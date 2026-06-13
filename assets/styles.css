@@ -51,7 +51,7 @@
   --space-2xl: 96px;
 
   /* Layout */
-  --page-max: 1360px;
+  --page-max: 1280px;
   --page-pad: clamp(16px, 3vw, 40px);
 }
 
@@ -340,11 +340,9 @@ a { color: inherit; }
   line-height: 20px;
 }
 
-/* ---- RECENT (icon list) --------------------------------------------- */
-.recent-item { display: grid; grid-template-columns: 1fr 32px; gap: var(--space-md); }
+/* ---- RECENT --------------------------------------------------------- */
 .recent-item + .recent-item { margin-top: var(--space-lg); }
 .recent-item p { margin: 0 0 var(--space-sm); color: var(--on-surface-body); }
-.recent-icon { width: 28px; height: 28px; color: var(--on-surface); }
 
 /* ---- Highlights carousel (About) ------------------------------------- */
 /* Allow the carousel to shrink inside a grid/flex column so overflow-x
