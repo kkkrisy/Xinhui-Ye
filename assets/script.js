@@ -44,6 +44,34 @@ document.addEventListener("DOMContentLoaded", () => {
     next && next.addEventListener("click", () =>
       track.scrollBy({ left: step(), behavior: "smooth" })
     );
+
+    // Fade the partially-visible edge cards to signal there's more to scroll.
+    const FADE = 64; // px
+    const updateFade = () => {
+      const atStart = track.scrollLeft <= 1;
+      const atEnd =
+        track.scrollLeft + track.clientWidth >= track.scrollWidth - 1;
+      let stops = atStart ? "#000 0" : `transparent 0, #000 ${FADE}px`;
+      stops += atEnd
+        ? ", #000 100%"
+        : `, #000 calc(100% - ${FADE}px), transparent 100%`;
+      const mask = `linear-gradient(to right, ${stops})`;
+      track.style.webkitMaskImage = mask;
+      track.style.maskImage = mask;
+    };
+    updateFade();
+    track.addEventListener("scroll", updateFade, { passive: true });
+    window.addEventListener("resize", updateFade);
+  });
+
+  /* ---- Back to top -------------------------------------------------- */
+  // #top points at the sticky nav, which is always "in view", so the native
+  // anchor jump does nothing. Scroll the window manually instead.
+  document.querySelectorAll(".back-to-top").forEach((link) => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
   });
 
   /* ---- Contact form (no backend yet) -------------------------------- */

@@ -51,8 +51,8 @@
   --space-2xl: 96px;
 
   /* Layout */
-  --page-max: 1200px;
-  --page-pad: clamp(20px, 5vw, 64px);
+  --page-max: 1360px;
+  --page-pad: clamp(16px, 3vw, 40px);
 }
 
 /* ---- Reset ----------------------------------------------------------- */
@@ -347,9 +347,12 @@ a { color: inherit; }
 .recent-icon { width: 28px; height: 28px; color: var(--on-surface); }
 
 /* ---- Highlights carousel (About) ------------------------------------- */
+/* Allow the carousel to shrink inside a grid/flex column so overflow-x
+   scrolling engages instead of stretching the page. */
+[data-carousel] { min-width: 0; }
 .h-carousel {
   display: flex;
-  gap: var(--space-lg);
+  gap: var(--space-sm);
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   padding-bottom: var(--space-sm);
