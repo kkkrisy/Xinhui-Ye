@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Xinhui Ye — Defense Day</title>
+<meta name="description" content="Detail page template — a single highlight or work, told in full.">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body id="top">
+
+<!--
+  TEMPLATE PAGE.
+  This single layout covers both "single highlight" and "single work" detail views
+  from your wireframes. To add another, copy this file (e.g. longitudinal.html) and
+  swap the title, text, and images. Link your "Read more" buttons to each copy.
+-->
+
+<div class="nav-wrap">
+  <nav class="nav" aria-label="Primary">
+    <span class="nav__brand">Xinhui Ye</span>
+    <button class="nav__toggle" aria-expanded="false" aria-controls="menu">Menu</button>
+    <div class="nav__links" id="menu">
+      <a class="nav__link" href="index.html">About</a>
+      <a class="nav__link" href="highlights.html" aria-current="page">Highlights</a>
+      <a class="nav__link" href="work.html">Work</a>
+      <a class="nav__link" href="craft.html">Craft</a>
+      <a class="nav__link" href="contact.html">Get in touch</a>
+    </div>
+  </nav>
+</div>
+
+<section class="band band--white">
+  <div class="band__inner">
+    <a href="highlights.html" class="back-link">&larr; All highlights</a>
+    <h1 class="display-lg" style="margin:var(--sp-sm) 0 var(--sp-xl);">Defense Day</h1>
+
+    <!-- row: image + text -->
+    <div class="detail-row">
+      <div class="media media--wide"><span class="media__hint">Hero image — the moment of defense</span></div>
+      <div class="detail-text">
+        <p>On 14 January 2026 I defended <em>Co-Exploration in Remote Design Collaboration</em> at Eindhoven University of Technology. The thesis asks how tools can better support the way design teams build on one another's ideas — especially at a distance — and brings together the publications from across my doctorate.</p>
+        <p>It proceeds in four moves: envisioning future remote-prototyping tools, mapping the limits of current ones, defining and characterising co-exploration through a five-month study, and translating all of it into a practical guideline for designers.</p>
+      </div>
+    </div>
+
+    <!-- full-bleed image -->
+    <div class="media media--wide detail-full"><span class="media__hint">The ceremony — committee, family, friends</span></div>
+
+    <!-- row: tall image stack + text -->
+    <div class="detail-row detail-row--tall">
+      <div class="detail-stack">
+        <div class="media media--portrait"><span class="media__hint">Thesis cover</span></div>
+        <div class="media media--square"><span class="media__hint">A representative page</span></div>
+        <div class="media media--square"><span class="media__hint">Behind the scenes</span></div>
+      </div>
+      <div class="detail-text">
+        <p>I designed the book myself — the cover, the illustrations, and the writing — so that the object would feel like the argument. The defense itself was a real ceremony: a committee drawn from universities across the world, and a university news post to mark it.</p>
+        <p>What stays with me most is the people in the room. The PhD is often called a lonely journey, but mine was accompanied at every turn by supervisors, colleagues, friends, and family.</p>
+      </div>
+    </div>
+
+    <!-- full-bleed image -->
+    <div class="media media--wide detail-full"><span class="media__hint">One more image (swap freely)</span></div>
+
+  </div>
+</section>
+
+<footer class="footer">
+  <a class="footer__top" href="#top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFEFD6" stroke-width="2"><path d="m6 15 6-6 6 6"/></svg>
+    Back to top
+  </a>
+  <div class="footer__links">
+    <a href="#" rel="me">LinkedIn</a>
+    <a href="#" rel="me">Google Scholar</a>
+    <a href="#" rel="me">Instagram</a>
+  </div>
+  <p class="footer__copy"><strong>@2026 Xinhui Ye</strong> · All Rights Reserved.</p>
+</footer>
+
+<style>
+.back-link { font-family: var(--display); font-weight: 600; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--on-surface-variant); text-decoration: none; }
+.detail-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-lg); align-items: stretch; margin-bottom: var(--sp-lg); }
+.detail-row .media { min-height: 340px; }
+.detail-text { border: 1px solid var(--outline); padding: var(--sp-xl); display: flex; flex-direction: column; justify-content: flex-start; gap: var(--sp-sm); }
+.detail-full { min-height: 420px; margin-bottom: var(--sp-lg); }
+.detail-row--tall { align-items: stretch; }
+.detail-stack { display: flex; flex-direction: column; gap: var(--sp-md); }
+.detail-row--tall .detail-text { padding: var(--sp-lg) var(--sp-xl); }
+@media (max-width: 820px) {
+  .detail-row, .detail-row--tall { grid-template-columns: 1fr; }
+  .detail-text { padding: var(--sp-lg); }
+}
+</style>
+<script src="assets/script.js"></script>
+</body>
+</html>
