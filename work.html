@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Xinhui Ye — Work</title>
+  <meta name="description" content="Roles I've held and certificates I've gained — Xinhui Ye." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Spectral:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+
+  <header class="site-nav" id="top">
+    <nav class="nav-pill" aria-label="Primary">
+      <div class="nav-links">
+        <a href="index.html">About</a>
+        <a href="highlights.html">Highlights</a>
+        <a href="work.html" aria-current="page">Work</a>
+        <a href="craft.html">Craft</a>
+        <a href="contact.html">Get in touch</a>
+      </div>
+      <button class="menu-toggle" data-menu-open aria-label="Open menu">Menu</button>
+    </nav>
+  </header>
+
+  <div class="nav-overlay" aria-hidden="true">
+    <button class="menu-toggle menu-close" data-menu-close aria-label="Close menu">Close</button>
+    <nav class="stack-md" aria-label="Mobile">
+      <a href="index.html">About</a>
+      <a href="highlights.html">Highlights</a>
+      <a href="work.html">Work</a>
+      <a href="craft.html">Craft</a>
+      <a href="contact.html">Get in touch</a>
+    </nav>
+  </div>
+
+  <main>
+    <!-- ===== Hero ===== -->
+    <section class="band band--cream hero">
+      <div class="container">
+        <span class="wordmark">Xinhui Ye</span>
+        <h1 class="display-xl">Roles I've Held</h1>
+      </div>
+    </section>
+
+    <!-- ===== Roles grid ===== -->
+    <section class="band band--cream" style="padding-top: var(--space-lg);">
+      <div class="container">
+        <div class="role-grid">
+          <!-- TODO: add an image per role; link READ MORE to its detail page. -->
+          <article class="role-card">
+            <div class="media-placeholder"><h3 class="headline-lg">Instructor at after-school programs</h3></div>
+            <a class="btn btn--outline btn--sm" href="work-detail.html" style="align-self:flex-start;">Read more</a>
+          </article>
+          <article class="role-card">
+            <div class="media-placeholder"><h3 class="headline-lg">Design Researcher</h3></div>
+            <a class="btn btn--outline btn--sm" href="work-detail.html" style="align-self:flex-start;">Read more</a>
+          </article>
+          <article class="role-card">
+            <div class="media-placeholder"><h3 class="headline-lg">Coach of<br />Qualitative Design Analysis</h3></div>
+            <a class="btn btn--outline btn--sm" href="work-detail.html" style="align-self:flex-start;">Read more</a>
+          </article>
+          <article class="role-card">
+            <div class="media-placeholder"><h3 class="headline-lg">Coach of<br />Research Through Design (RtH)</h3></div>
+            <a class="btn btn--outline btn--sm" href="work-detail.html" style="align-self:flex-start;">Read more</a>
+          </article>
+          <article class="role-card">
+            <div class="media-placeholder"><h3 class="headline-lg">Volunteering Tutor<br />of 3D modeling</h3></div>
+            <a class="btn btn--outline btn--sm" href="work-detail.html" style="align-self:flex-start;">Read more</a>
+          </article>
+          <article class="role-card">
+            <div class="media-placeholder"><h3 class="headline-lg">Vice Leader of<br />Accordion Orchestra</h3></div>
+            <a class="btn btn--outline btn--sm" href="work-detail.html" style="align-self:flex-start;">Read more</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Certificates ===== -->
+    <section class="band band--white">
+      <div class="container">
+        <h2 class="display-lg" style="margin-bottom: var(--space-lg);">Certificates I've gained</h2>
+        <div class="cert-grid">
+          <!-- TODO: add certificate images, names and descriptions (8 shown). -->
+          <article class="cert-card">
+            <div class="media-placeholder"></div>
+            <p class="cert-name">Certificate name</p>
+            <p class="cert-desc">Description</p>
+          </article>
+          <article class="cert-card">
+            <div class="media-placeholder"></div>
+            <p class="cert-name">Certificate name</p>
+            <p class="cert-desc">Description</p>
+          </article>
+          <article class="cert-card">
+            <div class="media-placeholder"></div>
+            <p class="cert-name">Certificate name</p>
+            <p class="cert-desc">Description</p>
+          </article>
+          <article class="cert-card">
+            <div class="media-placeholder"></div>
+            <p class="cert-name">Certificate name</p>
+            <p class="cert-desc">Description</p>
+          </article>
+          <article class="cert-card">
+            <div class="media-placeholder"></div>
+            <p class="cert-name">Certificate name</p>
+            <p class="cert-desc">Description</p>
+          </article>
+          <article class="cert-card">
+            <div class="media-placeholder"></div>
+            <p class="cert-name">Certificate name</p>
+            <p class="cert-desc">Description</p>
+          </article>
+          <!-- spans two columns: extra skills note -->
+          <div class="cert-skills">
+            <!-- TODO: add or trim skills as you like. -->
+            <p>Beyond these certificates, I also bring skills in qualitative and mixed-method research, design methods and theory, longitudinal study design, data analysis, academic writing and publishing, and design education.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Contact ===== -->
+    <section class="band band--cream" id="contact">
+      <div class="container">
+        <h2 class="headline-lg contact-heading">Want to get in touch?</h2>
+        <div class="contact-grid contact-grid--solo">
+          <form data-contact-form novalidate>
+            <div class="form-group">
+              <span class="form-label">Your Details</span>
+              <div class="field-row">
+                <input class="field" type="text" name="first" placeholder="First name" autocomplete="given-name" />
+                <input class="field" type="text" name="last" placeholder="Last name" autocomplete="family-name" />
+              </div>
+              <div style="margin-top: var(--space-md);">
+                <input class="field" type="email" name="email" placeholder="Email address" autocomplete="email" />
+              </div>
+            </div>
+            <div class="form-group">
+              <span class="form-label">Your Message</span>
+              <textarea class="field" name="message" placeholder="Type your message…"></textarea>
+            </div>
+            <div class="form-actions">
+              <button class="btn btn--primary" type="submit">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <a class="back-to-top" href="#top">&#x2303;<span>Back to top</span></a>
+      <div class="footer-social">
+        <a href="#" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://scholar.google.nl/citations?hl=en&user=P7ArCXEAAAAJ" target="_blank" rel="noopener">Google Scholar</a>
+        <a href="#" target="_blank" rel="noopener">Instagram</a>
+      </div>
+      <p class="footer-copy"><strong>@2026 Xinhui Ye</strong> All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script src="assets/script.js"></script>
+</body>
+</html>

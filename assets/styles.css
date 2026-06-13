@@ -1,0 +1,564 @@
+/* ==========================================================================
+   Xinhui Ye — personal site
+   Design system implemented from design.md (editorial color-blocking,
+   grotesque + serif pairing, full-pill controls, flat / no-shadow).
+   ========================================================================== */
+
+/* ---- Design tokens --------------------------------------------------- */
+:root {
+  /* Colors */
+  --surface: #fffef9;
+  --surface-container-lowest: #ffffff;
+  --surface-container: #ffefd6;          /* peach */
+  --surface-container-high: #f2f1ed;      /* warm grey (media / dividers) */
+  --background: #fffef9;
+  --on-background: #2e2e38;
+  --on-surface: #2e2e38;
+  --on-surface-body: #45454d;
+  --on-surface-variant: #76767a;
+  --outline: #76767a;
+  --outline-variant: #f2f1ed;
+  --inverse-surface: #333462;             /* deep indigo */
+  --inverse-on-surface: #ffefd6;          /* cream-on-indigo */
+  --primary: #333462;
+  --on-primary: #ffefd6;
+  --primary-container: #3e3f7f;           /* lighter indigo, for use on indigo */
+  --on-primary-container: #ffefd6;
+  --secondary: #fc9073;                   /* coral — brand signal, used sparingly */
+  --tertiary: #9ee2d3;                    /* mint — one pop per screen (menu pill) */
+  --on-tertiary: #333462;
+  --input-surface: #e2e2e2;
+
+  /* Type families. design.md specifies a heavy grotesque (display/UI) paired
+     with a transitional serif (reading). Söhne / Neue Haas are licensed, so we
+     load close free substitutes (Archivo, Spectral) with the documented stack
+     as fallback. TODO: swap in the licensed faces if available. */
+  --font-grotesque: "Archivo", "Neue Haas Grotesk", Arial, sans-serif;
+  --font-serif: "Spectral", Georgia, serif;
+
+  /* Radii */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  /* Spacing (8px base) */
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 40px;
+  --space-xl: 64px;
+  --space-2xl: 96px;
+
+  /* Layout */
+  --page-max: 1200px;
+  --page-pad: clamp(20px, 5vw, 64px);
+}
+
+/* ---- Reset ----------------------------------------------------------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--on-surface-body);
+  font-family: var(--font-serif);
+  font-size: 17px;
+  line-height: 28px;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { display: block; max-width: 100%; }
+
+a { color: inherit; }
+
+/* ---- Typography ------------------------------------------------------ */
+.display-xl,
+.display-lg,
+.headline-lg {
+  font-family: var(--font-grotesque);
+  color: var(--on-surface);
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.display-xl {
+  font-weight: 800;
+  font-size: clamp(44px, 8vw, 80px);
+  line-height: 1.05;
+}
+
+.display-lg {
+  font-weight: 800;
+  font-size: clamp(34px, 5.5vw, 56px);
+  line-height: 1.07;
+}
+
+.headline-lg {
+  font-weight: 700;
+  font-size: clamp(26px, 3.5vw, 40px);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.title-serif {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 30px;
+  color: var(--on-surface);
+  margin: 0;
+}
+
+.quote-lg {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 40px;
+  color: var(--on-surface);
+}
+
+/* Small uppercase grotesque eyebrow / section label */
+.label-caps {
+  font-family: var(--font-grotesque);
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--on-surface);
+}
+
+.body-lg { font-size: 17px; line-height: 28px; }
+.body-md { font-size: 16px; line-height: 26px; }
+
+.meta {
+  font-family: var(--font-grotesque);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--on-surface-variant);
+  text-transform: uppercase;
+}
+
+/* Coral wordmark — reserved brand signal */
+.wordmark {
+  font-family: var(--font-grotesque);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+
+/* ---- Layout helpers -------------------------------------------------- */
+.band {                       /* full-bleed color band */
+  width: 100%;
+  padding: var(--space-2xl) 0;
+}
+.band--cream   { background: var(--surface); }
+.band--white   { background: var(--surface-container-lowest); }
+.band--peach   { background: var(--surface-container); }
+.band--indigo  { background: var(--inverse-surface); color: var(--inverse-on-surface); }
+
+.container {
+  width: 100%;
+  max-width: var(--page-max);
+  margin-inline: auto;
+  padding-inline: var(--page-pad);
+}
+
+/* Two-part rhythm: eyebrow label in the far-left column, content to its right */
+.section-split {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: var(--space-lg);
+  align-items: start;
+}
+@media (max-width: 760px) {
+  .section-split { grid-template-columns: 1fr; gap: var(--space-md); }
+}
+
+.stack-sm > * + * { margin-top: var(--space-sm); }
+.stack-md > * + * { margin-top: var(--space-md); }
+
+/* ---- Pills / buttons ------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  padding: 0 28px;
+  border-radius: var(--radius-full);
+  border: 1px solid transparent;
+  font-family: var(--font-grotesque);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  background: none;
+  transition: opacity .15s ease, background-color .15s ease, color .15s ease;
+}
+.btn:hover { opacity: .88; }
+
+.btn--primary { background: var(--primary); color: var(--on-primary); }
+.btn--primary-container { background: var(--primary-container); color: var(--on-primary-container); }
+.btn--outline { background: transparent; color: var(--on-surface); border-color: var(--outline); padding: 0 24px; }
+.btn--outline-on-dark { background: transparent; color: var(--inverse-on-surface); border-color: var(--inverse-on-surface); padding: 0 24px; }
+
+/* small "READ" / "READ MORE" pills used on cards */
+.btn--sm { height: 36px; padding: 0 20px; font-size: 11px; }
+
+/* ---- Navigation ------------------------------------------------------ */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  padding: 20px var(--page-pad);
+  display: flex;
+  justify-content: center;
+  pointer-events: none;                 /* let band behind catch nothing extra */
+}
+.nav-pill {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 3vw, 40px);
+  background: var(--surface-container-lowest);
+  border-radius: var(--radius-full);
+  padding: 14px clamp(24px, 4vw, 48px);
+  box-shadow: 0 18px 40px -12px rgba(46, 46, 56, 0.22);
+}
+.nav-links { display: flex; align-items: center; gap: clamp(16px, 3vw, 40px); }
+.nav-pill a {
+  font-family: var(--font-grotesque);
+  font-weight: 500;
+  font-size: clamp(15px, 1.4vw, 18px);
+  text-decoration: none;
+  color: var(--on-surface);
+  white-space: nowrap;
+}
+.nav-pill a[aria-current="page"],
+.nav-pill a:hover { font-weight: 800; }
+
+/* Mint MENU pill (mobile) — the single mint accent, design.md */
+.menu-toggle {
+  display: none;
+  pointer-events: auto;
+  height: 40px;
+  padding: 0 20px;
+  border: none;
+  border-radius: var(--radius-full);
+  background: var(--tertiary);
+  color: var(--on-tertiary);
+  font-family: var(--font-grotesque);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+/* Full-screen indigo overlay menu (mobile) */
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: var(--inverse-surface);
+  color: var(--inverse-on-surface);
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--page-pad);
+}
+.nav-overlay.is-open { display: flex; }
+.nav-overlay a {
+  font-family: var(--font-grotesque);
+  font-weight: 700;
+  font-size: clamp(34px, 9vw, 44px);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  color: var(--inverse-on-surface);
+}
+.nav-overlay .menu-close {
+  align-self: flex-end;
+  margin-bottom: var(--space-xl);
+}
+
+@media (max-width: 720px) {
+  .nav-pill .nav-links { display: none; }
+  .menu-toggle { display: inline-flex; align-items: center; }
+  .nav-pill { gap: 16px; }
+}
+
+/* ---- Hero ------------------------------------------------------------ */
+.hero { padding-top: var(--space-lg); }
+.hero .wordmark { display: block; margin-bottom: var(--space-sm); }
+
+.hero-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  align-items: start;
+  margin-top: var(--space-lg);
+}
+@media (max-width: 860px) {
+  .hero-split { grid-template-columns: 1fr; }
+}
+
+/* ---- Media (sharp-cornered, flat) ------------------------------------ */
+.media,
+.media-placeholder {
+  background: var(--surface-container-high);
+  border-radius: 0;             /* sharp corners — design.md */
+  width: 100%;
+}
+.media-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--on-surface-variant);
+  font-family: var(--font-grotesque);
+  font-size: 14px;
+  padding: var(--space-md);
+  min-height: 200px;
+}
+.media img { border-radius: 0; }
+
+.caption {
+  margin-top: var(--space-xs);
+  color: var(--on-surface-variant);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+/* ---- RECENT (icon list) --------------------------------------------- */
+.recent-item { display: grid; grid-template-columns: 1fr 32px; gap: var(--space-md); }
+.recent-item + .recent-item { margin-top: var(--space-lg); }
+.recent-item p { margin: 0 0 var(--space-sm); color: var(--on-surface-body); }
+.recent-icon { width: 28px; height: 28px; color: var(--on-surface); }
+
+/* ---- Highlights carousel (About) ------------------------------------- */
+.h-carousel {
+  display: flex;
+  gap: var(--space-lg);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: var(--space-sm);
+  scrollbar-width: none;
+}
+.h-carousel::-webkit-scrollbar { display: none; }
+.h-card {
+  flex: 0 0 clamp(280px, 42vw, 460px);
+  scroll-snap-align: start;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-sm);
+  align-items: start;
+}
+.h-card .media-placeholder { min-height: 150px; aspect-ratio: 4 / 3; }
+.h-card .title-serif { font-family: var(--font-grotesque); font-weight: 700; }
+
+.carousel-controls { display: flex; gap: var(--space-xs); margin-top: var(--space-md); }
+.round-btn {
+  width: 44px; height: 44px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--outline);
+  background: transparent;
+  color: var(--on-surface);
+  cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 18px;
+}
+.round-btn:hover { background: var(--surface-container-high); }
+
+/* dot indicators */
+.dots { display: flex; gap: 6px; justify-content: center; margin-top: var(--space-sm); }
+.dots span { width: 7px; height: 7px; border-radius: var(--radius-full); background: var(--outline-variant); }
+.dots span.is-active { background: var(--on-surface-variant); }
+
+/* ---- Accordion (Education / Work) ------------------------------------ */
+.accordion { border-top: 1px solid var(--outline-variant); }
+.accordion-row { border-bottom: 1px solid var(--outline-variant); }
+.accordion-head {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: var(--space-md) 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-serif);
+  font-size: 17px;
+  color: var(--on-surface);
+}
+.accordion-head .sign { font-family: var(--font-grotesque); font-size: 22px; color: var(--on-surface-variant); }
+.accordion-body {
+  display: none;
+  padding: 0 0 var(--space-md) var(--space-lg);
+  color: var(--on-surface-body);
+}
+.accordion-row.is-open .accordion-body { display: block; }
+.accordion-row.is-open .sign::before { content: "–"; }
+.accordion-row:not(.is-open) .sign::before { content: "+"; }
+.accordion-row .sign { font-size: 0; }   /* hide the static char, use ::before */
+.accordion-row .sign::before { font-size: 22px; }
+
+/* ---- Contact form (underline inputs — design.md) --------------------- */
+.contact-heading { text-align: center; margin-bottom: var(--space-xl); }
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2xl);
+  align-items: start;
+}
+.contact-grid--solo { grid-template-columns: minmax(0, 560px); justify-content: center; }
+@media (max-width: 860px) {
+  .contact-grid { grid-template-columns: 1fr; gap: var(--space-lg); }
+}
+
+.form-group + .form-group { margin-top: var(--space-md); }
+.form-label {
+  font-family: var(--font-grotesque);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--on-surface);
+  display: block;
+  margin-bottom: var(--space-sm);
+}
+.field-row { display: flex; gap: var(--space-md); }
+.field-row > * { flex: 1; }
+
+.field {
+  width: 100%;
+  height: 44px;
+  padding: 8px 0;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--outline);
+  font-family: var(--font-serif);
+  font-size: 16px;
+  color: var(--on-surface);
+}
+textarea.field { height: auto; min-height: 140px; resize: vertical; padding-top: 8px; }
+.field::placeholder { color: var(--on-surface-variant); }
+.field:focus { outline: none; border-bottom-color: var(--primary); border-bottom-width: 2px; }
+
+.form-actions { margin-top: var(--space-lg); display: flex; justify-content: center; }
+
+/* ---- Footer ---------------------------------------------------------- */
+.site-footer { background: var(--inverse-surface); color: var(--inverse-on-surface); padding: var(--space-xl) 0; text-align: center; }
+.back-to-top {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: var(--primary-container);
+  color: var(--inverse-on-surface);
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 12px 18px;
+  font-family: var(--font-grotesque);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+}
+.footer-social {
+  display: flex;
+  gap: var(--space-lg);
+  justify-content: center;
+  margin: var(--space-lg) 0 var(--space-sm);
+  flex-wrap: wrap;
+}
+.footer-social a { color: var(--inverse-on-surface); text-decoration: underline; font-size: 15px; }
+.footer-copy { font-size: 13px; color: var(--inverse-on-surface); opacity: .85; }
+.footer-copy strong { font-family: var(--font-grotesque); }
+
+/* ---- Work page: role cards ------------------------------------------- */
+.role-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg) var(--space-lg);
+}
+@media (max-width: 760px) { .role-grid { grid-template-columns: 1fr; } }
+.role-card { display: flex; flex-direction: column; gap: var(--space-sm); }
+.role-card .media-placeholder {
+  aspect-ratio: 16 / 11;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--space-md);
+}
+.role-card .headline-lg { font-size: clamp(20px, 2.2vw, 26px); }
+
+/* ---- Work page: certificates ----------------------------------------- */
+.cert-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-md);
+}
+@media (max-width: 900px) { .cert-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .cert-grid { grid-template-columns: 1fr; } }
+.cert-card .media-placeholder { aspect-ratio: 4 / 3; min-height: 120px; }
+.cert-card .cert-name { font-family: var(--font-grotesque); font-weight: 700; font-size: 14px; color: var(--on-surface); margin: var(--space-xs) 0 2px; }
+.cert-card .cert-desc { font-size: 14px; color: var(--on-surface-body); }
+.cert-skills {
+  grid-column: span 2;
+  border: 1px solid var(--outline);
+  padding: var(--space-md);
+  color: var(--on-surface-body);
+}
+
+/* ---- Craft page: masonry --------------------------------------------- */
+.masonry { columns: 3; column-gap: var(--space-md); }
+@media (max-width: 900px) { .masonry { columns: 2; } }
+@media (max-width: 560px) { .masonry { columns: 1; } }
+.masonry .media-placeholder {
+  break-inside: avoid;
+  margin-bottom: var(--space-md);
+  min-height: 0;
+}
+
+/* ---- Detail page (single highlight / work) --------------------------- */
+.detail-blocks { display: flex; flex-direction: column; gap: var(--space-lg); }
+.detail-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  align-items: stretch;
+}
+@media (max-width: 760px) { .detail-split { grid-template-columns: 1fr; } }
+.detail-text {
+  border: 1px solid var(--outline-variant);
+  padding: var(--space-md);
+  color: var(--on-surface-body);
+}
+.detail-full .media-placeholder { aspect-ratio: 21 / 9; }
+.detail-split .media-placeholder { min-height: 240px; }
+
+/* ---- Highlights list (Highlights page) ------------------------------- */
+.hl-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  align-items: start;
+}
+.hl-item + .hl-item { margin-top: var(--space-2xl); }
+@media (max-width: 760px) { .hl-item { grid-template-columns: 1fr; gap: var(--space-md); } }
+.hl-item .media-placeholder { aspect-ratio: 4 / 3; }
+.hl-item .headline-lg { font-size: clamp(22px, 2.6vw, 32px); margin-bottom: var(--space-xs); }
+
+.utility-row { margin-top: var(--space-lg); }

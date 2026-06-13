@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Xinhui Ye — Get in touch</title>
+  <meta name="description" content="Get in touch with Xinhui Ye." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Spectral:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+
+  <header class="site-nav" id="top">
+    <nav class="nav-pill" aria-label="Primary">
+      <div class="nav-links">
+        <a href="index.html">About</a>
+        <a href="highlights.html">Highlights</a>
+        <a href="work.html">Work</a>
+        <a href="craft.html">Craft</a>
+        <a href="contact.html" aria-current="page">Get in touch</a>
+      </div>
+      <button class="menu-toggle" data-menu-open aria-label="Open menu">Menu</button>
+    </nav>
+  </header>
+
+  <div class="nav-overlay" aria-hidden="true">
+    <button class="menu-toggle menu-close" data-menu-close aria-label="Close menu">Close</button>
+    <nav class="stack-md" aria-label="Mobile">
+      <a href="index.html">About</a>
+      <a href="highlights.html">Highlights</a>
+      <a href="work.html">Work</a>
+      <a href="craft.html">Craft</a>
+      <a href="contact.html">Get in touch</a>
+    </nav>
+  </div>
+
+  <main>
+    <section class="band band--cream" style="padding-top: var(--space-lg);">
+      <div class="container">
+        <h1 class="headline-lg contact-heading">Want to get in touch?</h1>
+
+        <div class="contact-grid">
+          <!-- ----- Left: bio + note ----- -->
+          <div class="stack-md">
+            <div>
+              <p class="form-label" style="margin-bottom: 4px;">Xinhui Ye</p>
+              <!-- TODO: confirm contact email. -->
+              <p class="body-lg" style="margin:0;">Email: <a href="mailto:kristinyxh@gmail.com">kristinyxh@gmail.com</a></p>
+            </div>
+
+            <div>
+              <p class="form-label">Note from Xinhui</p>
+              <!-- TODO: add your portrait at assets/portrait.jpg -->
+              <div class="media">
+                <div class="media-placeholder" style="aspect-ratio: 4 / 3;">My portrait</div>
+              </div>
+              <p class="body-lg" style="margin-top: var(--space-md);">
+                It is always nice to meet new friends and get to exchange thoughts and ideas. If you have any questions, comments, ideas, or collaboration opportunities, please know that whichever is the case, I read and am grateful for each and every email.
+              </p>
+            </div>
+          </div>
+
+          <!-- ----- Right: form ----- -->
+          <form data-contact-form novalidate>
+            <div class="form-group">
+              <span class="form-label">Your Details</span>
+              <div class="field-row">
+                <input class="field" type="text" name="first" placeholder="First name" autocomplete="given-name" />
+                <input class="field" type="text" name="last" placeholder="Last name" autocomplete="family-name" />
+              </div>
+              <div style="margin-top: var(--space-md);">
+                <input class="field" type="email" name="email" placeholder="Email address" autocomplete="email" />
+              </div>
+            </div>
+            <div class="form-group">
+              <span class="form-label">Your Message</span>
+              <textarea class="field" name="message" placeholder="Type your message…" style="min-height: 220px;"></textarea>
+            </div>
+            <div class="form-actions">
+              <button class="btn btn--primary" type="submit">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <a class="back-to-top" href="#top">&#x2303;<span>Back to top</span></a>
+      <div class="footer-social">
+        <a href="#" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://scholar.google.nl/citations?hl=en&user=P7ArCXEAAAAJ" target="_blank" rel="noopener">Google Scholar</a>
+        <a href="#" target="_blank" rel="noopener">Instagram</a>
+      </div>
+      <p class="footer-copy"><strong>@2026 Xinhui Ye</strong> All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script src="assets/script.js"></script>
+</body>
+</html>
