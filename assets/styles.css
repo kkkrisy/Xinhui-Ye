@@ -550,6 +550,10 @@ textarea.field { height: auto; min-height: 140px; resize: vertical; padding-top:
 .detail-full .media-placeholder { aspect-ratio: 21 / 9; }
 .detail-split .media-placeholder { min-height: 240px; }
 
+/* five co-exploration pattern charts */
+.pattern-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--space-sm); }
+@media (max-width: 760px) { .pattern-grid { grid-template-columns: repeat(2, 1fr); } }
+
 /* ---- Highlights list (Highlights page) ------------------------------- */
 .hl-item {
   display: grid;
