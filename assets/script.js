@@ -80,6 +80,16 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("resize", updateFade);
   });
 
+  /* ---- Certificate flip cards --------------------------------------- */
+  // Click / tap (or Enter / Space, since the card is a <button>) flips it
+  // to show the back; flipping again returns to the front.
+  document.querySelectorAll(".cert-flip:not(.cert-flip--static)").forEach((card) => {
+    card.addEventListener("click", () => {
+      const flipped = card.classList.toggle("is-flipped");
+      card.setAttribute("aria-pressed", flipped);
+    });
+  });
+
   /* ---- Back to top -------------------------------------------------- */
   // #top points at the sticky nav, which is always "in view", so the native
   // anchor jump does nothing. Scroll the window manually instead.

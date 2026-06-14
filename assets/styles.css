@@ -582,7 +582,77 @@ textarea.field { height: auto; min-height: 140px; resize: vertical; padding-top:
 }
 @media (max-width: 900px) { .cert-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 520px) { .cert-grid { grid-template-columns: 1fr; } }
+.cert-hint-note {
+  font-size: 14px;
+  color: var(--on-surface-variant);
+  margin: calc(-1 * var(--space-md)) 0 var(--space-lg);
+}
 .cert-card .media-placeholder { aspect-ratio: 4 / 3; min-height: 120px; }
+
+/* ---- Certificate flip cards ----------------------------------------- */
+.cert-flip {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  position: relative;
+  aspect-ratio: 1 / 1.414;          /* A4 portrait — fits the TU/e certs */
+  background: transparent;
+  cursor: pointer;
+  perspective: 1400px;
+}
+.cert-flip--static { cursor: default; }
+.cert-flip__inner {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transition: transform 0.7s cubic-bezier(0.4, 0.1, 0.2, 1);
+}
+.cert-flip.is-flipped .cert-flip__inner { transform: rotateY(180deg); }
+.cert-flip__face {
+  position: absolute;
+  inset: 0;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  overflow: hidden;
+  border: 1px solid var(--outline-variant);
+  background: var(--surface-container-lowest);
+}
+.cert-flip__face img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.cert-flip__back { transform: rotateY(180deg); }
+.cert-flip__hint {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px;
+  font-family: var(--font-grotesque);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--on-surface);
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid var(--outline-variant);
+  border-radius: 999px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.cert-flip:hover .cert-flip__hint,
+.cert-flip:focus-visible .cert-flip__hint { opacity: 1; }
+.cert-flip.is-flipped .cert-flip__hint { opacity: 0; }
+.cert-flip:focus-visible { outline: 2px solid var(--on-surface); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) {
+  .cert-flip__inner { transition: none; }
+}
+
 .cert-card .cert-name { font-family: var(--font-grotesque); font-weight: 700; font-size: 14px; color: var(--on-surface); margin: var(--space-xs) 0 2px; }
 .cert-card .cert-desc { font-size: 14px; color: var(--on-surface-body); }
 .cert-skills {

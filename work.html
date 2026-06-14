@@ -82,41 +82,56 @@
     <section class="band band--white">
       <div class="container">
         <h2 class="display-lg" style="margin-bottom: var(--space-lg);">Certificates I've gained</h2>
+        <p class="cert-hint-note">Tap a certificate to flip it and read what the course covered.</p>
         <div class="cert-grid">
           <article class="cert-card">
-            <div class="media-placeholder"></div>
+            <button class="cert-flip" type="button" aria-pressed="false" aria-label="Practical Data Analysis using R for Researchers certificate — tap to flip">
+              <span class="cert-flip__inner">
+                <span class="cert-flip__face cert-flip__front">
+                  <img src="assets/cert-data-r-front.jpg" alt="Practical Data Analysis using R for Researchers — TU/e certificate" loading="lazy" />
+                </span>
+                <span class="cert-flip__face cert-flip__back">
+                  <img src="assets/cert-data-r-back.jpg" alt="Practical Data Analysis using R for Researchers — course details" loading="lazy" />
+                </span>
+              </span>
+              <span class="cert-flip__hint" aria-hidden="true">↻ Flip</span>
+            </button>
             <p class="cert-name">Practical Data Analysis using R for Researchers</p>
             <p class="cert-desc">TU/e, 2019 — R, regression and ANOVA, experimental design, and modern data-science methods.</p>
           </article>
           <article class="cert-card">
-            <div class="media-placeholder"></div>
+            <button class="cert-flip" type="button" aria-pressed="false" aria-label="Design of Experiments in a Nutshell certificate — tap to flip">
+              <span class="cert-flip__inner">
+                <span class="cert-flip__face cert-flip__front">
+                  <img src="assets/cert-doe-front.jpg" alt="Design of Experiments in a Nutshell — TU/e certificate" loading="lazy" />
+                </span>
+                <span class="cert-flip__face cert-flip__back">
+                  <img src="assets/cert-doe-back.jpg" alt="Design of Experiments in a Nutshell — course details" loading="lazy" />
+                </span>
+              </span>
+              <span class="cert-flip__hint" aria-hidden="true">↻ Flip</span>
+            </button>
             <p class="cert-name">Design of Experiments in a Nutshell</p>
             <p class="cert-desc">TU/e, 2019 — statistical design of experiments, factorial and response-surface designs, optimisation.</p>
           </article>
           <article class="cert-card">
-            <div class="media-placeholder"></div>
-            <p class="cert-name">Writing Articles and Abstracts</p>
-            <p class="cert-desc">TU/e, 2019–2020 — writing to a publishable standard: content, structure, conventions and style.</p>
-          </article>
-          <article class="cert-card">
-            <div class="media-placeholder"></div>
-            <p class="cert-name">Information Literacy and Reference Management</p>
-            <p class="cert-desc">TU/e, 2019 — systematic literature search, the publication process, and reference management.</p>
-          </article>
-          <article class="cert-card">
-            <div class="media-placeholder"></div>
-            <p class="cert-name">Exploitation of Research Results and Knowledge Transfer</p>
-            <p class="cert-desc">TU/e, 2019 — spotting knowledge-transfer opportunities and turning research into impact.</p>
-          </article>
-          <article class="cert-card">
-            <div class="media-placeholder"></div>
+            <div class="cert-flip cert-flip--static">
+              <span class="cert-flip__inner">
+                <span class="cert-flip__face cert-flip__front">
+                  <img src="assets/cert-crm.jpg" alt="CRM Basics: Unlock Business Growth through Relationships — LinkedIn Learning certificate" loading="lazy" />
+                </span>
+              </span>
+            </div>
             <p class="cert-name">CRM Basics: Unlock Business Growth through Relationships</p>
             <p class="cert-desc">LinkedIn Learning, 2026 — fundamentals of customer relationship management.</p>
           </article>
-          <!-- spans two columns: extra skills note -->
+          <!-- spans two columns: skills distilled from further TU/e training -->
           <div class="cert-skills">
-            <!-- TODO: add or trim skills as you like. -->
-            <p>Beyond these certificates, I also bring skills in qualitative and mixed-method research, design methods and theory, longitudinal study design, data analysis, academic writing and publishing, and design education.</p>
+            <p>My graduate training at TU/e also built skills I now apply directly in practice:
+              <strong>academic writing &amp; publishing</strong> — structuring articles and abstracts to a publishable standard;
+              <strong>information literacy &amp; reference management</strong> — systematic literature search and managing references across publishers;
+              and <strong>research exploitation &amp; knowledge transfer</strong> — spotting opportunities to turn research results into real-world impact.</p>
+            <p style="margin-top: var(--space-sm);">Beyond these, I bring qualitative and mixed-method research, design methods and theory, longitudinal study design, data analysis, and design education.</p>
           </div>
         </div>
       </div>
