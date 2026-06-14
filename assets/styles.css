@@ -88,7 +88,7 @@ a { color: inherit; }
 
 .display-xl {
   font-weight: 800;
-  font-size: clamp(44px, 8vw, 80px);
+  font-size: clamp(56px, 9vw, 96px);
   line-height: 1.05;
 }
 
@@ -302,6 +302,12 @@ a { color: inherit; }
 .hero { padding-top: var(--space-lg); }
 .hero .wordmark { display: block; margin-bottom: var(--space-sm); }
 
+/* Hero theme: navy title on cream (default). The About hero flips to a full
+   navy color-block with a cream title via .hero--navy. */
+.hero .display-xl { color: var(--inverse-surface); }
+.hero--navy { background: var(--inverse-surface); color: var(--inverse-on-surface); }
+.hero--navy .display-xl { color: var(--inverse-on-surface); }
+
 .hero-split {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -311,6 +317,19 @@ a { color: inherit; }
 }
 @media (max-width: 860px) {
   .hero-split { grid-template-columns: 1fr; }
+}
+
+/* Two-column hero: title + intro on the left, portrait rising to title level. */
+.hero-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+  align-items: start;
+}
+.hero-layout .body-lg { margin-top: var(--space-md); max-width: 46ch; }
+@media (max-width: 860px) {
+  .hero-layout { grid-template-columns: 1fr; }
+  .hero-portrait { order: -1; max-width: 360px; }
 }
 
 /* ---- Media (sharp-cornered, flat) ------------------------------------ */
