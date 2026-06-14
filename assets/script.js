@@ -22,6 +22,22 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.key === "Escape") setMenu(false);
   });
 
+  /* ---- Nav: ghost width + scroll shadow ----------------------------- */
+  // Mirror each link's text into data-text so the CSS ::after ghost can
+  // reserve the bold width and the bar stays steady on hover.
+  document.querySelectorAll(".nav-links a").forEach((a) => {
+    a.dataset.text = a.textContent.trim();
+  });
+
+  // Flat at the top, floating shadow once scrolled.
+  const siteNav = document.querySelector(".site-nav");
+  if (siteNav) {
+    const onScroll = () =>
+      siteNav.classList.toggle("is-scrolled", window.scrollY > 4);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+  }
+
   /* ---- Accordion (Education / Work lists) --------------------------- */
   document.querySelectorAll(".accordion-head").forEach((head) => {
     head.addEventListener("click", () => {

@@ -225,18 +225,50 @@ a { color: inherit; }
   justify-content: center;
   pointer-events: none;                 /* let band behind catch nothing extra */
 }
+
+/* Name at the top-left, level with the centered bar but outside it.
+   Coral brand color; fades away as soon as the page scrolls. */
+.site-wordmark {
+  position: absolute;
+  left: var(--page-pad);
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: auto;
+  font-family: var(--font-grotesque);
+  font-weight: 700;
+  font-size: clamp(15px, 1.4vw, 18px);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--secondary);
+  white-space: nowrap;
+  transition: opacity .25s ease;
+}
+.site-nav.is-scrolled .site-wordmark {
+  opacity: 0;
+  pointer-events: none;
+}
 .nav-pill {
   pointer-events: auto;
   display: flex;
   align-items: center;
-  gap: clamp(16px, 3vw, 40px);
-  background: var(--surface-container-lowest);
+  gap: clamp(24px, 4vw, 56px);
+  background: var(--background);
   border-radius: var(--radius-full);
-  padding: 14px clamp(24px, 4vw, 48px);
+  padding: 16px clamp(28px, 4vw, 48px);
+  box-shadow: none;
+  transition: box-shadow .25s ease;
+}
+/* Flat while pinned at the top; lift with a shadow once the page scrolls. */
+.site-nav.is-scrolled .nav-pill {
   box-shadow: 0 18px 40px -12px rgba(46, 46, 56, 0.22);
 }
-.nav-links { display: flex; align-items: center; gap: clamp(16px, 3vw, 40px); }
-.nav-pill a {
+
+.nav-links { display: flex; align-items: center; gap: clamp(28px, 4vw, 56px); }
+.nav-links a {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
   font-family: var(--font-grotesque);
   font-weight: 500;
   font-size: clamp(15px, 1.4vw, 18px);
@@ -244,8 +276,26 @@ a { color: inherit; }
   color: var(--on-surface);
   white-space: nowrap;
 }
-.nav-pill a[aria-current="page"],
-.nav-pill a:hover { font-weight: 800; }
+/* Reserve each link's bold width up front so the bar never reflows on hover.
+   The ghost copy (data-text, set in script.js) is laid out but invisible. */
+.nav-links a::after {
+  content: attr(data-text);
+  height: 0;
+  visibility: hidden;
+  overflow: hidden;
+  font-weight: 800;
+  pointer-events: none;
+}
+/* Page you're on: bold black. */
+.nav-links a[aria-current="page"] {
+  font-weight: 800;
+  color: var(--on-surface);
+}
+/* Link you're hovering: light mint. */
+.nav-links a:hover {
+  font-weight: 800;
+  color: rgb(173, 224, 211);
+}
 
 /* Mint MENU pill (mobile) — the single mint accent, design.md */
 .menu-toggle {
