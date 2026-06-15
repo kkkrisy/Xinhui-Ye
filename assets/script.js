@@ -182,13 +182,49 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   });
 
-  /* ---- Contact form (no backend yet) -------------------------------- */
+  /* ---- Contact form → Web3Forms → email ----------------------------- */
+  // Submits via fetch so the visitor stays on the page; on success the form
+  // is swapped for the thank-you panel. The access key lives in a hidden
+  // field in contact.html.
   document.querySelectorAll("[data-contact-form]").forEach((form) => {
-    form.addEventListener("submit", (e) => {
+    const success = form.parentElement.querySelector("[data-contact-success]");
+    const submitBtn = form.querySelector('[type="submit"]');
+
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      // TODO: wire this up to a real form handler / email service.
-      alert("Thanks for reaching out! (Form submission is not yet connected.)");
-      form.reset();
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Sending…";
+      }
+      try {
+        const res = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: { Accept: "application/json" },
+          body: new FormData(form),
+        });
+        const data = await res.json();
+        if (!data.success) throw new Error(data.message || "Submission failed");
+        form.hidden = true;
+        if (success) success.hidden = false;
+      } catch (err) {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Submit";
+        }
+        alert(
+          "Sorry, something went wrong sending your message. " +
+            "Please email kristinyxh@gmail.com directly."
+        );
+      }
     });
   });
+
+  /* ---- Deter image/video saving ------------------------------------- */
+  // Not bulletproof (screenshots, devtools and direct URLs still work), but
+  // it blocks right-click "Save image as…" and click-drag saving.
+  const blockMedia = (e) => {
+    if (e.target.closest("img, video")) e.preventDefault();
+  };
+  document.addEventListener("contextmenu", blockMedia);
+  document.addEventListener("dragstart", blockMedia);
 });

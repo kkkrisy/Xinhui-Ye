@@ -18,7 +18,7 @@
       <div class="nav-links">
         <a href="index.html">About</a>
         <a href="highlights.html">Highlights</a>
-        <a href="work.html">Work</a>
+        <a href="work.html">Experiences</a>
         <a href="craft.html">Craft</a>
         <a href="contact.html" aria-current="page">Get in touch</a>
       </div>
@@ -31,7 +31,7 @@
     <nav class="stack-md" aria-label="Mobile">
       <a href="index.html">About</a>
       <a href="highlights.html">Highlights</a>
-      <a href="work.html">Work</a>
+      <a href="work.html">Experiences</a>
       <a href="craft.html">Craft</a>
       <a href="contact.html">Get in touch</a>
     </nav>
@@ -56,6 +56,12 @@
             </p>
 
             <form data-contact-form novalidate>
+              <!-- Web3Forms: paste your access key from web3forms.com below -->
+              <input type="hidden" name="access_key" value="3b5f7678-14fb-4927-aae4-9830c9c35b41" />
+              <input type="hidden" name="subject" value="New message from your portfolio site" />
+              <input type="hidden" name="from_name" value="Xinhui Ye portfolio" />
+              <!-- honeypot: hidden from people, catches bots -->
+              <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true" />
               <div class="form-group">
                 <span class="form-label">Your Details</span>
                 <div class="field-row">
@@ -63,17 +69,23 @@
                   <input class="field" type="text" name="last" placeholder="Last name" autocomplete="family-name" />
                 </div>
                 <div style="margin-top: var(--space-md);">
-                  <input class="field" type="email" name="email" placeholder="Email address" autocomplete="email" />
+                  <input class="field" type="email" name="email" placeholder="Email address" autocomplete="email" required />
                 </div>
               </div>
               <div class="form-group">
                 <span class="form-label">Your Message</span>
-                <textarea class="field" name="message" placeholder="Type your message…" style="min-height: 220px;"></textarea>
+                <textarea class="field" name="message" placeholder="Type your message…" style="min-height: 220px;" required></textarea>
               </div>
               <div class="form-actions">
                 <button class="btn btn--primary" type="submit">Submit</button>
               </div>
             </form>
+
+            <!-- shown after a successful submission -->
+            <div class="contact-success" data-contact-success hidden>
+              <p class="title-serif">Thank you for your message!</p>
+              <p class="body-lg">I'll get back to you soon :)</p>
+            </div>
           </div>
         </div>
       </div>
@@ -84,9 +96,9 @@
     <div class="container">
       <a class="back-to-top" href="#top">&#x2303;<span>Back to top</span></a>
       <div class="footer-social">
-        <a href="#" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://www.linkedin.com/in/xinhui-ye-673a63150" target="_blank" rel="noopener">LinkedIn</a>
         <a href="https://scholar.google.nl/citations?hl=en&user=P7ArCXEAAAAJ" target="_blank" rel="noopener">Google Scholar</a>
-        <a href="#" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.instagram.com/kkkrisy_/" target="_blank" rel="noopener">Instagram</a>
       </div>
       <p class="footer-copy"><strong>@2026 Xinhui Ye</strong> All Rights Reserved.</p>
     </div>
