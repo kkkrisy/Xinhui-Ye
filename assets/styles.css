@@ -427,7 +427,8 @@ a { color: inherit; }
 }
 .h-carousel::-webkit-scrollbar { display: none; }
 .h-card {
-  flex: 0 0 clamp(280px, 40vw, 440px);
+  /* Exactly two cards per view: each is half the track minus half the gap. */
+  flex: 0 0 calc((100% - var(--space-sm)) / 2);
   scroll-snap-align: start;
   display: flex;
   flex-direction: column;
@@ -794,55 +795,116 @@ a.t-org:hover { color: var(--on-surface); }
 
 .utility-row { margin-top: var(--space-lg); }
 
-/* ---- Craft page: swipeable project cards ----------------------------- */
-.craft-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-md);
+/* ---- Craft page: masonry gallery + lightbox -------------------------- */
+.gallery-group { margin-bottom: var(--space-lg); }
+.gallery-group > h2 {
+  font: 700 13px/1 var(--font-grotesque);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--on-surface-variant);
+  margin: 0 0 var(--space-sm);
 }
-@media (max-width: 900px) { .craft-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 560px) { .craft-grid { grid-template-columns: 1fr; } }
 
-/* Each card holds one project; its slides scroll horizontally and snap. */
-.craft-card {
-  position: relative;
-  aspect-ratio: 3 / 4;
+/* Masonry: columns of varied height, each photo keeps its true shape. */
+.thumb-grid {
+  columns: 4 220px;
+  column-gap: var(--space-xs);
+}
+@media (max-width: 900px) { .thumb-grid { columns: 3 180px; } }
+@media (max-width: 560px) { .thumb-grid { columns: 2 140px; } }
+.thumb {
+  padding: 0;
+  border: 0;
+  cursor: pointer;
   overflow: hidden;
-  background: var(--surface-container-high);
-}
-.craft-track {
-  display: flex;
-  height: 100%;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-}
-.craft-track::-webkit-scrollbar { display: none; }
-.craft-slide {
-  flex: 0 0 100%;
+  display: block;
   width: 100%;
+  margin: 0 0 var(--space-xs);
+  break-inside: avoid;            /* don't split a photo across columns */
+  background: var(--surface-container-high);
+  position: relative;
+}
+.thumb img,
+.thumb video {
+  width: 100%;
+  height: auto;                   /* natural aspect ratio — no cropping */
+  display: block;
+  transition: transform .4s ease;
+}
+.thumb:hover img,
+.thumb:hover video { transform: scale(1.04); }
+/* crop a tall video down to a 3:4 portrait, trimming the top */
+.thumb--crop { aspect-ratio: 3 / 4; }
+.thumb--crop video {
   height: 100%;
   object-fit: cover;
-  scroll-snap-align: start;
-  display: block;
+  object-position: center bottom; /* keep the bottom, cut the top */
+}
+/* play badge on video thumbnails */
+.thumb--video::after {
+  content: "";
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-40%, -50%);
+  border-style: solid;
+  border-width: 11px 0 11px 19px;
+  border-color: transparent transparent transparent rgba(255,255,255,.92);
+  filter: drop-shadow(0 1px 3px rgba(0,0,0,.5));
+  pointer-events: none;
+}
+.thumb--video::before {
+  content: "";
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 56px; height: 56px;
+  transform: translate(-50%, -50%);
+  background: rgba(0,0,0,.45);
+  border-radius: var(--radius-full);
+  pointer-events: none;
 }
 
-/* Overlaid prev/next arrows, bottom-right of each card. */
-.craft-nav {
-  position: absolute;
-  bottom: var(--space-sm);
-  right: var(--space-sm);
-  display: flex;
-  gap: 6px;
+/* Lightbox overlay */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 18, 16, 0.92);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
 }
-.craft-nav .round-btn {
-  width: 36px; height: 36px;
-  font-size: 16px;
-  background: rgba(255, 255, 255, 0.82);
-  border-color: transparent;
+.lightbox.is-open { display: flex; }
+.lightbox-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lightbox-stage img,
+.lightbox-stage video {
+  max-width: 90vw;
+  max-height: 86vh;
+  object-fit: contain;
+  display: block;
+}
+.lightbox-close,
+.lightbox-prev,
+.lightbox-next {
+  position: absolute;
+  background: rgba(255,255,255,.14);
+  color: #fff;
+  border: 0;
+  width: 52px; height: 52px;
+  font-size: 22px;
+  cursor: pointer;
+  border-radius: var(--radius-full);
   backdrop-filter: blur(4px);
 }
-.craft-nav .round-btn:hover { background: #fff; }
+.lightbox-close { top: 20px; right: 20px; }
+.lightbox-prev { left: 20px; top: 50%; transform: translateY(-50%); }
+.lightbox-next { right: 20px; top: 50%; transform: translateY(-50%); }
+.lightbox-prev:hover,
+.lightbox-next:hover,
+.lightbox-close:hover { background: rgba(255,255,255,.28); }
 
 /* ---- Detail-page image gallery (masonry of real images) -------------- */
 .masonry img,

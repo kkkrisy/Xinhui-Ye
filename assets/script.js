@@ -53,31 +53,23 @@ document.addEventListener("DOMContentLoaded", () => {
     const prev = wrap.querySelector("[data-carousel-prev]");
     const next = wrap.querySelector("[data-carousel-next]");
     if (!track) return;
-    const step = () => Math.max(track.clientWidth * 0.8, 280);
+    // Paged carousels advance by exactly one full view of cards (here: 2).
+    const paged = wrap.hasAttribute("data-carousel-page");
+    const step = () => {
+      if (paged) {
+        const card = track.firstElementChild;
+        const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+        const cardW = card ? card.getBoundingClientRect().width : track.clientWidth / 2;
+        return (cardW + gap) * 2;
+      }
+      return Math.max(track.clientWidth * 0.8, 280);
+    };
     prev && prev.addEventListener("click", () =>
       track.scrollBy({ left: -step(), behavior: "smooth" })
     );
     next && next.addEventListener("click", () =>
       track.scrollBy({ left: step(), behavior: "smooth" })
     );
-
-    // Fade the partially-visible edge cards to signal there's more to scroll.
-    const FADE = 64; // px
-    const updateFade = () => {
-      const atStart = track.scrollLeft <= 1;
-      const atEnd =
-        track.scrollLeft + track.clientWidth >= track.scrollWidth - 1;
-      let stops = atStart ? "#000 0" : `transparent 0, #000 ${FADE}px`;
-      stops += atEnd
-        ? ", #000 100%"
-        : `, #000 calc(100% - ${FADE}px), transparent 100%`;
-      const mask = `linear-gradient(to right, ${stops})`;
-      track.style.webkitMaskImage = mask;
-      track.style.maskImage = mask;
-    };
-    updateFade();
-    track.addEventListener("scroll", updateFade, { passive: true });
-    window.addEventListener("resize", updateFade);
   });
 
   /* ---- Certificate flip cards --------------------------------------- */
@@ -99,6 +91,58 @@ document.addEventListener("DOMContentLoaded", () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
   });
+
+  /* ---- Craft gallery lightbox --------------------------------------- */
+  // Click any thumbnail to open it full-size; handles images and videos.
+  // Prev/next (buttons or arrow keys) step through every thumb in order.
+  const box = document.querySelector("[data-lightbox]");
+  if (box) {
+    const stage = box.querySelector("[data-lightbox-stage]");
+    const thumbs = Array.from(document.querySelectorAll(".thumb"));
+    let i = 0;
+
+    const show = (n) => {
+      i = (n + thumbs.length) % thumbs.length;
+      const media = thumbs[i].querySelector("img, video");
+      stage.innerHTML = "";
+      if (media.tagName === "VIDEO") {
+        const v = document.createElement("video");
+        v.src = media.currentSrc || media.querySelector("source").src;
+        v.controls = true;
+        v.autoplay = true;
+        v.loop = true;
+        v.playsInline = true;
+        stage.appendChild(v);
+      } else {
+        const img = document.createElement("img");
+        img.src = media.src;
+        img.alt = media.alt;
+        stage.appendChild(img);
+      }
+    };
+    const open = (n) => {
+      show(n);
+      box.classList.add("is-open");
+      box.setAttribute("aria-hidden", "false");
+    };
+    const close = () => {
+      box.classList.remove("is-open");
+      box.setAttribute("aria-hidden", "true");
+      stage.innerHTML = "";
+    };
+
+    thumbs.forEach((t, n) => t.addEventListener("click", () => open(n)));
+    box.querySelector("[data-lightbox-close]").addEventListener("click", close);
+    box.querySelector("[data-lightbox-prev]").addEventListener("click", () => show(i - 1));
+    box.querySelector("[data-lightbox-next]").addEventListener("click", () => show(i + 1));
+    box.addEventListener("click", (e) => { if (e.target === box) close(); });
+    document.addEventListener("keydown", (e) => {
+      if (!box.classList.contains("is-open")) return;
+      if (e.key === "Escape") close();
+      if (e.key === "ArrowLeft") show(i - 1);
+      if (e.key === "ArrowRight") show(i + 1);
+    });
+  }
 
   /* ---- Contact form (no backend yet) -------------------------------- */
   document.querySelectorAll("[data-contact-form]").forEach((form) => {
