@@ -43,44 +43,38 @@
         <h1 class="headline-lg contact-heading">Want to get in touch?</h1>
 
         <div class="contact-grid">
-          <!-- ----- Left: bio + note ----- -->
-          <div class="stack-md">
-            <div>
-              <p class="form-label" style="margin-bottom: 4px;">Xinhui Ye</p>
-              <p class="body-lg" style="margin:0;">Email: <a href="mailto:kristinyxh@gmail.com">kristinyxh@gmail.com</a></p>
-            </div>
-
-            <div>
-              <p class="form-label">Note from Xinhui</p>
-              <div class="media">
-                <img src="assets/contact.jpeg" alt="Xinhui Ye by a waterfall" style="width:100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: center; display:block;" />
-              </div>
-              <p class="body-lg" style="margin-top: var(--space-md);">
-                It is always nice to meet new friends and get to exchange thoughts and ideas. If you have any questions, comments, ideas, or collaboration opportunities, please know that whichever is the case, I read and am grateful for each and every email.
-              </p>
-            </div>
+          <!-- ----- Left: photo only ----- -->
+          <div class="contact-photo">
+            <img src="assets/contact.jpeg" alt="Xinhui Ye by a waterfall" />
           </div>
 
-          <!-- ----- Right: form ----- -->
-          <form data-contact-form novalidate>
-            <div class="form-group">
-              <span class="form-label">Your Details</span>
-              <div class="field-row">
-                <input class="field" type="text" name="first" placeholder="First name" autocomplete="given-name" />
-                <input class="field" type="text" name="last" placeholder="Last name" autocomplete="family-name" />
+          <!-- ----- Right: note + form ----- -->
+          <div class="contact-right">
+            <p class="form-label contact-note__label">Note from Xinhui</p>
+            <p class="body-lg contact-note__text">
+              It is always nice to meet new friends and get to exchange thoughts and ideas. If you have any questions, comments, ideas, or collaboration opportunities, please know that whichever is the case, I read and am grateful for each and every email.
+            </p>
+
+            <form data-contact-form novalidate>
+              <div class="form-group">
+                <span class="form-label">Your Details</span>
+                <div class="field-row">
+                  <input class="field" type="text" name="first" placeholder="First name" autocomplete="given-name" />
+                  <input class="field" type="text" name="last" placeholder="Last name" autocomplete="family-name" />
+                </div>
+                <div style="margin-top: var(--space-md);">
+                  <input class="field" type="email" name="email" placeholder="Email address" autocomplete="email" />
+                </div>
               </div>
-              <div style="margin-top: var(--space-md);">
-                <input class="field" type="email" name="email" placeholder="Email address" autocomplete="email" />
+              <div class="form-group">
+                <span class="form-label">Your Message</span>
+                <textarea class="field" name="message" placeholder="Type your message…" style="min-height: 220px;"></textarea>
               </div>
-            </div>
-            <div class="form-group">
-              <span class="form-label">Your Message</span>
-              <textarea class="field" name="message" placeholder="Type your message…" style="min-height: 220px;"></textarea>
-            </div>
-            <div class="form-actions">
-              <button class="btn btn--primary" type="submit">Submit</button>
-            </div>
-          </form>
+              <div class="form-actions">
+                <button class="btn btn--primary" type="submit">Submit</button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </section>

@@ -132,6 +132,12 @@ a { color: inherit; }
   text-transform: uppercase;
   color: var(--on-surface);
 }
+/* Larger, navy section eyebrows on the About page */
+.section-eyebrow {
+  font-size: 20px;
+  line-height: 26px;
+  color: var(--inverse-surface);   /* deep navy indigo */
+}
 
 .body-lg { font-size: 17px; line-height: 28px; }
 .body-md { font-size: 16px; line-height: 26px; }
@@ -495,11 +501,37 @@ a { color: inherit; }
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--space-2xl);
-  align-items: start;
+  align-items: stretch;
 }
 .contact-grid--solo { grid-template-columns: minmax(0, 560px); justify-content: center; }
+
+/* Left note column: image flexes to fill the leftover height so the
+   column bottom aligns with the form on the right. */
+.contact-note {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.contact-note__label { margin-top: 0; }
+.contact-note__text { margin: 0 0 var(--space-xl); }
+/* Left column: bare photo (no frame/background). It fills the row height set
+   by the right column and keeps its own aspect ratio, so it shows larger and
+   its top/bottom line up with the note + form on the right. */
+.contact-photo {
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+.contact-photo img {
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+  display: block;
+}
+
 @media (max-width: 860px) {
-  .contact-grid { grid-template-columns: 1fr; gap: var(--space-lg); }
+  .contact-grid { grid-template-columns: 1fr; gap: var(--space-lg); align-items: start; }
+  .contact-photo img { height: auto; width: auto; max-width: 100%; }
 }
 
 .form-group + .form-group { margin-top: var(--space-md); }
@@ -840,28 +872,46 @@ a.t-org:hover { color: var(--on-surface); }
   object-fit: cover;
   object-position: center bottom; /* keep the bottom, cut the top */
 }
-/* play badge on video thumbnails */
-.thumb--video::after {
-  content: "";
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-40%, -50%);
-  border-style: solid;
-  border-width: 11px 0 11px 19px;
-  border-color: transparent transparent transparent rgba(255,255,255,.92);
-  filter: drop-shadow(0 1px 3px rgba(0,0,0,.5));
-  pointer-events: none;
+/* the thumbnail crop is for the grid only — show the whole frame full screen */
+.thumb--crop video:fullscreen,
+.thumb--crop video:-webkit-full-screen {
+  object-fit: contain;
+  object-position: center;
 }
-.thumb--video::before {
-  content: "";
+/* Video thumbnails autoplay; real controls overlay them. */
+.thumb--video { cursor: default; }
+.video-controls {
   position: absolute;
-  top: 50%; left: 50%;
-  width: 56px; height: 56px;
-  transform: translate(-50%, -50%);
-  background: rgba(0,0,0,.45);
+  bottom: var(--space-xs);
+  right: var(--space-xs);
+  display: flex;
+  gap: 6px;
+  opacity: 0;
+  transition: opacity .25s ease;
+}
+.thumb--video:hover .video-controls,
+.thumb--video:focus-within .video-controls { opacity: 1; }
+.video-btn {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background: rgba(0,0,0,.5);
   border-radius: var(--radius-full);
-  pointer-events: none;
+  backdrop-filter: blur(4px);
 }
+.video-btn:hover { background: rgba(0,0,0,.72); }
+.video-btn svg { width: 18px; height: 18px; }
+.video-btn[data-video-fs] svg { width: 16px; height: 16px; }
+/* toggle shows the pause icon while playing, the play icon once paused */
+.video-btn .icon-play { display: none; }
+.video-btn.is-paused .icon-pause { display: none; }
+.video-btn.is-paused .icon-play { display: block; }
 
 /* Lightbox overlay */
 .lightbox {

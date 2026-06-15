@@ -98,7 +98,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const box = document.querySelector("[data-lightbox]");
   if (box) {
     const stage = box.querySelector("[data-lightbox-stage]");
-    const thumbs = Array.from(document.querySelectorAll(".thumb"));
+    // Videos have their own in-place controls (pause/play + fullscreen),
+    // so only photos open in the lightbox.
+    const thumbs = Array.from(document.querySelectorAll(".thumb:not(.thumb--video)"));
     let i = 0;
 
     const show = (n) => {
@@ -143,6 +145,42 @@ document.addEventListener("DOMContentLoaded", () => {
       if (e.key === "ArrowRight") show(i + 1);
     });
   }
+
+  /* ---- Craft video controls (pause/play + fullscreen) --------------- */
+  // Videos autoplay muted, so the toggle starts on "pause"; pausing flips it
+  // to "play". The second button opens the clip full screen for a bigger view.
+  document.querySelectorAll(".thumb--video").forEach((wrap) => {
+    const video = wrap.querySelector("video");
+    const toggle = wrap.querySelector("[data-video-toggle]");
+    const fsBtn = wrap.querySelector("[data-video-fs]");
+    if (!video) return;
+
+    const syncIcon = () => {
+      toggle.classList.toggle("is-paused", video.paused);
+      toggle.setAttribute("aria-label", video.paused ? "Play" : "Pause");
+    };
+    toggle &&
+      toggle.addEventListener("click", () => {
+        if (video.paused) video.play();
+        else video.pause();
+      });
+    video.addEventListener("play", syncIcon);
+    video.addEventListener("pause", syncIcon);
+    syncIcon();
+
+    fsBtn &&
+      fsBtn.addEventListener("click", () => {
+        if (document.fullscreenElement) {
+          document.exitFullscreen();
+        } else if (video.requestFullscreen) {
+          video.requestFullscreen();
+        } else if (video.webkitEnterFullscreen) {
+          video.webkitEnterFullscreen(); // iOS Safari
+        } else if (video.webkitRequestFullscreen) {
+          video.webkitRequestFullscreen();
+        }
+      });
+  });
 
   /* ---- Contact form (no backend yet) -------------------------------- */
   document.querySelectorAll("[data-contact-form]").forEach((form) => {
