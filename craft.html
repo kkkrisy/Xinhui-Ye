@@ -45,24 +45,104 @@
       </div>
     </section>
 
-    <!-- ===== Masonry gallery ===== -->
+    <!-- ===== Project cards ===== -->
+    <!-- Each card is one project; swipe / use the arrows to move through its
+         photos (and short videos). Sharp corners, no captions needed. -->
     <section class="band band--cream" style="padding-top: var(--space-lg);">
       <div class="container">
-        <!-- TODO: replace each placeholder with a craft image (painting,
-             accordion, 3D models, etc.). Sharp corners, no captions needed. -->
-        <div class="masonry">
-          <div class="media-placeholder" style="aspect-ratio: 4 / 3;"></div>
-          <div class="media-placeholder" style="aspect-ratio: 3 / 4;"></div>
-          <div class="media-placeholder" style="aspect-ratio: 1 / 1;"></div>
-          <div class="media-placeholder" style="aspect-ratio: 16 / 9;"></div>
-          <div class="media-placeholder" style="aspect-ratio: 3 / 4;"></div>
-          <div class="media-placeholder" style="aspect-ratio: 4 / 3;"></div>
-          <div class="media-placeholder" style="aspect-ratio: 1 / 1;"></div>
-          <div class="media-placeholder" style="aspect-ratio: 3 / 4;"></div>
-          <div class="media-placeholder" style="aspect-ratio: 4 / 3;"></div>
-          <div class="media-placeholder" style="aspect-ratio: 16 / 9;"></div>
-          <div class="media-placeholder" style="aspect-ratio: 1 / 1;"></div>
-          <div class="media-placeholder" style="aspect-ratio: 3 / 4;"></div>
+        <div class="craft-grid">
+
+          <!-- Pottery -->
+          <article class="craft-card" data-carousel>
+            <div class="craft-track" data-carousel-track>
+              <img class="craft-slide" src="assets/pottery%201.jpeg" alt="Pottery" loading="lazy" />
+              <img class="craft-slide" src="assets/pottery%202.jpg" alt="Pottery" loading="lazy" />
+              <img class="craft-slide" src="assets/pottery%203.jpg" alt="Pottery" loading="lazy" />
+              <img class="craft-slide" src="assets/pottery-4.jpg" alt="Pottery" loading="lazy" />
+              <img class="craft-slide" src="assets/pottery%205.jpeg" alt="Pottery" loading="lazy" />
+            </div>
+            <div class="craft-nav">
+              <button class="round-btn" data-carousel-prev aria-label="Previous photo">&#8249;</button>
+              <button class="round-btn" data-carousel-next aria-label="Next photo">&#8250;</button>
+            </div>
+          </article>
+
+          <!-- Painting -->
+          <article class="craft-card" data-carousel>
+            <div class="craft-track" data-carousel-track>
+              <img class="craft-slide" src="assets/painting%20cloud.JPG" alt="Painting" loading="lazy" />
+              <img class="craft-slide" src="assets/painting%20beach.JPG" alt="Painting" loading="lazy" />
+              <video class="craft-slide" autoplay muted loop playsinline preload="metadata" aria-label="Painting in progress">
+                <source src="assets/painting-plant.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <div class="craft-nav">
+              <button class="round-btn" data-carousel-prev aria-label="Previous photo">&#8249;</button>
+              <button class="round-btn" data-carousel-next aria-label="Next photo">&#8250;</button>
+            </div>
+          </article>
+
+          <!-- Floristry -->
+          <article class="craft-card" data-carousel>
+            <div class="craft-track" data-carousel-track>
+              <img class="craft-slide" src="assets/florist%201.jpg" alt="Flower arrangement" loading="lazy" />
+              <img class="craft-slide" src="assets/florist%202.JPG" alt="Flower arrangement" loading="lazy" />
+              <img class="craft-slide" src="assets/florist%203.JPG" alt="Flower arrangement" loading="lazy" />
+              <img class="craft-slide" src="assets/florist%204.JPG" alt="Flower arrangement" loading="lazy" />
+            </div>
+            <div class="craft-nav">
+              <button class="round-btn" data-carousel-prev aria-label="Previous photo">&#8249;</button>
+              <button class="round-btn" data-carousel-next aria-label="Next photo">&#8250;</button>
+            </div>
+          </article>
+
+          <!-- Paper craft -->
+          <article class="craft-card" data-carousel>
+            <div class="craft-track" data-carousel-track>
+              <img class="craft-slide" src="assets/diy-paper%201.jpeg" alt="Paper craft" loading="lazy" />
+              <img class="craft-slide" src="assets/diy-paper%202.JPG" alt="Paper craft" loading="lazy" />
+              <img class="craft-slide" src="assets/diy-paper%203.JPG" alt="Paper craft" loading="lazy" />
+              <img class="craft-slide" src="assets/diy-paper%204.JPG" alt="Paper craft" loading="lazy" />
+            </div>
+            <div class="craft-nav">
+              <button class="round-btn" data-carousel-prev aria-label="Previous photo">&#8249;</button>
+              <button class="round-btn" data-carousel-next aria-label="Next photo">&#8250;</button>
+            </div>
+          </article>
+
+          <!-- Panda craft -->
+          <article class="craft-card" data-carousel>
+            <div class="craft-track" data-carousel-track>
+              <img class="craft-slide" src="assets/diy-panda%201.jpg" alt="Handmade panda" loading="lazy" />
+              <img class="craft-slide" src="assets/diy-panda%202.JPG" alt="Handmade panda" loading="lazy" />
+              <img class="craft-slide" src="assets/diy-panda%203.JPG" alt="Handmade panda" loading="lazy" />
+            </div>
+            <div class="craft-nav">
+              <button class="round-btn" data-carousel-prev aria-label="Previous photo">&#8249;</button>
+              <button class="round-btn" data-carousel-next aria-label="Next photo">&#8250;</button>
+            </div>
+          </article>
+
+          <!-- Gold-leaf craft -->
+          <article class="craft-card" data-carousel>
+            <div class="craft-track" data-carousel-track>
+              <img class="craft-slide" src="assets/diy-gold%201.JPG" alt="Gold-leaf craft" loading="lazy" />
+              <img class="craft-slide" src="assets/diy-gold%202.JPG" alt="Gold-leaf craft" loading="lazy" />
+              <img class="craft-slide" src="assets/diy-gold%203.JPG" alt="Gold-leaf craft" loading="lazy" />
+              <img class="craft-slide" src="assets/diy-gold%204.JPG" alt="Gold-leaf craft" loading="lazy" />
+              <img class="craft-slide" src="assets/diy-gold%205.JPG" alt="Gold-leaf craft" loading="lazy" />
+              <img class="craft-slide" src="assets/diy-gold%206.JPG" alt="Gold-leaf craft" loading="lazy" />
+              <img class="craft-slide" src="assets/diy-gold%207.JPG" alt="Gold-leaf craft" loading="lazy" />
+              <video class="craft-slide" autoplay muted loop playsinline preload="metadata" aria-label="Gold-leaf craft in progress">
+                <source src="assets/diy-gold.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <div class="craft-nav">
+              <button class="round-btn" data-carousel-prev aria-label="Previous photo">&#8249;</button>
+              <button class="round-btn" data-carousel-next aria-label="Next photo">&#8250;</button>
+            </div>
+          </article>
+
         </div>
       </div>
     </section>
