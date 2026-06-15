@@ -427,14 +427,17 @@ a { color: inherit; }
 }
 .h-carousel::-webkit-scrollbar { display: none; }
 .h-card {
-  flex: 0 0 clamp(280px, 42vw, 460px);
+  flex: 0 0 clamp(280px, 40vw, 440px);
   scroll-snap-align: start;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-sm);
-  align-items: start;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
 }
-.h-card .media-placeholder { min-height: 150px; aspect-ratio: 4 / 3; }
+/* Big cover on top, title/meta/Read stacked beneath. */
+.h-card .media,
+.h-card .media img { width: 100%; display: block; }
+.h-card .media img { aspect-ratio: 4 / 3; object-fit: cover; }
+.h-card .media-placeholder { min-height: 200px; aspect-ratio: 4 / 3; }
 .h-card .title-serif { font-family: var(--font-grotesque); font-weight: 700; }
 
 .carousel-controls { display: flex; gap: var(--space-xs); margin-top: var(--space-md); }
