@@ -215,6 +215,18 @@ a { color: inherit; }
   .section-split { grid-template-columns: 1fr; gap: var(--space-md); }
 }
 
+/* Labelled accordion sections stack: header on top, thin navy rule beneath it,
+   then the list full-width below. */
+.section-split:has(.accordion) {
+  display: block;
+}
+.section-split:has(.accordion) .section-eyebrow {
+  display: block;
+  padding-bottom: var(--space-sm);
+  margin-bottom: var(--space-md);
+  border-bottom: 2px solid var(--primary);   /* navy line beneath the header */
+}
+
 .stack-sm > * + * { margin-top: var(--space-sm); }
 .stack-md > * + * { margin-top: var(--space-md); }
 
@@ -497,8 +509,8 @@ a { color: inherit; }
 .dots span.is-active { background: var(--on-surface-variant); }
 
 /* ---- Accordion (Education / Work) ------------------------------------ */
-.accordion { border-top: 1px solid var(--outline-variant); }
-.accordion-row { border-bottom: 1px solid var(--outline-variant); }
+.accordion { border-top: none; }
+.accordion-row + .accordion-row { border-top: 1px solid rgba(46, 46, 56, 0.15); }   /* faint grey line between entries */
 .accordion-head {
   width: 100%;
   display: flex;
@@ -514,7 +526,22 @@ a { color: inherit; }
   font-size: 17px;
   color: var(--on-surface);
 }
-.accordion-head .sign { font-family: var(--font-grotesque); font-size: 22px; color: var(--on-surface-variant); }
+/* Circular toggle icon (à la Jess Hill "reporting archive") */
+.accordion-head .sign {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  background: var(--primary);
+  color: var(--on-primary);
+  font-family: var(--font-grotesque);
+  line-height: 1;
+  transition: background 0.2s ease;
+}
+.accordion-head:hover .sign { background: var(--primary-container); }
 .accordion-body {
   display: none;
   padding: 0 0 var(--space-md) var(--space-lg);
@@ -524,7 +551,7 @@ a { color: inherit; }
 .accordion-row.is-open .sign::before { content: "–"; }
 .accordion-row:not(.is-open) .sign::before { content: "+"; }
 .accordion-row .sign { font-size: 0; }   /* hide the static char, use ::before */
-.accordion-row .sign::before { font-size: 22px; }
+.accordion-row .sign::before { font-size: 24px; }
 .accordion-body p + p { margin-top: var(--space-sm); }
 .accordion-tags {
   font-family: var(--font-serif);
