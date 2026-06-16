@@ -408,7 +408,12 @@ a { color: inherit; }
   gap: var(--space-xl);
   align-items: start;
 }
-.hero-layout .body-lg { margin-top: var(--space-md); max-width: 46ch; }
+.hero-layout .stack-md { margin-top: var(--space-xl); }
+.hero-layout .body-lg { margin-top: 0; }
+/* Hero intro runs a touch larger so the text column finishes near the
+   bottom of the portrait. */
+.hero-layout .stack-md .body-lg { font-size: 18px; line-height: 29px; }
+.hero-layout .stack-md .body-md { font-size: 17px; line-height: 28px; }
 @media (max-width: 860px) {
   .hero-layout { grid-template-columns: 1fr; }
   .hero-portrait { order: -1; max-width: 360px; }
@@ -442,7 +447,7 @@ a { color: inherit; }
 }
 
 /* ---- RECENT --------------------------------------------------------- */
-.recent-item + .recent-item { margin-top: var(--space-lg); }
+.recent-item + .recent-item { margin-top: var(--space-sm); }
 .recent-item p { margin: 0 0 var(--space-sm); color: var(--on-surface-body); }
 
 /* ---- Highlights carousel (About) ------------------------------------- */
@@ -520,6 +525,14 @@ a { color: inherit; }
 .accordion-row:not(.is-open) .sign::before { content: "+"; }
 .accordion-row .sign { font-size: 0; }   /* hide the static char, use ::before */
 .accordion-row .sign::before { font-size: 22px; }
+.accordion-body p + p { margin-top: var(--space-sm); }
+.accordion-tags {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 15px;
+  line-height: 24px;
+  color: var(--on-surface-variant);
+}
 
 /* ---- Contact form (underline inputs — design.md) --------------------- */
 .contact-heading { text-align: center; margin-bottom: var(--space-xl); }
