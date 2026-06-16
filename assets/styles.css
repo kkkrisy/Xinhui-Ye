@@ -24,7 +24,7 @@
   --on-primary: #ffefd6;
   --primary-container: #3e3f7f;           /* lighter indigo, for use on indigo */
   --on-primary-container: #ffefd6;
-  --secondary: #fc9073;                   /* coral — brand signal, used sparingly */
+  --secondary: #ff8a65;                   /* brand coral-orange — name / signal, used sparingly. Single source of truth: change here only. */
   --tertiary: #9ee2d3;                    /* mint — one pop per screen (menu pill) */
   --on-tertiary: #333462;
   --input-surface: #e2e2e2;
@@ -79,26 +79,9 @@ img, video {
   -webkit-touch-callout: none;
   user-select: none;
 }
-/* Subtle visible watermark on photographs */
-.thumb, .media, .contact-photo, .lightbox-stage { position: relative; }
-.thumb::after,
-.media::after,
-.contact-photo::after,
-.lightbox-stage::after {
-  content: "© Xinhui Ye";
-  position: absolute;
-  right: 8px;
-  bottom: 6px;
-  font-family: var(--font-grotesque);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  color: rgba(255, 255, 255, 0.3);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
-  pointer-events: none;
-  z-index: 2;
-}
-.lightbox-stage::after { font-size: 13px; right: 14px; bottom: 12px; }
+/* Watermark is now baked into the image files themselves (see
+   tools/watermark.py) so it survives downloads and screenshots — no CSS
+   overlay needed. */
 
 a { color: inherit; }
 
@@ -335,10 +318,10 @@ a { color: inherit; }
   font-weight: 800;
   color: var(--on-surface);
 }
-/* Link you're hovering: light mint. */
+/* Link you're hovering: mint accent (matches the back-to-top hover). */
 .nav-links a:hover {
   font-weight: 800;
-  color: rgb(173, 224, 211);
+  color: var(--tertiary);
 }
 
 /* Mint MENU pill (mobile) — the single mint accent, design.md */
@@ -640,14 +623,14 @@ textarea.field { height: auto; min-height: 140px; resize: vertical; padding-top:
 .site-footer { background: var(--inverse-surface); color: var(--inverse-on-surface); padding: var(--space-xl) 0; text-align: center; }
 .back-to-top {
   display: inline-flex;
-  flex-direction: column;
+  flex-direction: row-reverse;     /* label, then the chevron in its own dot */
   align-items: center;
-  gap: 4px;
+  gap: 12px;
   background: var(--primary-container);
   color: var(--inverse-on-surface);
   border: none;
-  border-radius: var(--radius-md);
-  padding: 12px 18px;
+  border-radius: var(--radius-full);   /* full pill */
+  padding: 14px 16px 14px 28px;
   font-family: var(--font-grotesque);
   font-weight: 600;
   font-size: 12px;
@@ -655,6 +638,42 @@ textarea.field { height: auto; min-height: 140px; resize: vertical; padding-top:
   text-transform: uppercase;
   text-decoration: none;
   cursor: pointer;
+  transition: background-color .2s ease, color .2s ease;
+}
+/* The chevron sits in a small round dot, like the reference button. */
+.back-to-top::before {
+  content: "\2191";                 /* up arrow */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-full);
+  background: var(--surface-container-high);
+  color: var(--primary);
+  font-size: 16px;
+  line-height: 1;
+  transition: background-color .2s ease, color .2s ease;
+}
+/* The markup keeps a raw chevron glyph before the label; the ::before dot
+   replaces it, so hide the inline glyph node. */
+.back-to-top {
+  font-size: 0;                     /* collapse the stray chevron text node */
+}
+.back-to-top span {
+  font-size: 12px;                  /* restore the label */
+}
+/* Touch / hover: flip to the mint accent used across the nav. */
+.back-to-top:hover,
+.back-to-top:focus-visible {
+  background: var(--tertiary);
+  color: var(--on-tertiary);
+  outline: none;
+}
+.back-to-top:hover::before,
+.back-to-top:focus-visible::before {
+  background: var(--surface);
+  color: var(--on-tertiary);
 }
 .footer-social {
   display: flex;

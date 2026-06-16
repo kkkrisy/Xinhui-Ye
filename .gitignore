@@ -1,0 +1,5 @@
+# Pristine, un-watermarked image originals — kept locally as a backup only.
+# Never publish these, or the baked-in watermark protection is defeated.
+assets/_originals/
+
+.DS_Store
