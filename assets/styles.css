@@ -1064,3 +1064,131 @@ a.t-org:hover { color: var(--on-surface); }
   break-inside: avoid;
   margin-bottom: var(--space-md);
 }
+
+/* ---- Takeaway CV (About) --------------------------------------------- */
+/* One typeface throughout (grotesque) — entries differ only by colour, size,
+   weight and case. Compact scale, centred in a thin frame above the contact
+   section. */
+.cv-shell { max-width: 910px; margin-inline: auto; }
+
+/* Header row: eyebrow on the left, download pill on the right, navy rule
+   beneath — same rhythm as the Education / Experiences section headers. */
+.cv-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+.cv-head .section-eyebrow { display: block; }
+/* Thin bordered frame around the whole CV block */
+.cv-frame { border: 1px solid var(--outline); padding: clamp(20px, 3vw, 36px); }
+@media (max-width: 560px) { .cv-frame { padding: var(--space-md); } }
+/* Download pill: navy at rest, mint on hover — same accent as back-to-top */
+.btn--mint-hover:hover,
+.btn--mint-hover:focus-visible {
+  background: var(--tertiary);
+  color: var(--on-tertiary);
+  opacity: 1;
+  outline: none;
+}
+
+/* Columns hug their content (flex items) and are spread with equal gaps, so the
+   visual channel between columns reads identically regardless of line lengths. */
+.cv-grid {
+  display: flex;
+  justify-content: flex-start;
+  gap: 52px;                   /* fixed, identical channel between every column */
+  align-items: flex-start;
+}
+@media (max-width: 860px) { .cv-grid { flex-direction: column; gap: var(--space-lg); } }
+.cv-col { flex: 0 0 auto; min-width: 0; }
+/* Explicit column widths → fixed flex boxes → space-between yields exactly
+   equal gaps between columns. Widths are sized to each column's content. */
+.cv-grid > .cv-col:nth-child(1) { width: 290px; }       /* sets the bio measure */
+.cv-grid > .cv-col:nth-child(2) { width: max-content; }  /* hug content */
+.cv-grid > .cv-col:nth-child(3) { width: max-content; }
+@media (max-width: 860px) {
+  .cv-grid > .cv-col:nth-child(1),
+  .cv-grid > .cv-col:nth-child(2),
+  .cv-grid > .cv-col:nth-child(3) { flex: 1 1 auto; width: auto; }
+}
+.cv-block + .cv-block { margin-top: var(--space-md); }
+
+/* Everything below uses var(--font-grotesque) — single family by design. */
+.cv-name {
+  font-family: var(--font-grotesque);
+  font-weight: 800;
+  font-size: 26px;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: var(--inverse-surface);
+  margin: 0;
+}
+.cv-role {
+  font-family: var(--font-grotesque);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--secondary);
+  margin: 5px 0 var(--space-sm);
+}
+.cv-portrait { width: 100%; height: auto; max-width: 180px; display: block; margin-bottom: var(--space-sm); }
+.cv-bio {
+  font-family: var(--font-grotesque);
+  font-weight: 400;
+  font-size: 12.5px;
+  line-height: 19px;
+  color: var(--on-surface-body);
+  margin: 0;                   /* column width (280px) sets the measure */
+}
+.cv-contact {
+  font-family: var(--font-grotesque);
+  font-weight: 600;
+  font-size: 11.5px;
+  line-height: 1.55;
+  color: var(--primary);
+  margin: 0 0 var(--space-md);
+}
+.cv-contact a { color: var(--primary); text-decoration: underline; text-underline-offset: 2px; }
+
+.cv-sub {
+  font-family: var(--font-grotesque);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--inverse-surface);
+  margin: 0 0 8px;
+}
+.cv-entry { line-height: 18px; }   /* match the list rhythm; avoid inherited tall leading */
+.cv-entry + .cv-entry { margin-top: 11px; }
+.cv-entry .role {
+  display: block;
+  font-family: var(--font-grotesque);
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--on-surface);
+  line-height: 18px;
+}
+.cv-entry .where {
+  font-family: var(--font-grotesque);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--on-surface-body);
+}
+.cv-entry .when {
+  font-family: var(--font-grotesque);
+  font-weight: 500;
+  font-size: 12px;
+  color: var(--on-surface-variant);
+  white-space: nowrap;          /* keep date ranges like 2019–2025 on one line */
+}
+.cv-list { list-style: none; margin: 0; padding: 0; }
+.cv-list li { font-family: var(--font-grotesque); font-weight: 400; font-size: 12px; line-height: 18px; color: var(--on-surface-body); }
+.cv-list li .lvl { color: var(--on-surface-variant); white-space: nowrap; }
