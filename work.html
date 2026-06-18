@@ -143,6 +143,12 @@
         <h2 class="headline-lg contact-heading">Want to get in touch?</h2>
         <div class="contact-grid contact-grid--solo">
           <form data-contact-form novalidate>
+            <!-- Web3Forms: same access key as the Contact page -->
+            <input type="hidden" name="access_key" value="3b5f7678-14fb-4927-aae4-9830c9c35b41" />
+            <input type="hidden" name="subject" value="New message from your portfolio site" />
+            <input type="hidden" name="from_name" value="Xinhui Ye portfolio" />
+            <!-- honeypot: hidden from people, catches bots -->
+            <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true" />
             <div class="form-group">
               <span class="form-label">Your Details</span>
               <div class="field-row">
@@ -150,17 +156,23 @@
                 <input class="field" type="text" name="last" placeholder="Last name" autocomplete="family-name" />
               </div>
               <div style="margin-top: var(--space-md);">
-                <input class="field" type="email" name="email" placeholder="Email address" autocomplete="email" />
+                <input class="field" type="email" name="email" placeholder="Email address" autocomplete="email" required />
               </div>
             </div>
             <div class="form-group">
               <span class="form-label">Your Message</span>
-              <textarea class="field" name="message" placeholder="Type your message…"></textarea>
+              <textarea class="field" name="message" placeholder="Type your message…" required></textarea>
             </div>
             <div class="form-actions">
               <button class="btn btn--primary" type="submit">Submit</button>
             </div>
           </form>
+
+          <!-- shown after a successful submission -->
+          <div class="contact-success" data-contact-success hidden>
+            <p class="title-serif">Thank you for your message!</p>
+            <p class="body-lg">I'll get back to you soon :)</p>
+          </div>
         </div>
       </div>
     </section>

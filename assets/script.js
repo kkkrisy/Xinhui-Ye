@@ -192,6 +192,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
+      // The form carries `novalidate`, so enforce the required fields here and
+      // surface the browser's native prompts instead of sending an empty form.
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
       if (submitBtn) {
         submitBtn.disabled = true;
         submitBtn.textContent = "Sending…";
