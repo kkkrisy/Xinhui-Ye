@@ -1069,7 +1069,7 @@ a.t-org:hover { color: var(--on-surface); }
 /* One typeface throughout (grotesque) — entries differ only by colour, size,
    weight and case. Compact scale, centred in a thin frame above the contact
    section. */
-.cv-shell { max-width: 910px; margin-inline: auto; }
+.cv-shell { max-width: 1010px; margin-inline: auto; }
 
 /* Header row: eyebrow on the left, download pill on the right, navy rule
    beneath — same rhythm as the Education / Experiences section headers. */
@@ -1085,7 +1085,7 @@ a.t-org:hover { color: var(--on-surface); }
 }
 .cv-head .section-eyebrow { display: block; }
 /* Thin bordered frame around the whole CV block */
-.cv-frame { border: 1px solid var(--outline); padding: clamp(20px, 3vw, 36px); }
+.cv-frame { border: 1px solid var(--outline); padding: clamp(32px, 4.5vw, 56px); }
 @media (max-width: 560px) { .cv-frame { padding: var(--space-md); } }
 /* Download pill: navy at rest, mint on hover — same accent as back-to-top */
 .btn--mint-hover:hover,
@@ -1101,7 +1101,7 @@ a.t-org:hover { color: var(--on-surface); }
 .cv-grid {
   display: flex;
   justify-content: flex-start;
-  gap: 52px;                   /* fixed, identical channel between every column */
+  gap: 76px;                   /* fixed, identical channel between every column */
   align-items: flex-start;
 }
 @media (max-width: 860px) { .cv-grid { flex-direction: column; gap: var(--space-lg); } }
