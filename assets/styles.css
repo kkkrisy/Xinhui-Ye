@@ -29,12 +29,13 @@
   --on-tertiary: #333462;
   --input-surface: #e2e2e2;
 
-  /* Type families. design.md specifies a heavy grotesque (display/UI) paired
-     with a transitional serif (reading). Söhne / Neue Haas are licensed, so we
-     load close free substitutes (Archivo, Spectral) with the documented stack
-     as fallback. TODO: swap in the licensed faces if available. */
+  /* Type families. Single grotesque typeface (Archivo) is used across the
+     whole site by design — body, headings, quotes, and labels all share it
+     for one consistent voice. --font-serif is kept as an alias so the many
+     reading/quote rules that reference it resolve to the same family; vary
+     weight/size for hierarchy instead of switching faces. */
   --font-grotesque: "Archivo", "Neue Haas Grotesk", Arial, sans-serif;
-  --font-serif: "Spectral", Georgia, serif;
+  --font-serif: "Archivo", "Neue Haas Grotesk", Arial, sans-serif;
 
   /* Radii */
   --radius-sm: 4px;
@@ -918,8 +919,9 @@ a.t-org:hover { color: var(--on-surface); }
 /* Moderate air between top-level blocks on this page */
 .defense-playful .detail-blocks { gap: clamp(40px, 5vw, 72px); }
 
-/* Reading copy sits straight on the page — no boxed border here */
-.defense-playful .detail-text { border: none; padding: 0; }
+/* Reading copy sits straight on the page — no boxed border here, navy ink */
+.defense-playful .detail-text { border: none; padding: 0; color: var(--primary); }
+.defense-playful .detail-text p { color: var(--primary); }
 
 /* Soft-rounded corners on every photo */
 .defense-playful .media img { border-radius: var(--radius-lg); }
@@ -944,6 +946,24 @@ a.t-org:hover { color: var(--on-surface); }
 }
 .photo-block--reverse .media { order: 2; }
 .photo-block .media img { border-radius: var(--radius-lg); }
+
+/* Thesis-book block: top-align the copy with the (tall) cover image instead
+   of vertically centring it, sit the two columns closer together, and use
+   full reading-size copy (matching the intro) in navy. Only this block sits
+   directly under .detail-blocks; the rest live inside .photo-feature. */
+.defense-playful .detail-blocks > .photo-block {
+  align-items: start;
+  gap: clamp(24px, 2.5vw, 40px);
+  border: 1px solid var(--outline);
+  border-radius: var(--radius-lg);
+  padding: clamp(24px, 3vw, 48px);
+}
+.defense-playful .detail-blocks > .photo-block .block-title { color: var(--primary); }
+.defense-playful .detail-blocks > .photo-block .block-desc {
+  font-size: 17px;
+  line-height: 28px;
+  max-width: none;
+}
 
 /* Compact variant: cap the photo so it doesn't tower over its caption */
 .photo-block--compact .media { display: flex; justify-content: center; }
