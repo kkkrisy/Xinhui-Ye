@@ -225,6 +225,28 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  /* ---- Book details modal (Defense Day) ----------------------------- */
+  const bookModal = document.querySelector("[data-book-modal]");
+  const bookOpen = document.querySelector("[data-book-open]");
+  if (bookModal && bookOpen) {
+    const setBook = (open) => {
+      bookModal.classList.toggle("is-open", open);
+      bookModal.setAttribute("aria-hidden", open ? "false" : "true");
+      document.body.style.overflow = open ? "hidden" : "";
+    };
+    bookOpen.addEventListener("click", () => setBook(true));
+    bookModal
+      .querySelector("[data-book-close]")
+      .addEventListener("click", () => setBook(false));
+    bookModal.addEventListener("click", (e) => {
+      if (e.target === bookModal) setBook(false);
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && bookModal.classList.contains("is-open"))
+        setBook(false);
+    });
+  }
+
   /* ---- Deter image/video saving ------------------------------------- */
   // Not bulletproof (screenshots, devtools and direct URLs still work), but
   // it blocks right-click "Save image as…" and click-drag saving.

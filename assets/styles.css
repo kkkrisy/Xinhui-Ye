@@ -912,6 +912,69 @@ a.t-org:hover { color: var(--on-surface); }
   .testimonial { flex-basis: 86%; padding-left: var(--space-md); }
 }
 
+/* ---- Defense Day — playful editorial layout -------------------------- */
+/* Warm cream backdrop, big black headings beside rounded photos that
+   alternate sides — the marketing-page rhythm from the reference. */
+/* Moderate air between top-level blocks on this page */
+.defense-playful .detail-blocks { gap: clamp(40px, 5vw, 72px); }
+
+/* Reading copy sits straight on the page — no boxed border here */
+.defense-playful .detail-text { border: none; padding: 0; }
+
+/* Soft-rounded corners on every photo */
+.defense-playful .media img { border-radius: var(--radius-lg); }
+
+/* Coloured feature band: the framework → party photos grouped on warm
+   cream, sitting tighter together than the rest of the page. */
+.photo-feature {
+  background: #f3efe3;
+  border-radius: var(--radius-lg);
+  padding: clamp(28px, 4vw, 56px);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(24px, 3vw, 40px);
+}
+
+/* Image + bold-headline pairing, vertically centred, alternating sides */
+.photo-block {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(28px, 4vw, 64px);
+  align-items: center;
+}
+.photo-block--reverse .media { order: 2; }
+.photo-block .media img { border-radius: var(--radius-lg); }
+
+/* Compact variant: cap the photo so it doesn't tower over its caption */
+.photo-block--compact .media { display: flex; justify-content: center; }
+.photo-block--compact .media img { max-width: 300px; width: 100%; }
+
+.block-title {
+  font-family: var(--font-grotesque);
+  font-weight: 800;
+  font-size: clamp(22px, 2.6vw, 36px);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--on-surface);
+  margin: 0 0 var(--space-sm);
+}
+.block-desc {
+  font-family: var(--font-grotesque);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--on-surface-body);
+  margin: 0;
+  max-width: 44ch;
+}
+.block-copy .utility-row { margin-top: var(--space-md); }
+
+@media (max-width: 760px) {
+  .photo-block { grid-template-columns: 1fr; gap: var(--space-md); }
+  .photo-block--reverse .media { order: 0; }
+}
+
 /* ---- Highlights list (Highlights page) ------------------------------- */
 .hl-item {
   display: grid;
@@ -1054,6 +1117,59 @@ a.t-org:hover { color: var(--on-surface); }
 .lightbox-prev:hover,
 .lightbox-next:hover,
 .lightbox-close:hover { background: rgba(255,255,255,.28); }
+
+/* ---- Book details modal (Defense Day) -------------------------------- */
+.book-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 18, 16, 0.92);
+  display: none;
+  z-index: 1000;
+  overflow-y: auto;
+  padding: 64px 20px;
+}
+.book-modal.is-open { display: block; }
+.book-modal-panel {
+  max-width: 980px;
+  margin: 0 auto;
+  background: var(--surface);
+  padding: var(--space-lg);
+}
+.book-modal-grid {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: var(--space-lg);
+  align-items: start;
+}
+.book-modal-cover { position: static; }
+.book-modal-cover .media img { width: 100%; display: block; }
+.book-chapters > .label-caps { display: block; margin-bottom: var(--space-md); }
+.book-chapter + .book-chapter { margin-top: var(--space-md); }
+.book-chapter .title-serif { margin-bottom: var(--space-xs); }
+.book-chapter p:not(.title-serif) { color: var(--on-surface-body); margin: 0; }
+.book-modal-close {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, .14);
+  color: #fff;
+  border: 0;
+  width: 52px;
+  height: 52px;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: var(--radius-full);
+  backdrop-filter: blur(4px);
+  z-index: 1001;
+}
+.book-modal-close:hover { background: rgba(255, 255, 255, .28); }
+@media (max-width: 760px) {
+  .book-modal { padding: 56px 12px; }
+  .book-modal-panel { padding: var(--space-md); }
+  .book-modal-grid { grid-template-columns: 1fr; }
+  .book-modal-cover { position: static; max-width: 260px; }
+}
 
 /* ---- Detail-page image gallery (masonry of real images) -------------- */
 .masonry img,
