@@ -889,8 +889,9 @@ textarea.field { height: auto; min-height: 140px; resize: vertical; padding-top:
   margin: 0;
   font-family: var(--font-serif);
   font-weight: 400;
-  font-size: clamp(20px, 1.8vw, 26px);
-  line-height: 1.45;
+  font-style: italic;
+  font-size: clamp(18px, 1.5vw, 22px);
+  line-height: 1.5;
   color: var(--on-surface);
 }
 .testimonial blockquote p { margin: 0 0 var(--space-sm); }
