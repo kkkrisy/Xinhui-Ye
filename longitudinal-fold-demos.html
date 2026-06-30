@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fold/Unfold concepts — Longitudinal cream block</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Spectral:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <style>
+    /* ---- Page chrome for this comparison sandbox only ------------------ */
+    .demo-intro { padding-top: var(--space-lg); }
+    .demo-sep {
+      margin: var(--space-xl) 0 var(--space-lg);
+      border: none;
+      border-top: 1px solid var(--outline-variant);
+    }
+    .demo-tag {
+      display: inline-block;
+      font-family: var(--font-grotesque);
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--surface);
+      background: var(--primary);
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-bottom: var(--space-sm);
+    }
+    .demo-note {
+      font-family: var(--font-grotesque);
+      font-size: 14px;
+      line-height: 22px;
+      color: var(--on-surface-variant);
+      max-width: 60ch;
+      margin: 0 0 var(--space-lg);
+    }
+
+    /* ============================================================= */
+    /* CONCEPT 1 — Sticky stacking deck                              */
+    /* Each chunk is a card that pins to the top as you scroll, and  */
+    /* the next card slides up and stacks on top of it.             */
+    /* ============================================================= */
+    .deck { position: relative; }
+    .deck__card {
+      position: sticky;
+      top: 90px;                     /* clears the fixed nav */
+      background: #f3efe3;
+      border-radius: var(--radius-lg);
+      padding: clamp(28px, 4vw, 56px);
+      box-shadow: 0 -8px 30px rgba(46, 46, 56, 0.10);
+      margin-bottom: 28px;           /* gives each card its own scroll travel */
+    }
+    /* fan the pinned offsets so a sliver of the card beneath peeks out */
+    .deck__card:nth-child(1) { top: 90px; }
+    .deck__card:nth-child(2) { top: 110px; }
+    .deck__card:nth-child(3) { top: 130px; }
+    .deck__card:nth-child(4) { top: 150px; }
+    .deck__card .media img { border-radius: var(--radius-lg); }
+    .deck__card .title-serif { color: var(--primary); }
+    .deck__count {
+      font-family: var(--font-grotesque);
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--on-surface-variant);
+      margin: 0 0 var(--space-sm);
+    }
+    .deck__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(24px, 4vw, 56px);
+      align-items: center;
+    }
+    .deck__grid p { color: var(--on-surface-body); }
+    .deck__spacer { height: 30vh; }
+    @media (max-width: 760px) {
+      .deck__grid { grid-template-columns: 1fr; gap: var(--space-md); }
+    }
+
+    /* ============================================================= */
+    /* CONCEPT 2 — Flip card                                         */
+    /* "The weekly diary entry" front, "A continuous board" back.    */
+    /* ============================================================= */
+    .flipwrap {
+      background: #f3efe3;
+      border-radius: var(--radius-lg);
+      padding: clamp(28px, 4vw, 56px);
+      display: flex;
+      flex-direction: column;
+      gap: clamp(24px, 3vw, 40px);
+    }
+    .flipwrap > .detail-prose .title-serif { color: var(--primary); }
+    .flipwrap > .detail-prose p { color: var(--on-surface-body); }
+
+    .flipcard { perspective: 2000px; }
+    .flipcard__inner {
+      position: relative;
+      transition: transform 0.7s cubic-bezier(0.4, 0.0, 0.2, 1);
+      transform-style: preserve-3d;
+    }
+    .flipcard.is-flipped .flipcard__inner { transform: rotateY(180deg); }
+    .flipcard__face {
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(24px, 4vw, 56px);
+      align-items: center;
+    }
+    .flipcard__face--back {
+      position: absolute;
+      inset: 0;
+      transform: rotateY(180deg);
+    }
+    .flipcard__face .media img { border-radius: var(--radius-lg); }
+    .flipcard__face .title-serif { color: var(--primary); }
+    .flipcard__face p { color: var(--on-surface-body); }
+    .flip-btn {
+      margin-top: var(--space-md);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .flip-btn::before { content: "\21BB"; font-size: 17px; line-height: 1; }
+    @media (max-width: 760px) {
+      .flipcard__face { grid-template-columns: 1fr; gap: var(--space-md); }
+      /* on narrow screens the absolutely-positioned back can't size to content,
+         so let height follow the front and allow the back to scroll if needed */
+      .flipcard__face--back { position: absolute; overflow: auto; }
+    }
+
+    /* ============================================================= */
+    /* CONCEPT 3 — Progressive disclosure                            */
+    /* Diary entry shown by default; a button reveals the rest.      */
+    /* ============================================================= */
+    .disclose {
+      background: #f3efe3;
+      border-radius: var(--radius-lg);
+      padding: clamp(28px, 4vw, 56px);
+      display: flex;
+      flex-direction: column;
+      gap: clamp(24px, 3vw, 40px);
+    }
+    .disclose .lead {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(24px, 4vw, 56px);
+      align-items: center;
+    }
+    .disclose .media img { border-radius: var(--radius-lg); }
+    .disclose .title-serif { color: var(--primary); }
+    .disclose p { color: var(--on-surface-body); }
+    .disclose__more {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.5s ease;
+    }
+    .disclose__more > div { overflow: hidden; }
+    .disclose.is-open .disclose__more { grid-template-rows: 1fr; }
+    .disclose__inner {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(24px, 3vw, 40px);
+      padding-top: clamp(24px, 3vw, 40px);
+    }
+    .disclose__inner .detail-prose .title-serif { color: var(--primary); }
+    .disclose__inner .detail-prose p { color: var(--on-surface-body); }
+    .disclose__inner .pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(24px, 4vw, 56px);
+      align-items: center;
+    }
+    .disclose-toggle { align-self: flex-start; }
+    .disclose-toggle .chev { display: inline-block; transition: transform 0.3s ease; }
+    .disclose.is-open .disclose-toggle .chev { transform: rotate(180deg); }
+    @media (max-width: 760px) {
+      .disclose .lead,
+      .disclose__inner .pair { grid-template-columns: 1fr; gap: var(--space-md); }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-nav" id="top">
+    <a class="site-wordmark" href="highlight-longitudinal.html">Xinhui Ye</a>
+    <nav class="nav-pill" aria-label="Primary">
+      <div class="nav-links">
+        <a href="highlight-longitudinal.html">&#8249; Back to the real page</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="band defense-playful demo-intro">
+      <div class="container">
+        <h1 class="headline-lg" style="margin-bottom: var(--space-sm);">Three ways to fold the cream block</h1>
+        <p class="demo-note">Same four chunks — Research Methods &amp; Analysis, the weekly diary entry, the continuous board, and the group reflection — shown three different ways so you can compare the feel of each. Nothing here touches the live page yet.</p>
+
+        <div class="detail-blocks">
+
+          <!-- ============================================================ -->
+          <!-- CONCEPT 1 — Sticky stacking deck                             -->
+          <!-- ============================================================ -->
+          <div>
+            <span class="demo-tag">Concept 1 · Stacking deck</span>
+            <p class="demo-note">Scroll and each chunk slides up to stack on the one before it, like dealing cards onto a pile. One chunk fills the view at a time; the earlier cards stay pinned just behind, so you can feel the depth of the stack. Best when you want a guided, one-thing-at-a-time read.</p>
+
+            <div class="deck">
+              <!-- 1 -->
+              <article class="deck__card">
+                <p class="deck__count">1 / 4</p>
+                <div class="detail-prose">
+                  <p class="title-serif">Research Methods and Analysis</p>
+                  <p class="block-desc">I designed and ran a five month observational study with sixteen design teams, sixty one students in total, working on open ended design briefs.</p>
+                  <img class="prose-figure" src="assets/longitudinal-12.jpg" alt="Diagram of the two-stage study and reverse-order analysis sequence" />
+                  <p class="block-desc">Stage 1, weekly diary-interviews: each week every team documented what they had done, then walked me through it in a short interview. Stage 2, a final group reflection on what co-exploration meant to them.</p>
+                  <p class="block-desc">Analysis ran in reverse. Reflexive thematic analysis of the group-reflection data surfaced shared features of co-exploration. These became an analytical framework, used to code 161 diary activities into five patterns.</p>
+                </div>
+              </article>
+
+              <!-- 2 -->
+              <article class="deck__card">
+                <p class="deck__count">2 / 4</p>
+                <div class="deck__grid">
+                  <div class="media"><img src="assets/longitudinal-1.jpg" alt="Schema of a weekly design-process diary entry, annotated A to E" /></div>
+                  <div>
+                    <p class="title-serif">The weekly diary entry</p>
+                    <p>Each week, every team filled in a shared diary documenting what they had done, then sat down with me for a short interview where they walked me through it. Participants (A) provided a detailed description of each design activity, (B) attached images as references, (C) selected assignees, (D) identified activities as co-exploration and explained their reasoning, and (E) expressed their emotions using emojis.</p>
+                  </div>
+                </div>
+              </article>
+
+              <!-- 3 -->
+              <article class="deck__card">
+                <p class="deck__count">3 / 4</p>
+                <div class="deck__grid">
+                  <div class="media"><img src="assets/longitudinal-2.5.jpg" alt="The continuous Miro diary board, showing the whole design process as a connected timeline" /></div>
+                  <div>
+                    <p class="title-serif">A continuous board</p>
+                    <p>Once the diary was complete, I conducted a semi structured group interview, prompting participants to walk through their entries and reflect on the week's activities. The diary board was continuous — each week teams could start a new board while revisiting and linking earlier entries, offering a clear view of the whole design process.</p>
+                  </div>
+                </div>
+              </article>
+
+              <!-- 4 -->
+              <article class="deck__card">
+                <p class="deck__count">4 / 4</p>
+                <div class="deck__grid">
+                  <div class="media"><img src="assets/longitudinal-2.jpg" alt="Designers sorting and discussing physical activity cards in the end-of-project group reflection session" /></div>
+                  <div>
+                    <p class="title-serif">Group reflection</p>
+                    <p>At the end of the project, I held a group reflection session. I transformed the digital descriptions of co-exploration activities into physical cards — diary content on the front, key points and quotes on the back. This hands-on interaction refreshed memories and deepened understanding, laying the foundation for the interview questions.</p>
+                  </div>
+                </div>
+              </article>
+            </div>
+            <div class="deck__spacer"></div>
+          </div>
+
+          <hr class="demo-sep" />
+
+          <!-- ============================================================ -->
+          <!-- CONCEPT 2 — Flip card                                        -->
+          <!-- ============================================================ -->
+          <div>
+            <span class="demo-tag">Concept 2 · Flip card</span>
+            <p class="demo-note">Research Methods stays on top as context. Below it, the weekly diary entry is the front of a card whose back is the continuous board — press the button to flip between "one entry" and "the whole process." Group reflection follows. Best when the diary entry and the board are two sides of the same idea.</p>
+
+            <div class="flipwrap">
+              <!-- context: research methods -->
+              <div class="detail-prose">
+                <p class="title-serif">Research Methods and Analysis</p>
+                <p class="block-desc">I designed and ran a five month observational study with sixteen design teams, sixty one students in total. Stage 1: weekly diary-interviews. Stage 2: a final group reflection. Analysis ran in reverse, coding 161 diary activities into five patterns.</p>
+              </div>
+
+              <!-- the flipping card -->
+              <div class="flipcard" id="flipcard">
+                <div class="flipcard__inner">
+                  <!-- FRONT: weekly diary entry -->
+                  <div class="flipcard__face flipcard__face--front">
+                    <div class="media"><img src="assets/longitudinal-1.jpg" alt="Schema of a weekly design-process diary entry, annotated A to E" /></div>
+                    <div>
+                      <p class="title-serif">The weekly diary entry</p>
+                      <p>Each week, every team filled in a shared diary documenting what they had done, then walked me through it in a short interview. Participants (A) described each design activity, (B) attached images as references, (C) selected assignees, (D) identified activities as co-exploration, and (E) expressed their emotions using emojis.</p>
+                      <button class="btn btn--outline flip-btn" type="button" data-flip>Flip it to see the example of a whole design process</button>
+                    </div>
+                  </div>
+                  <!-- BACK: a continuous board -->
+                  <div class="flipcard__face flipcard__face--back">
+                    <div class="media"><img src="assets/longitudinal-2.5.jpg" alt="The continuous Miro diary board, showing the whole design process as a connected timeline" /></div>
+                    <div>
+                      <p class="title-serif">A continuous board</p>
+                      <p>The diary board was continuous. Each week, teams could start a new board from templates while revisiting earlier entries and linking related ones — offering a clear view of the whole design process, from a single entry out to the entire journey.</p>
+                      <button class="btn btn--outline flip-btn" type="button" data-flip>Flip back to a single diary entry</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- group reflection -->
+              <div class="deck__grid">
+                <div class="media"><img src="assets/longitudinal-2.jpg" alt="Designers sorting and discussing physical activity cards in the end-of-project group reflection session" style="border-radius: var(--radius-lg);" /></div>
+                <div>
+                  <p class="title-serif" style="color: var(--primary);">Group reflection</p>
+                  <p style="color: var(--on-surface-body);">At the end of the project, I held a group reflection session, transforming the digital descriptions of co-exploration activities into physical cards — diary content on the front, key points and quotes on the back to prompt recall.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr class="demo-sep" />
+
+          <!-- ============================================================ -->
+          <!-- CONCEPT 3 — Progressive disclosure                           -->
+          <!-- ============================================================ -->
+          <div>
+            <span class="demo-tag">Concept 3 · Show more</span>
+            <p class="demo-note">By default only the diary entry — the most tangible artefact — is shown. A button unfolds the methods overview, the continuous board, and the group reflection for anyone who wants the full picture. Best when you want a calm, compact default that rewards the curious.</p>
+
+            <div class="disclose" id="disclose">
+              <!-- always-visible lead: the diary entry -->
+              <div class="lead">
+                <div class="media"><img src="assets/longitudinal-1.jpg" alt="Schema of a weekly design-process diary entry, annotated A to E" /></div>
+                <div>
+                  <p class="title-serif">The weekly diary entry</p>
+                  <p>Each week, every team filled in a shared diary documenting what they had done, then sat down with me for a short interview where they walked me through it. Participants (A) described each design activity, (B) attached images as references, (C) selected assignees, (D) identified activities as co-exploration and explained their reasoning, and (E) expressed their emotions using emojis.</p>
+                  <button class="btn btn--outline disclose-toggle" type="button" data-disclose aria-expanded="false">
+                    <span data-disclose-label>Show the research methods behind it</span>
+                    <span class="chev">&#9662;</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- collapsible: methods + board + reflection -->
+              <div class="disclose__more">
+                <div>
+                  <div class="disclose__inner">
+                    <div class="detail-prose">
+                      <p class="title-serif">Research Methods and Analysis</p>
+                      <p class="block-desc">I designed and ran a five month observational study with sixteen design teams, sixty one students in total, working on open ended design briefs.</p>
+                      <img class="prose-figure" src="assets/longitudinal-12.jpg" alt="Diagram of the two-stage study and reverse-order analysis sequence" />
+                      <p class="block-desc">Stage 1, weekly diary-interviews. Stage 2, a final group reflection. Analysis ran in reverse — reflexive thematic analysis surfaced shared features that became a framework, used to code 161 diary activities into five patterns.</p>
+                    </div>
+
+                    <div class="pair">
+                      <div class="media"><img src="assets/longitudinal-2.5.jpg" alt="The continuous Miro diary board, showing the whole design process as a connected timeline" /></div>
+                      <div>
+                        <p class="title-serif">A continuous board</p>
+                        <p>The diary board was continuous. Each week, teams could start a new board from templates while revisiting earlier entries and linking related ones — offering a clear view of the whole design process.</p>
+                      </div>
+                    </div>
+
+                    <div class="pair">
+                      <div class="media"><img src="assets/longitudinal-2.jpg" alt="Designers sorting and discussing physical activity cards in the end-of-project group reflection session" /></div>
+                      <div>
+                        <p class="title-serif">Group reflection</p>
+                        <p>At the end of the project, I held a group reflection session, transforming the digital descriptions of co-exploration activities into physical cards — diary content on the front, key points and quotes on the back to prompt recall.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <p class="utility-row" style="margin-top: var(--space-xl);"><a class="btn btn--outline" href="highlight-longitudinal.html">&#8249; Back to the real page</a></p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Concept 2 — flip
+    (function () {
+      var card = document.getElementById('flipcard');
+      if (!card) return;
+      card.querySelectorAll('[data-flip]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          card.classList.toggle('is-flipped');
+        });
+      });
+    })();
+
+    // Concept 3 — progressive disclosure
+    (function () {
+      var root = document.getElementById('disclose');
+      if (!root) return;
+      var btn = root.querySelector('[data-disclose]');
+      var label = root.querySelector('[data-disclose-label]');
+      btn.addEventListener('click', function () {
+        var open = root.classList.toggle('is-open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        label.textContent = open ? 'Hide the research methods' : 'Show the research methods behind it';
+      });
+    })();
+  </script>
+</body>
+</html>

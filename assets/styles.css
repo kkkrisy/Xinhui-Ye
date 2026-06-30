@@ -943,6 +943,65 @@ a.t-org:hover { color: var(--on-surface); }
 .photo-feature--navy-titles .detail-text .title-serif { color: var(--primary); }
 .photo-feature--navy-titles .detail-text p { color: var(--on-surface-body); }
 
+/* ---- Stacking deck ---------------------------------------------------
+   The data-collection chunks as a pinned deck: the stage sticks under the
+   nav so only one card fills the view at a time, and scrolling slides the
+   next card up to stack on top of the pile. Per-page JS drives the
+   transforms (adding .is-deck); with no JS the cards just flow as normal
+   stacked blocks, so the content is always readable. */
+.deck-card {
+  background: #f3efe3;
+  border-radius: var(--radius-lg);
+  padding: clamp(28px, 4vw, 56px);
+  box-shadow: 0 -8px 30px rgba(46, 46, 56, 0.10);
+  margin-bottom: 28px;
+}
+.deck-card .media img { border-radius: var(--radius-lg); }
+.deck-card .title-serif { color: var(--primary); }
+.deck-card .block-desc,
+.deck-card .deck-col p { color: var(--on-surface-body); }
+
+/* Deck mode — JS adds .is-deck once it can drive the scroll animation.
+   Every card is laid into the same pinned grid cell and stacked by JS. */
+/* the track itself is cream, so beneath a compact card the colour is seamless
+   instead of bare page */
+.deck-track.is-deck { position: relative; background: #f3efe3; border-radius: var(--radius-lg); }
+.deck-track.is-deck .deck-stage {
+  position: sticky;
+  top: 80px;
+  display: grid;
+  overflow: hidden;                /* clip cards parked below the pinned stage */
+  border-radius: var(--radius-lg);
+}
+.deck-track.is-deck .deck-card {
+  grid-area: 1 / 1;
+  align-self: stretch;             /* every card fills the (per-card-sized) stage */
+  margin-bottom: 0;
+  box-shadow: 0 -12px 44px rgba(46, 46, 56, 0.18);
+  will-change: transform;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;     /* content sits at the top of the card */
+  position: relative;
+}
+
+.deck-count {
+  font-family: var(--font-grotesque);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--on-surface-variant);
+  margin: 0 0 var(--space-sm);
+}
+/* Cards 2–4: image runs full width of the card, copy sits underneath it */
+.deck-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+.deck-grid .media img { width: 100%; display: block; }
+
 /* Image + bold-headline pairing, vertically centred, alternating sides */
 .photo-block {
   display: grid;

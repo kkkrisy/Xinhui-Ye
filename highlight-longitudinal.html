@@ -46,13 +46,14 @@
 
           <!-- Background — first image at the left (2/3); Background copy fills the
                right column so it ends near the foot of the image -->
-          <div class="photo-block photo-block--plain photo-block--wide">
+          <div class="photo-block photo-block--plain photo-block--wide" style="align-items: end;">
             <div class="media">
               <img src="assets/longitudinal-11-web.jpg" alt="A design team laying out and discussing their co-exploration activity cards on a table" />
             </div>
-            <div class="block-copy">
+            <div class="block-copy" style="align-self: stretch; display: flex; flex-direction: column;">
               <p class="title-serif">Background</p>
               <p class="block-desc">Exploration sits at the heart of design. When a team explores together rather than alone, that shared process becomes something distinct, something I call co exploration. It shows up everywhere, in brainstorms, sketching, building on someone else's half formed idea, the quick aside that sends two people down a new path. Yet for something so common, it had never really been pinned down. Most accounts treat exploration as a solo act, or fold the collaborative version into a single early phase and leave it there. Earlier work touched it only in pieces, tied to the early divergent stages, and rarely followed it past the first burst of ideas. How co exploration actually unfolds across a whole design process, week after week, in real teams working under real constraints, was the gap this study set out to address.</p>
+              <p class="utility-row" style="margin: auto 0 0; padding-top: var(--space-md); display: flex;"><a class="btn btn--outline" href="https://www.sciencedirect.com/science/article/pii/S2405872625000462" target="_blank" rel="noopener">Read the paper</a></p>
             </div>
           </div>
 
@@ -66,49 +67,62 @@
             <p class="block-desc">Answering these meant following real teams closely enough, and for long enough, to see the pattern beneath the activity.</p>
           </div>
 
-          <!-- Data collection — cream feature band grouping the methods overview
-               and the three diary/reflection figures -->
-          <div class="photo-feature photo-feature--navy-titles">
+          <!-- Data collection — stacking deck: the stage pins under the nav so
+               only one card shows, and scrolling slides the next card up to
+               stack on top (driven by per-page JS at the foot of this file) -->
+          <div class="deck-track" data-deck>
+           <div class="deck-stage">
 
-            <!-- Research Methods and Analysis — title + intro run full width, then the
-                 second image floats and the remaining copy wraps around it, both
-                 ending on roughly the same line -->
-            <div class="block-copy detail-prose">
-              <p class="title-serif">Research Methods and Analysis</p>
-              <p class="block-desc">I designed and ran a five month observational study with sixteen design teams, sixty one students in total, working on open ended design briefs.</p>
-              <img class="prose-figure" src="assets/longitudinal-12.jpg" alt="Diagram of the two-stage study and reverse-order analysis sequence" />
-              <p class="block-desc">Stage 1, weekly diary-interviews: each week every team documented what they had done, then walked me through it in a short interview. Stage 2, a final group reflection on what co-exploration meant to them.</p>
-              <p class="block-desc">Analysis ran in reverse. Reflexive thematic analysis of the group-reflection data surfaced shared features of co-exploration. These became an analytical framework, used to code 161 diary activities into five patterns. Finally, we related these patterns to participants' final assessments across design stage and outcomes.</p>
-            </div>
+            <!-- 1 · Research Methods and Analysis -->
+            <article class="deck-card">
+              <p class="deck-count">1 / 4</p>
+              <div class="block-copy detail-prose">
+                <p class="title-serif">Research Methods and Analysis</p>
+                <p class="block-desc">I designed and ran a five month observational study with sixteen design teams, sixty one students in total, working on open ended design briefs.</p>
+                <img class="prose-figure" src="assets/longitudinal-12.jpg" alt="Diagram of the two-stage study and reverse-order analysis sequence" />
+                <p class="block-desc">Stage 1, weekly diary-interviews: each week every team documented what they had done, then walked me through it in a short interview. Stage 2, a final group reflection on what co-exploration meant to them.</p>
+                <p class="block-desc">Analysis ran in reverse. Reflexive thematic analysis of the group-reflection data surfaced shared features of co-exploration. These became an analytical framework, used to code 161 diary activities into five patterns. Finally, we related these patterns to participants' final assessments across design stage and outcomes.</p>
+              </div>
+            </article>
 
-            <!-- The weekly diary entry -->
-            <div class="detail-full">
-              <div class="media"><img src="assets/longitudinal-1.jpg" alt="Schema of a weekly design-process diary entry, annotated A to E" style="width:100%; display:block;" /></div>
-            </div>
-            <div class="detail-text">
-              <p class="title-serif">The weekly diary entry</p>
-              <p>Each week, every team filled in a shared diary documenting what they had done, then sat down with me for a short interview where they walked me through it. This is the schema of a weekly diary entry. Participants (A) provided a detailed description of each design activity, (B) attached images as references for later discussions, (C) selected assignees for each activity, (D) identified activities as co-exploration and explained their reasoning, and (E) expressed their emotions using emojis for insights beyond text descriptions.</p>
-            </div>
+            <!-- 2 · The weekly diary entry -->
+            <article class="deck-card">
+              <p class="deck-count">2 / 4</p>
+              <div class="deck-grid">
+                <div class="media"><img src="assets/longitudinal-1.jpg" alt="Schema of a weekly design-process diary entry, annotated A to E" style="width:100%; display:block;" /></div>
+                <div class="deck-col">
+                  <p class="title-serif">The weekly diary entry</p>
+                  <p>Each week, every team filled in a shared diary documenting what they had done, then sat down with me for a short interview where they walked me through it. This is the schema of a weekly diary entry. Participants (A) provided a detailed description of each design activity, (B) attached images as references for later discussions, (C) selected assignees for each activity, (D) identified activities as co-exploration and explained their reasoning, and (E) expressed their emotions using emojis for insights beyond text descriptions.</p>
+                </div>
+              </div>
+            </article>
 
-            <!-- A continuous board -->
-            <div class="detail-full">
-              <div class="media"><img src="assets/longitudinal-2.5.jpg" alt="The continuous Miro diary board, showing the whole design process as a connected timeline" style="width:100%; display:block;" /></div>
-            </div>
-            <div class="detail-text">
-              <p class="title-serif">A continuous board</p>
-              <p>Once the diary was complete, I conducted a semi structured group interview, prompting participants to walk through their entries, elaborate on details, and reflect on the week's activities. The diary board was continuous. Each week, teams could start a new board from templates for documenting activities, while revisiting earlier entries and linking related ones. This structure, shown here, offered a clear view of the whole design process.</p>
-            </div>
+            <!-- 3 · A continuous board -->
+            <article class="deck-card">
+              <p class="deck-count">3 / 4</p>
+              <div class="deck-grid">
+                <div class="media"><img src="assets/longitudinal-2.5.jpg" alt="The continuous Miro diary board, showing the whole design process as a connected timeline" style="width:100%; display:block;" /></div>
+                <div class="deck-col">
+                  <p class="title-serif">A continuous board</p>
+                  <p>Once the diary was complete, I conducted a semi structured group interview, prompting participants to walk through their entries, elaborate on details, and reflect on the week's activities. The diary board was continuous. Each week, teams could start a new board from templates for documenting activities, while revisiting earlier entries and linking related ones. This structure, shown here, offered a clear view of the whole design process.</p>
+                </div>
+              </div>
+            </article>
 
-            <!-- Group reflection -->
-            <div class="detail-full">
-              <div class="media"><img src="assets/longitudinal-2.jpg" alt="Designers sorting and discussing physical activity cards in the end-of-project group reflection session" style="width:100%; display:block;" /></div>
-            </div>
-            <div class="detail-text">
-              <p class="title-serif">Group reflection</p>
-              <p>At the end of the project, I held a group reflection session. I transformed the digital descriptions of co-exploration activities from the interviews into physical cards. Each card showed diary content on the front as a tangible representation of a design activity, with key points and quotes on the back to prompt recall. This hands-on interaction refreshed memories and deepened understanding, laying the foundation for the interview questions</p>
-            </div>
+            <!-- 4 · Group reflection -->
+            <article class="deck-card">
+              <p class="deck-count">4 / 4</p>
+              <div class="deck-grid">
+                <div class="media"><img src="assets/longitudinal-2.jpg" alt="Designers sorting and discussing physical activity cards in the end-of-project group reflection session" style="width:100%; display:block;" /></div>
+                <div class="deck-col">
+                  <p class="title-serif">Group reflection</p>
+                  <p>At the end of the project, I held a group reflection session. I transformed the digital descriptions of co-exploration activities from the interviews into physical cards. Each card showed diary content on the front as a tangible representation of a design activity, with key points and quotes on the back to prompt recall. This hands-on interaction refreshed memories and deepened understanding, laying the foundation for the interview questions</p>
+                </div>
+              </div>
+            </article>
 
-          </div><!-- /.photo-feature (data collection) -->
+           </div><!-- /.deck-stage -->
+          </div><!-- /.deck-track (data collection) -->
 
           <!-- What people are saying -->
           <div class="testimonials">
@@ -240,7 +254,6 @@
             <!-- Publication -->
             <div class="detail-text">
               <p>This work — the four-dimensional framework and the five patterns — was published as <a href="https://www.sciencedirect.com/science/article/pii/S2405872625000462" target="_blank" rel="noopener"><em>Beyond Divergence: Characterizing Co-exploration Patterns in Collaborative Design Processes</em></a> in <em>She Ji: The Journal of Design, Economics, and Innovation</em> (2025).</p>
-              <p class="utility-row" style="margin-top: var(--space-md);"><a class="btn btn--outline" href="https://www.sciencedirect.com/science/article/pii/S2405872625000462" target="_blank" rel="noopener">Read the paper</a></p>
             </div>
 
           </div><!-- /.photo-feature -->
@@ -272,5 +285,101 @@
   </footer>
 
   <script src="assets/script.js"></script>
+
+  <!-- Stacking deck: pin the stage and slide each card up to stack on top.
+       Only one card is visible at a time; scrolling drives the transitions. -->
+  <script>
+    (function () {
+      var track = document.querySelector('[data-deck]');
+      if (!track) return;
+      var stage = track.querySelector('.deck-stage');
+      var cards = Array.prototype.slice.call(track.querySelectorAll('.deck-card'));
+      if (cards.length < 2) return;
+
+      var STICKY_TOP = 80;   // matches .deck-track.is-deck .deck-stage top
+      var REST = 14;         // px each landed card sits below the one beneath
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+      var active = false;
+      var heights = [];      // natural height of each card (content + padding)
+      var hMax = 0;
+
+      function measure() {
+        cards.forEach(function (c) { c.style.transform = ''; });
+        var pad = 2 * parseFloat(getComputedStyle(cards[0]).paddingTop) || 0;
+        var cap = window.innerHeight - 100;   // never taller than the viewport
+        // each card sized to its OWN content — short text card stays compact,
+        // full-width image cards grow — so no card floats in a big cream gap
+        heights = cards.map(function (c) {
+          var inner = c.querySelector('.deck-grid, .detail-prose');
+          var h = (inner ? inner.offsetHeight : c.offsetHeight) + pad + REST * (cards.length - 1);
+          return Math.min(h, cap);
+        });
+        hMax = Math.max.apply(null, heights);
+        stage.style.height = heights[0] + 'px';
+        // each transition gets ~85vh of scroll travel
+        var travel = Math.round(window.innerHeight * 0.85);
+        track.style.height = (hMax + (cards.length - 1) * travel) + 'px';
+      }
+
+      function update() {
+        if (!active) return;
+        var segs = cards.length - 1;
+        var scrollable = track.offsetHeight - hMax;   // fixed reference for stable p
+        if (scrollable <= 0) return;
+        var p = (STICKY_TOP - track.getBoundingClientRect().top) / scrollable;
+        p = Math.max(0, Math.min(1, p));
+
+        // stage height follows the active card, interpolating during a slide
+        var fp = Math.min(p * segs, segs);
+        var s = Math.min(Math.floor(fp), segs - 1);
+        var lt = fp - s;
+        stage.style.height = (heights[s] + (heights[s + 1] - heights[s]) * lt) + 'px';
+
+        cards.forEach(function (card, k) {
+          var y;
+          if (k === 0) {
+            y = 0;                       // first card always at rest
+          } else {
+            var t = (p - (k - 1) / segs) * segs;   // 0→1 across this card's segment
+            t = Math.max(0, Math.min(1, t));
+            y = hMax + (k * REST - hMax) * t;       // slide up from below the stage
+          }
+          card.style.transform = 'translateY(' + y + 'px)';
+          card.style.zIndex = k + 1;
+        });
+      }
+
+      function enable() {
+        if (active) return;
+        active = true;
+        track.classList.add('is-deck');
+        measure();
+        update();
+      }
+      function disable() {
+        if (!active) return;
+        active = false;
+        track.classList.remove('is-deck');
+        track.style.height = '';
+        stage.style.height = '';
+        cards.forEach(function (c) { c.style.transform = ''; c.style.zIndex = ''; });
+      }
+      function evaluate() {
+        if (window.innerWidth >= 760 && !reduce.matches) { enable(); }
+        else { disable(); }
+      }
+
+      var ticking = false;
+      window.addEventListener('scroll', function () {
+        if (active && !ticking) {
+          ticking = true;
+          requestAnimationFrame(function () { update(); ticking = false; });
+        }
+      }, { passive: true });
+      window.addEventListener('resize', function () { if (active) measure(); evaluate(); update(); });
+      window.addEventListener('load', function () { if (active) { measure(); update(); } });
+      evaluate();
+    })();
+  </script>
 </body>
 </html>
