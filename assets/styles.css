@@ -1002,6 +1002,31 @@ a.t-org:hover { color: var(--on-surface); }
 .photo-block--wide { grid-template-columns: 2fr 1fr; }
 @media (max-width: 760px) { .photo-block--wide { grid-template-columns: 1fr; } }
 
+/* Full-width prose blocks (Research Objectives, Research Methods) sitting
+   directly under .detail-blocks — span the page at full reading size in navy */
+.defense-playful .detail-prose .block-desc {
+  font-size: 17px;
+  line-height: 28px;
+  max-width: none;
+}
+/* Image that the prose wraps around: floats to one side after the intro copy,
+   so the title + first line run full width, then text surrounds the figure */
+.detail-prose .prose-figure {
+  float: right;
+  width: 50%;
+  object-fit: contain;
+  margin: var(--space-xs) 0 var(--space-md) var(--space-lg);
+  border-radius: var(--radius-lg);
+}
+@media (max-width: 760px) {
+  .detail-prose .prose-figure {
+    float: none;
+    width: 100%;
+    height: auto;
+    margin: var(--space-md) 0;
+  }
+}
+
 /* Named sub-sections inside a block-copy (e.g. Background / Methodology) */
 .block-copy .title-serif { margin: 0 0 var(--space-xs); color: var(--primary); }
 .block-copy .title-serif + .block-desc { margin-top: 0; }
