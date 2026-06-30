@@ -61,7 +61,7 @@
 *::before,
 *::after { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; scroll-snap-type: y proximity; }
+html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
@@ -981,15 +981,8 @@ a.t-org:hover { color: var(--on-surface); }
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    scroll-snap-align: start;
     scroll-margin-top: 88px;
   }
-
-  /* Card 1 only: force the scroll to stop here so a single smooth scroll can't
-     glide straight past its text — you must scroll again for card 2 to cover
-     it. Other cards stay free (no scroll-snap-stop), so there's no gap and no
-     repeated yank down the deck. */
-  .deck-card:first-child { scroll-snap-stop: always; }
 
   /* The caption keeps its natural height and is never clipped; the image fills
      whatever space is left above it. The image is positioned absolutely inside
