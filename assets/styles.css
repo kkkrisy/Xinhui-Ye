@@ -974,10 +974,14 @@ a.t-org:hover { color: var(--on-surface); }
   .deck-card {
     position: sticky;
     top: 88px;
-    height: clamp(560px, 84vh, 820px);
+    /* Fill the window below the nav so a pinned card fully covers the one
+       behind it — no strip of the next card peeking at the bottom edge. */
+    height: calc(100vh - 88px);
     margin-bottom: 0;
     overflow: hidden;
-    box-shadow: 0 -14px 50px rgba(46, 46, 56, 0.20);
+    /* Low-opacity per-card drop shadow so it stays soft where stacked cards
+       overlap their shadows at the top edge. */
+    box-shadow: 0 -14px 50px rgba(46, 46, 56, 0.08);
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
