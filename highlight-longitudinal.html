@@ -75,19 +75,19 @@
 
             <!-- 1 · Research Methods and Analysis -->
             <article class="deck-card">
-              <p class="deck-count">1 / 4</p>
-              <div class="block-copy detail-prose">
-                <p class="title-serif">Research Methods and Analysis</p>
-                <p class="block-desc">I designed and ran a five month observational study with sixteen design teams, sixty one students in total, working on open ended design briefs.</p>
-                <img class="prose-figure" src="assets/longitudinal-12.jpg" alt="Diagram of the two-stage study and reverse-order analysis sequence" />
-                <p class="block-desc">Stage 1, weekly diary-interviews: each week every team documented what they had done, then walked me through it in a short interview. Stage 2, a final group reflection on what co-exploration meant to them.</p>
-                <p class="block-desc">Analysis ran in reverse. Reflexive thematic analysis of the group-reflection data surfaced shared features of co-exploration. These became an analytical framework, used to code 161 diary activities into five patterns. Finally, we related these patterns to participants' final assessments across design stage and outcomes.</p>
+              <div class="deck-grid">
+                <div class="media"><img src="assets/longitudinal-12.jpg" alt="Diagram of the two-stage study and reverse-order analysis sequence" style="width:100%; display:block;" /></div>
+                <div class="deck-col">
+                  <p class="title-serif">Research Methods and Analysis</p>
+                  <p>I designed and ran a five month observational study with sixteen design teams, sixty one students in total, working on open ended design briefs.</p>
+                  <p>Stage 1, weekly diary-interviews: each week every team documented what they had done, then walked me through it in a short interview. Stage 2, a final group reflection on what co-exploration meant to them.</p>
+                  <p>Analysis ran in reverse. Reflexive thematic analysis of the group-reflection data surfaced shared features of co-exploration. These became an analytical framework, used to code 161 diary activities into five patterns. Finally, we related these patterns to participants' final assessments across design stage and outcomes.</p>
+                </div>
               </div>
             </article>
 
             <!-- 2 · The weekly diary entry -->
             <article class="deck-card">
-              <p class="deck-count">2 / 4</p>
               <div class="deck-grid">
                 <div class="media"><img src="assets/longitudinal-1.jpg" alt="Schema of a weekly design-process diary entry, annotated A to E" style="width:100%; display:block;" /></div>
                 <div class="deck-col">
@@ -99,7 +99,6 @@
 
             <!-- 3 · A continuous board -->
             <article class="deck-card">
-              <p class="deck-count">3 / 4</p>
               <div class="deck-grid">
                 <div class="media"><img src="assets/longitudinal-2.5.jpg" alt="The continuous Miro diary board, showing the whole design process as a connected timeline" style="width:100%; display:block;" /></div>
                 <div class="deck-col">
@@ -111,7 +110,6 @@
 
             <!-- 4 · Group reflection -->
             <article class="deck-card">
-              <p class="deck-count">4 / 4</p>
               <div class="deck-grid">
                 <div class="media"><img src="assets/longitudinal-2.jpg" alt="Designers sorting and discussing physical activity cards in the end-of-project group reflection session" style="width:100%; display:block;" /></div>
                 <div class="deck-col">
@@ -285,101 +283,5 @@
   </footer>
 
   <script src="assets/script.js"></script>
-
-  <!-- Stacking deck: pin the stage and slide each card up to stack on top.
-       Only one card is visible at a time; scrolling drives the transitions. -->
-  <script>
-    (function () {
-      var track = document.querySelector('[data-deck]');
-      if (!track) return;
-      var stage = track.querySelector('.deck-stage');
-      var cards = Array.prototype.slice.call(track.querySelectorAll('.deck-card'));
-      if (cards.length < 2) return;
-
-      var STICKY_TOP = 80;   // matches .deck-track.is-deck .deck-stage top
-      var REST = 14;         // px each landed card sits below the one beneath
-      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
-      var active = false;
-      var heights = [];      // natural height of each card (content + padding)
-      var hMax = 0;
-
-      function measure() {
-        cards.forEach(function (c) { c.style.transform = ''; });
-        var pad = 2 * parseFloat(getComputedStyle(cards[0]).paddingTop) || 0;
-        var cap = window.innerHeight - 100;   // never taller than the viewport
-        // each card sized to its OWN content — short text card stays compact,
-        // full-width image cards grow — so no card floats in a big cream gap
-        heights = cards.map(function (c) {
-          var inner = c.querySelector('.deck-grid, .detail-prose');
-          var h = (inner ? inner.offsetHeight : c.offsetHeight) + pad + REST * (cards.length - 1);
-          return Math.min(h, cap);
-        });
-        hMax = Math.max.apply(null, heights);
-        stage.style.height = heights[0] + 'px';
-        // each transition gets ~85vh of scroll travel
-        var travel = Math.round(window.innerHeight * 0.85);
-        track.style.height = (hMax + (cards.length - 1) * travel) + 'px';
-      }
-
-      function update() {
-        if (!active) return;
-        var segs = cards.length - 1;
-        var scrollable = track.offsetHeight - hMax;   // fixed reference for stable p
-        if (scrollable <= 0) return;
-        var p = (STICKY_TOP - track.getBoundingClientRect().top) / scrollable;
-        p = Math.max(0, Math.min(1, p));
-
-        // stage height follows the active card, interpolating during a slide
-        var fp = Math.min(p * segs, segs);
-        var s = Math.min(Math.floor(fp), segs - 1);
-        var lt = fp - s;
-        stage.style.height = (heights[s] + (heights[s + 1] - heights[s]) * lt) + 'px';
-
-        cards.forEach(function (card, k) {
-          var y;
-          if (k === 0) {
-            y = 0;                       // first card always at rest
-          } else {
-            var t = (p - (k - 1) / segs) * segs;   // 0→1 across this card's segment
-            t = Math.max(0, Math.min(1, t));
-            y = hMax + (k * REST - hMax) * t;       // slide up from below the stage
-          }
-          card.style.transform = 'translateY(' + y + 'px)';
-          card.style.zIndex = k + 1;
-        });
-      }
-
-      function enable() {
-        if (active) return;
-        active = true;
-        track.classList.add('is-deck');
-        measure();
-        update();
-      }
-      function disable() {
-        if (!active) return;
-        active = false;
-        track.classList.remove('is-deck');
-        track.style.height = '';
-        stage.style.height = '';
-        cards.forEach(function (c) { c.style.transform = ''; c.style.zIndex = ''; });
-      }
-      function evaluate() {
-        if (window.innerWidth >= 760 && !reduce.matches) { enable(); }
-        else { disable(); }
-      }
-
-      var ticking = false;
-      window.addEventListener('scroll', function () {
-        if (active && !ticking) {
-          ticking = true;
-          requestAnimationFrame(function () { update(); ticking = false; });
-        }
-      }, { passive: true });
-      window.addEventListener('resize', function () { if (active) measure(); evaluate(); update(); });
-      window.addEventListener('load', function () { if (active) { measure(); update(); } });
-      evaluate();
-    })();
-  </script>
 </body>
 </html>

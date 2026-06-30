@@ -61,7 +61,7 @@
 *::before,
 *::after { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-snap-type: y proximity; }
 
 body {
   margin: 0;
@@ -961,28 +961,53 @@ a.t-org:hover { color: var(--on-surface); }
 .deck-card .block-desc,
 .deck-card .deck-col p { color: var(--on-surface-body); }
 
-/* Deck mode — JS adds .is-deck once it can drive the scroll animation.
-   Every card is laid into the same pinned grid cell and stacked by JS. */
-/* the track itself is cream, so beneath a compact card the colour is seamless
-   instead of bare page */
-.deck-track.is-deck { position: relative; background: #f3efe3; border-radius: var(--radius-lg); }
-.deck-track.is-deck .deck-stage {
-  position: sticky;
-  top: 80px;
-  display: grid;
-  overflow: hidden;                /* clip cards parked below the pinned stage */
-  border-radius: var(--radius-lg);
-}
-.deck-track.is-deck .deck-card {
-  grid-area: 1 / 1;
-  align-self: stretch;             /* every card fills the (per-card-sized) stage */
-  margin-bottom: 0;
-  box-shadow: 0 -12px 44px rgba(46, 46, 56, 0.18);
-  will-change: transform;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;     /* content sits at the top of the card */
-  position: relative;
+/* ---- Pinned window (desktop) ------------------------------------------
+   The deck reads as a single fixed window. As you scroll into it, the first
+   card pins just under the nav; scrolling on slides the next card straight up
+   over it (every card pins at the same spot, so each fully covers the last —
+   no peeking ledges). Each card snaps as it lands and can't be flung past, so
+   there's a beat to read; once the last card lands, the page scrolls on. Pure
+   CSS sticky drives it — no JS, no nested scrollbar to trap the wheel. */
+@media (min-width: 760px) {
+  .deck-stage { display: flex; flex-direction: column; gap: 0; }
+
+  .deck-card {
+    position: sticky;
+    top: 88px;
+    height: clamp(560px, 84vh, 820px);
+    margin-bottom: 0;
+    overflow: hidden;
+    box-shadow: 0 -14px 50px rgba(46, 46, 56, 0.20);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    scroll-margin-top: 88px;
+  }
+
+  /* The caption keeps its natural height and is never clipped; the image fills
+     whatever space is left above it. The image is positioned absolutely inside
+     its box so its intrinsic size can't push the caption out and overlap it. */
+  .deck-card .deck-grid { flex: 1 1 auto; min-height: 0; }
+  .deck-card .deck-grid .deck-col { flex: 0 0 auto; }
+  .deck-card .deck-grid .media {
+    flex: 1 1 auto;
+    min-height: 0;
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+  }
+  /* override .detail-blocks .media img { height:auto } so the image is sized to
+     its box and object-fit:contain scales the WHOLE picture down to fit —
+     nothing cropped, just smaller within the window */
+  .deck-card .deck-grid .media img {
+    position: absolute;
+    inset: 0;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+  }
 }
 
 .deck-count {
