@@ -937,6 +937,11 @@ a.t-org:hover { color: var(--on-surface); }
   flex-direction: column;
   gap: clamp(24px, 3vw, 40px);
 }
+/* Match the "Research Methods and Analysis" block: navy title, grey body —
+   overriding the .defense-playful rule that otherwise paints detail-text body
+   copy navy. */
+.photo-feature--navy-titles .detail-text .title-serif { color: var(--primary); }
+.photo-feature--navy-titles .detail-text p { color: var(--on-surface-body); }
 
 /* Image + bold-headline pairing, vertically centred, alternating sides */
 .photo-block {
