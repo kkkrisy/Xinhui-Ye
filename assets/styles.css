@@ -979,13 +979,35 @@ a.t-org:hover { color: var(--on-surface); }
     height: calc(100vh - 88px);
     margin-bottom: 0;
     overflow: hidden;
-    /* Low-opacity per-card drop shadow so it stays soft where stacked cards
-       overlap their shadows at the top edge. */
-    box-shadow: 0 -14px 50px rgba(46, 46, 56, 0.08);
+    /* No outer drop shadow here: every card stays pinned at top:88px, so an
+       upward shadow from each one would pile into the same strip above the
+       edge and darken with every card. Instead the shadow is drawn *inside*
+       the top of the card (::before below), where the next card's opaque body
+       covers it — so only the current top card's shadow ever shows. */
+    box-shadow: none;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     scroll-margin-top: 88px;
+  }
+
+  /* Soft top shadow contained within the card. Because it sits inside the
+     card body (top edge, fading down), the next card slides up and covers
+     it — so stacked cards never accumulate overlapping shadows. */
+  .deck-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(
+      to bottom,
+      rgba(46, 46, 56, 0.05),
+      rgba(46, 46, 56, 0)
+    );
   }
 
   /* The caption keeps its natural height and is never clipped; the image fills
