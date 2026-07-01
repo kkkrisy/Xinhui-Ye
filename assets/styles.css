@@ -841,19 +841,19 @@ textarea.field { height: auto; min-height: 140px; resize: vertical; padding-top:
    text-forward columns (image in the narrower track), a smaller rounded image
    that is capped so it never towers, a wider gap, and roomier reading copy. */
 .pattern-block {
-  grid-template-columns: 0.85fr 1.15fr;
+  grid-template-columns: 1fr 1fr;
   gap: clamp(36px, 5vw, 80px);
   align-items: center;
 }
-.pattern-block.photo-block--reverse { grid-template-columns: 1.15fr 0.85fr; }
 .pattern-block .media { display: flex; justify-content: center; }
 .pattern-block .media img {
-  border-radius: var(--radius-lg);
   max-width: 340px;
   width: 100%;
 }
-.pattern-block .block-desc { font-size: 17px; line-height: 28px; max-width: none; }
-.pattern-block .block-desc strong { color: var(--on-surface); }
+/* Square corners: override .photo-block/.defense-playful .media img rounding
+   (equal specificity but declared later) so the heatmap frame isn't clipped. */
+.pattern-block.photo-block .media img { border-radius: 0; }
+.pattern-block .block-desc { font-size: 17px; line-height: 28px; max-width: 500px; }
 @media (max-width: 760px) {
   .pattern-block,
   .pattern-block.photo-block--reverse { grid-template-columns: 1fr; }
@@ -1204,7 +1204,6 @@ a.t-org:hover { color: var(--on-surface); }
 .reveal-frame {
   position: absolute;
   inset: 0;
-  border-radius: var(--radius-lg);
   overflow: hidden;
 }
 .reveal-img {
