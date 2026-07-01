@@ -860,6 +860,40 @@ textarea.field { height: auto; min-height: 140px; resize: vertical; padding-top:
   .pattern-block .media img { max-width: 100%; }
 }
 
+/* Closing pull-quote — big navy quote mark leading an italic serif line */
+.pull-quote {
+  margin: 32px 0;
+  text-align: left;
+}
+.pull-quote__mark {
+  display: block;
+  width: clamp(48px, 5vw, 72px);
+  height: auto;
+  fill: var(--primary);
+  transform: rotate(180deg);
+  margin-bottom: var(--space-xs);
+}
+.pull-quote blockquote {
+  margin: 0;
+  max-width: none;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(24px, 2.6vw, 34px);
+  line-height: 1.4;
+  color: var(--primary);
+}
+
+/* Full-width standalone figure (e.g. thriving vs struggling chart) */
+.detail-figure {
+  margin: var(--space-xl) 0 var(--space-md);
+}
+.detail-figure img {
+  width: 100%;
+  display: block;
+  border-radius: var(--radius-lg);
+}
+
 /* Inline links inside detail copy (e.g. publication titles) */
 .detail-text a:not(.btn) {
   color: var(--primary);
