@@ -201,30 +201,68 @@
             </div>
           </div>
 
-          <!-- Coloured feature band: the analysis and its findings -->
+          <!-- The analytical framework: a before/after reveal. Drag the handle
+               to wipe between the framework and a mapped example; the copy
+               beside it swaps at the midpoint. -->
+          <div class="reveal-card" data-face="front" style="--reveal:50%;">
+            <div class="reveal-grid">
+              <!-- Left column: the toggle sits above the image so the "|"
+                   lines up with the wipe handle's centre. -->
+              <div class="reveal-left">
+              <div class="reveal-toggle" role="tablist" aria-label="Choose framework or example">
+                <button type="button" role="tab" aria-selected="true" data-face="front">Framework</button>
+                <span class="reveal-toggle-sep" aria-hidden="true">|</span>
+                <button type="button" role="tab" aria-selected="false" data-face="back">Example</button>
+              </div>
+              <!-- Image wiper: example underneath, framework clipped on top -->
+              <div class="reveal-media">
+                <div class="reveal-frame">
+                  <img class="reveal-img reveal-img--example" src="assets/longitudinal-3.jpg" alt="The four-dimensional framework plotted for a single team" draggable="false" />
+                  <img class="reveal-img reveal-img--framework" src="assets/longitudinal-13.jpg" alt="The four-dimensional analytical framework of co-exploration" draggable="false" />
+                </div>
+                <button type="button" class="reveal-handle" aria-label="Drag to reveal the mapped example">
+                  <span class="reveal-tip" aria-hidden="true">Drag to reveal</span>
+                  <span class="reveal-handle-grip" aria-hidden="true"></span>
+                </button>
+              </div>
+              </div><!-- /.reveal-left -->
+
+              <!-- Copy that swaps at the midpoint -->
+              <div class="reveal-copy">
+                <div class="reveal-text reveal-text--front">
+                  <h2 class="block-title">Analytical Framework</h2>
+                  <p class="block-desc">Co-exploration mapped across four dimensions: information distribution, diversity of insights, communication types, and people distribution.</p>
+                  <ul class="block-desc">
+                    <li><strong>Information distribution:</strong> was information shared before the activity? Fully synced, partially overlapping, or not at all</li>
+                    <li><strong>Diversity of insights:</strong> where did ideas come from? Prepared individually, generated through a group technique, or drawn from existing shared knowledge</li>
+                    <li><strong>Communication types:</strong> what kind of exchange took place? Generating more ideas, refining together, refining one person's idea, or combining into something new</li>
+                    <li><strong>People distribution:</strong> how were participants arranged? All in the same room, hybrid in some form, or fully online</li>
+                  </ul>
+                </div>
+                <div class="reveal-text reveal-text--back">
+                  <h2 class="block-title">Reading one team</h2>
+                  <p class="block-desc">Take a brainstorming session using the 6-3-5 technique as example:</p>
+                  <ul class="block-desc">
+                    <li>no prior sharing &#8594; async</li>
+                    <li>ideas generated through a structured group method &#8594; group-based design technique</li>
+                    <li>passed around and built upon &#8594; generating more</li>
+                    <li>everyone in the room &#8594; co-present</li>
+                  </ul>
+                  <p class="block-desc">One line on the framework, shown here.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Coloured feature band: mapping all teams and the five patterns -->
           <div class="photo-feature">
-
-            <!-- The four-dimensional framework -->
-            <div class="photo-block photo-block--reverse">
-              <div class="media"><img src="assets/longitudinal-13.jpg" alt="The four-dimensional analytical framework of co-exploration" style="width:100%; display:block;" /></div>
-              <div class="block-copy">
-                <h2 class="block-title">A four-dimensional framework.</h2>
-                <p class="block-desc">Co-exploration mapped across four dimensions — information distribution, diversity of insights, communication types and people distribution — read both before and during co-exploration.</p>
-              </div>
-            </div>
-
-            <!-- Reading one team -->
-            <div class="photo-block">
-              <div class="media"><img src="assets/longitudinal-3.jpg" alt="The four-dimensional framework plotted for a single team" style="width:100%; display:block;" /></div>
-              <div class="block-copy">
-                <h2 class="block-title">Reading one team.</h2>
-                <p class="block-desc">Each co-exploration instance traces a single line across the four dimensions. Here, one instance from team T15 — async, group-based, diverging, and physically co-present.</p>
-              </div>
-            </div>
 
             <!-- All 16 teams, mapped -->
             <div class="detail-full">
               <div class="media"><img src="assets/longitudinal-4.jpg" alt="Parallel-coordinates mapping of co-exploration activities across all 16 teams" style="width:100%; display:block;" /></div>
+            </div>
+            <div class="detail-text">
+              <p>By mapping each activity onto the analytical framework according to its four dimensions, I analyzed all co-exploration activities across 16 design teams. The overview is shown here: each of the 16 frameworks represents one team, and each line within it represents a single co-exploration activity. Colors distinguish the five patterns, which are elaborated in the sections below.</p>
             </div>
 
             <!-- The five patterns -->
@@ -247,11 +285,6 @@
                 <h2 class="block-title">Thriving vs<br>struggling teams.</h2>
                 <p class="block-desc">The quantitative results showed that thriving teams demonstrated both a higher frequency and a greater diversity of co-exploration than struggling teams.</p>
               </div>
-            </div>
-
-            <!-- Publication -->
-            <div class="detail-text">
-              <p>This work — the four-dimensional framework and the five patterns — was published as <a href="https://www.sciencedirect.com/science/article/pii/S2405872625000462" target="_blank" rel="noopener"><em>Beyond Divergence: Characterizing Co-exploration Patterns in Collaborative Design Processes</em></a> in <em>She Ji: The Journal of Design, Economics, and Innovation</em> (2025).</p>
             </div>
 
           </div><!-- /.photo-feature -->
@@ -283,5 +316,58 @@
   </footer>
 
   <script src="assets/script.js"></script>
+  <script>
+    document.querySelectorAll('.reveal-card').forEach(function (card) {
+      var media = card.querySelector('.reveal-media');
+      var handle = card.querySelector('.reveal-handle');
+      var buttons = card.querySelectorAll('.reveal-toggle button');
+
+      // Apply a reveal percentage (0–100); update the face + toggle at the midpoint.
+      function setReveal(pct) {
+        pct = Math.max(0, Math.min(100, pct));
+        card.style.setProperty('--reveal', pct + '%');
+        var face = pct >= 50 ? 'front' : 'back';
+        card.setAttribute('data-face', face);
+        buttons.forEach(function (b) {
+          b.setAttribute('aria-selected', b.dataset.face === face ? 'true' : 'false');
+        });
+      }
+
+      function pctFromEvent(e) {
+        var rect = media.getBoundingClientRect();
+        return ((e.clientX - rect.left) / rect.width) * 100;
+      }
+
+      var dragging = false;
+      function startDrag(e) {
+        dragging = true;
+        media.classList.remove('is-animating'); // instant while dragging
+        media.setPointerCapture && media.setPointerCapture(e.pointerId);
+        setReveal(pctFromEvent(e));
+      }
+      media.addEventListener('pointerdown', startDrag);
+      media.addEventListener('pointermove', function (e) {
+        if (dragging) setReveal(pctFromEvent(e));
+      });
+      media.addEventListener('pointerup', function () { dragging = false; });
+      media.addEventListener('pointercancel', function () { dragging = false; });
+
+      // Keyboard support on the handle
+      handle.addEventListener('keydown', function (e) {
+        var cur = parseFloat(getComputedStyle(card).getPropertyValue('--reveal')) || 100;
+        if (e.key === 'ArrowLeft') { setReveal(cur - 5); e.preventDefault(); }
+        else if (e.key === 'ArrowRight') { setReveal(cur + 5); e.preventDefault(); }
+      });
+
+      // Clicking a label animates the wipe fully to that side
+      buttons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          media.classList.add('is-animating');
+          setReveal(btn.dataset.face === 'front' ? 100 : 0);
+          setTimeout(function () { media.classList.remove('is-animating'); }, 550);
+        });
+      });
+    });
+  </script>
 </body>
 </html>
