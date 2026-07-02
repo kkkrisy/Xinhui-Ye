@@ -1000,6 +1000,10 @@ a.t-org:hover { color: var(--on-surface); }
 .photo-feature--navy-titles .detail-text .title-serif { color: var(--primary); }
 .photo-feature--navy-titles .detail-text p { color: var(--on-surface-body); }
 
+/* Intro copy inside the band reads as body grey, matching the pattern
+   captions beside it rather than the navy detail-text elsewhere on the page. */
+.photo-feature .detail-text p { color: var(--on-surface-body); }
+
 /* ---- Stacking deck ---------------------------------------------------
    The data-collection chunks as a pinned deck: the stage sticks under the
    nav so only one card fills the view at a time, and scrolling slides the
