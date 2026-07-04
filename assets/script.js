@@ -2,6 +2,14 @@
    Progressive enhancement: everything works as plain HTML if JS is off. */
 
 document.addEventListener("DOMContentLoaded", () => {
+  /* Phone-sized viewport? The mobile-only enhancements below (read-more
+     clamps, dots, folding) key off this and re-apply if it changes. */
+  const mobileMQ = window.matchMedia("(max-width: 760px)");
+  const onMobileChange = (fn) => {
+    if (mobileMQ.addEventListener) mobileMQ.addEventListener("change", fn);
+    else if (mobileMQ.addListener) mobileMQ.addListener(fn);
+  };
+
   /* ---- Mobile menu overlay ------------------------------------------ */
   const overlay = document.querySelector(".nav-overlay");
   const openBtn = document.querySelector("[data-menu-open]");
@@ -10,6 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const setMenu = (open) => {
     if (!overlay) return;
     overlay.classList.toggle("is-open", open);
+    overlay.setAttribute("aria-hidden", open ? "false" : "true");
     document.body.style.overflow = open ? "hidden" : "";
   };
   openBtn && openBtn.addEventListener("click", () => setMenu(true));
@@ -53,14 +62,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const prev = wrap.querySelector("[data-carousel-prev]");
     const next = wrap.querySelector("[data-carousel-next]");
     if (!track) return;
-    // Paged carousels advance by exactly one full view of cards (here: 2).
+    // Paged carousels advance by exactly one full view of cards
+    // (2 on desktop, 1 on phones where a single card fills the view).
     const paged = wrap.hasAttribute("data-carousel-page");
     const step = () => {
       if (paged) {
         const card = track.firstElementChild;
         const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
         const cardW = card ? card.getBoundingClientRect().width : track.clientWidth / 2;
-        return (cardW + gap) * 2;
+        return (cardW + gap) * (mobileMQ.matches ? 1 : 2);
       }
       return Math.max(track.clientWidth * 0.8, 280);
     };
@@ -70,6 +80,41 @@ document.addEventListener("DOMContentLoaded", () => {
     next && next.addEventListener("click", () =>
       track.scrollBy({ left: step(), behavior: "smooth" })
     );
+
+    /* Dot indicators (phones): one dot per card, synced to the swipe.
+       Built once; CSS keeps them hidden on desktop. */
+    const cards = Array.from(track.children);
+    if (cards.length > 1) {
+      const dots = document.createElement("div");
+      dots.className = "dots dots--auto";
+      const buttons = cards.map((card, n) => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.setAttribute("aria-label", "Go to item " + (n + 1));
+        b.addEventListener("click", () =>
+          track.scrollTo({ left: card.offsetLeft - track.offsetLeft, behavior: "smooth" })
+        );
+        dots.appendChild(b);
+        return b;
+      });
+      wrap.appendChild(dots);
+
+      let ticking = false;
+      const syncDots = () => {
+        ticking = false;
+        let nearest = 0;
+        let best = Infinity;
+        cards.forEach((card, n) => {
+          const d = Math.abs(card.offsetLeft - track.offsetLeft - track.scrollLeft);
+          if (d < best) { best = d; nearest = n; }
+        });
+        buttons.forEach((b, n) => b.classList.toggle("is-active", n === nearest));
+      };
+      track.addEventListener("scroll", () => {
+        if (!ticking) { ticking = true; requestAnimationFrame(syncDots); }
+      }, { passive: true });
+      syncDots();
+    }
   });
 
   /* ---- Certificate flip cards --------------------------------------- */
@@ -144,6 +189,20 @@ document.addEventListener("DOMContentLoaded", () => {
       if (e.key === "ArrowLeft") show(i - 1);
       if (e.key === "ArrowRight") show(i + 1);
     });
+
+    // Swipe left/right anywhere on the overlay steps through the photos.
+    let touchX = 0, touchY = 0;
+    box.addEventListener("touchstart", (e) => {
+      touchX = e.touches[0].clientX;
+      touchY = e.touches[0].clientY;
+    }, { passive: true });
+    box.addEventListener("touchend", (e) => {
+      const dx = e.changedTouches[0].clientX - touchX;
+      const dy = e.changedTouches[0].clientY - touchY;
+      if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+        show(dx < 0 ? i + 1 : i - 1);
+      }
+    }, { passive: true });
   }
 
   /* ---- Craft video controls (pause/play + fullscreen) --------------- */
@@ -266,18 +325,192 @@ document.addEventListener("DOMContentLoaded", () => {
         if (userInitiated) card.scrollIntoView({ behavior: "smooth", block: "start" });
       };
 
-      paperStack.classList.add("is-piled");
-      activate(cards[0], false);
+      /* Phones: the pile flattens into two tap-to-open papers (the first
+         starts open), so the page stays short. Desktop keeps the tilted
+         two-sheet pile. */
+      const setHint = (card, open) => {
+        const hint = card.querySelector(".paper-tab__hint");
+        if (hint) {
+          hint.firstChild.textContent = mobileMQ.matches
+            ? (open ? "Tap to close" : "Tap to read")
+            : "Bring forward to read";
+        }
+      };
+      const setFolded = (card, open) => {
+        card.classList.toggle("is-open", open);
+        const tab = card.querySelector(".paper-tab");
+        if (tab) tab.setAttribute("aria-expanded", open ? "true" : "false");
+        setHint(card, open);
+      };
+      const applyMode = () => {
+        if (mobileMQ.matches) {
+          paperStack.classList.remove("is-piled");
+          paperStack.classList.add("is-folded");
+          cards.forEach((c, n) => {
+            c.classList.remove("is-active", "is-peek");
+            setFolded(c, n === 0);
+          });
+        } else {
+          paperStack.classList.remove("is-folded");
+          paperStack.classList.add("is-piled");
+          cards.forEach((c) => { c.classList.remove("is-open"); setHint(c, false); });
+          activate(cards[0], false);
+        }
+      };
+      applyMode();
+      onMobileChange(applyMode);
 
       cards.forEach((c) => {
         // The whole card beneath is clickable (its exposed frame + tab); a
         // button in the tab keeps it keyboard-reachable and its click bubbles
-        // here. Clicks inside the already-open card are ignored by the guard.
-        c.addEventListener("click", () => {
+        // here. In the pile, clicks inside the already-open card are ignored;
+        // in the mobile fold, only the tab toggles its own paper.
+        c.addEventListener("click", (e) => {
+          if (paperStack.classList.contains("is-folded")) {
+            if (e.target.closest(".paper-tab")) {
+              const open = !c.classList.contains("is-open");
+              setFolded(c, open);
+              if (open) c.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+            return;
+          }
           if (!c.classList.contains("is-active")) activate(c, true);
         });
       });
     }
+  }
+
+  /* ---- Read more (phones): shorten long prose ------------------------
+     Desktop shows full text; on phones long passages collapse to a few
+     lines with a READ MORE toggle so pages stay short. Two shapes:
+       · single long paragraph  → line-clamped, toggle expands it
+       · multi-paragraph block  → first paragraph clamped, the rest hidden,
+         one toggle reveals the whole story
+     Blocks that already link to a full page (highlights teasers) clamp
+     without a toggle — their existing "Read more" pill is the expansion. */
+  const CLAMP_MIN_CHARS = 180;       // shorter than this reads fine as-is
+
+  const makeToggle = () => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "rm-toggle";
+    b.textContent = "Read more";
+    return b;
+  };
+
+  const collapseGroup = (first, rest, lines) => {
+    if ((first.textContent || "").trim().length < CLAMP_MIN_CHARS && !rest.length) return;
+    first.classList.add("m-clamp", "is-clamped");
+    first.style.setProperty("--rm-lines", lines);
+    rest.forEach((el) => el.classList.add("m-hide", "is-collapsed"));
+    const toggle = makeToggle();
+    const last = rest.length ? rest[rest.length - 1] : first;
+    last.insertAdjacentElement("afterend", toggle);
+    toggle.addEventListener("click", () => {
+      const collapsed = first.classList.toggle("is-clamped");
+      rest.forEach((el) => el.classList.toggle("is-collapsed", collapsed));
+      toggle.textContent = collapsed ? "Read more" : "Read less";
+    });
+  };
+
+  let readMoreDone = false;
+  const setupReadMore = () => {
+    if (readMoreDone || !mobileMQ.matches) return;
+    readMoreDone = true;
+
+    // Multi-paragraph prose blocks: intro stories, photo captions, chapters.
+    // Everything up to the first body paragraph stays (headings, eyebrows);
+    // the first paragraph clamps and the rest folds behind one toggle.
+    // Button rows always stay visible so calls to action never disappear.
+    const HEADING = ".title-serif, .block-title, h1, h2, h3";
+    const ALWAYS = ".utility-row, .rm-toggle";
+    document
+      .querySelectorAll(".detail-text, .hero-layout .stack-md, .block-copy, .book-chapter, .deck-col")
+      .forEach((block) => {
+        if (block.closest(".reveal-copy, .accordion-body")) return; // their own UX
+        const children = Array.from(block.children);
+        const first = children.find(
+          (el) =>
+            !el.matches(HEADING) && !el.matches(ALWAYS) &&
+            !el.querySelector(".btn") &&
+            (el.textContent || "").trim().length > 0
+        );
+        if (!first) return;
+        const rest = children
+          .slice(children.indexOf(first) + 1)
+          .filter((el) => !el.matches(ALWAYS) && !el.querySelector(".btn"));
+        const total = [first, ...rest].reduce(
+          (n, el) => n + (el.textContent || "").trim().length, 0
+        );
+        if (total < CLAMP_MIN_CHARS) return;
+        collapseGroup(first, rest, 4);
+      });
+
+    // Standalone long paragraphs
+    document
+      .querySelectorAll(".recent-item > p, .contact-note__text")
+      .forEach((p) => collapseGroup(p, [], 4));
+
+    // Highlights teasers: clamp only — the pill below IS the read-more.
+    document.querySelectorAll(".hl-item .body-lg").forEach((p) => {
+      if ((p.textContent || "").trim().length < CLAMP_MIN_CHARS) return;
+      p.classList.add("m-clamp", "is-clamped");
+      p.style.setProperty("--rm-lines", 5);
+    });
+  };
+  setupReadMore();
+  onMobileChange(setupReadMore);
+
+  /* ---- Takeaway CV (phones): fold to the essentials ------------------ */
+  const cvShell = document.querySelector(".cv-shell");
+  if (cvShell) {
+    cvShell.classList.add("cv-collapsed");
+    const cvToggle = document.createElement("button");
+    cvToggle.type = "button";
+    cvToggle.className = "btn btn--outline cv-toggle";
+    cvToggle.textContent = "Show full CV";
+    const frame = cvShell.querySelector(".cv-frame") || cvShell;
+    frame.appendChild(cvToggle);
+    cvToggle.addEventListener("click", () => {
+      const collapsed = cvShell.classList.toggle("cv-collapsed");
+      cvToggle.textContent = collapsed ? "Show full CV" : "Hide full CV";
+    });
+  }
+
+  /* ---- Scroll-reveal (phones): sections rise in as you scroll -------- */
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!reduceMotion && "IntersectionObserver" in window) {
+    const targets = document.querySelectorAll(
+      [
+        ".recent-item", "[data-carousel-page]", ".accordion-row", ".hl-item",
+        ".photo-block", ".deck-card", ".detail-split", ".detail-full",
+        ".detail-prose", ".gallery-group", ".testimonials", ".cv-frame",
+        ".contact-photo", ".paper-card", ".reveal-card", ".detail-figure",
+        ".pull-quote", ".contact-grid form",
+      ].join(", ")
+    );
+    let revealDone = false;
+    const setupReveal = () => {
+      if (revealDone || !mobileMQ.matches) return;
+      revealDone = true;
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-inview");
+              io.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.08, rootMargin: "0px 0px -8% 0px" }
+      );
+      targets.forEach((el) => {
+        el.classList.add("reveal-init");
+        io.observe(el);
+      });
+    };
+    setupReveal();
+    onMobileChange(setupReveal);
   }
 
   /* ---- Deter image/video saving ------------------------------------- */

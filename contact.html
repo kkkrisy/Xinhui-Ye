@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Spectral:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <meta name="theme-color" content="#333462" />
   <link rel="stylesheet" href="assets/styles.css" />
 </head>
 <body>
@@ -26,13 +27,24 @@
   </header>
 
   <div class="nav-overlay" aria-hidden="true">
-    <button class="menu-toggle menu-close" data-menu-close aria-label="Close menu">Close</button>
-    <nav class="stack-md" aria-label="Mobile">
+    <div class="nav-overlay__head">
+      <span class="nav-overlay__brand">Xinhui Ye</span>
+      <button class="menu-toggle menu-close" data-menu-close aria-label="Close menu">Close</button>
+    </div>
+    <nav class="nav-overlay__links" aria-label="Mobile">
       <a href="index.html">About</a>
       <a href="highlights.html">Highlights</a>
       <a href="craft.html">Craft</a>
-      <a href="contact.html">Get in touch</a>
+      <a href="contact.html" aria-current="page">Get in touch</a>
     </nav>
+    <div class="nav-overlay__foot">
+      <a class="nav-overlay__mail" href="mailto:kristinyxh@gmail.com">kristinyxh@gmail.com</a>
+      <div class="nav-overlay__social">
+        <a href="https://www.linkedin.com/in/xinhui-ye-673a63150" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://scholar.google.nl/citations?hl=en&user=P7ArCXEAAAAJ" target="_blank" rel="noopener">Google Scholar</a>
+        <a href="https://www.instagram.com/kkkrisy_/" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </div>
   </div>
 
   <main>
