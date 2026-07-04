@@ -247,6 +247,39 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  /* ---- Paper pile (INTERACT two-talks page) -------------------------
+     Two paper cards piled up: one open, the other a peeking tab behind it.
+     Clicking a card's tab brings that paper forward. Progressive: if this
+     never runs, both cards stay fully expanded and readable. */
+  const paperStack = document.querySelector("[data-paper-stack]");
+  if (paperStack) {
+    const cards = Array.from(paperStack.querySelectorAll(".paper-card"));
+    if (cards.length === 2) {
+      const activate = (card, userInitiated) => {
+        cards.forEach((c) => {
+          const isActive = c === card;
+          c.classList.toggle("is-active", isActive);
+          c.classList.toggle("is-peek", !isActive);
+          const tab = c.querySelector(".paper-tab");
+          if (tab) tab.setAttribute("aria-expanded", isActive ? "true" : "false");
+        });
+        if (userInitiated) card.scrollIntoView({ behavior: "smooth", block: "start" });
+      };
+
+      paperStack.classList.add("is-piled");
+      activate(cards[0], false);
+
+      cards.forEach((c) => {
+        // The whole card beneath is clickable (its exposed frame + tab); a
+        // button in the tab keeps it keyboard-reachable and its click bubbles
+        // here. Clicks inside the already-open card are ignored by the guard.
+        c.addEventListener("click", () => {
+          if (!c.classList.contains("is-active")) activate(c, true);
+        });
+      });
+    }
+  }
+
   /* ---- Deter image/video saving ------------------------------------- */
   // Not bulletproof (screenshots, devtools and direct URLs still work), but
   // it blocks right-click "Save image as…" and click-drag saving.

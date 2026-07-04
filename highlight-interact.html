@@ -52,8 +52,17 @@
             </div>
           </div>
 
-          <!-- ===== First paper — expert study & the DTC guideline (cream band) ===== -->
-          <div class="photo-feature">
+          <!-- ===== Two papers as a pile — hover a card, click to bring it forward ===== -->
+          <div class="paper-stack" data-paper-stack>
+
+            <!-- Paper 1 — expert study & the DTC guideline (main-conference full paper) -->
+            <article class="paper-card" data-paper="dtc">
+              <button class="paper-tab" type="button" aria-controls="paper-dtc-body">
+                <span class="paper-tab__eyebrow">Paper 01 &middot; Full paper, main conference</span>
+                <span class="paper-tab__title">Co-exploration in professional practice &amp; the DTC guideline</span>
+                <span class="paper-tab__hint">Bring forward to read</span>
+              </button>
+              <div class="paper-body" id="paper-dtc-body">
 
             <!-- Background + Research Objectives, beside the Inspiration-Card session (image 4, first picture) -->
             <div class="detail-split" style="grid-template-columns: 1fr 1.35fr; align-items: stretch;">
@@ -127,17 +136,29 @@
               </figure>
             </div>
 
-          </div><!-- /.photo-feature (first paper) -->
+              </div><!-- /.paper-body (paper 1) -->
+            </article>
 
-          <!-- ===== Second paper — PhenoHCI workshop ===== -->
-          <div class="detail-split">
-            <div class="media"><img src="assets/interact-6.jpeg" alt="Q&amp;A session in the lecture hall at the PhenoHCI workshop" style="width:100%; height:auto; display:block;" /></div>
-            <div class="detail-text">
-              <p class="title-serif">Reflecting on Methods</p>
-              <p><a href="https://research.tue.nl/en/publications/reflecting-on-methods-from-unfolding-to-supporting-co-exploration/" target="_blank" rel="noopener"><em>From Unfolding to Supporting Co-exploration in Collaborative Design</em></a> (PhenoHCI'25 workshop). Here I stepped back to reflect on my PhD methods and the lessons phenomenology offered along the way.</p>
-              <p class="utility-row" style="margin-top: var(--space-md);"><a class="btn btn--outline" href="https://research.tue.nl/en/publications/reflecting-on-methods-from-unfolding-to-supporting-co-exploration/" target="_blank" rel="noopener">Read the paper</a></p>
-            </div>
-          </div>
+            <!-- Paper 2 — PhenoHCI workshop short paper -->
+            <article class="paper-card" data-paper="pheno">
+              <button class="paper-tab" type="button" aria-controls="paper-pheno-body">
+                <span class="paper-tab__eyebrow">Paper 02 &middot; Short paper, PhenoHCI workshop</span>
+                <span class="paper-tab__title">Reflecting on Methods &mdash; from unfolding to supporting co-exploration</span>
+                <span class="paper-tab__hint">Bring forward to read</span>
+              </button>
+              <div class="paper-body" id="paper-pheno-body">
+                <div class="detail-split">
+                  <div class="media"><img src="assets/interact-6.jpeg" alt="Q&amp;A session in the lecture hall at the PhenoHCI workshop" style="width:100%; height:auto; display:block;" /></div>
+                  <div class="detail-text">
+                    <p class="title-serif">Reflecting on Methods</p>
+                    <p><a href="https://research.tue.nl/en/publications/reflecting-on-methods-from-unfolding-to-supporting-co-exploration/" target="_blank" rel="noopener"><em>From Unfolding to Supporting Co-exploration in Collaborative Design</em></a> (PhenoHCI'25 workshop). Here I stepped back to reflect on my PhD methods and the lessons phenomenology offered along the way.</p>
+                    <p class="utility-row" style="margin-top: var(--space-md);"><a class="btn btn--outline" href="https://research.tue.nl/en/publications/reflecting-on-methods-from-unfolding-to-supporting-co-exploration/" target="_blank" rel="noopener">Read the paper</a></p>
+                  </div>
+                </div>
+              </div><!-- /.paper-body (paper 2) -->
+            </article>
+
+          </div><!-- /.paper-stack -->
 
         </div>
 

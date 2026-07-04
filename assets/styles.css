@@ -1039,6 +1039,163 @@ a.t-org:hover { color: var(--on-surface); }
    captions beside it rather than the navy detail-text elsewhere on the page. */
 .photo-feature .detail-text p { color: var(--on-surface-body); }
 
+/* ---- Paper pile (INTERACT: two papers stacked as pickable cards) -----
+   Two cream cards piled on top of each other. One is open and fully
+   readable; the other collapses to a rotated tab peeking behind it. Hover
+   the peeking tab to lift it, click to bring that paper forward. The pile
+   behaviour is added by JS (.is-piled); with no JS both cards render as
+   plain, fully-readable stacked blocks, and on mobile it flattens back to
+   the same simple stack. */
+.paper-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  position: relative;
+}
+.paper-card {
+  background: #f3efe3;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 10px 30px rgba(46, 46, 56, 0.10);
+  scroll-margin-top: 96px;
+  transition: transform .4s cubic-bezier(.2, .7, .2, 1),
+              box-shadow .4s ease;
+}
+/* Distinct paper stock per talk so the pile clearly reads as two papers:
+   the original cream for the full paper, deep navy for the workshop paper. */
+.paper-card[data-paper="dtc"]   { background: #f3efe3; }
+.paper-card[data-paper="pheno"] { background: var(--inverse-surface); }
+
+/* Navy card runs on cream ink; the coral eyebrow keeps its pop. */
+.paper-card[data-paper="pheno"] .paper-tab,
+.paper-card[data-paper="pheno"] .paper-tab__title,
+.paper-card[data-paper="pheno"] .detail-text .title-serif {
+  color: var(--inverse-on-surface);
+}
+.paper-card[data-paper="pheno"] .paper-tab__hint { color: rgba(255, 239, 214, 0.72); }
+.paper-card[data-paper="pheno"] .detail-text p { color: rgba(255, 239, 214, 0.90); }
+.paper-card[data-paper="pheno"] .detail-text a:not(.btn) {
+  color: var(--inverse-on-surface);
+  text-decoration-color: rgba(255, 239, 214, 0.5);
+}
+.paper-card[data-paper="pheno"] .btn--outline {
+  color: var(--inverse-on-surface);
+  border-color: var(--inverse-on-surface);
+}
+.paper-card .media img { border-radius: var(--radius-lg); }
+.paper-card .detail-text .title-serif { color: var(--primary); }
+.paper-card .detail-text p { color: var(--on-surface-body); }
+
+/* Tab / header — the always-visible handle for each paper */
+.paper-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  text-align: left;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font-family: var(--font-grotesque);
+  color: var(--primary);
+  padding: clamp(20px, 3vw, 32px) clamp(28px, 4vw, 56px) 0;
+}
+.paper-tab__eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+.paper-tab__title {
+  font-size: clamp(19px, 2.4vw, 26px);
+  font-weight: 700;
+  line-height: 1.25;
+}
+.paper-tab__hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--on-surface-variant);
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+.paper-tab__hint::after { content: "\2191"; font-size: 15px; }
+
+.paper-body {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(24px, 3vw, 40px);
+  padding: clamp(20px, 3vw, 32px) clamp(28px, 4vw, 56px) clamp(28px, 4vw, 56px);
+}
+
+/* --- Piled behaviour (JS on): two tilted sheets -------------------------
+   Like two sheets of paper on a desk: the open, readable paper lies on top,
+   barely tilted; the second paper sits behind it tilted the other way, its
+   header peeking above the top edge while its lower half disappears behind the
+   front sheet — so it reads as a whole sheet tucked under, never a stub. The
+   back sheet is a fixed, moderate height so its tilt can't swing past the page
+   even though the front paper can be very long. */
+.paper-stack.is-piled {
+  gap: 0;
+  padding-top: 92px;              /* room for the sheet behind to peek above */
+}
+
+/* Front sheet: the open paper, on top, barely tilted (about its centre so a
+   long card's far corner barely moves). */
+.paper-stack.is-piled .paper-card.is-active {
+  position: relative;
+  z-index: 2;
+  transform: rotate(-0.6deg);
+  transform-origin: 50% 50%;
+  box-shadow: 0 18px 44px rgba(46, 46, 56, 0.20);
+}
+.paper-stack.is-piled .paper-card.is-active .paper-tab { cursor: default; }
+
+/* Back sheet: sits behind the front, tilted the other way. Fixed height with
+   its lower part hidden behind the front card. */
+.paper-stack.is-piled .paper-card.is-peek {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 400px;
+  z-index: 1;
+  cursor: pointer;
+  overflow: hidden;
+  transform: rotate(3deg) translateX(-6px);
+  transform-origin: 50% 50%;
+  box-shadow: 0 12px 32px rgba(46, 46, 56, 0.16);
+  transition: transform .4s cubic-bezier(.2, .7, .2, 1), box-shadow .4s ease;
+}
+.paper-stack.is-piled .paper-card.is-peek .paper-body { display: none; }
+.paper-stack.is-piled .paper-card.is-peek .paper-tab { padding-top: 22px; }
+.paper-stack.is-piled .paper-card.is-peek .paper-tab__hint { opacity: 1; }
+.paper-stack.is-piled .paper-card.is-peek:hover,
+.paper-stack.is-piled .paper-card.is-peek:focus-within {
+  transform: rotate(3deg) translateX(-6px) translateY(-6px);
+  box-shadow: 0 18px 40px rgba(46, 46, 56, 0.22);
+}
+
+/* Mobile / no-pile: both papers fully expanded in a plain stack */
+@media (max-width: 760px) {
+  .paper-stack.is-piled { gap: var(--space-lg); padding-top: 0; }
+  .paper-stack.is-piled .paper-card { transform: none; }
+  .paper-stack.is-piled .paper-card.is-peek {
+    position: static;
+    inset: auto;
+    height: auto;
+    overflow: visible;
+  }
+  .paper-stack.is-piled .paper-card.is-peek .paper-body { display: flex; }
+  .paper-tab__hint { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .paper-card { transition: none; }
+}
+
 /* ---- Stacking deck ---------------------------------------------------
    The data-collection chunks as a pinned deck: the stage sticks under the
    nav so only one card fills the view at a time, and scrolling slides the
