@@ -816,7 +816,14 @@ textarea.field { height: auto; min-height: 140px; resize: vertical; padding-top:
   gap: var(--space-lg);
   align-items: start;
 }
-@media (max-width: 760px) { .detail-split { grid-template-columns: 1fr; } }
+/* Variant with a wider media column and equal-height columns (INTERACT page).
+   Kept in the stylesheet — not as an inline style — so the mobile rule below
+   can still collapse it to a single column. */
+.detail-split--media-lg { grid-template-columns: 1fr 1.35fr; align-items: stretch; }
+@media (max-width: 760px) {
+  .detail-split,
+  .detail-split--media-lg { grid-template-columns: 1fr; }
+}
 /* Detail-page images always show in full, never cropped */
 .detail-blocks .media { background: transparent; }
 .detail-blocks .media img {
@@ -1182,7 +1189,14 @@ a.t-org:hover { color: var(--on-surface); }
 /* Mobile / no-pile: both papers fully expanded in a plain stack */
 @media (max-width: 760px) {
   .paper-stack.is-piled { gap: var(--space-lg); padding-top: 0; }
-  .paper-stack.is-piled .paper-card { transform: none; }
+  /* The selectors need .is-active/.is-peek so they outweigh the desktop
+     tilt rules — a plain .paper-card reset loses on specificity and the
+     rotated cards overflow the phone screen. */
+  .paper-stack.is-piled .paper-card,
+  .paper-stack.is-piled .paper-card.is-active,
+  .paper-stack.is-piled .paper-card.is-peek,
+  .paper-stack.is-piled .paper-card.is-peek:hover,
+  .paper-stack.is-piled .paper-card.is-peek:focus-within { transform: none; }
   .paper-stack.is-piled .paper-card.is-peek {
     position: static;
     inset: auto;
