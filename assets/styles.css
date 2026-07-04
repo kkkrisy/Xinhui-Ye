@@ -894,6 +894,36 @@ textarea.field { height: auto; min-height: 140px; resize: vertical; padding-top:
   border-radius: var(--radius-lg);
 }
 
+/* DTC guideline table (INTERACT detail) — the design knowledge laid out
+   across the three collaborative spaces. Scrolls horizontally on narrow
+   viewports so the page body never does. */
+.dtc-scroll { overflow-x: auto; }
+.dtc-table {
+  width: 100%;
+  min-width: 320px;
+  border-collapse: collapse;
+  font-family: var(--font-grotesque);
+  font-size: 11.5px;
+  line-height: 1.2;
+  color: var(--primary);
+}
+.dtc-table thead th {
+  text-align: left;
+  font-weight: 700;
+  padding: 0 10px 5px 0;
+  border-bottom: 2px solid var(--primary);
+  white-space: nowrap;
+}
+.dtc-table td {
+  text-align: left;
+  vertical-align: top;
+  padding: 2.5px 10px 2.5px 0;
+  border-bottom: 1px solid rgba(20, 24, 54, 0.10);
+}
+.dtc-table tr.dtc-sec > td { border-top: 2px solid rgba(20, 24, 54, 0.28); }
+.dtc-table .dtc-space { font-weight: 700; white-space: nowrap; }
+.dtc-table .dtc-theme { font-weight: 600; white-space: nowrap; }
+
 /* Inline links inside detail copy (e.g. publication titles) */
 .detail-text a:not(.btn) {
   color: var(--primary);
