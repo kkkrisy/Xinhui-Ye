@@ -343,20 +343,49 @@ a { color: inherit; }
   cursor: pointer;
 }
 
-/* Full-screen indigo overlay menu (mobile) */
+/* Full-screen indigo overlay menu (mobile) — Jess Hill style: brand top-left,
+   oversized staggered links in the middle, email + socials at the foot.
+   Kept mounted (visibility, not display) so the open/close fade and the
+   per-link stagger can animate. */
 .nav-overlay {
   position: fixed;
   inset: 0;
   z-index: 100;
   background: var(--inverse-surface);
   color: var(--inverse-on-surface);
-  display: none;
+  display: flex;
+  flex-direction: column;
+  padding: 20px var(--page-pad) var(--space-lg);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity .3s ease, visibility 0s linear .3s;
+}
+.nav-overlay.is-open {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity .3s ease;
+}
+.nav-overlay__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-overlay__brand {
+  font-family: var(--font-grotesque);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--secondary);          /* coral brand signal, as on the bar */
+}
+.nav-overlay__links {
+  flex: 1;
+  display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: var(--page-pad);
+  gap: var(--space-md);
 }
-.nav-overlay.is-open { display: flex; }
-.nav-overlay a {
+.nav-overlay__links a {
   font-family: var(--font-grotesque);
   font-weight: 700;
   font-size: clamp(34px, 9vw, 44px);
@@ -364,10 +393,49 @@ a { color: inherit; }
   letter-spacing: -0.01em;
   text-decoration: none;
   color: var(--inverse-on-surface);
+  /* staggered rise-in when the overlay opens */
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity .4s ease, transform .4s ease;
 }
-.nav-overlay .menu-close {
-  align-self: flex-end;
-  margin-bottom: var(--space-xl);
+.nav-overlay.is-open .nav-overlay__links a { opacity: 1; transform: none; }
+.nav-overlay.is-open .nav-overlay__links a:nth-child(1) { transition-delay: .08s; }
+.nav-overlay.is-open .nav-overlay__links a:nth-child(2) { transition-delay: .16s; }
+.nav-overlay.is-open .nav-overlay__links a:nth-child(3) { transition-delay: .24s; }
+.nav-overlay.is-open .nav-overlay__links a:nth-child(4) { transition-delay: .32s; }
+/* the page you're on reads coral, like the wordmark */
+.nav-overlay__links a[aria-current="page"] { color: var(--secondary); }
+.nav-overlay__foot {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  opacity: 0;
+  transition: opacity .4s ease .4s;
+}
+.nav-overlay.is-open .nav-overlay__foot { opacity: 1; }
+.nav-overlay__mail {
+  font-family: var(--font-grotesque);
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--inverse-on-surface);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.nav-overlay__social { display: flex; gap: var(--space-md); flex-wrap: wrap; }
+.nav-overlay__social a {
+  font-family: var(--font-grotesque);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--inverse-on-surface);
+  opacity: .8;
+  text-decoration: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-overlay,
+  .nav-overlay__links a,
+  .nav-overlay__foot { transition: none; }
 }
 
 @media (max-width: 720px) {
@@ -1948,3 +2016,160 @@ a.t-org:hover { color: var(--on-surface); }
 .cv-list { list-style: none; margin: 0; padding: 0; }
 .cv-list li { font-family: var(--font-grotesque); font-weight: 400; font-size: 12px; line-height: 18px; color: var(--on-surface-body); }
 .cv-list li .lvl { color: var(--on-surface-variant); white-space: nowrap; }
+
+/* ==========================================================================
+   MOBILE LAYER — Jess Hill-style editorial mobile (phones, ≤760px)
+   Everything below is additive and scoped to small viewports (plus a few
+   JS-driven hooks that stay inert on desktop), so the desktop layout is
+   untouched.
+   ========================================================================== */
+
+/* ---- Read-more clamps (script.js adds the classes on mobile only) ------ */
+.rm-toggle { display: none; }
+@media (max-width: 760px) {
+  /* Clamped paragraph: N lines then an ellipsis */
+  .m-clamp.is-clamped {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: var(--rm-lines, 4);
+    overflow: hidden;
+  }
+  /* Follow-up paragraphs hidden behind the same toggle */
+  .m-hide.is-collapsed { display: none; }
+  .rm-toggle {
+    display: inline-block;
+    align-self: flex-start;      /* stay left-aligned inside flex prose blocks */
+    text-align: left;
+    background: none;
+    border: none;
+    padding: 0;
+    margin-top: 8px;
+    font-family: var(--font-grotesque);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--primary);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    cursor: pointer;
+  }
+  /* toggles sitting on dark grounds read cream */
+  .hero--navy .rm-toggle,
+  .paper-card[data-paper="pheno"] .rm-toggle { color: var(--inverse-on-surface); }
+}
+
+/* ---- Scroll-reveal (mobile only; script.js observes) ------------------- */
+@media (max-width: 760px) and (prefers-reduced-motion: no-preference) {
+  .reveal-init {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity .55s ease, transform .55s ease;
+  }
+  .reveal-init.is-inview { opacity: 1; transform: none; }
+}
+
+/* ---- Carousel dots (script.js builds them; hidden on desktop) ---------- */
+.dots--auto { display: none; }
+@media (max-width: 760px) {
+  .dots--auto {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-top: var(--space-sm);
+  }
+  .dots--auto button {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: none;
+    border-radius: var(--radius-full);
+    background: rgba(46, 46, 56, 0.18);
+    cursor: pointer;
+    transition: background-color .2s ease, transform .2s ease;
+  }
+  .dots--auto button.is-active {
+    background: var(--primary);
+    transform: scale(1.25);
+  }
+}
+
+/* ---- Rhythm & type ------------------------------------------------------ */
+@media (max-width: 760px) {
+  /* Bands breathe, but not desktop-deep — pages read as a brisk stack */
+  .band { padding: var(--space-xl) 0; }
+  .section-split { gap: var(--space-sm); }
+  .section-eyebrow { font-size: 16px; line-height: 22px; }
+
+  .display-xl { font-size: clamp(40px, 11.5vw, 48px); }
+  .headline-lg { font-size: clamp(24px, 7.2vw, 30px); }
+
+  /* Accordion bodies: drop the desktop indent, keep the thumb-friendly head */
+  .accordion-body { padding-left: 0; }
+  .accordion-head { gap: var(--space-sm); }
+  .accordion-head .sign { width: 34px; height: 34px; }
+
+  /* Swipeable rows: one card per view with a peek of the next, no arrow
+     buttons — dots + thumb do the work (added by script.js) */
+  .carousel-controls { display: none; }
+  .h-card { flex: 0 0 84%; }
+
+  /* Detail pages: calmer inter-block gaps so stories feel continuous */
+  .detail-blocks { gap: var(--space-lg); }
+  .defense-playful .detail-blocks { gap: var(--space-lg); }
+  .hl-item + .hl-item { margin-top: var(--space-xl); }
+
+  /* Testimonials: keep the page from feeling wide; quotes swipe */
+  .testimonial { border-left-width: 4px; }
+
+  /* Contact form fields stack instead of squeezing side by side */
+  .field-row { flex-direction: column; gap: var(--space-md); }
+
+  /* Lightbox controls sized for thumbs, out of the photo's way */
+  .lightbox-prev, .lightbox-next { width: 44px; height: 44px; }
+  .lightbox-prev { left: 10px; }
+  .lightbox-next { right: 10px; }
+
+  /* Detail-page galleries: two slim columns beat one endless column */
+  .masonry { columns: 2; column-gap: var(--space-xs); }
+  .masonry img, .masonry video { margin-bottom: var(--space-xs); }
+}
+
+/* ---- Hero (About): title → full-bleed portrait → intro ----------------- */
+@media (max-width: 860px) {
+  .hero-layout { display: flex; flex-direction: column; }
+  .hero-main { display: contents; }        /* let title / text order around the photo */
+  .hero-main .display-xl { order: 1; }
+  .hero-layout .hero-portrait {
+    order: 2;
+    max-width: none;
+    margin-top: var(--space-md);
+    /* full-bleed: escape the container padding like a Jess Hill mobile hero */
+    margin-inline: calc(-1 * var(--page-pad));
+  }
+  .hero-layout .hero-portrait img { aspect-ratio: 4 / 5 !important; }
+  .hero-main .stack-md { order: 3; margin-top: var(--space-md); }
+}
+
+/* ---- Takeaway CV: collapse to the essentials behind one pill ----------- */
+.cv-toggle { display: none; }
+@media (max-width: 760px) {
+  .cv-shell.cv-collapsed .cv-grid > .cv-col:nth-child(2),
+  .cv-shell.cv-collapsed .cv-grid > .cv-col:nth-child(3) { display: none; }
+  .cv-toggle {
+    display: inline-flex;
+    margin-top: var(--space-md);
+  }
+}
+
+/* ---- Paper pile (INTERACT): folds into tap-to-open papers on mobile ---- */
+@media (max-width: 760px) {
+  .paper-stack.is-folded .paper-card:not(.is-open) .paper-body { display: none; }
+  .paper-stack.is-folded .paper-card:not(.is-open) { padding-bottom: clamp(20px, 3vw, 32px); }
+  .paper-stack.is-folded .paper-tab__hint {
+    display: inline-flex;
+    opacity: 1;
+  }
+  /* closed papers open downward (↓); the open one folds back up (↑, base) */
+  .paper-stack.is-folded .paper-card:not(.is-open) .paper-tab__hint::after { content: "\2193"; }
+}
