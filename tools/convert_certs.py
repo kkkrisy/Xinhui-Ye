@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Convert certificate PDFs into front/back JPGs for the Work page.
+"""Convert certificate PDFs into front/back JPGs.
 
 Drop the source PDFs into ./certs-src (or pass a folder as the first arg),
 then run:  python3 tools/convert_certs.py
-Outputs land in ./assets with the names work.html expects.
+Outputs land in ./assets as cert-*.jpg.
 """
 import sys
 from pathlib import Path
