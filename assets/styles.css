@@ -2206,6 +2206,9 @@ a.t-org:hover { color: var(--on-surface); }
 @media (max-width: 760px) {
   .cv-shell.cv-collapsed .cv-grid > .cv-col:nth-child(2),
   .cv-shell.cv-collapsed .cv-grid > .cv-col:nth-child(3) { display: none; }
+  /* One pill only on phones: hide the header Download, keep the card's
+     Download full CV (opens the PDF preview, which offers download). */
+  .cv-head .btn { display: none; }
   .cv-toggle {
     display: inline-flex;
     margin-top: var(--space-md);
