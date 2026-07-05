@@ -569,11 +569,12 @@ body.menu-open .nav-overlay__head { visibility: hidden; }
   .hero-portrait { order: -1; max-width: 360px; }
 }
 
-/* ---- Media (sharp-cornered, flat) ------------------------------------ */
+/* ---- Media (soft-rounded, flat) --------------------------------------- */
 .media,
 .media-placeholder {
   background: var(--surface-container-high);
-  border-radius: 0;             /* sharp corners — design.md */
+  border-radius: var(--radius-lg);   /* soft-rounded corners, site-wide */
+  overflow: hidden;
   width: 100%;
 }
 .media-placeholder {
@@ -587,7 +588,7 @@ body.menu-open .nav-overlay__head { visibility: hidden; }
   padding: var(--space-md);
   min-height: 200px;
 }
-.media img { border-radius: 0; }
+.media img { border-radius: var(--radius-lg); }
 
 .caption {
   margin-top: var(--space-xs);
@@ -743,6 +744,7 @@ body.menu-open .nav-overlay__head { visibility: hidden; }
   width: auto;
   max-width: 100%;
   display: block;
+  border-radius: var(--radius-lg);
 }
 
 @media (max-width: 860px) {
@@ -780,6 +782,7 @@ textarea.field { height: auto; min-height: 140px; resize: vertical; padding-top:
 .form-actions { margin-top: var(--space-lg); display: flex; justify-content: center; }
 .contact-success {
   border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-lg);
   padding: var(--space-lg);
   text-align: center;
 }
@@ -915,6 +918,7 @@ textarea.field { height: auto; min-height: 140px; resize: vertical; padding-top:
   backface-visibility: hidden;
   overflow: hidden;
   border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-lg);
   background: var(--surface-container-lowest);
 }
 .cert-flip__face img { width: 100%; height: 100%; object-fit: contain; display: block; }
@@ -953,6 +957,7 @@ textarea.field { height: auto; min-height: 140px; resize: vertical; padding-top:
 .cert-skills {
   grid-column: span 2;
   border: 1px solid var(--outline);
+  border-radius: var(--radius-lg);
   padding: var(--space-md);
   color: var(--on-surface-body);
 }
@@ -993,6 +998,7 @@ textarea.field { height: auto; min-height: 140px; resize: vertical; padding-top:
 }
 .detail-text {
   border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-lg);
   padding: var(--space-md);
   color: var(--on-surface-body);
 }
@@ -1016,9 +1022,6 @@ textarea.field { height: auto; min-height: 140px; resize: vertical; padding-top:
   max-width: 340px;
   width: 100%;
 }
-/* Square corners: override .photo-block/.defense-playful .media img rounding
-   (equal specificity but declared later) so the heatmap frame isn't clipped. */
-.pattern-block.photo-block .media img { border-radius: 0; }
 .pattern-block .block-desc { font-size: 17px; line-height: 28px; max-width: 500px; }
 @media (max-width: 760px) {
   .pattern-block,
@@ -1247,6 +1250,9 @@ a.t-org:hover { color: var(--on-surface); }
   color: var(--inverse-on-surface);
   border-color: var(--inverse-on-surface);
 }
+/* Navy READ pills sitting on the navy card use the lighter indigo fill so
+   they read against the field — same move as the footer back-to-top. */
+.paper-card[data-paper="pheno"] .btn--primary { background: var(--primary-container); }
 .paper-card .media img { border-radius: var(--radius-lg); }
 .paper-card .detail-text .title-serif { color: var(--primary); }
 .paper-card .detail-text p { color: var(--on-surface-body); }
@@ -1609,6 +1615,7 @@ a.t-org:hover { color: var(--on-surface); }
   position: absolute;
   inset: 0;
   overflow: hidden;
+  border-radius: var(--radius-lg);
 }
 .reveal-img {
   position: absolute;
@@ -1815,6 +1822,7 @@ a.t-org:hover { color: var(--on-surface); }
   margin: 0 0 var(--space-xs);
   break-inside: avoid;            /* don't split a photo across columns */
   background: var(--surface-container-high);
+  border-radius: var(--radius-lg);
   position: relative;
 }
 .thumb img,
@@ -1896,6 +1904,7 @@ a.t-org:hover { color: var(--on-surface); }
   max-height: 86vh;
   object-fit: contain;
   display: block;
+  border-radius: var(--radius-lg);
 }
 .lightbox-close,
 .lightbox-prev,
@@ -1925,6 +1934,7 @@ a.t-org:hover { color: var(--on-surface); }
   height: auto;
   break-inside: avoid;
   margin-bottom: var(--space-md);
+  border-radius: var(--radius-lg);
 }
 
 /* ---- Takeaway CV (About) --------------------------------------------- */
@@ -1947,7 +1957,7 @@ a.t-org:hover { color: var(--on-surface); }
 }
 .cv-head .section-eyebrow { display: block; }
 /* Thin bordered frame around the whole CV block */
-.cv-frame { border: 1px solid var(--outline); padding: clamp(32px, 4.5vw, 56px); }
+.cv-frame { border: 1px solid var(--outline); border-radius: var(--radius-lg); padding: clamp(32px, 4.5vw, 56px); }
 @media (max-width: 560px) { .cv-frame { padding: var(--space-md); } }
 /* Download pill: navy at rest, mint on hover — same accent as back-to-top.
    Hover only where a real pointer hovers; on touch, :hover would latch onto
@@ -2009,7 +2019,7 @@ a.t-org:hover { color: var(--on-surface); }
   color: var(--secondary);
   margin: 5px 0 var(--space-sm);
 }
-.cv-portrait { width: 100%; height: auto; max-width: 180px; display: block; margin-bottom: var(--space-sm); }
+.cv-portrait { width: 100%; height: auto; max-width: 180px; display: block; margin-bottom: var(--space-sm); border-radius: var(--radius-lg); }
 .cv-bio {
   font-family: var(--font-grotesque);
   font-weight: 400;
