@@ -67,15 +67,37 @@
             <p>The reception was at Hubble, and I was so grateful to celebrate with the committee, my family, colleagues, and friends. People call the PhD a lonely journey. I was fortunate to have someone at every turn. That day held more emotions than I knew what to do with: nerves, excitement, relief, joy, and at the very end, a small quiet wonder about what comes next.</p>
           </div>
 
-          <!-- Photo — the thesis book + abstract + book details (before the framework) -->
+          <!-- Photo — the thesis book + abstract (before the framework).
+               The cover is a flip card: click / tap it to read the chapter
+               list on the back. Same interaction on every screen size. -->
           <div class="photo-block photo-block--reverse">
-            <div class="media"><img src="assets/thesis-cover.jpg" alt="Cover of the thesis, Co-Exploration in Remote Design Collaboration" style="width:100%; height:auto; display:block;" /></div>
+            <div class="media">
+              <div class="book-flip" role="button" tabindex="0" aria-label="Flip the cover to see what's inside the book">
+                <div class="book-flip__inner">
+                  <div class="book-flip__front">
+                    <img src="assets/thesis-cover.jpg" alt="Cover of the thesis, Co-Exploration in Remote Design Collaboration" style="width:100%; height:auto; display:block;" />
+                    <span class="book-flip__hint">Book details</span>
+                  </div>
+                  <div class="book-flip__back">
+                    <span class="label-caps">Inside the book</span>
+                    <ol>
+                      <li>Introduction</li>
+                      <li>Visions and Real-World Experiences</li>
+                      <li>Limitations of Current Tools</li>
+                      <li>Understanding and Defining Co-Exploration</li>
+                      <li>Guidelines for Improving Remote Co-Exploration</li>
+                      <li>Conclusion and Reflection</li>
+                    </ol>
+                    <span class="book-flip__hint">Flip back</span>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="block-copy">
               <h2 class="block-title">The thesis book.</h2>
               <p class="block-desc">The book pulls together four studies into one argument: that supporting collaborative design is less about any one tool and more about creating the right conditions for co-exploration to happen. I designed the cover and illustrated all of its content myself.</p>
               <p class="block-desc" style="margin-top: var(--space-md);">This dissertation investigates co-exploration, an emergent, situated experience that unfolds within design teams during collaboration. Co-exploration is best understood not as a prescribed activity, but as an emergent shared experience that arises from the quality of team interaction. Its principal value lies in transforming individual knowledge into collective intelligence, enabling teams to achieve outcomes beyond the sum of their individual contributions.</p>
               <p class="utility-row" style="margin-top: var(--space-md);">
-                <button class="btn btn--outline" data-book-open>Book details</button>
                 <a class="btn btn--outline" href="https://research.tue.nl/en/publications/co-exploration-in-remote-design-collaboration/" target="_blank" rel="noopener">Read the thesis</a>
               </p>
             </div>
@@ -184,52 +206,6 @@
       </div>
     </section>
   </main>
-
-  <!-- Book details modal -->
-  <div class="book-modal" data-book-modal aria-hidden="true" role="dialog" aria-modal="true" aria-label="Thesis book details">
-    <button class="book-modal-close" data-book-close aria-label="Close">&times;</button>
-    <div class="book-modal-panel">
-      <div class="book-modal-grid">
-        <div class="book-modal-cover">
-          <div class="media"><img src="assets/thesis-cover.jpg" alt="Cover of the thesis, Co-Exploration in Remote Design Collaboration" style="width:100%; display:block;" /></div>
-        </div>
-        <div class="book-chapters">
-          <span class="label-caps">Inside the book</span>
-
-          <div class="book-chapter">
-            <p class="title-serif">Chapter 1 — Introduction</p>
-            <p>This chapter sets up the core question of how tools can better support remote design collaboration, and traces how the research scope narrowed to the prototyping process, where tacit and experiential knowledge is hardest to transfer remotely.</p>
-          </div>
-
-          <div class="book-chapter">
-            <p class="title-serif">Chapter 2 — Visions and Real-World Experiences</p>
-            <p>Two studies open the inquiry. In the first, design students and professionals imagined future remote prototyping tools. The second landed in the middle of COVID-19, when remote collaboration stopped being hypothetical. Designers described losing something they called "building on each other's ideas." That loss became the thread the rest of the thesis follows.</p>
-          </div>
-
-          <div class="book-chapter">
-            <p class="title-serif">Chapter 3 — Limitations of Current Tools</p>
-            <p>A systematic review revealed two dominant approaches: tools that sync digital and physical prototypes, and tools that let one person guide another remotely. Neither supports the parallel, bidirectional engagement where everyone explores at once. Two constructive design studies tested potential solutions but stayed limited to early-stage tasks.</p>
-          </div>
-
-          <div class="book-chapter">
-            <p class="title-serif">Chapter 4 — Understanding and Defining Co-Exploration</p>
-            <p>The core study. Sixteen design teams observed over five months, generating over 1,500 documented activities. From those, 161 instances of co-exploration were identified and analysed in three sequential passes, resulting in a four-dimensional analytical framework and five co-exploration patterns. Teams that co-explored more often tended to have healthier, more creative collaborative processes.</p>
-          </div>
-
-          <div class="book-chapter">
-            <p class="title-serif">Chapter 5 — Guidelines for Improving Remote Co-Exploration</p>
-            <p>Eight professional designers confirmed that the five patterns persist in remote settings but are regularly blocked by reduced social interaction and delayed discussions. Interviews and ideation sessions translated the research into the DTC guideline — structured, practical advice for anyone building tools to support remote design teams.</p>
-          </div>
-
-          <div class="book-chapter">
-            <p class="title-serif">Chapter 6 — Conclusion and Reflection</p>
-            <p>The thesis pulls the four research phases together, discusses contributions and limitations, and looks forward. Testing the DTC guideline across different cultural and professional contexts remains open. The chapter ends with the questions this research leaves for whoever picks up the thread next.</p>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
 
   <footer class="site-footer">
     <div class="container">

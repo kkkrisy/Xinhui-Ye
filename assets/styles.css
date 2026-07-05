@@ -1912,59 +1912,6 @@ a.t-org:hover { color: var(--on-surface); }
 .lightbox-next:hover,
 .lightbox-close:hover { background: rgba(255,255,255,.28); }
 
-/* ---- Book details modal (Defense Day) -------------------------------- */
-.book-modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(20, 18, 16, 0.92);
-  display: none;
-  z-index: 1000;
-  overflow-y: auto;
-  padding: 64px 20px;
-}
-.book-modal.is-open { display: block; }
-.book-modal-panel {
-  max-width: 980px;
-  margin: 0 auto;
-  background: var(--surface);
-  padding: var(--space-lg);
-}
-.book-modal-grid {
-  display: grid;
-  grid-template-columns: 300px 1fr;
-  gap: var(--space-lg);
-  align-items: start;
-}
-.book-modal-cover { position: static; }
-.book-modal-cover .media img { width: 100%; display: block; }
-.book-chapters > .label-caps { display: block; margin-bottom: var(--space-md); }
-.book-chapter + .book-chapter { margin-top: var(--space-md); }
-.book-chapter .title-serif { margin-bottom: var(--space-xs); }
-.book-chapter p:not(.title-serif) { color: var(--on-surface-body); margin: 0; }
-.book-modal-close {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background: rgba(255, 255, 255, .14);
-  color: #fff;
-  border: 0;
-  width: 52px;
-  height: 52px;
-  font-size: 28px;
-  line-height: 1;
-  cursor: pointer;
-  border-radius: var(--radius-full);
-  backdrop-filter: blur(4px);
-  z-index: 1001;
-}
-.book-modal-close:hover { background: rgba(255, 255, 255, .28); }
-@media (max-width: 760px) {
-  .book-modal { padding: 56px 12px; }
-  .book-modal-panel { padding: var(--space-md); }
-  .book-modal-grid { grid-template-columns: 1fr; }
-  .book-modal-cover { position: static; max-width: 260px; }
-}
-
 /* ---- Detail-page image gallery (masonry of real images) -------------- */
 .masonry img,
 .masonry video {
@@ -2363,77 +2310,78 @@ a.t-org:hover { color: var(--on-surface); }
   }
 }
 
-/* ---- Thesis book (phones): tap the cover to flip to the chapter list ---
-   Replaces the Book details button + modal on small screens; the only
-   pill left is Read the thesis. Desktop keeps the button + modal. */
-.book-flip__back,
-.book-flip__hint { display: none; }
-@media (max-width: 760px) {
-  [data-book-open] { display: none; }
-  .book-flip {
-    position: relative;
-    perspective: 1200px;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .book-flip:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
-  .book-flip__inner {
-    position: relative;
-    transform-style: preserve-3d;
-    transition: transform .7s cubic-bezier(0.4, 0.1, 0.2, 1);
-  }
-  .book-flip.is-flipped .book-flip__inner { transform: rotateY(180deg); }
-  .book-flip__front {
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-  }
-  .book-flip__back {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    position: absolute;
-    inset: 0;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    transform: rotateY(180deg);
-    background: var(--inverse-surface);
-    color: var(--inverse-on-surface);
-    border-radius: var(--radius-lg);
-    padding: var(--space-md);
-    overflow: auto;
-  }
-  .book-flip__back .label-caps { color: var(--secondary); margin-bottom: 4px; }
-  .book-flip__back ol {
-    margin: 0;
-    padding: 0 0 0 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-    font-family: var(--font-grotesque);
-    font-size: 13.5px;
-    line-height: 1.35;
-    font-weight: 600;
-  }
-  .book-flip__hint {
-    display: inline-flex;
-    align-items: center;
-    position: absolute;
-    right: 10px;
-    bottom: 10px;
-    z-index: 2;
-    padding: 5px 12px;
-    border-radius: var(--radius-full);
-    background: var(--surface);
-    color: var(--primary);
-    font-family: var(--font-grotesque);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    pointer-events: none;
-  }
-  .book-flip.is-flipped .book-flip__front .book-flip__hint { visibility: hidden; }
-  @media (prefers-reduced-motion: reduce) {
-    .book-flip__inner { transition: none; }
-  }
+/* ---- Thesis book: click / tap the cover to flip to the chapter list ---
+   The same flip card on every screen size; the only pill next to the
+   abstract is Read the thesis. */
+.book-flip {
+  position: relative;
+  perspective: 1200px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.book-flip:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
+.book-flip__inner {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform .7s cubic-bezier(0.4, 0.1, 0.2, 1);
+}
+.book-flip.is-flipped .book-flip__inner { transform: rotateY(180deg); }
+.book-flip__front {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+.book-flip__back {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: absolute;
+  inset: 0;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: rotateY(180deg);
+  background: var(--inverse-surface);
+  color: var(--inverse-on-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  overflow: auto;
+}
+.book-flip__back .label-caps { color: var(--secondary); margin-bottom: 4px; }
+.book-flip__back ol {
+  margin: 0;
+  padding: 0 0 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  font-family: var(--font-grotesque);
+  font-size: 13.5px;
+  line-height: 1.35;
+  font-weight: 600;
+}
+.book-flip__hint {
+  display: inline-flex;
+  align-items: center;
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  z-index: 2;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  background: var(--surface);
+  color: var(--primary);
+  font-family: var(--font-grotesque);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+.book-flip.is-flipped .book-flip__front .book-flip__hint { visibility: hidden; }
+/* Larger screens: the cover is bigger, so let the chapter list breathe. */
+@media (min-width: 761px) {
+  .book-flip__back { padding: var(--space-lg); gap: 12px; }
+  .book-flip__back .label-caps { margin-bottom: 8px; }
+  .book-flip__back ol { gap: 14px; font-size: 17px; line-height: 1.4; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .book-flip__inner { transition: none; }
 }

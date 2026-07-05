@@ -324,65 +324,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  /* ---- Book details modal (Defense Day) ----------------------------- */
-  const bookModal = document.querySelector("[data-book-modal]");
-  const bookOpen = document.querySelector("[data-book-open]");
-  if (bookModal && bookOpen) {
-    const setBook = (open) => {
-      bookModal.classList.toggle("is-open", open);
-      bookModal.setAttribute("aria-hidden", open ? "false" : "true");
-      document.body.style.overflow = open ? "hidden" : "";
-    };
-    bookOpen.addEventListener("click", () => setBook(true));
-    bookModal
-      .querySelector("[data-book-close]")
-      .addEventListener("click", () => setBook(false));
-    bookModal.addEventListener("click", (e) => {
-      if (e.target === bookModal) setBook(false);
+  /* ---- Thesis book flip (Defense page) -------------------------------
+     Click / tap the cover (or Enter / Space) to flip it over and read the
+     chapter list; flipping again returns to the front. Same interaction
+     on every screen size. */
+  document.querySelectorAll(".book-flip").forEach((flip) => {
+    const toggleFlip = () => flip.classList.toggle("is-flipped");
+    flip.addEventListener("click", toggleFlip);
+    flip.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggleFlip(); }
     });
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && bookModal.classList.contains("is-open"))
-        setBook(false);
-    });
-  }
-
-  /* ---- Thesis book flip (phones, Defense page) -----------------------
-     On phones the Book details button + modal give way to something more
-     playful: tap the cover to flip it over and read the chapter list.
-     Desktop keeps the button + modal; there the flip markup renders as a
-     plain cover image. */
-  const bookBtn = document.querySelector("[data-book-open]");
-  const bookBlock = bookBtn && bookBtn.closest(".photo-block");
-  if (bookBlock) {
-    const media = bookBlock.querySelector(".media");
-    const cover = media && media.querySelector("img");
-    const chapters = Array.from(
-      document.querySelectorAll("[data-book-modal] .book-chapter .title-serif")
-    ).map((t) => t.textContent.trim().replace(/^Chapter \d+\s*—\s*/, ""));
-    if (cover && chapters.length) {
-      const flip = document.createElement("div");
-      flip.className = "book-flip";
-      flip.setAttribute("role", "button");
-      flip.setAttribute("tabindex", "0");
-      flip.setAttribute("aria-label", "Flip the cover to see what's inside the book");
-      flip.innerHTML =
-        '<div class="book-flip__inner">' +
-        '<div class="book-flip__front"><span class="book-flip__hint">Book details</span></div>' +
-        '<div class="book-flip__back">' +
-        '<span class="label-caps">Inside the book</span>' +
-        "<ol>" + chapters.map((c) => "<li>" + c + "</li>").join("") + "</ol>" +
-        '<span class="book-flip__hint">Tap to flip back</span>' +
-        "</div></div>";
-      const front = flip.querySelector(".book-flip__front");
-      front.insertBefore(cover, front.firstChild);
-      media.appendChild(flip);
-      const toggleFlip = () => flip.classList.toggle("is-flipped");
-      flip.addEventListener("click", toggleFlip);
-      flip.addEventListener("keydown", (e) => {
-        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggleFlip(); }
-      });
-    }
-  }
+  });
 
   /* ---- Paper pile (INTERACT two-talks page) -------------------------
      Two paper cards piled up: one open, the other a peeking tab behind it.
@@ -505,7 +457,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // intros: Background, Research Objectives) always show in full.
     const HEADING = ".title-serif, .block-title, h1, h2, h3";
     document
-      .querySelectorAll(".detail-text, .block-copy, .book-chapter, .deck-col")
+      .querySelectorAll(".detail-text, .block-copy, .deck-col")
       .forEach((block) => {
         if (block.closest(".reveal-copy, .accordion-body")) return; // their own UX
         if (block.hasAttribute("data-no-clamp") || block.closest("[data-no-clamp]")) return;
