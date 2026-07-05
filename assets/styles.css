@@ -1260,6 +1260,25 @@ a.t-org:hover { color: var(--on-surface); }
 .paper-card .detail-text .title-serif { color: var(--primary); }
 .paper-card .detail-text p { color: var(--on-surface-body); }
 
+/* Pheno lead: the presentation photo and the reflection copy. On desktop the
+   photo floats so the heading, intro and both movements paragraphs read as one
+   continuous column that wraps beside the photo and then flows full width —
+   no dead space under the short intro. Phones stack it (see below). */
+.pheno-lead::after { content: ""; display: block; clear: both; }
+@media (min-width: 761px) {
+  .pheno-lead__img {
+    float: left;
+    width: 52%;
+    margin: 4px var(--space-lg) var(--space-sm) 0;
+  }
+  .pheno-lead .detail-text + .detail-text { margin-top: var(--space-md); }
+}
+@media (max-width: 760px) {
+  /* Stacked: give the photo room before the heading; blocks flow with their
+     natural paragraph rhythm. */
+  .pheno-lead__img { margin-bottom: var(--space-md); }
+}
+
 /* Tab / header — the always-visible handle for each paper */
 .paper-tab {
   display: flex;
