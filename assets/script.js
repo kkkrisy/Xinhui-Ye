@@ -85,6 +85,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const d = Math.abs(item.offsetLeft - track.offsetLeft - track.scrollLeft);
         if (d < best) { best = d; nearest = n; }
       });
+      // scrolled to the end → the last item is the one in view, even if it
+      // couldn't travel all the way to the snap point
+      const maxScroll = track.scrollWidth - track.clientWidth;
+      if (maxScroll > 0 && track.scrollLeft >= maxScroll - 2) nearest = items.length - 1;
       buttons.forEach((b, n) => b.classList.toggle("is-active", n === nearest));
     };
     track.addEventListener("scroll", () => {
@@ -484,25 +488,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Multi-paragraph prose blocks: intro stories, photo captions, chapters.
     // Everything up to the first body paragraph stays (headings, eyebrows);
-    // the first paragraph clamps and the rest folds behind one toggle.
-    // Button rows always stay visible so calls to action never disappear.
+    // the first paragraph clamps and everything after it — including button
+    // rows like "Read the paper" — folds behind one toggle, so the buttons
+    // appear only with the full text. Blocks marked data-no-clamp (page
+    // intros: Background, Research Objectives) always show in full.
     const HEADING = ".title-serif, .block-title, h1, h2, h3";
-    const ALWAYS = ".utility-row, .rm-toggle";
     document
       .querySelectorAll(".detail-text, .hero-layout .stack-md, .block-copy, .book-chapter, .deck-col")
       .forEach((block) => {
         if (block.closest(".reveal-copy, .accordion-body")) return; // their own UX
+        if (block.hasAttribute("data-no-clamp") || block.closest("[data-no-clamp]")) return;
         const children = Array.from(block.children);
         const first = children.find(
           (el) =>
-            !el.matches(HEADING) && !el.matches(ALWAYS) &&
+            !el.matches(HEADING) && !el.matches(".utility-row, .rm-toggle") &&
             !el.querySelector(".btn") &&
             (el.textContent || "").trim().length > 0
         );
         if (!first) return;
         const rest = children
           .slice(children.indexOf(first) + 1)
-          .filter((el) => !el.matches(ALWAYS) && !el.querySelector(".btn"));
+          .filter((el) => !el.matches(".rm-toggle"));
         const total = [first, ...rest].reduce(
           (n, el) => n + (el.textContent || "").trim().length, 0
         );
@@ -512,7 +518,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Standalone long paragraphs
     document
-      .querySelectorAll(".recent-item > p, .contact-note__text")
+      .querySelectorAll(".contact-note__text")
       .forEach((p) => collapseGroup(p, [], 4));
 
     // Highlights teasers: clamp only — the pill below IS the read-more.
