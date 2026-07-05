@@ -19,9 +19,20 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!overlay) return;
     overlay.classList.toggle("is-open", open);
     overlay.setAttribute("aria-hidden", open ? "false" : "true");
+    document.body.classList.toggle("menu-open", open);
     document.body.style.overflow = open ? "hidden" : "";
+    if (openBtn) {
+      openBtn.setAttribute("aria-expanded", open ? "true" : "false");
+      openBtn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    }
   };
-  openBtn && openBtn.addEventListener("click", () => setMenu(true));
+  /* One pill does both: it stays on top of the overlay and morphs
+     (dashes → cross), so clicking it again closes the menu. */
+  openBtn && openBtn.setAttribute("aria-expanded", "false");
+  openBtn &&
+    openBtn.addEventListener("click", () =>
+      setMenu(!overlay.classList.contains("is-open"))
+    );
   closeBtn && closeBtn.addEventListener("click", () => setMenu(false));
   overlay &&
     overlay.querySelectorAll("a").forEach((a) =>
