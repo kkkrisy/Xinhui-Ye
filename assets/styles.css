@@ -325,16 +325,19 @@ a { color: inherit; }
   color: var(--tertiary);
 }
 
-/* Mint MENU pill (mobile) — the single mint accent, design.md */
+/* MENU pill (mobile) — Jess Hill style: navy pill with hamburger dashes in
+   the bar; the overlay's close pill flips to mint with a cross. */
 .menu-toggle {
   display: none;
   pointer-events: auto;
+  align-items: center;
+  gap: 10px;
   height: 40px;
   padding: 0 20px;
-  border: none;
+  border: 1px solid var(--inverse-on-surface); /* invisible on cream, outlines the pill on navy bands */
   border-radius: var(--radius-full);
-  background: var(--tertiary);
-  color: var(--on-tertiary);
+  background: var(--primary);
+  color: var(--inverse-on-surface);
   font-family: var(--font-grotesque);
   font-weight: 700;
   font-size: 13px;
@@ -342,6 +345,42 @@ a { color: inherit; }
   text-transform: uppercase;
   cursor: pointer;
 }
+/* Overlay close pill: the single mint accent */
+.menu-toggle.menu-close {
+  background: var(--tertiary);
+  color: var(--on-tertiary);
+  border-color: var(--tertiary);
+}
+/* Hamburger: three dashes drawn from one bar + shadows */
+.menu-icon {
+  position: relative;
+  width: 18px;
+  height: 2px;
+  border-radius: 1px;
+  background: currentColor;
+  box-shadow: 0 -5px 0 currentColor, 0 5px 0 currentColor;
+}
+/* Cross: the dashes fold into an ✕ on the open pill */
+.menu-icon--x {
+  height: 14px;
+  width: 16px;
+  background: transparent;
+  box-shadow: none;
+}
+.menu-icon--x::before,
+.menu-icon--x::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin-top: -1px;
+  width: 100%;
+  height: 2px;
+  border-radius: 1px;
+  background: currentColor;
+}
+.menu-icon--x::before { transform: rotate(45deg); }
+.menu-icon--x::after { transform: rotate(-45deg); }
 
 /* Full-screen indigo overlay menu (mobile) — Jess Hill style: brand top-left,
    oversized staggered links in the middle, email + socials at the foot.
@@ -382,13 +421,16 @@ a { color: inherit; }
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: var(--space-md);
+  justify-content: flex-start;
+  gap: 0;
+  margin-top: var(--space-lg);
 }
 .nav-overlay__links a {
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(255, 239, 214, 0.25);  /* hairline dividers */
   font-family: var(--font-grotesque);
   font-weight: 700;
-  font-size: clamp(34px, 9vw, 44px);
+  font-size: clamp(30px, 8vw, 38px);
   line-height: 1.2;
   letter-spacing: -0.01em;
   text-decoration: none;
@@ -440,8 +482,12 @@ a { color: inherit; }
 
 @media (max-width: 720px) {
   .nav-pill .nav-links { display: none; }
-  .menu-toggle { display: inline-flex; align-items: center; }
-  .nav-pill { gap: 16px; }
+  .menu-toggle { display: inline-flex; }
+  /* No cream pill around the button on phones — the wordmark sits on the
+     left and the MENU pill alone on the right, like the reference site. */
+  .site-nav { justify-content: flex-end; }
+  .nav-pill { gap: 0; background: transparent; padding: 0; }
+  .site-nav.is-scrolled .nav-pill { box-shadow: none; }
 }
 
 /* ---- Hero ------------------------------------------------------------ */
@@ -2172,4 +2218,165 @@ a.t-org:hover { color: var(--on-surface); }
   }
   /* closed papers open downward (↓); the open one folds back up (↑, base) */
   .paper-stack.is-folded .paper-card:not(.is-open) .paper-tab__hint::after { content: "\2193"; }
+}
+
+/* ---- Mobile type scale: titles keep their punch, reading copy steps down */
+@media (max-width: 760px) {
+  body { font-size: 15px; line-height: 25px; }
+  .body-lg,
+  .hero-layout .stack-md .body-lg { font-size: 16px; line-height: 26px; }
+  .body-md,
+  .hero-layout .stack-md .body-md { font-size: 15px; line-height: 25px; }
+  .block-desc,
+  .pattern-block .block-desc,
+  .defense-playful .detail-prose .block-desc,
+  .defense-playful .detail-blocks > .photo-block .block-desc,
+  .defense-playful .detail-blocks > .detail-prose .block-desc { font-size: 15px; line-height: 24px; }
+  .accordion-head { font-size: 15px; }
+  .accordion-tags { font-size: 13px; line-height: 21px; }
+  .recent-item p { font-size: 15px; line-height: 25px; }
+  .testimonial blockquote { font-size: 16px; }
+  .contact-note__text { font-size: 15px; line-height: 25px; }
+}
+
+/* ---- Craft (phones): each craft becomes a swipeable gallery row --------
+   Instead of a bumpy two-column masonry, every group turns into one clean
+   horizontal reel — uniform portrait frames, snap scrolling, dots below
+   (script.js builds them). Tap any photo for the full, uncropped lightbox. */
+@media (max-width: 760px) {
+  .thumb-grid {
+    display: flex;
+    gap: var(--space-xs);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+  .thumb-grid::-webkit-scrollbar { display: none; }
+  .thumb-grid .thumb {
+    flex: 0 0 74%;
+    margin: 0;
+    scroll-snap-align: start;
+    aspect-ratio: 4 / 5;
+  }
+  .thumb-grid .thumb img,
+  .thumb-grid .thumb video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .gallery-group { margin-bottom: var(--space-xl); }
+  .gallery-group > h2 { font-size: 15px; margin-bottom: var(--space-sm); }
+}
+
+/* ---- Testimonials (phones): compact quotes, two in view ---------------- */
+@media (max-width: 760px) {
+  .t-carousel { gap: var(--space-sm); }
+  .testimonial { flex: 0 0 62%; padding: var(--space-xs) 0 var(--space-xs) var(--space-sm); }
+  .testimonial blockquote { font-size: 14px; line-height: 1.5; }
+  .t-cite { margin-top: var(--space-sm); }
+  .t-name, .t-org { font-size: 11px; letter-spacing: 0.04em; }
+}
+
+/* ---- Longitudinal reels (phones): data-collection cards and the five
+   patterns swipe sideways instead of stacking into a huge page.
+   script.js wraps the pattern blocks in .pattern-reel; on desktop that
+   wrapper is display:contents so the layout is exactly as before. -------- */
+.pattern-reel { display: contents; }
+@media (max-width: 760px) {
+  .deck-stage,
+  .pattern-reel {
+    display: flex;
+    gap: var(--space-sm);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+  .deck-stage::-webkit-scrollbar,
+  .pattern-reel::-webkit-scrollbar { display: none; }
+  .deck-stage .deck-card {
+    flex: 0 0 86%;
+    scroll-snap-align: start;
+    margin-bottom: 0;
+    padding: var(--space-md);
+  }
+  .pattern-reel .pattern-block {
+    flex: 0 0 86%;
+    scroll-snap-align: start;
+    align-content: start;
+  }
+}
+
+/* ---- Thesis book (phones): tap the cover to flip to the chapter list ---
+   Replaces the Book details button + modal on small screens; the only
+   pill left is Read the thesis. Desktop keeps the button + modal. */
+.book-flip__back,
+.book-flip__hint { display: none; }
+@media (max-width: 760px) {
+  [data-book-open] { display: none; }
+  .book-flip {
+    position: relative;
+    perspective: 1200px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .book-flip:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
+  .book-flip__inner {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform .7s cubic-bezier(0.4, 0.1, 0.2, 1);
+  }
+  .book-flip.is-flipped .book-flip__inner { transform: rotateY(180deg); }
+  .book-flip__front {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+  .book-flip__back {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: absolute;
+    inset: 0;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: rotateY(180deg);
+    background: var(--inverse-surface);
+    color: var(--inverse-on-surface);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md);
+    overflow: auto;
+  }
+  .book-flip__back .label-caps { color: var(--secondary); margin-bottom: 4px; }
+  .book-flip__back ol {
+    margin: 0;
+    padding: 0 0 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    font-family: var(--font-grotesque);
+    font-size: 13.5px;
+    line-height: 1.35;
+    font-weight: 600;
+  }
+  .book-flip__hint {
+    display: inline-flex;
+    align-items: center;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    z-index: 2;
+    padding: 5px 12px;
+    border-radius: var(--radius-full);
+    background: var(--surface);
+    color: var(--primary);
+    font-family: var(--font-grotesque);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    pointer-events: none;
+  }
+  .book-flip.is-flipped .book-flip__front .book-flip__hint { visibility: hidden; }
+  @media (prefers-reduced-motion: reduce) {
+    .book-flip__inner { transition: none; }
+  }
 }
