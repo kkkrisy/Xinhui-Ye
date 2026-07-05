@@ -156,7 +156,7 @@ components:
     padding: 8px 0
   card-media:
     backgroundColor: "{colors.surface-container-high}"
-    rounded: "0px"
+    rounded: "{rounded.lg}"
   hero-panel-dark:
     backgroundColor: "{colors.inverse-surface}"
     textColor: "{colors.inverse-on-surface}"
@@ -228,11 +228,11 @@ This system is intentionally **flat**. There is effectively no drop-shadow langu
 
 ## Shapes
 
-Two shape registers only: **fully round interactive elements** and **sharp-cornered media/structure**.
+Two shape registers only: **fully round interactive elements** and **soft-rounded media/structure**.
 
 - **Pills (`rounded.full`):** Every button, toggle and control is a full pill — primary CTAs, outline buttons, the MENU pill, the contact radio pills, Back to Top. This is the dominant shape motif.
-- **Sharp media (`0px`):** Images, video thumbnails, the book cover and full-bleed panels use square corners. Keep photography and structural panels hard-edged.
-- **Small radii (`sm`/`md`/`lg`):** Defined for incidental surfaces but rarely seen in source; prefer pill-or-square before using an intermediate radius.
+- **Soft-rounded media (`rounded.lg`, 16px):** Images, video thumbnails, the book cover, and bordered frames (detail-text boxes, the CV frame, certificate faces) all share the same 16px corner radius. Full-bleed color bands stay hard-edged.
+- **Small radii (`sm`/`md`):** Defined for incidental surfaces but rarely seen in source; prefer pill-or-`lg` before other radii.
 
 ## Components
 
@@ -254,7 +254,7 @@ Inputs are **underline-only** fields — transparent background, single bottom b
 
 ### Media & Cards
 
-Images are sharp-cornered and flat (`card-media`), captioned beneath in `on-surface-variant` with a small uppercase date stamp. Galleries scroll horizontally with circular arrow controls.
+Images are soft-rounded (`card-media`, 16px) and flat, captioned beneath in `on-surface-variant` with a small uppercase date stamp. Galleries scroll horizontally with circular arrow controls.
 
 ### Recurring Brand Block
 
@@ -266,14 +266,14 @@ The "How Do You Smash a Ghost?" Substack block is a fixed motif: indigo ground, 
 - Do build pages as full-bleed color bands, alternating cream, peach and indigo to chunk long content.
 - Do pair bold-grotesque display headings with serif body copy — the sans/serif contrast is the core of the identity.
 - Do reserve coral (`#FC9073`) for the wordmark and the Substack prompt; treat it as a signal, not a utility color.
-- Do make every interactive control a full pill, and keep all imagery sharp-cornered.
+- Do make every interactive control a full pill, and give all imagery and bordered frames the same 16px (`rounded.lg`) corners.
 - Do use the far-left uppercase eyebrow label above each section's heading.
 - Do separate list rows with 1px `#F2F1ED` hairlines rather than cards.
 
 **Don't**
 - Don't add drop shadows, glows or raised cards — depth is color-blocking, not elevation.
 - Don't use coral as a button fill or spread it across general UI; don't pair white text on coral.
-- Don't round image corners or square off buttons — that inverts the shape system.
+- Don't square off images or buttons, and don't mix corner radii on media — every image and frame shares the one 16px radius.
 - Don't introduce a third type family or rely on many intermediate weights; let scale and sans/serif carry hierarchy.
 - Don't place the lighter indigo (`#3E3F7F`) buttons on light grounds — they're for use inside dark indigo bands; use solid `primary` on light grounds.
 - Don't add more than one mint accent per screen.
@@ -287,5 +287,5 @@ When generating UI in this system:
 3. **Match text color to ground.** On light grounds use `on-surface` (`#2E2E38`) headings and `on-surface-body` (`#45454D`) paragraphs; on indigo use cream (`#FFEFD6`).
 4. **Buttons are pills.** Solid `primary` on light grounds, `primary-container` when inside indigo, outline pills for secondary actions. Uppercase, letter-spaced labels.
 5. **Spend accents carefully.** Coral only for the wordmark / Substack headline; mint only for the menu pill. Everything else is indigo, cream, peach and greys.
-6. **Stay flat.** No shadows. Separate with color bands or `#F2F1ED` hairlines. Keep all photography square-cornered.
+6. **Stay flat.** No shadows. Separate with color bands or `#F2F1ED` hairlines. Give all photography the shared 16px corner radius.
 7. **Verify before shipping:** confirm the two font families and exact type sizes on the live site, and confirm the coral token (`#FC9073` vs `#FF9574`) — these are marked uncertain.
