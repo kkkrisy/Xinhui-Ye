@@ -344,6 +344,7 @@ a { color: inherit; }
   letter-spacing: 0.06em;
   text-transform: uppercase;
   cursor: pointer;
+  transition: background-color .3s ease, color .3s ease, border-color .3s ease;
 }
 /* Overlay close pill: the single mint accent */
 .menu-toggle.menu-close {
@@ -351,14 +352,44 @@ a { color: inherit; }
   color: var(--on-tertiary);
   border-color: var(--tertiary);
 }
-/* Hamburger: three dashes drawn from one bar + shadows */
+/* Open menu: the bar pill itself turns mint (it stays visible above the
+   overlay and morphs into the close button). */
+.menu-open .menu-toggle[data-menu-open] {
+  background: var(--tertiary);
+  color: var(--on-tertiary);
+  border-color: var(--tertiary);
+}
+/* Hamburger: middle dash is the span, upper/lower dashes are its pseudos,
+   so each can animate on its own when the pill flips to a cross. */
 .menu-icon {
   position: relative;
   width: 18px;
   height: 2px;
   border-radius: 1px;
   background: currentColor;
-  box-shadow: 0 -5px 0 currentColor, 0 5px 0 currentColor;
+  transition: transform .3s ease;
+}
+.menu-icon::before,
+.menu-icon::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 1px;
+  background: currentColor;
+  transition: transform .3s ease, opacity .3s ease;
+}
+.menu-icon::before { transform: translateY(-5px); }
+.menu-icon::after  { transform: translateY(5px); }
+/* Morph to a cross: upper and lower dashes fold into the middle and fade,
+   the remaining dash rotates 45° while the lower one lands crosswise on it.
+   Reversing the class plays the same animation backwards to three dashes. */
+.menu-open .menu-toggle[data-menu-open] .menu-icon { transform: rotate(45deg); }
+.menu-open .menu-toggle[data-menu-open] .menu-icon::before {
+  transform: translateY(0);
+  opacity: 0;
+}
+.menu-open .menu-toggle[data-menu-open] .menu-icon::after {
+  transform: translateY(0) rotate(-90deg);
 }
 /* Cross: the dashes fold into an ✕ on the open pill */
 .menu-icon--x {
@@ -404,6 +435,11 @@ a { color: inherit; }
   opacity: 1;
   transition: opacity .3s ease;
 }
+/* While open, the real nav bar rides above the overlay so its MENU pill can
+   morph in place; the overlay's own head only keeps the layout height. */
+body.menu-open .site-nav { z-index: 101; }
+body.menu-open .site-wordmark { opacity: 1; pointer-events: auto; }
+body.menu-open .nav-overlay__head { visibility: hidden; }
 .nav-overlay__head {
   display: flex;
   align-items: center;
@@ -477,7 +513,11 @@ a { color: inherit; }
 @media (prefers-reduced-motion: reduce) {
   .nav-overlay,
   .nav-overlay__links a,
-  .nav-overlay__foot { transition: none; }
+  .nav-overlay__foot,
+  .menu-toggle,
+  .menu-icon,
+  .menu-icon::before,
+  .menu-icon::after { transition: none; }
 }
 
 @media (max-width: 720px) {
