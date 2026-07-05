@@ -705,8 +705,8 @@ body.menu-open .nav-overlay__head { visibility: hidden; }
 .accordion-tags {
   font-family: var(--font-serif);
   font-style: italic;
-  font-size: 16px;
-  line-height: 26px;
+  font-size: 14px;
+  line-height: 23px;
   font-weight: 500;
   color: var(--primary);
 }
@@ -2243,7 +2243,7 @@ a.t-org:hover { color: var(--on-surface); }
   .defense-playful .detail-blocks > .detail-prose .block-desc { font-size: 15px; line-height: 24px; }
   .accordion-head { font-size: 15px; }
   .accordion-body { font-size: 14px; line-height: 23px; }
-  .accordion-tags { font-size: 14.5px; line-height: 23px; }
+  .accordion-tags { font-size: 13px; line-height: 21px; }
   .recent-item p { font-size: 15px; line-height: 25px; }
   .testimonial blockquote { font-size: 16px; }
   .contact-note__text { font-size: 15px; line-height: 25px; }
