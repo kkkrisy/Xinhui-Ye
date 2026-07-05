@@ -1250,9 +1250,12 @@ a.t-org:hover { color: var(--on-surface); }
   color: var(--inverse-on-surface);
   border-color: var(--inverse-on-surface);
 }
-/* Navy READ pills sitting on the navy card use the lighter indigo fill so
-   they read against the field — same move as the footer back-to-top. */
-.paper-card[data-paper="pheno"] .btn--primary { background: var(--primary-container); }
+/* READ pill on the navy card inverts the card's own scheme — cream fill,
+   navy label — so it reads clearly against the field. */
+.paper-card[data-paper="pheno"] .btn--primary {
+  background: var(--inverse-on-surface);
+  color: var(--inverse-surface);
+}
 .paper-card .media img { border-radius: var(--radius-lg); }
 .paper-card .detail-text .title-serif { color: var(--primary); }
 .paper-card .detail-text p { color: var(--on-surface-body); }
