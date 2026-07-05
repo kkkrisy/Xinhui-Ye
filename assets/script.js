@@ -56,6 +56,43 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  /* Dot indicators for any horizontal reel (phones): one dot per item,
+     synced to the swipe. Built once; CSS keeps them hidden on desktop. */
+  const buildDots = (host, track, items) => {
+    if (items.length < 2) return;
+    const dots = document.createElement("div");
+    dots.className = "dots dots--auto";
+    const buttons = items.map((item, n) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.setAttribute("aria-label", "Go to item " + (n + 1));
+      b.addEventListener("click", () =>
+        track.scrollTo({ left: item.offsetLeft - track.offsetLeft, behavior: "smooth" })
+      );
+      dots.appendChild(b);
+      return b;
+    });
+    // no host → the dots sit directly after the reel (display:none on desktop)
+    if (host) host.appendChild(dots);
+    else track.insertAdjacentElement("afterend", dots);
+
+    let ticking = false;
+    const syncDots = () => {
+      ticking = false;
+      let nearest = 0;
+      let best = Infinity;
+      items.forEach((item, n) => {
+        const d = Math.abs(item.offsetLeft - track.offsetLeft - track.scrollLeft);
+        if (d < best) { best = d; nearest = n; }
+      });
+      buttons.forEach((b, n) => b.classList.toggle("is-active", n === nearest));
+    };
+    track.addEventListener("scroll", () => {
+      if (!ticking) { ticking = true; requestAnimationFrame(syncDots); }
+    }, { passive: true });
+    syncDots();
+  };
+
   /* ---- Carousels (horizontal scroll with circular controls) --------- */
   document.querySelectorAll("[data-carousel]").forEach((wrap) => {
     const track = wrap.querySelector("[data-carousel-track]");
@@ -81,41 +118,29 @@ document.addEventListener("DOMContentLoaded", () => {
       track.scrollBy({ left: step(), behavior: "smooth" })
     );
 
-    /* Dot indicators (phones): one dot per card, synced to the swipe.
-       Built once; CSS keeps them hidden on desktop. */
-    const cards = Array.from(track.children);
-    if (cards.length > 1) {
-      const dots = document.createElement("div");
-      dots.className = "dots dots--auto";
-      const buttons = cards.map((card, n) => {
-        const b = document.createElement("button");
-        b.type = "button";
-        b.setAttribute("aria-label", "Go to item " + (n + 1));
-        b.addEventListener("click", () =>
-          track.scrollTo({ left: card.offsetLeft - track.offsetLeft, behavior: "smooth" })
-        );
-        dots.appendChild(b);
-        return b;
-      });
-      wrap.appendChild(dots);
-
-      let ticking = false;
-      const syncDots = () => {
-        ticking = false;
-        let nearest = 0;
-        let best = Infinity;
-        cards.forEach((card, n) => {
-          const d = Math.abs(card.offsetLeft - track.offsetLeft - track.scrollLeft);
-          if (d < best) { best = d; nearest = n; }
-        });
-        buttons.forEach((b, n) => b.classList.toggle("is-active", n === nearest));
-      };
-      track.addEventListener("scroll", () => {
-        if (!ticking) { ticking = true; requestAnimationFrame(syncDots); }
-      }, { passive: true });
-      syncDots();
-    }
+    buildDots(wrap, track, Array.from(track.children));
   });
+
+  /* Craft gallery reels (phones): dots under each swipeable group */
+  document.querySelectorAll(".gallery-group").forEach((group) => {
+    const grid = group.querySelector(".thumb-grid");
+    if (grid) buildDots(group, grid, Array.from(grid.children));
+  });
+
+  /* Longitudinal reels (phones): the data-collection deck and the five
+     pattern blocks swipe sideways. The patterns get wrapped in a reel
+     container that is display:contents on desktop, so nothing changes
+     there. Dots land right below each reel. */
+  const deckStage = document.querySelector(".deck-stage");
+  if (deckStage) buildDots(null, deckStage, Array.from(deckStage.children));
+  const patternBlocks = Array.from(document.querySelectorAll(".photo-feature .pattern-block"));
+  if (patternBlocks.length > 1) {
+    const reel = document.createElement("div");
+    reel.className = "pattern-reel";
+    patternBlocks[0].insertAdjacentElement("beforebegin", reel);
+    patternBlocks.forEach((b) => reel.appendChild(b));
+    buildDots(null, reel, patternBlocks);
+  }
 
   /* ---- Certificate flip cards --------------------------------------- */
   // Click / tap (or Enter / Space, since the card is a <button>) flips it
@@ -306,6 +331,44 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  /* ---- Thesis book flip (phones, Defense page) -----------------------
+     On phones the Book details button + modal give way to something more
+     playful: tap the cover to flip it over and read the chapter list.
+     Desktop keeps the button + modal; there the flip markup renders as a
+     plain cover image. */
+  const bookBtn = document.querySelector("[data-book-open]");
+  const bookBlock = bookBtn && bookBtn.closest(".photo-block");
+  if (bookBlock) {
+    const media = bookBlock.querySelector(".media");
+    const cover = media && media.querySelector("img");
+    const chapters = Array.from(
+      document.querySelectorAll("[data-book-modal] .book-chapter .title-serif")
+    ).map((t) => t.textContent.trim().replace(/^Chapter \d+\s*—\s*/, ""));
+    if (cover && chapters.length) {
+      const flip = document.createElement("div");
+      flip.className = "book-flip";
+      flip.setAttribute("role", "button");
+      flip.setAttribute("tabindex", "0");
+      flip.setAttribute("aria-label", "Flip the cover to see what's inside the book");
+      flip.innerHTML =
+        '<div class="book-flip__inner">' +
+        '<div class="book-flip__front"><span class="book-flip__hint">Book details</span></div>' +
+        '<div class="book-flip__back">' +
+        '<span class="label-caps">Inside the book</span>' +
+        "<ol>" + chapters.map((c) => "<li>" + c + "</li>").join("") + "</ol>" +
+        '<span class="book-flip__hint">Tap to flip back</span>' +
+        "</div></div>";
+      const front = flip.querySelector(".book-flip__front");
+      front.insertBefore(cover, front.firstChild);
+      media.appendChild(flip);
+      const toggleFlip = () => flip.classList.toggle("is-flipped");
+      flip.addEventListener("click", toggleFlip);
+      flip.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggleFlip(); }
+      });
+    }
+  }
+
   /* ---- Paper pile (INTERACT two-talks page) -------------------------
      Two paper cards piled up: one open, the other a peeking tab behind it.
      Clicking a card's tab brings that paper forward. Progressive: if this
@@ -346,9 +409,10 @@ document.addEventListener("DOMContentLoaded", () => {
         if (mobileMQ.matches) {
           paperStack.classList.remove("is-piled");
           paperStack.classList.add("is-folded");
-          cards.forEach((c, n) => {
+          // both papers start folded — the page opens compact
+          cards.forEach((c) => {
             c.classList.remove("is-active", "is-peek");
-            setFolded(c, n === 0);
+            setFolded(c, false);
           });
         } else {
           paperStack.classList.remove("is-folded");
@@ -483,7 +547,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const targets = document.querySelectorAll(
       [
         ".recent-item", "[data-carousel-page]", ".accordion-row", ".hl-item",
-        ".photo-block", ".deck-card", ".detail-split", ".detail-full",
+        ".photo-block:not(.pattern-block)", ".deck-track", ".pattern-reel",
+        ".detail-split", ".detail-full",
         ".detail-prose", ".gallery-group", ".testimonials", ".cv-frame",
         ".contact-photo", ".paper-card", ".reveal-card", ".detail-figure",
         ".pull-quote", ".contact-grid form",
