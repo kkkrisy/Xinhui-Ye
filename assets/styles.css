@@ -1957,8 +1957,18 @@ a.t-org:hover { color: var(--on-surface); }
 /* Thin bordered frame around the whole CV block */
 .cv-frame { border: 1px solid var(--outline); padding: clamp(32px, 4.5vw, 56px); }
 @media (max-width: 560px) { .cv-frame { padding: var(--space-md); } }
-/* Download pill: navy at rest, mint on hover — same accent as back-to-top */
-.btn--mint-hover:hover,
+/* Download pill: navy at rest, mint on hover — same accent as back-to-top.
+   Hover only where a real pointer hovers; on touch, :hover would latch onto
+   the tap and keep the pill mint. There, :active flashes mint during the
+   press and lets go on release. */
+@media (hover: hover) {
+  .btn--mint-hover:hover {
+    background: var(--tertiary);
+    color: var(--on-tertiary);
+    opacity: 1;
+  }
+}
+.btn--mint-hover:active,
 .btn--mint-hover:focus-visible {
   background: var(--tertiary);
   color: var(--on-tertiary);
