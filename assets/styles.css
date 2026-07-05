@@ -2300,7 +2300,7 @@ a.t-org:hover { color: var(--on-surface); }
     padding: var(--space-md);
   }
   .pattern-reel .pattern-block {
-    flex: 0 0 86%;
+    flex: 0 0 100%;          /* exactly one pattern per view */
     scroll-snap-align: start;
     align-content: start;
   }
