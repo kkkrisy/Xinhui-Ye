@@ -1798,6 +1798,19 @@ a.t-org:hover { color: var(--on-surface); }
 
 .utility-row { margin-top: var(--space-lg); }
 
+/* Bottom nav on highlight detail pages: back to all (left), next (right) */
+.hl-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+.hl-nav .label-short { display: none; }
+@media (max-width: 600px) {
+  .hl-nav .label-full { display: none; }
+  .hl-nav .label-short { display: inline; }
+}
+
 /* ---- Craft page: masonry gallery + lightbox -------------------------- */
 .gallery-group { margin-bottom: var(--space-lg); }
 .gallery-group > h2 {
