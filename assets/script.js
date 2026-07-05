@@ -546,20 +546,21 @@ document.addEventListener("DOMContentLoaded", () => {
   setupReadMore();
   onMobileChange(setupReadMore);
 
-  /* ---- Takeaway CV (phones): fold to the essentials ------------------ */
+  /* ---- Takeaway CV (phones): essentials only -------------------------
+     The card keeps just the photo, bio and contact; the full CV opens as
+     the PDF in the browser's preview (with its own share / download),
+     which reads far better than the stacked desktop columns would. */
   const cvShell = document.querySelector(".cv-shell");
   if (cvShell) {
     cvShell.classList.add("cv-collapsed");
-    const cvToggle = document.createElement("button");
-    cvToggle.type = "button";
-    cvToggle.className = "btn btn--outline cv-toggle";
-    cvToggle.textContent = "Show full CV";
+    const cvLink = document.createElement("a");
+    cvLink.className = "btn btn--outline cv-toggle";
+    cvLink.textContent = "View full CV";
+    cvLink.href = "assets/Xinhui-Ye-CV.pdf";
+    cvLink.target = "_blank";
+    cvLink.rel = "noopener";
     const frame = cvShell.querySelector(".cv-frame") || cvShell;
-    frame.appendChild(cvToggle);
-    cvToggle.addEventListener("click", () => {
-      const collapsed = cvShell.classList.toggle("cv-collapsed");
-      cvToggle.textContent = collapsed ? "Show full CV" : "Hide full CV";
-    });
+    frame.appendChild(cvLink);
   }
 
   /* ---- Scroll-reveal (phones): sections rise in as you scroll -------- */
