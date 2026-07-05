@@ -690,18 +690,23 @@ body.menu-open .nav-overlay__head { visibility: hidden; }
 .accordion-head .sign::before { width: 14px; height: 2px; transform: translate(-50%, -50%); }  /* horizontal bar */
 .accordion-head .sign::after  { width: 2px; height: 14px; transform: translate(-50%, -50%); }  /* vertical bar (plus) */
 .accordion-row.is-open .sign::after { display: none; }   /* open → minus */
+/* Expanded details step down in size and grey out so the entry title
+   stays on top of the hierarchy; the skills line reads slightly larger
+   in the accent colour. */
 .accordion-body {
   display: none;
   padding: 0 0 var(--space-md) var(--space-lg);
-  color: var(--on-surface-body);
+  color: var(--on-surface-variant);
+  font-size: 15px;
+  line-height: 25px;
 }
 .accordion-row.is-open .accordion-body { display: block; }
 .accordion-body p + p { margin-top: var(--space-sm); }
 .accordion-tags {
   font-family: var(--font-serif);
   font-style: italic;
-  font-size: 15px;
-  line-height: 24px;
+  font-size: 16px;
+  line-height: 26px;
   font-weight: 500;
   color: var(--primary);
 }
@@ -2237,7 +2242,8 @@ a.t-org:hover { color: var(--on-surface); }
   .defense-playful .detail-blocks > .photo-block .block-desc,
   .defense-playful .detail-blocks > .detail-prose .block-desc { font-size: 15px; line-height: 24px; }
   .accordion-head { font-size: 15px; }
-  .accordion-tags { font-size: 13px; line-height: 21px; }
+  .accordion-body { font-size: 14px; line-height: 23px; }
+  .accordion-tags { font-size: 14.5px; line-height: 23px; }
   .recent-item p { font-size: 15px; line-height: 25px; }
   .testimonial blockquote { font-size: 16px; }
   .contact-note__text { font-size: 15px; line-height: 25px; }
