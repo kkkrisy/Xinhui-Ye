@@ -2098,41 +2098,6 @@ a.t-org:hover { color: var(--on-surface); }
    untouched.
    ========================================================================== */
 
-/* ---- Read-more clamps (script.js adds the classes on mobile only) ------ */
-.rm-toggle { display: none; }
-@media (max-width: 760px) {
-  /* Clamped paragraph: N lines then an ellipsis */
-  .m-clamp.is-clamped {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: var(--rm-lines, 4);
-    overflow: hidden;
-  }
-  /* Follow-up paragraphs hidden behind the same toggle */
-  .m-hide.is-collapsed { display: none; }
-  .rm-toggle {
-    display: inline-block;
-    align-self: flex-start;      /* stay left-aligned inside flex prose blocks */
-    text-align: left;
-    background: none;
-    border: none;
-    padding: 0;
-    margin-top: 8px;
-    font-family: var(--font-grotesque);
-    font-weight: 700;
-    font-size: 12px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--primary);
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    cursor: pointer;
-  }
-  /* toggles sitting on dark grounds read cream */
-  .hero--navy .rm-toggle,
-  .paper-card[data-paper="pheno"] .rm-toggle { color: var(--inverse-on-surface); }
-}
-
 /* ---- Scroll-reveal (mobile only; script.js observes) ------------------- */
 @media (max-width: 760px) and (prefers-reduced-motion: no-preference) {
   .reveal-init {
