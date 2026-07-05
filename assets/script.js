@@ -494,7 +494,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // intros: Background, Research Objectives) always show in full.
     const HEADING = ".title-serif, .block-title, h1, h2, h3";
     document
-      .querySelectorAll(".detail-text, .hero-layout .stack-md, .block-copy, .book-chapter, .deck-col")
+      .querySelectorAll(".detail-text, .block-copy, .book-chapter, .deck-col")
       .forEach((block) => {
         if (block.closest(".reveal-copy, .accordion-body")) return; // their own UX
         if (block.hasAttribute("data-no-clamp") || block.closest("[data-no-clamp]")) return;
@@ -520,6 +520,21 @@ document.addEventListener("DOMContentLoaded", () => {
     document
       .querySelectorAll(".contact-note__text")
       .forEach((p) => collapseGroup(p, [], 4));
+
+    // Recent (About): the first paragraph shows in full, the other entries
+    // wait behind a single Read more.
+    const recentItems = Array.from(document.querySelectorAll(".recent-item"));
+    if (recentItems.length > 1) {
+      const rest = recentItems.slice(1);
+      rest.forEach((el) => el.classList.add("m-hide", "is-collapsed"));
+      const toggle = makeToggle();
+      recentItems[recentItems.length - 1].insertAdjacentElement("afterend", toggle);
+      toggle.addEventListener("click", () => {
+        const nowCollapsed = !rest[0].classList.contains("is-collapsed");
+        rest.forEach((el) => el.classList.toggle("is-collapsed", nowCollapsed));
+        toggle.textContent = nowCollapsed ? "Read more" : "Read less";
+      });
+    }
 
     // Highlights teasers: clamp only — the pill below IS the read-more.
     document.querySelectorAll(".hl-item .body-lg").forEach((p) => {

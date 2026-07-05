@@ -2190,10 +2190,14 @@ a.t-org:hover { color: var(--on-surface); }
     order: 2;
     max-width: none;
     margin-top: var(--space-md);
-    /* full-bleed: escape the container padding like a Jess Hill mobile hero */
-    margin-inline: calc(-1 * var(--page-pad));
+    /* full container width with soft-rounded corners, like the detail photos */
+    border-radius: var(--radius-lg);
+    overflow: hidden;
   }
-  .hero-layout .hero-portrait img { aspect-ratio: 4 / 5 !important; }
+  .hero-layout .hero-portrait img {
+    aspect-ratio: 4 / 5 !important;
+    border-radius: var(--radius-lg);
+  }
   .hero-main .stack-md { order: 3; margin-top: var(--space-md); }
 }
 
