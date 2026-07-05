@@ -547,15 +547,16 @@ document.addEventListener("DOMContentLoaded", () => {
   onMobileChange(setupReadMore);
 
   /* ---- Takeaway CV (phones): essentials only -------------------------
-     The card keeps just the photo, bio and contact; the full CV opens as
-     the PDF in the browser's preview (with its own share / download),
-     which reads far better than the stacked desktop columns would. */
+     The card keeps just the photo, bio and contact; one "Download full CV"
+     pill (the header Download is hidden on phones) opens the PDF in the
+     browser's preview, which offers its own download / share — and reads
+     far better than the stacked desktop columns would. */
   const cvShell = document.querySelector(".cv-shell");
   if (cvShell) {
     cvShell.classList.add("cv-collapsed");
     const cvLink = document.createElement("a");
-    cvLink.className = "btn btn--outline cv-toggle";
-    cvLink.textContent = "View full CV";
+    cvLink.className = "btn btn--primary btn--mint-hover cv-toggle";
+    cvLink.textContent = "Download full CV";
     cvLink.href = "assets/Xinhui-Ye-CV.pdf";
     cvLink.target = "_blank";
     cvLink.rel = "noopener";
