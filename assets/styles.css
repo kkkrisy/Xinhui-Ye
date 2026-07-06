@@ -1093,6 +1093,56 @@ textarea.field { height: auto; min-height: 140px; resize: vertical; padding-top:
 .dtc-table .dtc-space { font-weight: 700; white-space: nowrap; }
 .dtc-table .dtc-theme { font-weight: 600; white-space: nowrap; }
 
+/* ---- Coaching by Design (student coaching detail) --------------------
+   A narrative page on the same warm-cream .defense-playful ground. These
+   few scoped components carry its structure: an italic serif deck under a
+   section title, the two teams' answers as a paired card row, and a pill
+   tag row for the closing methods list. */
+
+/* Italic serif subhead sitting just under a section's title-serif heading */
+.section-deck {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(19px, 2vw, 22px);
+  line-height: 1.4;
+  color: var(--on-surface-variant);
+  margin: 2px 0 var(--space-sm);
+}
+
+/* The two teams' answers, side by side on cream card stock */
+.answer-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+.answer-card {
+  background: #f3efe3;
+  border-radius: var(--radius-lg);
+  padding: clamp(24px, 3vw, 36px);
+}
+.answer-card .deck-count { margin-bottom: var(--space-xs); }
+.answer-card .title-serif { color: var(--primary); margin: 0 0 var(--space-xs); }
+.answer-card p:last-child { color: var(--on-surface-body); margin: 0; }
+@media (max-width: 760px) { .answer-cards { grid-template-columns: 1fr; } }
+
+/* Closing methods row — small outline pills, the site's dominant shape */
+.tag-row { display: flex; flex-wrap: wrap; gap: var(--space-xs); }
+.tag-row .tag {
+  font-family: var(--font-grotesque);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--primary);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-full);
+  padding: 7px 15px;
+  white-space: nowrap;
+}
+
+/* A caption sitting under a full-width detail figure */
+.detail-figure figcaption,
+figure.detail-media .caption { margin-top: var(--space-xs); }
+
 /* Inline links inside detail copy (e.g. publication titles) */
 .detail-text a:not(.btn) {
   color: var(--primary);
