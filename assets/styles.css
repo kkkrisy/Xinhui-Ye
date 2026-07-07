@@ -1486,32 +1486,32 @@ a.t-org:hover { color: var(--on-surface); }
 }
 .paper-stack--folders .paper-tab__title { color: var(--primary); }
 .paper-stack--folders .paper-tab__eyebrow { color: var(--secondary); }
-/* First file: tab on the left, ogee shoulder sweeping down on its right.
-   Flat top runs to x=550, then a two-cubic S curves down to (640,80): tangents
-   are horizontal where it leaves the flat top and meets the body, vertical at
-   the inflection, so the join reads as one continuous sweep. */
+/* Front file (cream): tab on the right, ogee shoulder sweeping down on its
+   left. Flat top runs from x=90 to x=628, its two-cubic S curving up from the
+   body at (0,80): tangents are horizontal where it meets the body and leaves
+   the flat top, vertical at the inflection, so the join reads as one sweep. */
 .paper-stack--folders .paper-card[data-paper="shapeoverlay"]::before {
-  left: 0;
-  clip-path: path("M0,80 L0,12 Q0,0 12,0 L550,0 C580,0 595,18 595,40 C595,62 610,80 640,80 L0,80 Z");
-}
-.paper-stack--folders .paper-card[data-paper="shapeoverlay"]::after {
-  border-radius: 0 var(--fold-r) var(--fold-r) var(--fold-r);
-}
-.paper-stack--folders .paper-card[data-paper="shapeoverlay"] .paper-tab {
-  padding-right: 44%;
-}
-/* Second file: tab on the right, ogee shoulder sweeping down on its left —
-   the mirror of the first file's curve. */
-.paper-stack--folders .paper-card[data-paper="mmm"]::before {
   right: 0;
   clip-path: path("M640,80 L640,12 Q640,0 628,0 L90,0 C60,0 45,18 45,40 C45,62 30,80 0,80 L640,80 Z");
 }
-.paper-stack--folders .paper-card[data-paper="mmm"]::after {
+.paper-stack--folders .paper-card[data-paper="shapeoverlay"]::after {
   border-radius: var(--fold-r) 0 var(--fold-r) var(--fold-r);
 }
-.paper-stack--folders .paper-card[data-paper="mmm"] .paper-tab {
+.paper-stack--folders .paper-card[data-paper="shapeoverlay"] .paper-tab {
   padding-left: 54%;
   padding-right: clamp(28px, 4vw, 56px);
+}
+/* Back file (navy): tab on the left, the mirror of the front file's curve, so
+   the pair reads as two tabs side by side in a drawer. */
+.paper-stack--folders .paper-card[data-paper="mmm"]::before {
+  left: 0;
+  clip-path: path("M0,80 L0,12 Q0,0 12,0 L550,0 C580,0 595,18 595,40 C595,62 610,80 640,80 L0,80 Z");
+}
+.paper-stack--folders .paper-card[data-paper="mmm"]::after {
+  border-radius: 0 var(--fold-r) var(--fold-r) var(--fold-r);
+}
+.paper-stack--folders .paper-card[data-paper="mmm"] .paper-tab {
+  padding-right: 44%;
 }
 
 /* --- Piled behaviour (JS on): two tilted sheets -------------------------
@@ -1596,7 +1596,7 @@ a.t-org:hover { color: var(--on-surface); }
 @media (min-width: 761px) {
   .paper-stack--folders.is-piled {
     gap: 0;
-    padding-top: 116px;            /* room for the back folder's tab to peek */
+    padding-top: 0;                /* back folder sits directly behind, tabs top-aligned */
   }
   .paper-stack--folders.is-piled .paper-card.is-active {
     transform: none;
