@@ -1596,7 +1596,11 @@ a.t-org:hover { color: var(--on-surface); }
 @media (min-width: 761px) {
   .paper-stack--folders.is-piled {
     gap: 0;
-    padding-top: 0;                /* back folder sits directly behind, tabs top-aligned */
+    /* Back folder's tab lifts a little above the front one — enough to read as
+       a tab you can pull up, and to sit above the front card so it stays
+       clickable (a fully top-aligned tab would be covered by the front card's
+       box and swallow the click). */
+    padding-top: 46px;
   }
   .paper-stack--folders.is-piled .paper-card.is-active {
     transform: none;
