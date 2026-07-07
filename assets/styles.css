@@ -1109,6 +1109,30 @@ textarea.field { height: auto; min-height: 140px; resize: vertical; padding-top:
   margin: 2px 0 var(--space-sm);
 }
 
+/* The live question + the coaching approach share one cream frame, matching
+   the paper-stock cards further down. On the .defense-playful ground the inner
+   .detail-text blocks already run borderless with navy ink, so the frame just
+   supplies the card: cream stock, rounded corners, a soft lift. */
+.coach-frame {
+  background: #f3efe3;
+  border-radius: var(--radius-lg);
+  padding: clamp(28px, 4vw, 56px);
+  box-shadow: 0 10px 30px rgba(46, 46, 56, 0.10);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(24px, 3vw, 40px);
+}
+.coach-frame .detail-text { border: 0; padding: 0; }
+/* The handed-over question: a prominent serif statement, not a quotation */
+.coach-question {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: clamp(23px, 2.6vw, 32px);
+  line-height: 1.35;
+  color: var(--primary);
+  margin: 2px 0 var(--space-sm);
+}
+
 /* The two teams' answers, side by side on cream card stock */
 .answer-cards {
   display: grid;
@@ -1281,28 +1305,44 @@ a.t-org:hover { color: var(--on-surface); }
 }
 /* Distinct paper stock per talk so the pile clearly reads as two papers:
    the original cream for the full paper, deep navy for the workshop paper. */
-.paper-card[data-paper="dtc"]   { background: #f3efe3; }
-.paper-card[data-paper="pheno"] { background: var(--inverse-surface); }
+.paper-card[data-paper="dtc"]          { background: #f3efe3; }
+.paper-card[data-paper="pheno"]        { background: var(--inverse-surface); }
+/* Coaching page: two cases as folders — cream stock for the first, deep navy
+   for the second, so the pile clearly reads as two separate files. */
+.paper-card[data-paper="shapeoverlay"] { background: #f3efe3; }
+.paper-card[data-paper="mmm"]          { background: var(--inverse-surface); }
 
 /* Navy card runs on cream ink; the coral eyebrow keeps its pop. */
 .paper-card[data-paper="pheno"] .paper-tab,
 .paper-card[data-paper="pheno"] .paper-tab__title,
-.paper-card[data-paper="pheno"] .detail-text .title-serif {
+.paper-card[data-paper="pheno"] .detail-text .title-serif,
+.paper-card[data-paper="mmm"] .paper-tab,
+.paper-card[data-paper="mmm"] .paper-tab__title,
+.paper-card[data-paper="mmm"] .detail-text .title-serif {
   color: var(--inverse-on-surface);
 }
-.paper-card[data-paper="pheno"] .paper-tab__hint { color: rgba(255, 239, 214, 0.72); }
-.paper-card[data-paper="pheno"] .detail-text p { color: rgba(255, 239, 214, 0.90); }
-.paper-card[data-paper="pheno"] .detail-text a:not(.btn) {
+.paper-card[data-paper="pheno"] .paper-tab__hint,
+.paper-card[data-paper="mmm"] .paper-tab__hint { color: rgba(255, 239, 214, 0.72); }
+.paper-card[data-paper="pheno"] .detail-text p,
+.paper-card[data-paper="mmm"] .detail-text p { color: rgba(255, 239, 214, 0.90); }
+/* Captions on the navy card read on cream too, a touch quieter than the body */
+.paper-card[data-paper="mmm"] .caption,
+.paper-card[data-paper="mmm"] .label-caps,
+.paper-card[data-paper="mmm"] .section-deck { color: rgba(255, 239, 214, 0.72); }
+.paper-card[data-paper="pheno"] .detail-text a:not(.btn),
+.paper-card[data-paper="mmm"] .detail-text a:not(.btn) {
   color: var(--inverse-on-surface);
   text-decoration-color: rgba(255, 239, 214, 0.5);
 }
-.paper-card[data-paper="pheno"] .btn--outline {
+.paper-card[data-paper="pheno"] .btn--outline,
+.paper-card[data-paper="mmm"] .btn--outline {
   color: var(--inverse-on-surface);
   border-color: var(--inverse-on-surface);
 }
 /* READ pill on the navy card inverts the card's own scheme — cream fill,
    navy label — so it reads clearly against the field. */
-.paper-card[data-paper="pheno"] .btn--primary {
+.paper-card[data-paper="pheno"] .btn--primary,
+.paper-card[data-paper="mmm"] .btn--primary {
   background: var(--inverse-on-surface);
   color: var(--inverse-surface);
 }
