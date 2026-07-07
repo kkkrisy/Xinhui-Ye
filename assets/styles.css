@@ -1307,42 +1307,32 @@ a.t-org:hover { color: var(--on-surface); }
    the original cream for the full paper, deep navy for the workshop paper. */
 .paper-card[data-paper="dtc"]          { background: #f3efe3; }
 .paper-card[data-paper="pheno"]        { background: var(--inverse-surface); }
-/* Coaching page: two cases as folders — cream stock for the first, deep navy
-   for the second, so the pile clearly reads as two separate files. */
-.paper-card[data-paper="shapeoverlay"] { background: #f3efe3; }
-.paper-card[data-paper="mmm"]          { background: var(--inverse-surface); }
+/* Coaching page: two cases as manila file folders — warm tan stock with a
+   deep-indigo tab band, so the pair reads as two files pulled from a drawer.
+   The two bodies take slightly different manila tones so they stay distinct
+   even when both tabs share the same indigo. */
+.paper-card[data-paper="shapeoverlay"] { background: #f2ddb0; }
+.paper-card[data-paper="mmm"]          { background: #edd3a0; }
 
 /* Navy card runs on cream ink; the coral eyebrow keeps its pop. */
 .paper-card[data-paper="pheno"] .paper-tab,
 .paper-card[data-paper="pheno"] .paper-tab__title,
-.paper-card[data-paper="pheno"] .detail-text .title-serif,
-.paper-card[data-paper="mmm"] .paper-tab,
-.paper-card[data-paper="mmm"] .paper-tab__title,
-.paper-card[data-paper="mmm"] .detail-text .title-serif {
+.paper-card[data-paper="pheno"] .detail-text .title-serif {
   color: var(--inverse-on-surface);
 }
-.paper-card[data-paper="pheno"] .paper-tab__hint,
-.paper-card[data-paper="mmm"] .paper-tab__hint { color: rgba(255, 239, 214, 0.72); }
-.paper-card[data-paper="pheno"] .detail-text p,
-.paper-card[data-paper="mmm"] .detail-text p { color: rgba(255, 239, 214, 0.90); }
-/* Captions on the navy card read on cream too, a touch quieter than the body */
-.paper-card[data-paper="mmm"] .caption,
-.paper-card[data-paper="mmm"] .label-caps,
-.paper-card[data-paper="mmm"] .section-deck { color: rgba(255, 239, 214, 0.72); }
-.paper-card[data-paper="pheno"] .detail-text a:not(.btn),
-.paper-card[data-paper="mmm"] .detail-text a:not(.btn) {
+.paper-card[data-paper="pheno"] .paper-tab__hint { color: rgba(255, 239, 214, 0.72); }
+.paper-card[data-paper="pheno"] .detail-text p { color: rgba(255, 239, 214, 0.90); }
+.paper-card[data-paper="pheno"] .detail-text a:not(.btn) {
   color: var(--inverse-on-surface);
   text-decoration-color: rgba(255, 239, 214, 0.5);
 }
-.paper-card[data-paper="pheno"] .btn--outline,
-.paper-card[data-paper="mmm"] .btn--outline {
+.paper-card[data-paper="pheno"] .btn--outline {
   color: var(--inverse-on-surface);
   border-color: var(--inverse-on-surface);
 }
 /* READ pill on the navy card inverts the card's own scheme — cream fill,
    navy label — so it reads clearly against the field. */
-.paper-card[data-paper="pheno"] .btn--primary,
-.paper-card[data-paper="mmm"] .btn--primary {
+.paper-card[data-paper="pheno"] .btn--primary {
   background: var(--inverse-on-surface);
   color: var(--inverse-surface);
 }
@@ -1414,6 +1404,33 @@ a.t-org:hover { color: var(--on-surface); }
   gap: clamp(24px, 3vw, 40px);
   padding: clamp(20px, 3vw, 32px) clamp(28px, 4vw, 56px) clamp(28px, 4vw, 56px);
 }
+
+/* --- Folder tab band (coaching): make each header read as a manila folder's
+   raised tab. The header becomes a deep-indigo band whose top edge is notched
+   into a folder tab — raised on the left for the first file, on the right for
+   the second — with the manila body showing through the cut corners. Applies
+   in every state so the tab reads whether the folder is open, tucked behind or
+   flattened on mobile. */
+.paper-stack--folders .paper-tab {
+  background: var(--inverse-surface);
+  color: var(--inverse-on-surface);
+  padding-top: calc(24px + clamp(16px, 2.4vw, 26px));
+  padding-bottom: clamp(16px, 2.2vw, 24px);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+.paper-stack--folders .paper-tab__title { color: var(--inverse-on-surface); }
+.paper-stack--folders .paper-tab__eyebrow { color: var(--secondary); }
+.paper-stack--folders .paper-tab__hint { color: rgba(255, 239, 214, 0.72); }
+/* First file: tab raised on the left. */
+.paper-stack--folders .paper-card[data-paper="shapeoverlay"] .paper-tab {
+  clip-path: polygon(6% 0, 44% 0, 48% 24px, 100% 24px, 100% 100%, 0 100%, 0 24px, 6% 24px);
+}
+/* Second file: tab raised on the right, so the two tabs never overlap. */
+.paper-stack--folders .paper-card[data-paper="mmm"] .paper-tab {
+  clip-path: polygon(52% 24px, 56% 0, 94% 0, 94% 24px, 100% 24px, 100% 100%, 0 100%, 0 24px);
+}
+/* Thin warm seam where the indigo tab meets the manila front panel. */
+.paper-stack--folders .paper-body { box-shadow: inset 0 1px 0 rgba(255, 239, 214, 0.35); }
 
 /* --- Piled behaviour (JS on): two tilted sheets -------------------------
    Like two sheets of paper on a desk: the open, readable paper lies on top,
@@ -1497,7 +1514,7 @@ a.t-org:hover { color: var(--on-surface); }
 @media (min-width: 761px) {
   .paper-stack--folders.is-piled {
     gap: 0;
-    padding-top: 84px;             /* room for the back folder's tab band */
+    padding-top: 108px;            /* room for the back folder's tab band */
   }
   .paper-stack--folders.is-piled .paper-card.is-active {
     transform: none;
@@ -1513,14 +1530,8 @@ a.t-org:hover { color: var(--on-surface); }
     transform: translateY(-6px);
     box-shadow: 0 -8px 20px rgba(46, 46, 56, 0.18);
   }
-  /* Slim tab band: trim the peek header and drop the hint arrow so the band
-     stays compact and clean, like a folder tab. */
-  .paper-stack--folders.is-piled .paper-card.is-peek .paper-tab { padding-top: 18px; }
+  /* Drop the hint arrow on the tucked file so the tab band stays clean. */
   .paper-stack--folders.is-piled .paper-card.is-peek .paper-tab__hint { display: none; }
-  /* Stagger the two folders' tabs so they read as separate files: the first
-     folder's tab sits left, the second's shifts right. Fixed per folder, so a
-     tab keeps its spot whether it is open or tucked behind. */
-  .paper-stack--folders .paper-card[data-paper="mmm"] .paper-tab { padding-left: 44%; }
 }
 
 /* ---- Stacking deck ---------------------------------------------------
