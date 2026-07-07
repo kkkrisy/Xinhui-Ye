@@ -1448,14 +1448,15 @@ a.t-org:hover { color: var(--on-surface); }
    tab is clipped with clip-path: path() so its inner shoulder sweeps into the
    body along a true cubic-bezier ogee (an S, like a real manila tab) rather
    than a chain of tiny straight segments, and its outer top corner is rounded.
-   The tab sits left for the first file, right for the second, so the pair
-   stair-steps. drop-shadow (not box-shadow) hugs the folder outline. Because
-   path() takes literal pixels (no % or calc), the tab is a fixed 640x80 box —
-   wide enough for the full case title to sit on the coloured tab — and its
-   width is capped at 100% so a narrow card never pushes it past its edge. */
+   The tab sits right for the front file, left for the back one, so the pair
+   reads as two tabs in a drawer. drop-shadow (not box-shadow) hugs the folder
+   outline. Because path() takes literal pixels (no % or calc), the tab is a
+   fixed 700x80 box — wide enough for the full case title, with a long, gentle
+   shoulder — and its width is capped at 100% so a narrow card never pushes it
+   past its edge. */
 .paper-stack--folders .paper-card {
   --tabh: 80px;
-  --tabw: 640px;
+  --tabw: 700px;
   --fold-r: var(--radius-lg);
   position: relative;
   background: transparent;
@@ -1486,13 +1487,14 @@ a.t-org:hover { color: var(--on-surface); }
 }
 .paper-stack--folders .paper-tab__title { color: var(--primary); }
 .paper-stack--folders .paper-tab__eyebrow { color: var(--secondary); }
-/* Front file (cream): tab on the right, ogee shoulder sweeping down on its
-   left. Flat top runs from x=90 to x=628, its two-cubic S curving up from the
-   body at (0,80): tangents are horizontal where it meets the body and leaves
-   the flat top, vertical at the inflection, so the join reads as one sweep. */
+/* Front file (cream): tab on the right, a long gentle ogee shoulder sweeping up
+   from the body at (0,80) over 190px to the flat top at x=190. The two cubics
+   keep horizontal tangents where the curve meets the body and leaves the flat
+   top and a vertical tangent at the inflection, so the wide S reads as one calm
+   sweep rather than a steep step. */
 .paper-stack--folders .paper-card[data-paper="shapeoverlay"]::before {
   right: 0;
-  clip-path: path("M640,80 L640,12 Q640,0 628,0 L90,0 C60,0 45,18 45,40 C45,62 30,80 0,80 L640,80 Z");
+  clip-path: path("M700,80 L700,14 Q700,0 686,0 L190,0 C130,0 95,12 95,40 C95,68 60,80 0,80 L700,80 Z");
 }
 .paper-stack--folders .paper-card[data-paper="shapeoverlay"]::after {
   border-radius: var(--fold-r) 0 var(--fold-r) var(--fold-r);
@@ -1505,7 +1507,7 @@ a.t-org:hover { color: var(--on-surface); }
    the pair reads as two tabs side by side in a drawer. */
 .paper-stack--folders .paper-card[data-paper="mmm"]::before {
   left: 0;
-  clip-path: path("M0,80 L0,12 Q0,0 12,0 L550,0 C580,0 595,18 595,40 C595,62 610,80 640,80 L0,80 Z");
+  clip-path: path("M0,80 L0,14 Q0,0 14,0 L510,0 C570,0 605,12 605,40 C605,68 640,80 700,80 L0,80 Z");
 }
 .paper-stack--folders .paper-card[data-paper="mmm"]::after {
   border-radius: 0 var(--fold-r) var(--fold-r) var(--fold-r);
@@ -1596,12 +1598,18 @@ a.t-org:hover { color: var(--on-surface); }
 @media (min-width: 761px) {
   .paper-stack--folders.is-piled {
     gap: 0;
-    /* Back folder's tab lifts a little above the front one — enough to read as
-       a tab you can pull up, and to sit above the front card so it stays
-       clickable (a fully top-aligned tab would be covered by the front card's
-       box and swallow the click). */
-    padding-top: 46px;
+    padding-top: 0;                /* both tabs top-aligned, side by side */
   }
+  /* Top-aligned, the front card's full-width box would otherwise sit over the
+     back tab and swallow its click. So the front (active) card passes pointer
+     events through by default; only its painted parts — the tab silhouette
+     (::before), the body sheet (::after) and the body copy — absorb clicks (a
+     no-op, since it's already open). Its transparent notch stays click-through,
+     so a click there lands on the back tab underneath and brings it forward. */
+  .paper-stack--folders.is-piled .paper-card.is-active { pointer-events: none; }
+  .paper-stack--folders.is-piled .paper-card.is-active::before,
+  .paper-stack--folders.is-piled .paper-card.is-active::after,
+  .paper-stack--folders.is-piled .paper-card.is-active .paper-body { pointer-events: auto; }
   .paper-stack--folders.is-piled .paper-card.is-active {
     transform: none;
     box-shadow: none;              /* silhouette shadow comes from filter, below */
