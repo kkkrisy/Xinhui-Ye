@@ -1109,15 +1109,15 @@ textarea.field { height: auto; min-height: 140px; resize: vertical; padding-top:
   margin: 2px 0 var(--space-sm);
 }
 
-/* The live question + the coaching approach share one cream frame, matching
-   the paper-stock cards further down. On the .defense-playful ground the inner
-   .detail-text blocks already run borderless with navy ink, so the frame just
-   supplies the card: cream stock, rounded corners, a soft lift. */
+/* The live question + the coaching approach share one frame, matching the
+   highlight pages' outlined blocks. Just a thin border on the page ground —
+   no fill — so the two sections read as one grouped unit. On the
+   .defense-playful ground the inner .detail-text blocks already run borderless
+   with navy ink, so the frame only supplies the outline. */
 .coach-frame {
-  background: #f3efe3;
+  border: 1px solid var(--outline-variant);
   border-radius: var(--radius-lg);
   padding: clamp(28px, 4vw, 56px);
-  box-shadow: 0 10px 30px rgba(46, 46, 56, 0.10);
   display: flex;
   flex-direction: column;
   gap: clamp(24px, 3vw, 40px);
@@ -1485,6 +1485,42 @@ a.t-org:hover { color: var(--on-surface); }
 }
 @media (prefers-reduced-motion: reduce) {
   .paper-card { transition: none; }
+}
+
+/* ---- Folder variant (coaching): organized, not tilted ------------------
+   Same pickable-card behaviour as the INTERACT paper pile, but squared up
+   into a tidy set of labelled files rather than two tossed sheets. The open
+   folder sits flat in front at full height; the other tucks behind as a slim
+   coloured tab-band peeking straight above it, its label offset so the two
+   files read as separate tabs in a drawer. Click a folder to bring it
+   forward. Scoped to --folders so the INTERACT pile keeps its tilt. */
+@media (min-width: 761px) {
+  .paper-stack--folders.is-piled {
+    gap: 0;
+    padding-top: 84px;             /* room for the back folder's tab band */
+  }
+  .paper-stack--folders.is-piled .paper-card.is-active {
+    transform: none;
+    box-shadow: 0 -5px 24px rgba(46, 46, 56, 0.14);
+  }
+  .paper-stack--folders.is-piled .paper-card.is-peek {
+    height: 340px;
+    transform: none;
+    box-shadow: 0 -3px 12px rgba(46, 46, 56, 0.10);
+  }
+  .paper-stack--folders.is-piled .paper-card.is-peek:hover,
+  .paper-stack--folders.is-piled .paper-card.is-peek:focus-within {
+    transform: translateY(-6px);
+    box-shadow: 0 -8px 20px rgba(46, 46, 56, 0.18);
+  }
+  /* Slim tab band: trim the peek header and drop the hint arrow so the band
+     stays compact and clean, like a folder tab. */
+  .paper-stack--folders.is-piled .paper-card.is-peek .paper-tab { padding-top: 18px; }
+  .paper-stack--folders.is-piled .paper-card.is-peek .paper-tab__hint { display: none; }
+  /* Stagger the two folders' tabs so they read as separate files: the first
+     folder's tab sits left, the second's shifts right. Fixed per folder, so a
+     tab keeps its spot whether it is open or tucked behind. */
+  .paper-stack--folders .paper-card[data-paper="mmm"] .paper-tab { padding-left: 44%; }
 }
 
 /* ---- Stacking deck ---------------------------------------------------
