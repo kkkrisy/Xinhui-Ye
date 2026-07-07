@@ -1128,14 +1128,12 @@ textarea.field { height: auto; min-height: 140px; resize: vertical; padding-top:
 .coach-frame .detail-text p:not(.title-serif):not(.coach-question) {
   color: var(--on-surface-body);
 }
-/* The handed-over question: an italic statement, only a touch larger than the
-   body copy so it reads as an aside the students were handed, not a banner. */
+/* The handed-over question: set at the same size as the surrounding body copy,
+   just in medium-weight navy so it reads as a quiet emphasis, not a banner. */
 .coach-question {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-weight: 600;
-  font-size: clamp(17px, 1.4vw, 20px);
-  line-height: 1.45;
+  font-size: 17px;
+  line-height: 28px;
+  font-weight: 500;
   color: var(--primary);
   margin: 2px 0 var(--space-sm);
 }
@@ -1378,24 +1376,24 @@ a.t-org:hover { color: var(--on-surface); }
   .pheno-lead__img { margin-bottom: var(--space-md); }
 }
 
-/* Coaching lead: the workshop photo floats at half width so the intro copy
-   wraps around it and then flows on beneath — the image sits nested in the
-   opening paragraphs rather than stacked above them. The gutter beside it
-   matches the side-by-side .photo-block gap used across the other highlight
-   pages, and the image gets the same rounded corners. Phones stack it. */
-.coach-lead::after { content: ""; display: block; clear: both; }
-.coach-lead__img .media img { border-radius: var(--radius-lg); }
+/* Coaching case float: an in-case photo floats at roughly two-thirds width so
+   the case copy wraps around it rather than stacking above it. The gutter
+   beside it echoes the side-by-side .photo-block gap used across the other
+   highlight pages, and the image keeps the same rounded corners. Phones stack
+   it full width above the copy. */
+.coach-float::after { content: ""; display: block; clear: both; }
+.coach-float__img .media img { border-radius: var(--radius-lg); }
 /* Float only where there is room for a comfortable gutter; below that the
    image stacks full width above the copy rather than crowding it. */
 @media (min-width: 861px) {
-  .coach-lead__img {
+  .coach-float__img {
     float: left;
-    width: 42%;
-    margin: 6px clamp(48px, 5vw, 72px) var(--space-sm) 0;
+    width: 58%;
+    margin: 6px clamp(32px, 4vw, 48px) var(--space-sm) 0;
   }
 }
 @media (max-width: 860px) {
-  .coach-lead__img { margin-bottom: var(--space-md); }
+  .coach-float__img { margin-bottom: var(--space-md); }
 }
 
 /* Tab / header — the always-visible handle for each paper */
@@ -1447,14 +1445,16 @@ a.t-org:hover { color: var(--on-surface); }
 /* --- Folder silhouette (coaching): build each card as a tabbed file --------
    The card itself is transparent; two same-colour layers paint the folder —
    the raised tab (::before) and the body sheet (::after), both in --fill. The
-   tab is clipped so its inner shoulder sweeps into the body in a smooth ogee
-   curve (an S, like a real manila tab) rather than a hard step, and its outer
-   top corner is rounded. The tab sits left for the first file, right for the
-   second, so the pair stair-steps. drop-shadow (not box-shadow) hugs the
-   folder outline. The ogee's y-values assume --tabh: 80px. */
+   tab is clipped with clip-path: path() so its inner shoulder sweeps into the
+   body along a true cubic-bezier ogee (an S, like a real manila tab) rather
+   than a chain of tiny straight segments, and its outer top corner is rounded.
+   The tab sits left for the first file, right for the second, so the pair
+   stair-steps. drop-shadow (not box-shadow) hugs the folder outline. Because
+   path() takes literal pixels (no % or calc), the tab is a fixed 340x80 box;
+   its width is capped at 100% so a narrow card never pushes it past its edge. */
 .paper-stack--folders .paper-card {
   --tabh: 80px;
-  --tabw: 62%;
+  --tabw: 340px;
   --fold-r: var(--radius-lg);
   position: relative;
   background: transparent;
@@ -1478,24 +1478,20 @@ a.t-org:hover { color: var(--on-surface); }
   content: "";
   position: absolute;
   top: 0;
-  width: var(--tabw);
+  width: min(var(--tabw), 100%);
   height: var(--tabh);
   background: var(--fill);
   z-index: -1;
 }
 .paper-stack--folders .paper-tab__title { color: var(--primary); }
 .paper-stack--folders .paper-tab__eyebrow { color: var(--secondary); }
-/* First file: tab on the left, ogee shoulder sweeping down on its right. */
+/* First file: tab on the left, ogee shoulder sweeping down on its right.
+   Flat top runs to x=250, then a two-cubic S curves down to (340,80): tangents
+   are horizontal where it leaves the flat top and meets the body, vertical at
+   the inflection, so the join reads as one continuous sweep. */
 .paper-stack--folders .paper-card[data-paper="shapeoverlay"]::before {
   left: 0;
-  clip-path: polygon(
-    0 12px, 3px 3px, 12px 0,
-    80% 0,
-    81.25% 1px, 82.5% 3px, 83.75% 7px, 85% 13px, 86.25% 19px, 87.5% 25px, 88.75% 32px,
-    90% 40px,
-    91.25% 48px, 92.5% 55px, 93.75% 61px, 95% 68px, 96.25% 73px, 97.5% 77px, 98.75% 79px,
-    100% 80px,
-    0 80px);
+  clip-path: path("M0,80 L0,12 Q0,0 12,0 L250,0 C280,0 295,18 295,40 C295,62 310,80 340,80 L0,80 Z");
 }
 .paper-stack--folders .paper-card[data-paper="shapeoverlay"]::after {
   border-radius: 0 var(--fold-r) var(--fold-r) var(--fold-r);
@@ -1503,17 +1499,11 @@ a.t-org:hover { color: var(--on-surface); }
 .paper-stack--folders .paper-card[data-paper="shapeoverlay"] .paper-tab {
   padding-right: 44%;
 }
-/* Second file: tab on the right, ogee shoulder sweeping down on its left. */
+/* Second file: tab on the right, ogee shoulder sweeping down on its left —
+   the mirror of the first file's curve. */
 .paper-stack--folders .paper-card[data-paper="mmm"]::before {
   right: 0;
-  clip-path: polygon(
-    100% 12px, calc(100% - 3px) 3px, calc(100% - 12px) 0,
-    20% 0,
-    18.75% 1px, 17.5% 3px, 16.25% 7px, 15% 13px, 13.75% 19px, 12.5% 25px, 11.25% 32px,
-    10% 40px,
-    8.75% 48px, 7.5% 55px, 6.25% 61px, 5% 68px, 3.75% 73px, 2.5% 77px, 1.25% 79px,
-    0 80px,
-    100% 80px);
+  clip-path: path("M340,80 L340,12 Q340,0 328,0 L90,0 C60,0 45,18 45,40 C45,62 30,80 0,80 L340,80 Z");
 }
 .paper-stack--folders .paper-card[data-paper="mmm"]::after {
   border-radius: var(--fold-r) 0 var(--fold-r) var(--fold-r);
