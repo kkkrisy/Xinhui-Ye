@@ -1450,11 +1450,12 @@ a.t-org:hover { color: var(--on-surface); }
    than a chain of tiny straight segments, and its outer top corner is rounded.
    The tab sits left for the first file, right for the second, so the pair
    stair-steps. drop-shadow (not box-shadow) hugs the folder outline. Because
-   path() takes literal pixels (no % or calc), the tab is a fixed 340x80 box;
-   its width is capped at 100% so a narrow card never pushes it past its edge. */
+   path() takes literal pixels (no % or calc), the tab is a fixed 640x80 box —
+   wide enough for the full case title to sit on the coloured tab — and its
+   width is capped at 100% so a narrow card never pushes it past its edge. */
 .paper-stack--folders .paper-card {
   --tabh: 80px;
-  --tabw: 340px;
+  --tabw: 640px;
   --fold-r: var(--radius-lg);
   position: relative;
   background: transparent;
@@ -1486,12 +1487,12 @@ a.t-org:hover { color: var(--on-surface); }
 .paper-stack--folders .paper-tab__title { color: var(--primary); }
 .paper-stack--folders .paper-tab__eyebrow { color: var(--secondary); }
 /* First file: tab on the left, ogee shoulder sweeping down on its right.
-   Flat top runs to x=250, then a two-cubic S curves down to (340,80): tangents
+   Flat top runs to x=550, then a two-cubic S curves down to (640,80): tangents
    are horizontal where it leaves the flat top and meets the body, vertical at
    the inflection, so the join reads as one continuous sweep. */
 .paper-stack--folders .paper-card[data-paper="shapeoverlay"]::before {
   left: 0;
-  clip-path: path("M0,80 L0,12 Q0,0 12,0 L250,0 C280,0 295,18 295,40 C295,62 310,80 340,80 L0,80 Z");
+  clip-path: path("M0,80 L0,12 Q0,0 12,0 L550,0 C580,0 595,18 595,40 C595,62 610,80 640,80 L0,80 Z");
 }
 .paper-stack--folders .paper-card[data-paper="shapeoverlay"]::after {
   border-radius: 0 var(--fold-r) var(--fold-r) var(--fold-r);
@@ -1503,13 +1504,13 @@ a.t-org:hover { color: var(--on-surface); }
    the mirror of the first file's curve. */
 .paper-stack--folders .paper-card[data-paper="mmm"]::before {
   right: 0;
-  clip-path: path("M340,80 L340,12 Q340,0 328,0 L90,0 C60,0 45,18 45,40 C45,62 30,80 0,80 L340,80 Z");
+  clip-path: path("M640,80 L640,12 Q640,0 628,0 L90,0 C60,0 45,18 45,40 C45,62 30,80 0,80 L640,80 Z");
 }
 .paper-stack--folders .paper-card[data-paper="mmm"]::after {
   border-radius: var(--fold-r) 0 var(--fold-r) var(--fold-r);
 }
 .paper-stack--folders .paper-card[data-paper="mmm"] .paper-tab {
-  padding-left: 50%;
+  padding-left: 54%;
   padding-right: clamp(28px, 4vw, 56px);
 }
 
