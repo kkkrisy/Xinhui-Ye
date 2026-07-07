@@ -1128,12 +1128,14 @@ textarea.field { height: auto; min-height: 140px; resize: vertical; padding-top:
 .coach-frame .detail-text p:not(.title-serif):not(.coach-question) {
   color: var(--on-surface-body);
 }
-/* The handed-over question: a prominent serif statement, not a quotation */
+/* The handed-over question: an italic statement, only a touch larger than the
+   body copy so it reads as an aside the students were handed, not a banner. */
 .coach-question {
   font-family: var(--font-serif);
+  font-style: italic;
   font-weight: 600;
-  font-size: clamp(23px, 2.6vw, 32px);
-  line-height: 1.35;
+  font-size: clamp(17px, 1.4vw, 20px);
+  line-height: 1.45;
   color: var(--primary);
   margin: 2px 0 var(--space-sm);
 }
@@ -1383,14 +1385,16 @@ a.t-org:hover { color: var(--on-surface); }
    pages, and the image gets the same rounded corners. Phones stack it. */
 .coach-lead::after { content: ""; display: block; clear: both; }
 .coach-lead__img .media img { border-radius: var(--radius-lg); }
-@media (min-width: 761px) {
+/* Float only where there is room for a comfortable gutter; below that the
+   image stacks full width above the copy rather than crowding it. */
+@media (min-width: 861px) {
   .coach-lead__img {
     float: left;
-    width: 50%;
-    margin: 6px clamp(28px, 4vw, 64px) var(--space-md) 0;
+    width: 45%;
+    margin: 6px clamp(40px, 4vw, 56px) var(--space-sm) 0;
   }
 }
-@media (max-width: 760px) {
+@media (max-width: 860px) {
   .coach-lead__img { margin-bottom: var(--space-md); }
 }
 
@@ -1442,13 +1446,14 @@ a.t-org:hover { color: var(--on-surface); }
 
 /* --- Folder silhouette (coaching): build each card as a tabbed file --------
    The card itself is transparent; two same-colour layers paint the folder —
-   a rounded raised tab (::before) and the rounded body sheet (::after). Because
-   they are real rounded rectangles, every outer corner is softly rounded and
-   the tab meets the body in a clean fold rather than a hard diagonal. The tab
-   sits left for the first file, right for the second, so the pair stair-steps.
-   drop-shadow (not box-shadow) hugs the folder outline. */
+   the raised tab (::before) and the body sheet (::after), both in --fill. The
+   tab is clipped so its inner shoulder sweeps into the body in a smooth ogee
+   curve (an S, like a real manila tab) rather than a hard step, and its outer
+   top corner is rounded. The tab sits left for the first file, right for the
+   second, so the pair stair-steps. drop-shadow (not box-shadow) hugs the
+   folder outline. The ogee's y-values assume --tabh: 80px. */
 .paper-stack--folders .paper-card {
-  --tabh: 78px;
+  --tabh: 80px;
   --tabw: 62%;
   --fold-r: var(--radius-lg);
   position: relative;
@@ -1460,37 +1465,55 @@ a.t-org:hover { color: var(--on-surface); }
 }
 .paper-stack--folders .paper-card[data-paper="shapeoverlay"] { --fill: #f3efe3; }
 .paper-stack--folders .paper-card[data-paper="mmm"]          { --fill: var(--inverse-surface); }
-/* Body sheet — full width, starts just below the tab. */
+/* Body sheet — full width, starts a hair under the tab so the two merge. */
 .paper-stack--folders .paper-card::after {
   content: "";
   position: absolute;
-  left: 0; right: 0; top: var(--tabh); bottom: 0;
+  left: 0; right: 0; top: calc(var(--tabh) - 1px); bottom: 0;
   background: var(--fill);
-  border-radius: var(--fold-r);
   z-index: -1;
 }
-/* Raised tab — overlaps down into the body so the two merge seamlessly. */
+/* Raised tab — clip-path draws the rounded corner and the ogee shoulder. */
 .paper-stack--folders .paper-card::before {
   content: "";
   position: absolute;
   top: 0;
   width: var(--tabw);
-  height: calc(var(--tabh) + var(--fold-r));
+  height: var(--tabh);
   background: var(--fill);
-  border-radius: var(--fold-r) var(--fold-r) 0 0;
   z-index: -1;
 }
 .paper-stack--folders .paper-tab__title { color: var(--primary); }
 .paper-stack--folders .paper-tab__eyebrow { color: var(--secondary); }
-/* First file: tab on the left; keep the header within the tab's width. */
-.paper-stack--folders .paper-card[data-paper="shapeoverlay"]::before { left: 0; }
-.paper-stack--folders .paper-card[data-paper="shapeoverlay"] .paper-tab {
-  padding-right: 40%;
+/* First file: tab on the left, ogee shoulder sweeping down on its right. */
+.paper-stack--folders .paper-card[data-paper="shapeoverlay"]::before {
+  left: 0;
+  clip-path: polygon(
+    0 12px, 3px 3px, 12px 0,
+    80% 0,
+    84% 6px, 88% 21px, 91% 40px, 94% 59px, 97% 74px, 100% 80px,
+    0 80px);
 }
-/* Second file: tab on the right; shift the header over to sit on it. */
-.paper-stack--folders .paper-card[data-paper="mmm"]::before { right: 0; }
+.paper-stack--folders .paper-card[data-paper="shapeoverlay"]::after {
+  border-radius: 0 var(--fold-r) var(--fold-r) var(--fold-r);
+}
+.paper-stack--folders .paper-card[data-paper="shapeoverlay"] .paper-tab {
+  padding-right: 44%;
+}
+/* Second file: tab on the right, ogee shoulder sweeping down on its left. */
+.paper-stack--folders .paper-card[data-paper="mmm"]::before {
+  right: 0;
+  clip-path: polygon(
+    100% 12px, calc(100% - 3px) 3px, calc(100% - 12px) 0,
+    20% 0,
+    16% 6px, 12% 21px, 9% 40px, 6% 59px, 3% 74px, 0 80px,
+    100% 80px);
+}
+.paper-stack--folders .paper-card[data-paper="mmm"]::after {
+  border-radius: var(--fold-r) 0 var(--fold-r) var(--fold-r);
+}
 .paper-stack--folders .paper-card[data-paper="mmm"] .paper-tab {
-  padding-left: 38%;
+  padding-left: 50%;
   padding-right: clamp(28px, 4vw, 56px);
 }
 
