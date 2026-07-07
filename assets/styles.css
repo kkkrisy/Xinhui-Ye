@@ -1362,13 +1362,16 @@ a.t-org:hover { color: var(--on-surface); }
 
 /* Coaching lead: the workshop photo floats at half width so the intro copy
    wraps around it and then flows on beneath — the image sits nested in the
-   opening paragraphs rather than stacked above them. Phones stack it. */
+   opening paragraphs rather than stacked above them. The gutter beside it
+   matches the side-by-side .photo-block gap used across the other highlight
+   pages, and the image gets the same rounded corners. Phones stack it. */
 .coach-lead::after { content: ""; display: block; clear: both; }
+.coach-lead__img .media img { border-radius: var(--radius-lg); }
 @media (min-width: 761px) {
   .coach-lead__img {
     float: left;
     width: 50%;
-    margin: 6px var(--space-lg) var(--space-sm) 0;
+    margin: 6px clamp(28px, 4vw, 64px) var(--space-md) 0;
   }
 }
 @media (max-width: 760px) {
