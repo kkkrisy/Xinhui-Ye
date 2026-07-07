@@ -1491,7 +1491,8 @@ a.t-org:hover { color: var(--on-surface); }
    from the body at (0,80) over 190px to the flat top at x=190. The two cubics
    keep horizontal tangents where the curve meets the body and leaves the flat
    top and a vertical tangent at the inflection, so the wide S reads as one calm
-   sweep rather than a steep step. */
+   sweep rather than a steep step. (The desktop drawer view narrows this and
+   opens a gap between the two tabs — see the --folders.is-piled block below.) */
 .paper-stack--folders .paper-card[data-paper="shapeoverlay"]::before {
   right: 0;
   clip-path: path("M700,80 L700,14 Q700,0 686,0 L190,0 C130,0 95,12 95,40 C95,68 60,80 0,80 L700,80 Z");
@@ -1631,6 +1632,29 @@ a.t-org:hover { color: var(--on-surface); }
   }
   /* Drop the hint arrow on the tucked file so the tab stays clean. */
   .paper-stack--folders.is-piled .paper-card.is-peek .paper-tab__hint { display: none; }
+
+  /* Two tabs, side by side, with a gap between them ----------------------
+     In the drawer view the tabs sit top-aligned and overlap in the middle.
+     Here we narrow each tab's inner edge into a clean rounded corner so a
+     notch of background opens between them: the cream (front) tab pulls to
+     the right and its label aligns to the right line; the navy (back) tab
+     keeps to the left. The title steps down a touch so each label sits
+     inside its now-narrower tab without spilling past the shoulder. */
+  .paper-stack--folders.is-piled .paper-tab__title { font-size: clamp(17px, 2.05vw, 23px); }
+  .paper-stack--folders.is-piled .paper-card[data-paper="shapeoverlay"]::before {
+    clip-path: path("M700,80 L700,14 Q700,0 686,0 L195,0 Q170,0 170,25 L170,80 L700,80 Z");
+  }
+  .paper-stack--folders.is-piled .paper-card[data-paper="shapeoverlay"] .paper-tab {
+    padding-left: 46%;
+    align-items: flex-end;
+    text-align: right;
+  }
+  .paper-stack--folders.is-piled .paper-card[data-paper="mmm"]::before {
+    clip-path: path("M0,80 L0,14 Q0,0 14,0 L560,0 Q585,0 585,25 L585,80 L0,80 Z");
+  }
+  .paper-stack--folders.is-piled .paper-card[data-paper="mmm"] .paper-tab {
+    padding-right: 50%;
+  }
 }
 
 /* ---- Stacking deck ---------------------------------------------------
