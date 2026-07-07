@@ -1115,7 +1115,7 @@ textarea.field { height: auto; min-height: 140px; resize: vertical; padding-top:
    .defense-playful ground the inner .detail-text blocks already run borderless
    with navy ink, so the frame only supplies the outline. */
 .coach-frame {
-  border: 1px solid var(--outline-variant);
+  border: 1px solid var(--outline);
   border-radius: var(--radius-lg);
   padding: clamp(28px, 4vw, 56px);
   display: flex;
@@ -1123,6 +1123,11 @@ textarea.field { height: auto; min-height: 140px; resize: vertical; padding-top:
   gap: clamp(24px, 3vw, 40px);
 }
 .coach-frame .detail-text { border: 0; padding: 0; }
+/* Inside the frame the body copy reads grey; only the section titles and the
+   handed-over question keep the navy ink. */
+.coach-frame .detail-text p:not(.title-serif):not(.coach-question) {
+  color: var(--on-surface-body);
+}
 /* The handed-over question: a prominent serif statement, not a quotation */
 .coach-question {
   font-family: var(--font-serif);
@@ -1307,33 +1312,44 @@ a.t-org:hover { color: var(--on-surface); }
    the original cream for the full paper, deep navy for the workshop paper. */
 .paper-card[data-paper="dtc"]          { background: #f3efe3; }
 .paper-card[data-paper="pheno"]        { background: var(--inverse-surface); }
-/* Coaching page: two cases as file folders in a drawer. Each folder is one
-   solid muted colour whose top edge is cut into a tab (see the --folders block
-   below); the two tabs stair-step left then right so the pair reads as two
-   files, like tabbed dividers. Warm sand for the first, muted slate-blue for
-   the second. */
-.paper-card[data-paper="shapeoverlay"] { background: #e7d3a1; }
-.paper-card[data-paper="mmm"]          { background: #aec4cd; }
+/* Coaching page: two cases as file folders in a drawer, sharing the INTERACT
+   pile's two-stock scheme — cream for the first file, deep navy for the second
+   — so the pair reads as two distinct folders. The top edge of each is cut
+   into a rounded tab (see the --folders block below), stair-stepped left then
+   right. */
+.paper-card[data-paper="shapeoverlay"] { background: #f3efe3; }
+.paper-card[data-paper="mmm"]          { background: var(--inverse-surface); }
 
-/* Navy card runs on cream ink; the coral eyebrow keeps its pop. */
+/* Navy cards run on cream ink; the coral eyebrow keeps its pop. */
 .paper-card[data-paper="pheno"] .paper-tab,
 .paper-card[data-paper="pheno"] .paper-tab__title,
-.paper-card[data-paper="pheno"] .detail-text .title-serif {
+.paper-card[data-paper="pheno"] .detail-text .title-serif,
+.paper-card[data-paper="mmm"] .paper-tab,
+.paper-card[data-paper="mmm"] .paper-tab__title,
+.paper-card[data-paper="mmm"] .detail-text .title-serif {
   color: var(--inverse-on-surface);
 }
-.paper-card[data-paper="pheno"] .paper-tab__hint { color: rgba(255, 239, 214, 0.72); }
-.paper-card[data-paper="pheno"] .detail-text p { color: rgba(255, 239, 214, 0.90); }
-.paper-card[data-paper="pheno"] .detail-text a:not(.btn) {
+.paper-card[data-paper="pheno"] .paper-tab__hint,
+.paper-card[data-paper="mmm"] .paper-tab__hint { color: rgba(255, 239, 214, 0.72); }
+.paper-card[data-paper="pheno"] .detail-text p,
+.paper-card[data-paper="mmm"] .detail-text p { color: rgba(255, 239, 214, 0.90); }
+.paper-card[data-paper="mmm"] .caption,
+.paper-card[data-paper="mmm"] .label-caps,
+.paper-card[data-paper="mmm"] .section-deck { color: rgba(255, 239, 214, 0.72); }
+.paper-card[data-paper="pheno"] .detail-text a:not(.btn),
+.paper-card[data-paper="mmm"] .detail-text a:not(.btn) {
   color: var(--inverse-on-surface);
   text-decoration-color: rgba(255, 239, 214, 0.5);
 }
-.paper-card[data-paper="pheno"] .btn--outline {
+.paper-card[data-paper="pheno"] .btn--outline,
+.paper-card[data-paper="mmm"] .btn--outline {
   color: var(--inverse-on-surface);
   border-color: var(--inverse-on-surface);
 }
 /* READ pill on the navy card inverts the card's own scheme — cream fill,
    navy label — so it reads clearly against the field. */
-.paper-card[data-paper="pheno"] .btn--primary {
+.paper-card[data-paper="pheno"] .btn--primary,
+.paper-card[data-paper="mmm"] .btn--primary {
   background: var(--inverse-on-surface);
   color: var(--inverse-surface);
 }
@@ -1424,34 +1440,57 @@ a.t-org:hover { color: var(--on-surface); }
   padding: clamp(20px, 3vw, 32px) clamp(28px, 4vw, 56px) clamp(28px, 4vw, 56px);
 }
 
-/* --- Folder silhouette (coaching): cut each card into a tabbed file --------
-   The whole card is one colour; clip-path carves a clean tab out of its top
-   edge — a wide tab on the left for the first file, on the right for the
-   second — leaving the opposite top corner notched away so each folder reads
-   as a tabbed divider. A drop-shadow (not box-shadow) is used so the shadow
-   hugs the tab shape instead of the rectangle. The header sits on the tab; its
-   width is capped to the tab so the copy never runs into the cut corner. */
+/* --- Folder silhouette (coaching): build each card as a tabbed file --------
+   The card itself is transparent; two same-colour layers paint the folder —
+   a rounded raised tab (::before) and the rounded body sheet (::after). Because
+   they are real rounded rectangles, every outer corner is softly rounded and
+   the tab meets the body in a clean fold rather than a hard diagonal. The tab
+   sits left for the first file, right for the second, so the pair stair-steps.
+   drop-shadow (not box-shadow) hugs the folder outline. */
 .paper-stack--folders .paper-card {
-  --tabh: 84px;
+  --tabh: 78px;
+  --tabw: 62%;
+  --fold-r: var(--radius-lg);
+  position: relative;
+  background: transparent;
+  border-radius: 0;
   box-shadow: none;
   filter: drop-shadow(0 -3px 10px rgba(46, 46, 56, 0.10))
           drop-shadow(0 12px 22px rgba(46, 46, 56, 0.12));
 }
+.paper-stack--folders .paper-card[data-paper="shapeoverlay"] { --fill: #f3efe3; }
+.paper-stack--folders .paper-card[data-paper="mmm"]          { --fill: var(--inverse-surface); }
+/* Body sheet — full width, starts just below the tab. */
+.paper-stack--folders .paper-card::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; top: var(--tabh); bottom: 0;
+  background: var(--fill);
+  border-radius: var(--fold-r);
+  z-index: -1;
+}
+/* Raised tab — overlaps down into the body so the two merge seamlessly. */
+.paper-stack--folders .paper-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: var(--tabw);
+  height: calc(var(--tabh) + var(--fold-r));
+  background: var(--fill);
+  border-radius: var(--fold-r) var(--fold-r) 0 0;
+  z-index: -1;
+}
 .paper-stack--folders .paper-tab__title { color: var(--primary); }
 .paper-stack--folders .paper-tab__eyebrow { color: var(--secondary); }
-/* First file: tab on the left, top-right corner notched away. */
-.paper-stack--folders .paper-card[data-paper="shapeoverlay"] {
-  clip-path: polygon(0 0, 62% 0, 66% var(--tabh), 100% var(--tabh), 100% 100%, 0 100%);
-}
+/* First file: tab on the left; keep the header within the tab's width. */
+.paper-stack--folders .paper-card[data-paper="shapeoverlay"]::before { left: 0; }
 .paper-stack--folders .paper-card[data-paper="shapeoverlay"] .paper-tab {
   padding-right: 40%;
 }
-/* Second file: tab on the right, top-left corner notched away. */
-.paper-stack--folders .paper-card[data-paper="mmm"] {
-  clip-path: polygon(34% 0, 100% 0, 100% 100%, 0 100%, 0 var(--tabh), 30% var(--tabh));
-}
+/* Second file: tab on the right; shift the header over to sit on it. */
+.paper-stack--folders .paper-card[data-paper="mmm"]::before { right: 0; }
 .paper-stack--folders .paper-card[data-paper="mmm"] .paper-tab {
-  padding-left: 36%;
+  padding-left: 38%;
   padding-right: clamp(28px, 4vw, 56px);
 }
 
@@ -1541,15 +1580,19 @@ a.t-org:hover { color: var(--on-surface); }
   }
   .paper-stack--folders.is-piled .paper-card.is-active {
     transform: none;
+    box-shadow: none;              /* silhouette shadow comes from filter, below */
     filter: drop-shadow(0 -3px 10px rgba(46, 46, 56, 0.12))
             drop-shadow(0 14px 26px rgba(46, 46, 56, 0.16));
   }
   .paper-stack--folders.is-piled .paper-card.is-peek {
     height: 300px;
     transform: none;
+    box-shadow: none;
     filter: drop-shadow(0 -2px 8px rgba(46, 46, 56, 0.08))
             drop-shadow(0 8px 16px rgba(46, 46, 56, 0.10));
   }
+  .paper-stack--folders.is-piled .paper-card.is-peek:hover,
+  .paper-stack--folders.is-piled .paper-card.is-peek:focus-within { box-shadow: none; }
   .paper-stack--folders.is-piled .paper-card.is-peek:hover,
   .paper-stack--folders.is-piled .paper-card.is-peek:focus-within {
     transform: translateY(-8px);
