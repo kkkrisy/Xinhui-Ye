@@ -1307,12 +1307,13 @@ a.t-org:hover { color: var(--on-surface); }
    the original cream for the full paper, deep navy for the workshop paper. */
 .paper-card[data-paper="dtc"]          { background: #f3efe3; }
 .paper-card[data-paper="pheno"]        { background: var(--inverse-surface); }
-/* Coaching page: two cases as manila file folders — warm tan stock with a
-   deep-indigo tab band, so the pair reads as two files pulled from a drawer.
-   The two bodies take slightly different manila tones so they stay distinct
-   even when both tabs share the same indigo. */
-.paper-card[data-paper="shapeoverlay"] { background: #f2ddb0; }
-.paper-card[data-paper="mmm"]          { background: #edd3a0; }
+/* Coaching page: two cases as file folders in a drawer. Each folder is one
+   solid muted colour whose top edge is cut into a tab (see the --folders block
+   below); the two tabs stair-step left then right so the pair reads as two
+   files, like tabbed dividers. Warm sand for the first, muted slate-blue for
+   the second. */
+.paper-card[data-paper="shapeoverlay"] { background: #e7d3a1; }
+.paper-card[data-paper="mmm"]          { background: #aec4cd; }
 
 /* Navy card runs on cream ink; the coral eyebrow keeps its pop. */
 .paper-card[data-paper="pheno"] .paper-tab,
@@ -1357,6 +1358,21 @@ a.t-org:hover { color: var(--on-surface); }
   /* Stacked: give the photo room before the heading; blocks flow with their
      natural paragraph rhythm. */
   .pheno-lead__img { margin-bottom: var(--space-md); }
+}
+
+/* Coaching lead: the workshop photo floats at half width so the intro copy
+   wraps around it and then flows on beneath — the image sits nested in the
+   opening paragraphs rather than stacked above them. Phones stack it. */
+.coach-lead::after { content: ""; display: block; clear: both; }
+@media (min-width: 761px) {
+  .coach-lead__img {
+    float: left;
+    width: 50%;
+    margin: 6px var(--space-lg) var(--space-sm) 0;
+  }
+}
+@media (max-width: 760px) {
+  .coach-lead__img { margin-bottom: var(--space-md); }
 }
 
 /* Tab / header — the always-visible handle for each paper */
@@ -1405,32 +1421,36 @@ a.t-org:hover { color: var(--on-surface); }
   padding: clamp(20px, 3vw, 32px) clamp(28px, 4vw, 56px) clamp(28px, 4vw, 56px);
 }
 
-/* --- Folder tab band (coaching): make each header read as a manila folder's
-   raised tab. The header becomes a deep-indigo band whose top edge is notched
-   into a folder tab — raised on the left for the first file, on the right for
-   the second — with the manila body showing through the cut corners. Applies
-   in every state so the tab reads whether the folder is open, tucked behind or
-   flattened on mobile. */
-.paper-stack--folders .paper-tab {
-  background: var(--inverse-surface);
-  color: var(--inverse-on-surface);
-  padding-top: calc(24px + clamp(16px, 2.4vw, 26px));
-  padding-bottom: clamp(16px, 2.2vw, 24px);
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+/* --- Folder silhouette (coaching): cut each card into a tabbed file --------
+   The whole card is one colour; clip-path carves a clean tab out of its top
+   edge — a wide tab on the left for the first file, on the right for the
+   second — leaving the opposite top corner notched away so each folder reads
+   as a tabbed divider. A drop-shadow (not box-shadow) is used so the shadow
+   hugs the tab shape instead of the rectangle. The header sits on the tab; its
+   width is capped to the tab so the copy never runs into the cut corner. */
+.paper-stack--folders .paper-card {
+  --tabh: 84px;
+  box-shadow: none;
+  filter: drop-shadow(0 -3px 10px rgba(46, 46, 56, 0.10))
+          drop-shadow(0 12px 22px rgba(46, 46, 56, 0.12));
 }
-.paper-stack--folders .paper-tab__title { color: var(--inverse-on-surface); }
+.paper-stack--folders .paper-tab__title { color: var(--primary); }
 .paper-stack--folders .paper-tab__eyebrow { color: var(--secondary); }
-.paper-stack--folders .paper-tab__hint { color: rgba(255, 239, 214, 0.72); }
-/* First file: tab raised on the left. */
+/* First file: tab on the left, top-right corner notched away. */
+.paper-stack--folders .paper-card[data-paper="shapeoverlay"] {
+  clip-path: polygon(0 0, 62% 0, 66% var(--tabh), 100% var(--tabh), 100% 100%, 0 100%);
+}
 .paper-stack--folders .paper-card[data-paper="shapeoverlay"] .paper-tab {
-  clip-path: polygon(6% 0, 44% 0, 48% 24px, 100% 24px, 100% 100%, 0 100%, 0 24px, 6% 24px);
+  padding-right: 40%;
 }
-/* Second file: tab raised on the right, so the two tabs never overlap. */
+/* Second file: tab on the right, top-left corner notched away. */
+.paper-stack--folders .paper-card[data-paper="mmm"] {
+  clip-path: polygon(34% 0, 100% 0, 100% 100%, 0 100%, 0 var(--tabh), 30% var(--tabh));
+}
 .paper-stack--folders .paper-card[data-paper="mmm"] .paper-tab {
-  clip-path: polygon(52% 24px, 56% 0, 94% 0, 94% 24px, 100% 24px, 100% 100%, 0 100%, 0 24px);
+  padding-left: 36%;
+  padding-right: clamp(28px, 4vw, 56px);
 }
-/* Thin warm seam where the indigo tab meets the manila front panel. */
-.paper-stack--folders .paper-body { box-shadow: inset 0 1px 0 rgba(255, 239, 214, 0.35); }
 
 /* --- Piled behaviour (JS on): two tilted sheets -------------------------
    Like two sheets of paper on a desk: the open, readable paper lies on top,
@@ -1514,23 +1534,24 @@ a.t-org:hover { color: var(--on-surface); }
 @media (min-width: 761px) {
   .paper-stack--folders.is-piled {
     gap: 0;
-    padding-top: 108px;            /* room for the back folder's tab band */
+    padding-top: 116px;            /* room for the back folder's tab to peek */
   }
   .paper-stack--folders.is-piled .paper-card.is-active {
     transform: none;
-    box-shadow: 0 -5px 24px rgba(46, 46, 56, 0.14);
+    filter: drop-shadow(0 -3px 10px rgba(46, 46, 56, 0.12))
+            drop-shadow(0 14px 26px rgba(46, 46, 56, 0.16));
   }
   .paper-stack--folders.is-piled .paper-card.is-peek {
-    height: 340px;
+    height: 300px;
     transform: none;
-    box-shadow: 0 -3px 12px rgba(46, 46, 56, 0.10);
+    filter: drop-shadow(0 -2px 8px rgba(46, 46, 56, 0.08))
+            drop-shadow(0 8px 16px rgba(46, 46, 56, 0.10));
   }
   .paper-stack--folders.is-piled .paper-card.is-peek:hover,
   .paper-stack--folders.is-piled .paper-card.is-peek:focus-within {
-    transform: translateY(-6px);
-    box-shadow: 0 -8px 20px rgba(46, 46, 56, 0.18);
+    transform: translateY(-8px);
   }
-  /* Drop the hint arrow on the tucked file so the tab band stays clean. */
+  /* Drop the hint arrow on the tucked file so the tab stays clean. */
   .paper-stack--folders.is-piled .paper-card.is-peek .paper-tab__hint { display: none; }
 }
 
