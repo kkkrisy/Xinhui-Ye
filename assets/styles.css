@@ -1642,7 +1642,7 @@ a.t-org:hover { color: var(--on-surface); }
      inside its now-narrower tab without spilling past the shoulder. */
   .paper-stack--folders.is-piled .paper-tab__title { font-size: clamp(17px, 2.05vw, 23px); }
   .paper-stack--folders.is-piled .paper-card[data-paper="shapeoverlay"]::before {
-    clip-path: path("M700,80 L700,14 Q700,0 686,0 L195,0 Q170,0 170,25 L170,80 L700,80 Z");
+    clip-path: path("M700,80 L700,14 Q700,0 686,0 L192,0 Q160,0 160,30 L160,80 L700,80 Z");
   }
   .paper-stack--folders.is-piled .paper-card[data-paper="shapeoverlay"] .paper-tab {
     padding-left: 46%;
@@ -1650,10 +1650,18 @@ a.t-org:hover { color: var(--on-surface); }
     text-align: right;
   }
   .paper-stack--folders.is-piled .paper-card[data-paper="mmm"]::before {
-    clip-path: path("M0,80 L0,14 Q0,0 14,0 L560,0 Q585,0 585,25 L585,80 L0,80 Z");
+    clip-path: path("M0,80 L0,14 Q0,0 14,0 L608,0 Q640,0 640,30 L640,80 L0,80 Z");
   }
   .paper-stack--folders.is-piled .paper-card[data-paper="mmm"] .paper-tab {
     padding-right: 50%;
+  }
+  /* Flatten the tab shadow to a soft ground shadow only — the upward-casting
+     shadow used elsewhere hazes the clean notch between the two tabs. */
+  .paper-stack--folders.is-piled .paper-card.is-active {
+    filter: drop-shadow(0 12px 22px rgba(46, 46, 56, 0.14));
+  }
+  .paper-stack--folders.is-piled .paper-card.is-peek {
+    filter: drop-shadow(0 8px 16px rgba(46, 46, 56, 0.10));
   }
 }
 
