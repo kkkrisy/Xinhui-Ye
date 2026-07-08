@@ -466,6 +466,54 @@ document.addEventListener("DOMContentLoaded", () => {
     onMobileChange(setupReveal);
   }
 
+  /* ---- Mobile read-more (phones): clip long prose blocks --------------
+     Each .mobile-clip keeps its heading visible and folds the copy below it
+     to a few lines with a "Read more" toggle, so the page stays scannable.
+     The heading stays out of the clipped region; the button only appears when
+     the copy actually overflows. Re-measures on viewport change; on desktop
+     the block is fully expanded and the button hidden. */
+  document.querySelectorAll(".mobile-clip").forEach((block) => {
+    const title = block.querySelector(".title-serif");
+    const body = document.createElement("div");
+    body.className = "clip-body";
+    // Move everything except the heading into the clip body.
+    Array.from(block.childNodes).forEach((n) => {
+      if (n !== title) body.appendChild(n);
+    });
+    block.appendChild(body);
+
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "more-toggle";
+    btn.textContent = "Read more";
+    btn.setAttribute("aria-expanded", "false");
+    block.appendChild(btn);
+
+    const setOpen = (open) => {
+      body.classList.toggle("is-open", open);
+      body.classList.toggle("is-clipped", !open);
+      btn.classList.toggle("is-open", open);
+      btn.textContent = open ? "Read less" : "Read more";
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+    };
+    btn.addEventListener("click", () => setOpen(!body.classList.contains("is-open")));
+
+    const applyClip = () => {
+      if (mobileMQ.matches) {
+        setOpen(false);                       // start clipped
+        // Overflowing? clientHeight is capped at the clamp, scrollHeight is full.
+        const overflows = body.scrollHeight > body.clientHeight + 4;
+        btn.style.display = overflows ? "" : "none";
+        if (!overflows) body.classList.remove("is-clipped");
+      } else {
+        body.classList.remove("is-clipped", "is-open");
+        btn.style.display = "none";
+      }
+    };
+    applyClip();
+    onMobileChange(applyClip);
+  });
+
   /* ---- Deter image/video saving ------------------------------------- */
   // Not bulletproof (screenshots, devtools and direct URLs still work), but
   // it blocks right-click "Save image as…" and click-drag saving.
