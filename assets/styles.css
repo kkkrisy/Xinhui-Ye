@@ -2397,45 +2397,29 @@ a.t-org:hover { color: var(--on-surface); }
   .reveal-init.is-inview { opacity: 1; transform: none; }
 }
 
-/* ---- Mobile read-more (phones): long prose blocks clip to a few lines with
-   a "Read more" toggle so the page stays scannable; the intro block is left
-   full. script.js wraps each .mobile-clip's copy in a .clip-body and adds the
-   button only when the copy actually overflows. With no JS everything shows,
-   fully readable, and the button stays hidden. */
-.more-toggle { display: none; }
+/* ---- Coaching frames (phones): the shared coach-frame box splits into two
+   swipeable framed cards — one section per view, snap scrolling, dots below
+   (script.js builds them). On desktop the frame stays a single stacked box,
+   untouched. */
 @media (max-width: 760px) {
-  .clip-body.is-clipped {
-    max-height: 7em;                 /* ~4 lines before the fade */
-    overflow: hidden;
-    -webkit-mask-image: linear-gradient(to bottom, #000 58%, transparent);
-            mask-image: linear-gradient(to bottom, #000 58%, transparent);
-  }
-  .clip-body.is-open {
-    max-height: none;
-    -webkit-mask-image: none;
-            mask-image: none;
-  }
-  .more-toggle {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    margin-top: 12px;
+  .coach-frame {
+    flex-direction: row;
+    border: 0;                       /* drop the shared box; each slide framed */
     padding: 0;
-    border: 0;
-    background: transparent;
-    cursor: pointer;
-    font-family: var(--font-grotesque);
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: .02em;
-    color: var(--secondary);
+    gap: var(--space-sm);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
   }
-  .more-toggle::after {
-    content: "\2193";                /* down arrow, flips when open */
-    font-size: 15px;
-    transition: transform .3s ease;
+  .coach-frame::-webkit-scrollbar { display: none; }
+  .coach-frame > .detail-text {
+    flex: 0 0 100%;                  /* exactly one section per view */
+    min-width: 0;
+    scroll-snap-align: start;
+    border: 1px solid var(--outline);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md);
   }
-  .more-toggle.is-open::after { transform: rotate(180deg); }
 }
 
 /* ---- Carousel dots (script.js builds them; hidden on desktop) ---------- */
