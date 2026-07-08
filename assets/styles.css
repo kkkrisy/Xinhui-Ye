@@ -1394,6 +1394,9 @@ a.t-org:hover { color: var(--on-surface); }
     width: 58%;
     margin: 6px clamp(32px, 4vw, 48px) var(--space-sm) 0;
   }
+  /* Line the copy's first line up with the top edge of the floated image
+     (the copy's default top margin would otherwise drop it lower). */
+  .coach-float > p:first-of-type { margin-top: 0; }
 }
 @media (max-width: 860px) {
   /* Zero the browser-default figure side margins (never reset) so the lead
@@ -1883,6 +1886,32 @@ a.t-org:hover { color: var(--on-surface); }
   /* Contain the float so the block fully wraps its image. */
   .photo-block::after,
   .pattern-block::after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+}
+
+/* The wide intro blocks (2/3 image + copy) keep the image pinned to the top
+   with the copy wrapping around it at every width above the phone stack — not
+   just the tablet band — so they never fall back to a tall, narrow one-third
+   text column standing beside the image on wide desktops. */
+@media (min-width: 1025px) {
+  .photo-block--wide { display: block; }
+  .photo-block--wide > .media {
+    float: left;
+    width: clamp(280px, 55%, 620px);
+    margin: 0 clamp(32px, 3.5vw, 56px) var(--space-md) 0;
+  }
+  .photo-block--wide.photo-block--reverse > .media {
+    float: right;
+    margin: 0 0 var(--space-md) clamp(32px, 3.5vw, 56px);
+  }
+  .photo-block--wide > .block-copy {
+    display: block !important;
+    align-self: auto !important;
+  }
+  .photo-block--wide::after {
     content: "";
     display: block;
     clear: both;
