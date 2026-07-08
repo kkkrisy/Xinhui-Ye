@@ -564,7 +564,10 @@ body.menu-open .nav-overlay__head { visibility: hidden; }
    bottom of the portrait. */
 .hero-layout .stack-md .body-lg { font-size: 18px; line-height: 29px; }
 .hero-layout .stack-md .body-md { font-size: 17px; line-height: 28px; }
-@media (max-width: 860px) {
+/* Below the desktop two-column width the portrait rises to the top and the
+   intro reads beneath it, rather than squeezing into a narrow side column at
+   in-between window sizes. */
+@media (max-width: 1024px) {
   .hero-layout { grid-template-columns: 1fr; }
   .hero-portrait { order: -1; max-width: 360px; }
 }
@@ -1839,6 +1842,52 @@ a.t-org:hover { color: var(--on-surface); }
 .defense-playful .detail-blocks > .photo-block--plain { border: none; padding: 0; }
 .photo-block--wide { grid-template-columns: 2fr 1fr; }
 @media (max-width: 760px) { .photo-block--wide { grid-template-columns: 1fr; } }
+
+/* ---------------------------------------------------------------------------
+   In-between widths (tablet / non-maximised desktop windows).
+   The rigid two-column image+text blocks get squeezed here: the copy is forced
+   into a tall narrow strip and, on the align-items:end intro blocks, the image
+   sinks to the bottom leaving dead space above it. Follow the site's existing
+   float idiom (see .pheno-lead and the coaching case float): drop the grid,
+   let the image rise to the top and float to one side, and the copy wraps
+   around it and then flows full width. Phones (<=760) keep the simple stack;
+   wide desktops (>=1025) keep the balanced two-column grid.
+--------------------------------------------------------------------------- */
+@media (min-width: 761px) and (max-width: 1024px) {
+  .photo-block,
+  .pattern-block { display: block; }
+
+  .photo-block > .media {
+    float: left;
+    width: clamp(240px, 45%, 460px);
+    margin: 0 clamp(24px, 3vw, 44px) var(--space-md) 0;
+  }
+  .photo-block--reverse > .media {
+    float: right;
+    margin: 0 0 var(--space-md) clamp(24px, 3vw, 44px);
+  }
+  /* Intro blocks: give the wider image a little more room. */
+  .photo-block--wide > .media { width: clamp(280px, 55%, 560px); }
+  /* Compact / pattern images are capped small — float them at their natural
+     size so the copy wraps snugly instead of around a wide empty float box. */
+  .photo-block--compact > .media { width: auto; max-width: 300px; }
+  .pattern-block > .media { width: auto; max-width: 340px; display: block; }
+
+  /* Neutralise the grid-era inline helpers (align-items:end / align-self:
+     stretch / display:flex) so the copy is a normal block that actually wraps
+     around the float — a flex/grid container would refuse to wrap. */
+  .photo-block > .block-copy {
+    display: block !important;
+    align-self: auto !important;
+  }
+  /* Contain the float so the block fully wraps its image. */
+  .photo-block::after,
+  .pattern-block::after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+}
 
 /* ---- Reveal card: framework / mapped example -------------------------
    A before/after image wiper. Two aligned framework images are stacked; a
