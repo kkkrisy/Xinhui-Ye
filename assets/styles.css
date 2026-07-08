@@ -999,6 +999,14 @@ textarea.field { height: auto; min-height: 140px; resize: vertical; padding-top:
   object-fit: contain !important;
   display: block;
 }
+/* Films: a full player with sound + native controls, sized like a detail image */
+.detail-blocks .media--film { background: #000; }
+.detail-blocks .media--film video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-lg);
+}
 .detail-text {
   border: 1px solid var(--outline-variant);
   border-radius: var(--radius-lg);
