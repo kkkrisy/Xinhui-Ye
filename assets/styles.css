@@ -1393,7 +1393,9 @@ a.t-org:hover { color: var(--on-surface); }
   }
 }
 @media (max-width: 860px) {
-  .coach-float__img { margin-bottom: var(--space-md); }
+  /* Zero the browser-default figure side margins (never reset) so the lead
+     image spans the full column width, matching the copy below it. */
+  .coach-float__img { margin: 0 0 var(--space-md); }
 }
 
 /* Tab / header — the always-visible handle for each paper */
@@ -2393,6 +2395,47 @@ a.t-org:hover { color: var(--on-surface); }
     transition: opacity .55s ease, transform .55s ease;
   }
   .reveal-init.is-inview { opacity: 1; transform: none; }
+}
+
+/* ---- Mobile read-more (phones): long prose blocks clip to a few lines with
+   a "Read more" toggle so the page stays scannable; the intro block is left
+   full. script.js wraps each .mobile-clip's copy in a .clip-body and adds the
+   button only when the copy actually overflows. With no JS everything shows,
+   fully readable, and the button stays hidden. */
+.more-toggle { display: none; }
+@media (max-width: 760px) {
+  .clip-body.is-clipped {
+    max-height: 7em;                 /* ~4 lines before the fade */
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to bottom, #000 58%, transparent);
+            mask-image: linear-gradient(to bottom, #000 58%, transparent);
+  }
+  .clip-body.is-open {
+    max-height: none;
+    -webkit-mask-image: none;
+            mask-image: none;
+  }
+  .more-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    font-family: var(--font-grotesque);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: .02em;
+    color: var(--secondary);
+  }
+  .more-toggle::after {
+    content: "\2193";                /* down arrow, flips when open */
+    font-size: 15px;
+    transition: transform .3s ease;
+  }
+  .more-toggle.is-open::after { transform: rotate(180deg); }
 }
 
 /* ---- Carousel dots (script.js builds them; hidden on desktop) ---------- */
