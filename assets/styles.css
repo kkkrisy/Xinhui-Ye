@@ -1298,6 +1298,20 @@ a.t-org:hover { color: var(--on-surface); }
    captions beside it rather than the navy detail-text elsewhere on the page. */
 .photo-feature .detail-text p { color: var(--on-surface-body); }
 
+/* Photo collage (Master page): a soft-rounded masonry of process/result
+   photos. Used both inside the cream feature band (interviews → prototyping →
+   user testing) and on the page ground for the final AI&U renders. */
+.photo-collage { columns: 3; column-gap: var(--space-md); }
+@media (max-width: 900px) { .photo-collage { columns: 2; } }
+@media (max-width: 560px) { .photo-collage { columns: 1; } }
+.photo-collage img {
+  width: 100%;
+  margin: 0 0 var(--space-md);
+  border-radius: var(--radius-lg);
+  break-inside: avoid;
+  display: block;
+}
+
 /* ---- Paper pile (INTERACT: two papers stacked as pickable cards) -----
    Two cream cards piled on top of each other. One is open and fully
    readable; the other collapses to a rotated tab peeking behind it. Hover
