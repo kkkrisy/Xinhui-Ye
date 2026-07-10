@@ -1312,6 +1312,73 @@ a.t-org:hover { color: var(--on-surface); }
   display: block;
 }
 
+/* Pinned snapshots (Master — "Behind the concept"): the process photos as
+   little taped polaroids, each tilted a few degrees and captioned. Hovering
+   one straightens and lifts it. Sits on the cream .photo-feature band. */
+.photo-scatter {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: var(--space-xs) 4px;
+  padding: var(--space-xs) 0 var(--space-sm);
+}
+.photo-scatter .pola {
+  position: relative;
+  margin: 0;
+  width: clamp(128px, 20vw, 178px);
+  background: #fff;
+  padding: 8px 8px 30px;
+  border-radius: 3px;
+  box-shadow: 0 12px 24px -14px rgba(20, 20, 40, 0.5);
+  transform: rotate(var(--r, 0deg));
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.photo-scatter .pola:nth-child(odd) { margin-top: 14px; }
+.photo-scatter .pola:nth-child(3n)  { margin-top: 26px; }
+.photo-scatter .pola img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 1px;
+  display: block;
+}
+.photo-scatter .pola figcaption {
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  text-align: center;
+  font-family: var(--font-grotesque);
+  font-size: 12px;
+  line-height: 1.2;
+  color: #5a5a62;
+}
+/* A little strip of "washi tape" pinning each snapshot, alternating the site's
+   mint and coral accents. */
+.photo-scatter .pola::before {
+  content: "";
+  position: absolute;
+  top: -9px;
+  left: 50%;
+  width: 46px;
+  height: 16px;
+  transform: translateX(-50%) rotate(calc(var(--r, 0deg) * -1));
+  background: rgba(158, 226, 211, 0.72);   /* mint */
+  border-radius: 2px;
+}
+.photo-scatter .pola:nth-child(even)::before {
+  background: rgba(255, 138, 101, 0.55);    /* coral */
+}
+.photo-scatter .pola:hover {
+  transform: rotate(0deg) scale(1.04);
+  box-shadow: 0 20px 34px -14px rgba(20, 20, 40, 0.55);
+  z-index: 3;
+}
+@media (prefers-reduced-motion: reduce) {
+  .photo-scatter .pola { transition: none; }
+}
+
 /* ---- Paper pile (INTERACT: two papers stacked as pickable cards) -----
    Two cream cards piled on top of each other. One is open and fully
    readable; the other collapses to a rotated tab peeking behind it. Hover
