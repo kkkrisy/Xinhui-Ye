@@ -470,7 +470,7 @@ document.addEventListener("DOMContentLoaded", () => {
      as separate framed cards instead of stacking. On desktop .coach-frame
      stays a single shared box (CSS), so nothing changes there; the dots are
      hidden. */
-  const coachFrame = document.querySelector(".coach-frame");
+  const coachFrame = document.querySelector(".coach-frame--swipe");
   if (coachFrame) buildDots(null, coachFrame, Array.from(coachFrame.children));
 
   /* ---- Deter image/video saving ------------------------------------- */
