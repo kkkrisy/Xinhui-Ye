@@ -1379,80 +1379,72 @@ a.t-org:hover { color: var(--on-surface); }
   .photo-scatter .pola { transition: none; }
 }
 
-/* The two demo clips pinned to the same corkboard as the snapshots, only
-   bigger and landscape: white polaroid frame, washi tape, a slight tilt that
-   straightens on hover. Each autoplays muted/looped (like the craft gallery)
-   and reuses the .thumb--video controls. */
-.clip-board {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: flex-start;
-  gap: clamp(20px, 4vw, 60px);
-  padding: var(--space-sm) 0 var(--space-xs);
-}
-.clip-pola {
+/* The demo clips are pinned right in among the snapshots on the same
+   .photo-scatter board, just wider and landscape (16:9): same white polaroid
+   frame, washi tape (colour set per-clip via --tape) and tilt, straightening
+   on hover. Each autoplays muted/looped (like the craft gallery) and reuses
+   the .thumb--video controls. */
+.photo-scatter .clip-pola {
   position: relative;
   margin: 0;
-  width: clamp(280px, 42%, 460px);
+  width: clamp(232px, 30vw, 340px);
   background: #fff;
-  padding: 10px 10px 40px;
+  padding: 9px 9px 34px;
   border-radius: 3px;
-  box-shadow: 0 16px 30px -16px rgba(20, 20, 40, 0.55);
+  box-shadow: 0 14px 28px -15px rgba(20, 20, 40, 0.5);
   transform: rotate(var(--r, 0deg));
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
-/* nudge the second clip down so the pair sits staggered, not in a rigid row */
-.clip-pola:nth-child(even) { margin-top: clamp(18px, 4vw, 44px); }
-.clip-pola .thumb--video {
+/* a little vertical jitter so the wide cards don't lock to the row baseline */
+.photo-scatter .clip-pola:nth-of-type(odd)  { margin-top: 20px; }
+.photo-scatter .clip-pola:nth-of-type(even) { margin-top: 34px; }
+.photo-scatter .clip-pola .thumb--video {
   aspect-ratio: 16 / 9;
   border-radius: 2px;
   background: #000;
 }
-.clip-pola .thumb--video video {
+.photo-scatter .clip-pola .thumb--video video {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 /* the polaroid does the lifting on hover; skip the inner craft-thumb zoom */
-.clip-pola .thumb--video:hover video { transform: none; }
-.clip-pola figcaption {
+.photo-scatter .clip-pola .thumb--video:hover video { transform: none; }
+.photo-scatter .clip-pola figcaption {
   position: absolute;
-  left: 10px;
-  right: 10px;
-  bottom: 13px;
+  left: 9px;
+  right: 9px;
+  bottom: 11px;
   text-align: center;
   font-family: var(--font-grotesque);
-  font-size: 13.5px;
+  font-size: 13px;
   line-height: 1.25;
   color: #5a5a62;
 }
-/* a wider strip of washi tape, alternating the site's mint and coral */
-.clip-pola::before {
+/* a wider strip of washi tape; colour comes from the figure's --tape */
+.photo-scatter .clip-pola::before {
   content: "";
   position: absolute;
-  top: -11px;
+  top: -10px;
   left: 50%;
-  width: 68px;
-  height: 20px;
+  width: 62px;
+  height: 18px;
   transform: translateX(-50%) rotate(calc(var(--r, 0deg) * -1));
-  background: rgba(158, 226, 211, 0.72);   /* mint */
+  background: var(--tape, rgba(255, 138, 101, 0.55));
   border-radius: 2px;
 }
-.clip-pola:nth-child(even)::before {
-  background: rgba(255, 138, 101, 0.55);    /* coral */
-}
-.clip-pola:hover {
-  transform: rotate(0deg) scale(1.02);
-  box-shadow: 0 24px 42px -16px rgba(20, 20, 40, 0.6);
+.photo-scatter .clip-pola:hover {
+  transform: rotate(0deg) scale(1.03);
+  box-shadow: 0 22px 38px -16px rgba(20, 20, 40, 0.58);
   z-index: 3;
 }
-@media (max-width: 640px) {
-  .clip-pola { width: min(360px, 100%); }
-  .clip-pola:nth-child(even) { margin-top: 0; }
+@media (max-width: 560px) {
+  .photo-scatter .clip-pola { width: min(300px, 82vw); }
+  .photo-scatter .clip-pola:nth-of-type(odd),
+  .photo-scatter .clip-pola:nth-of-type(even) { margin-top: 12px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .clip-pola { transition: none; }
+  .photo-scatter .clip-pola { transition: none; }
 }
 
 /* ---- Paper pile (INTERACT: two papers stacked as pickable cards) -----
