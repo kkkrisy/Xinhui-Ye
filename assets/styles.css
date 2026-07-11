@@ -1379,6 +1379,26 @@ a.t-org:hover { color: var(--on-surface); }
   .photo-scatter .pola { transition: none; }
 }
 
+/* Two demo clips side by side inside the "Behind the concept" band. Each
+   autoplays muted/looped (like the craft gallery) and reuses the .thumb--video
+   controls; captions sit below in the band's body grey. */
+.clip-duo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+@media (max-width: 640px) { .clip-duo { grid-template-columns: 1fr; } }
+.clip-duo .clip { margin: 0; }
+.clip-duo .thumb--video { background: #000; }
+.clip-duo figcaption {
+  margin-top: var(--space-xs);
+  text-align: center;
+  font-family: var(--font-grotesque);
+  font-size: 13px;
+  line-height: 1.3;
+  color: var(--on-surface-body);
+}
+
 /* ---- Paper pile (INTERACT: two papers stacked as pickable cards) -----
    Two cream cards piled on top of each other. One is open and fully
    readable; the other collapses to a rotated tab peeking behind it. Hover
