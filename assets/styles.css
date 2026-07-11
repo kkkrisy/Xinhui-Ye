@@ -2569,7 +2569,7 @@ a.t-org:hover { color: var(--on-surface); }
    (script.js builds them). On desktop the frame stays a single stacked box,
    untouched. */
 @media (max-width: 760px) {
-  .coach-frame {
+  .coach-frame--swipe {
     flex-direction: row;
     border: 0;                       /* drop the shared box; each slide framed */
     padding: 0;
@@ -2578,8 +2578,8 @@ a.t-org:hover { color: var(--on-surface); }
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
   }
-  .coach-frame::-webkit-scrollbar { display: none; }
-  .coach-frame > .detail-text {
+  .coach-frame--swipe::-webkit-scrollbar { display: none; }
+  .coach-frame--swipe > .detail-text {
     flex: 0 0 100%;                  /* exactly one section per view */
     min-width: 0;
     scroll-snap-align: start;
