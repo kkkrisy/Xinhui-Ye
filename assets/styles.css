@@ -1014,6 +1014,41 @@ textarea.field { height: auto; min-height: 140px; resize: vertical; padding-top:
   color: var(--on-surface-body);
 }
 .detail-full .media-placeholder { aspect-ratio: 21 / 9; }
+
+/* AI&U opening showcase: the film leads at ~two-thirds width; the five final
+   renders wrap it — two stacked on the right rail, three along the bottom. */
+.film-showcase {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: clamp(10px, 1.5vw, 18px);
+}
+.film-showcase .film-main { grid-column: 1; grid-row: 1; margin: 0; align-self: start; }
+.film-showcase .film-main video { display: block; width: 100%; height: auto; }
+.film-showcase .film-rail {
+  grid-column: 2; grid-row: 1;
+  display: grid; grid-template-rows: 1fr 1fr;
+  gap: clamp(10px, 1.5vw, 18px);
+}
+.film-showcase .film-base {
+  grid-column: 1 / -1; grid-row: 2;
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: clamp(10px, 1.5vw, 18px);
+}
+.film-showcase figure {
+  margin: 0; overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: #0d0e1c;
+}
+.film-showcase .film-rail figure { height: 100%; }
+.film-showcase .film-base figure { aspect-ratio: 4 / 3; }
+.film-showcase figure img { width: 100%; height: 100%; object-fit: cover; display: block; }
+@media (max-width: 760px) {
+  .film-showcase { grid-template-columns: 1fr; }
+  .film-showcase .film-main { grid-column: 1; grid-row: 1; }
+  .film-showcase .film-rail { grid-column: 1; grid-row: 2; grid-template-rows: none; grid-template-columns: 1fr 1fr; }
+  .film-showcase .film-base { grid-column: 1; grid-row: 3; }
+  .film-showcase .film-rail figure { height: auto; aspect-ratio: 4 / 3; }
+}
 .detail-split .media-placeholder { min-height: 240px; }
 
 /* five co-exploration pattern charts */

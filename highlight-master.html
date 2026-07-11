@@ -62,22 +62,35 @@
             <p class="block-desc">Fun fact: the whole class was taught in German &mdash; I graduated with <em>sehr gut</em>, the top grade.</p>
           </div>
 
-          <!-- Graduation project AI&U — copy + the film share one frame -->
+          <!-- Graduation project AI&U — the story, then the result up front:
+               the film leads at ~two-thirds width with the five final renders
+               wrapping it on the right rail and along the bottom. -->
           <div class="coach-frame">
             <div class="detail-text">
               <p class="title-serif">Graduation project — AI&amp;U</p>
-              <p>My thesis was <em>AI&amp;U</em>, a concept for a language-learning platform that adapts to the person using it. Most tools teach everyone the same way. AI&amp;U starts from the other end: it learns who you are first &mdash; your level, your goals, when you focus, even your mood &mdash; and shapes the lessons around that.</p>
-              <p>I built it over five months with Chiara Mayer. The concept borrowed an idea from engineering, where a machine gets a live model of itself, and asked whether a learner could have one too. But most of the work was not theory. It was talking to people, building rough versions, and watching how they held up.</p>
-              <p>To make it tangible, we made a set of short films. Instead of listing features, we dropped AI&amp;U into ordinary moments &mdash; a commute, a work call coming up &mdash; so an abstract concept felt like something you could actually reach for.</p>
+              <p>My thesis was <em>AI&amp;U</em>, a concept for a language learning platform that adapts to whoever is using it. Most tools teach everyone the same way. AI&amp;U works the other way around. It learns who you are first, your level, your goals, when you tend to focus, even your mood, and builds the lessons from there.</p>
+              <p>I made it over five months with Chiara Mayer. The idea came from engineering, where a machine gets a live model of itself, and we wondered if a learner could have one too. But the theory was the small part. Most of the time went into talking to people, building rough versions, and seeing what fell apart.</p>
+              <p>We also made a few short films. Rather than list what the platform does, we put it into everyday situations, a commute, a work call to prep for, so the idea felt like something you would actually use.</p>
             </div>
-            <!-- The film (assets/ai&u-film.mp4, H.264/AAC). The `poster` is the
-                 still shown before Play is pressed; swap it for a nicer frame if
-                 you like. -->
-            <div class="media media--film">
-              <video class="film" controls controlsList="nodownload noplaybackrate noremoteplayback" disablePictureInPicture disableRemotePlayback preload="metadata" playsinline poster="assets/ai%26u_render%201.png" oncontextmenu="return false">
-                <source src="assets/ai%26u-film.mp4" type="video/mp4" />
-                Your browser can&rsquo;t play this video.
-              </video>
+            <!-- The film (assets/ai&u-film.mp4) autoplays muted; controls stay so
+                 visitors can unmute. The five renders wrap it: two on the right
+                 rail, three along the bottom. -->
+            <div class="film-showcase">
+              <div class="media media--film film-main">
+                <video class="film" autoplay muted loop playsinline controls controlsList="nodownload noplaybackrate noremoteplayback" disablePictureInPicture disableRemotePlayback preload="metadata" poster="assets/ai%26u-film-poster.jpg" oncontextmenu="return false">
+                  <source src="assets/ai%26u-film.mp4" type="video/mp4" />
+                  Your browser can&rsquo;t play this video.
+                </video>
+              </div>
+              <div class="film-rail">
+                <figure><img src="assets/ai%26u_render%201.png" alt="AI&amp;U — the app opening on a phone" loading="lazy" /></figure>
+                <figure><img src="assets/ai%26u_render%202.png" alt="AI&amp;U — a word explained in context" loading="lazy" /></figure>
+              </div>
+              <div class="film-base">
+                <figure><img src="assets/ai%26u_render%203.png" alt="AI&amp;U — the learner's knowledge graph on the desktop reader" loading="lazy" /></figure>
+                <figure><img src="assets/ai%26u_render%204.jpg" alt="AI&amp;U across desktop, tablet and phone, following the persona Mona preparing for a business trip" loading="lazy" /></figure>
+                <figure><img src="assets/ai%26u_render%205.jpg" alt="AI&amp;U — the desktop reader looking up a word in context" loading="lazy" /></figure>
+              </div>
             </div>
           </div>
 
@@ -186,25 +199,6 @@
                 <figcaption>Testing the flow</figcaption>
               </figure>
             </div>
-          </div>
-
-          <!-- The final result — lead copy, then the cross-device hero render -->
-          <div class="detail-text">
-            <p class="title-serif">The final result.</p>
-            <p>The final concept came together as something you could actually interact with. We designed it for both mobile and desktop, recorded a video walkthrough of the full flow, and built separate cases, each following a persona through their own reason to learn.</p>
-          </div>
-
-          <!-- Hero render: the cross-device shot with the "Mona" persona flow -->
-          <div class="detail-full">
-            <div class="media"><img src="assets/ai%26u_render%204.jpg" alt="AI&amp;U shown across desktop, tablet and phone, following the persona Mona preparing for a business trip" style="width:100%; display:block;" loading="lazy" /></div>
-          </div>
-
-          <!-- The remaining renders as a soft masonry -->
-          <div class="photo-collage">
-            <img src="assets/ai%26u_render%201.png" alt="AI&amp;U — the app opening on a phone" loading="lazy" />
-            <img src="assets/ai%26u_render%205.jpg" alt="AI&amp;U — the desktop reader looking up a word in context" loading="lazy" />
-            <img src="assets/ai%26u_render%202.png" alt="AI&amp;U — final render" loading="lazy" />
-            <img src="assets/ai%26u_render%203.png" alt="AI&amp;U — final render" loading="lazy" />
           </div>
 
           <!-- Demo day — a big standalone photo (no side-by-side frame), the
