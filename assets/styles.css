@@ -558,18 +558,28 @@ body.menu-open .nav-overlay__head { visibility: hidden; }
   gap: var(--space-xl);
   align-items: start;
 }
+/* Portrait comes first in the DOM (so the text can wrap around it at
+   in-between widths); order keeps the desktop grid text-left / portrait-right. */
+.hero-layout .hero-main { order: 1; }
+.hero-layout .hero-portrait { order: 2; }
 .hero-layout .stack-md { margin-top: var(--space-xl); }
 .hero-layout .body-lg { margin-top: 0; }
 /* Hero intro runs a touch larger so the text column finishes near the
    bottom of the portrait. */
 .hero-layout .stack-md .body-lg { font-size: 18px; line-height: 29px; }
 .hero-layout .stack-md .body-md { font-size: 17px; line-height: 28px; }
-/* Below the desktop two-column width the portrait rises to the top and the
-   intro reads beneath it, rather than squeezing into a narrow side column at
-   in-between window sizes. */
+/* At in-between widths the two even columns would leave a gap, so instead of
+   stacking (which stranded the portrait beside empty space) the portrait floats
+   to the right and the title + intro wrap around it, magazine-style. */
 @media (max-width: 1024px) {
-  .hero-layout { grid-template-columns: 1fr; }
-  .hero-portrait { order: -1; max-width: 360px; }
+  .hero-layout { display: block; }
+  .hero-layout .hero-portrait {
+    float: right;
+    width: clamp(300px, 42%, 420px);
+    max-width: none;
+    margin: 0 0 var(--space-md) var(--space-xl);
+  }
+  .hero-layout .stack-md { margin-top: var(--space-md); }
 }
 
 /* ---- Media (soft-rounded, flat) --------------------------------------- */
@@ -2765,8 +2775,10 @@ a.t-org:hover { color: var(--on-surface); }
   .hero-main .display-xl { order: 1; }
   .hero-layout .hero-portrait {
     order: 2;
+    float: none;
+    width: auto;
     max-width: none;
-    margin-top: var(--space-md);
+    margin: var(--space-md) 0 0;
     /* full container width with soft-rounded corners, like the detail photos */
     border-radius: var(--radius-lg);
     overflow: hidden;
