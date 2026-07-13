@@ -2496,7 +2496,13 @@ a.t-org:hover { color: var(--on-surface); }
   scroll-margin-top: 96px;
 }
 .gallery-group:first-of-type { border-top: 0; padding-top: 0; }
-.gallery-group--flip .gallery-group__text { order: 2; }
+/* Text always takes the narrow column, images always the wide one —
+   flipping only swaps which side each lands on, never their widths. */
+.gallery-group__text  { grid-column: 1; }
+.gallery-group .thumb-grid { grid-column: 2; }
+.gallery-group--flip { grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.82fr); }
+.gallery-group--flip .gallery-group__text  { grid-column: 2; }
+.gallery-group--flip .thumb-grid { grid-column: 1; }
 
 /* The writing column — pins in place while the photos scroll past. */
 .gallery-group__text {
@@ -2537,8 +2543,12 @@ a.t-org:hover { color: var(--on-surface); }
 
 /* Stack the spread on narrow screens; text no longer pins. */
 @media (max-width: 760px) {
-  .gallery-group { grid-template-columns: 1fr; gap: var(--space-md); }
-  .gallery-group--flip .gallery-group__text { order: 0; }
+  .gallery-group,
+  .gallery-group--flip { grid-template-columns: 1fr; gap: var(--space-md); }
+  .gallery-group__text,
+  .gallery-group .thumb-grid,
+  .gallery-group--flip .gallery-group__text,
+  .gallery-group--flip .thumb-grid { grid-column: auto; }
   .gallery-group__text { position: static; }
   .gallery-group__note { max-width: 60ch; }
 }
