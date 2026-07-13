@@ -3022,10 +3022,11 @@ a.t-org:hover { color: var(--on-surface); }
 }
 
 /* ---- Paper pile (INTERACT): folds into tap-to-open papers on mobile ---- */
-/* Close control at the foot of a card — an outline pill that mirrors the tab's
-   ↑ "fold back up" hint. Hidden everywhere except an open card in the mobile
-   fold, so it only appears when there is something to close. Colour follows the
-   stock: navy ink on the cream papers, cream ink on the navy ones. */
+/* Close control at the foot of a card — a filled pill (matching the card's READ
+   pill) that mirrors the tab's ↑ "fold back up" hint. Hidden everywhere except
+   an open card in the mobile fold, so it only appears when there is something to
+   close. Fill follows the stock: navy pill on the cream papers, cream pill on
+   the navy ones. Like every other navy button it flips to mint on hover/press. */
 .paper-close { display: none; }
 @media (max-width: 760px) {
   .paper-stack.is-folded .paper-card:not(.is-open) .paper-body { display: none; }
@@ -3068,10 +3069,28 @@ a.t-org:hover { color: var(--on-surface); }
     background: var(--inverse-on-surface);
     color: var(--inverse-surface);
   }
-  /* Press feedback: the site's mint accent, matching the menu close pill. */
+  /* Press / keyboard-focus feedback: the site's mint accent, matching the menu
+     close pill. (Hover is handled below, gated to real pointers.) */
   .paper-stack.is-folded .paper-card.is-open .paper-close:active,
+  .paper-stack.is-folded .paper-card.is-open .paper-close:focus-visible,
   .paper-stack.is-folded .paper-card[data-paper="mmm"].is-open .paper-close:active,
-  .paper-stack.is-folded .paper-card[data-paper="pheno"].is-open .paper-close:active {
+  .paper-stack.is-folded .paper-card[data-paper="mmm"].is-open .paper-close:focus-visible,
+  .paper-stack.is-folded .paper-card[data-paper="pheno"].is-open .paper-close:active,
+  .paper-stack.is-folded .paper-card[data-paper="pheno"].is-open .paper-close:focus-visible {
+    background: var(--tertiary);
+    color: var(--on-tertiary);
+    border-color: var(--tertiary);
+    outline: none;
+  }
+}
+
+/* Hover only where a real pointer hovers (so it never latches on a touch tap),
+   and only in the mobile fold where the Close pill exists. Navy or cream at
+   rest, mint on hover — the same navy→mint flip every other button uses. */
+@media (max-width: 760px) and (hover: hover) {
+  .paper-stack.is-folded .paper-card.is-open .paper-close:hover,
+  .paper-stack.is-folded .paper-card[data-paper="mmm"].is-open .paper-close:hover,
+  .paper-stack.is-folded .paper-card[data-paper="pheno"].is-open .paper-close:hover {
     background: var(--tertiary);
     color: var(--on-tertiary);
     border-color: var(--tertiary);
