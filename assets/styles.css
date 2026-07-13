@@ -346,6 +346,24 @@ a { color: inherit; }
   cursor: pointer;
   transition: background-color .3s ease, color .3s ease, border-color .3s ease;
 }
+/* Closed MENU pill flips to mint on hover / press, matching every other navy
+   button on the site (.btn--mint-hover). Hover only where a real pointer
+   hovers; on touch, :active flashes mint during the press. The open-menu rule
+   below still wins while the overlay is up. */
+@media (hover: hover) {
+  .menu-toggle:hover {
+    background: var(--tertiary);
+    color: var(--on-tertiary);
+    border-color: var(--tertiary);
+  }
+}
+.menu-toggle:active,
+.menu-toggle:focus-visible {
+  background: var(--tertiary);
+  color: var(--on-tertiary);
+  border-color: var(--tertiary);
+  outline: none;
+}
 /* Overlay close pill: the single mint accent */
 .menu-toggle.menu-close {
   background: var(--tertiary);
@@ -3004,6 +3022,11 @@ a.t-org:hover { color: var(--on-surface); }
 }
 
 /* ---- Paper pile (INTERACT): folds into tap-to-open papers on mobile ---- */
+/* Close control at the foot of a card — an outline pill that mirrors the tab's
+   ↑ "fold back up" hint. Hidden everywhere except an open card in the mobile
+   fold, so it only appears when there is something to close. Colour follows the
+   stock: navy ink on the cream papers, cream ink on the navy ones. */
+.paper-close { display: none; }
 @media (max-width: 760px) {
   .paper-stack.is-folded .paper-card:not(.is-open) .paper-body { display: none; }
   .paper-stack.is-folded .paper-card:not(.is-open) { padding-bottom: clamp(20px, 3vw, 32px); }
@@ -3013,6 +3036,40 @@ a.t-org:hover { color: var(--on-surface); }
   }
   /* closed papers open downward (↓); the open one folds back up (↑, base) */
   .paper-stack.is-folded .paper-card:not(.is-open) .paper-tab__hint::after { content: "\2193"; }
+
+  .paper-stack.is-folded .paper-card.is-open .paper-close {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    align-self: flex-start;
+    height: 40px;
+    padding: 0 22px;
+    border-radius: var(--radius-full);
+    border: 1px solid currentColor;
+    background: transparent;
+    color: var(--primary);
+    font-family: var(--font-grotesque);
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color .15s ease, color .15s ease, border-color .15s ease;
+  }
+  .paper-stack.is-folded .paper-card.is-open .paper-close::after {
+    content: "\2191";
+    font-size: 15px;
+  }
+  /* Navy papers (field study / workshop short paper) invert to cream ink.
+     Matches the open-card context so it outweighs the navy default above. */
+  .paper-stack.is-folded .paper-card[data-paper="mmm"].is-open .paper-close,
+  .paper-stack.is-folded .paper-card[data-paper="pheno"].is-open .paper-close { color: var(--inverse-on-surface); }
+  /* Press feedback: the site's mint accent, matching the menu close pill. */
+  .paper-stack.is-folded .paper-card.is-open .paper-close:active {
+    background: var(--tertiary);
+    color: var(--on-tertiary);
+    border-color: var(--tertiary);
+  }
 }
 
 /* ---- Mobile type scale: titles keep their punch, reading copy steps down */
