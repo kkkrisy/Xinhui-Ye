@@ -2932,12 +2932,17 @@ a.t-org:hover { color: var(--on-surface); }
   }
   .deck-stage::-webkit-scrollbar,
   .pattern-reel::-webkit-scrollbar { display: none; }
+  .deck-stage { align-items: flex-start; }   /* each card sizes to its own content */
   .deck-stage .deck-card {
     flex: 0 0 86%;
     scroll-snap-align: start;
     margin-bottom: 0;
     padding: var(--space-md);
   }
+  /* Show only the picture on each card; script.js folds the caption (title +
+     copy) behind a Read more toggle so the swipe reel stays compact. */
+  .deck-card .deck-col.is-collapsed { display: none; }
+  .deck-card .deck-more { margin-top: var(--space-sm); }
   .pattern-reel .pattern-block {
     flex: 0 0 100%;          /* exactly one pattern per view */
     scroll-snap-align: start;
