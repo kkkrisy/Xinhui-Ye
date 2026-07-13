@@ -3045,9 +3045,9 @@ a.t-org:hover { color: var(--on-surface); }
     height: 40px;
     padding: 0 22px;
     border-radius: var(--radius-full);
-    border: 1px solid currentColor;
-    background: transparent;
-    color: var(--primary);
+    border: 1px solid transparent;
+    background: var(--primary);
+    color: var(--on-primary);
     font-family: var(--font-grotesque);
     font-weight: 600;
     font-size: 13px;
@@ -3060,12 +3060,18 @@ a.t-org:hover { color: var(--on-surface); }
     content: "\2191";
     font-size: 15px;
   }
-  /* Navy papers (field study / workshop short paper) invert to cream ink.
-     Matches the open-card context so it outweighs the navy default above. */
+  /* Navy papers (field study / workshop short paper) invert the fill — cream
+     pill, navy label — exactly like the READ pill on the same card. Matches
+     the open-card context so it outweighs the navy default above. */
   .paper-stack.is-folded .paper-card[data-paper="mmm"].is-open .paper-close,
-  .paper-stack.is-folded .paper-card[data-paper="pheno"].is-open .paper-close { color: var(--inverse-on-surface); }
+  .paper-stack.is-folded .paper-card[data-paper="pheno"].is-open .paper-close {
+    background: var(--inverse-on-surface);
+    color: var(--inverse-surface);
+  }
   /* Press feedback: the site's mint accent, matching the menu close pill. */
-  .paper-stack.is-folded .paper-card.is-open .paper-close:active {
+  .paper-stack.is-folded .paper-card.is-open .paper-close:active,
+  .paper-stack.is-folded .paper-card[data-paper="mmm"].is-open .paper-close:active,
+  .paper-stack.is-folded .paper-card[data-paper="pheno"].is-open .paper-close:active {
     background: var(--tertiary);
     color: var(--on-tertiary);
     border-color: var(--tertiary);
