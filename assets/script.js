@@ -473,6 +473,68 @@ document.addEventListener("DOMContentLoaded", () => {
   const coachFrame = document.querySelector(".coach-frame--swipe");
   if (coachFrame) buildDots(null, coachFrame, Array.from(coachFrame.children));
 
+  /* ---- Mobile read-more (phones): clip long prose sections -----------
+     On a detail page the first intro section stays full; every later prose
+     section clips to a few lines with a "Read more" toggle, so the page stays
+     short and scannable. Blocks that live inside their own interactive
+     component (swipeable decks/reels, flip and paper cards, carousels, the
+     pinboard) are left alone — those already fold themselves on phones.
+     Progressive enhancement: with no JS everything shows fully and no toggle
+     appears; on desktop the copy is never clipped. */
+  const INTERACTIVE = ".pattern-block, .deck-track, .reveal-card, .paper-stack, " +
+    ".coach-frame--swipe, [data-carousel], .testimonials, .gallery-group, .photo-scatter";
+  const foldables = Array.from(
+    document.querySelectorAll(".detail-blocks .block-copy, .detail-blocks .detail-text")
+  ).filter((el) => !el.closest(INTERACTIVE));
+
+  // Skip index 0 — that's the intro section, which is always left full.
+  foldables.slice(1).forEach((block) => {
+    const isHeading = (n) =>
+      n.nodeType === 1 && n.matches(".title-serif, .block-title, h2, h3, h4");
+    // Move everything except the heading(s) into a clip body; headings stay
+    // visible as the section handle above the fold.
+    const body = document.createElement("div");
+    body.className = "clip-body";
+    Array.from(block.childNodes).forEach((n) => {
+      if (isHeading(n)) return;
+      body.appendChild(n);
+    });
+    if (!body.textContent.trim()) return;   // heading-only block — nothing to clip
+    block.appendChild(body);
+
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "more-toggle";
+    btn.textContent = "Read more";
+    btn.setAttribute("aria-expanded", "false");
+    block.appendChild(btn);
+
+    const setOpen = (open) => {
+      body.classList.toggle("is-open", open);
+      body.classList.toggle("is-clipped", !open);
+      btn.classList.toggle("is-open", open);
+      btn.textContent = open ? "Read less" : "Read more";
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+    };
+    btn.addEventListener("click", () => setOpen(!body.classList.contains("is-open")));
+
+    const applyClip = () => {
+      if (mobileMQ.matches) {
+        setOpen(false);                       // start clipped
+        // Only fold when a meaningful amount is hidden (~2+ lines), so short
+        // sections don't get a pointless toggle.
+        const overflows = body.scrollHeight > body.clientHeight + 48;
+        btn.style.display = overflows ? "" : "none";
+        if (!overflows) body.classList.remove("is-clipped");
+      } else {
+        body.classList.remove("is-clipped", "is-open");
+        btn.style.display = "none";
+      }
+    };
+    applyClip();
+    onMobileChange(applyClip);
+  });
+
   /* ---- Deter image/video saving ------------------------------------- */
   // Not bulletproof (screenshots, devtools and direct URLs still work), but
   // it blocks right-click "Save image as…" and click-drag saving.

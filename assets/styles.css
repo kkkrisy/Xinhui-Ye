@@ -2677,6 +2677,48 @@ a.t-org:hover { color: var(--on-surface); }
   .reveal-init.is-inview { opacity: 1; transform: none; }
 }
 
+/* ---- Mobile read-more (phones): keep the first intro section on each detail
+   page full, and clip every later prose section to a few lines with a "Read
+   more" toggle so the page stays short and scannable. script.js wraps each
+   clipped block's copy in a .clip-body (leaving its heading visible) and only
+   adds the button when the copy actually overflows. With JS off, everything
+   shows in full and the toggle stays hidden. Desktop is untouched. */
+.more-toggle { display: none; }
+@media (max-width: 760px) {
+  .clip-body.is-clipped {
+    max-height: 7em;                 /* ~4 lines before the fade */
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to bottom, #000 58%, transparent);
+            mask-image: linear-gradient(to bottom, #000 58%, transparent);
+  }
+  .clip-body.is-open {
+    max-height: none;
+    -webkit-mask-image: none;
+            mask-image: none;
+  }
+  .more-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    font-family: var(--font-grotesque);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: .02em;
+    color: var(--secondary);
+  }
+  .more-toggle::after {
+    content: "\2193";                /* down arrow, flips when open */
+    font-size: 15px;
+    transition: transform .3s ease;
+  }
+  .more-toggle.is-open::after { transform: rotate(180deg); }
+}
+
 /* ---- Coaching frames (phones): the shared coach-frame box splits into two
    swipeable framed cards — one section per view, snap scrolling, dots below
    (script.js builds them). On desktop the frame stays a single stacked box,
