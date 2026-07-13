@@ -2497,9 +2497,11 @@ a.t-org:hover { color: var(--on-surface); }
 }
 .gallery-group:first-of-type { border-top: 0; padding-top: 0; }
 /* Text always takes the narrow column, images always the wide one —
-   flipping only swaps which side each lands on, never their widths. */
-.gallery-group__text  { grid-column: 1; }
-.gallery-group .thumb-grid { grid-column: 2; }
+   flipping only swaps which side each lands on, never their widths.
+   Both are pinned to row 1: without this, placing the DOM-first text
+   into column 2 on flipped groups pushes the images to a second row. */
+.gallery-group__text  { grid-column: 1; grid-row: 1; }
+.gallery-group .thumb-grid { grid-column: 2; grid-row: 1; }
 .gallery-group--flip { grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.82fr); }
 .gallery-group--flip .gallery-group__text  { grid-column: 2; }
 .gallery-group--flip .thumb-grid { grid-column: 1; }
@@ -2548,7 +2550,7 @@ a.t-org:hover { color: var(--on-surface); }
   .gallery-group__text,
   .gallery-group .thumb-grid,
   .gallery-group--flip .gallery-group__text,
-  .gallery-group--flip .thumb-grid { grid-column: auto; }
+  .gallery-group--flip .thumb-grid { grid-column: auto; grid-row: auto; }
   .gallery-group__text { position: static; }
   .gallery-group__note { max-width: 60ch; }
 }
