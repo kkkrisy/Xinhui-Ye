@@ -691,8 +691,25 @@ body.menu-open .nav-overlay__head { visibility: hidden; }
   cursor: pointer;
   display: inline-flex; align-items: center; justify-content: center;
   font-size: 18px;
+  transition: background-color .18s ease, border-color .18s ease, color .18s ease;
 }
-.round-btn:hover { background: var(--surface-container-high); }
+/* Carousel arrows flip into the site's mint pill on hover, matching every
+   other control. Gated to real pointers; :active / :focus-visible cover
+   touch-press and keyboard. */
+@media (hover: hover) {
+  .round-btn:hover {
+    background: var(--tertiary);
+    border-color: var(--tertiary);
+    color: var(--on-tertiary);
+  }
+}
+.round-btn:active,
+.round-btn:focus-visible {
+  background: var(--tertiary);
+  border-color: var(--tertiary);
+  color: var(--on-tertiary);
+  outline: none;
+}
 
 /* dot indicators */
 .dots { display: flex; gap: 6px; justify-content: center; margin-top: var(--space-sm); }
@@ -3290,6 +3307,20 @@ a.t-org:hover { color: var(--on-surface); }
   letter-spacing: 0.06em;
   text-transform: uppercase;
   pointer-events: none;
+  transition: background-color .18s ease, color .18s ease;
+}
+/* Sync with the site's mint hover language: the BOOK DETAILS pill flips to
+   mint when the cover is hovered or focused, like every other pill (text
+   stays navy). Gated to real pointers so it never latches on touch. */
+@media (hover: hover) {
+  .book-flip:hover .book-flip__hint {
+    background: var(--tertiary);
+    color: var(--on-tertiary);
+  }
+}
+.book-flip:focus-visible .book-flip__hint {
+  background: var(--tertiary);
+  color: var(--on-tertiary);
 }
 .book-flip.is-flipped .book-flip__front .book-flip__hint { visibility: hidden; }
 /* Larger screens: the cover is bigger, so let the chapter list breathe. */
