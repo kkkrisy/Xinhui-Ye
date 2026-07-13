@@ -1045,6 +1045,67 @@ textarea.field { height: auto; min-height: 140px; resize: vertical; padding-top:
   .music-lead .wrap-img { float: none; width: 100%; margin: 0 0 var(--space-md); }
 }
 
+/* The two recorded CDs: each cover sits in a sleeve with a record disc
+   peeking out to the right, an album title and a short note beneath. */
+.music-lead .cd-vinyl {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(28px, 5vw, 64px);
+  align-items: start;
+}
+.music-lead .vinyl-item { margin: 0; }
+.music-lead .vinyl-frame { position: relative; }
+.music-lead .vinyl-frame img {
+  position: relative;
+  z-index: 2;
+  width: 80%;
+  border-radius: 8px;
+  box-shadow: 0 16px 36px -18px rgba(0, 0, 0, 0.55);
+  display: block;
+}
+.music-lead .cd-disc {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  right: 0;
+  width: 56%;
+  padding-bottom: 56%;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  background: radial-gradient(circle at center,
+    #0b0b0f 0 11%, #f2f1ed 11% 13%, #17171d 13% 45%,
+    #3a3a44 45% 47%, #141419 47% 100%);
+  box-shadow: 0 16px 32px -16px rgba(0, 0, 0, 0.55);
+}
+.music-lead .vinyl-item figcaption { margin-top: 16px; max-width: 30ch; }
+.music-lead .cd-title {
+  display: block;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 21px;
+  color: var(--primary);
+}
+.music-lead .cd-meta {
+  display: block;
+  font-family: var(--font-grotesque);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #9a9aa2;
+  margin-top: 5px;
+}
+.music-lead .cd-desc {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--on-surface-body);
+  margin-top: 10px;
+}
+@media (max-width: 640px) {
+  .music-lead .cd-vinyl { grid-template-columns: 1fr; gap: 40px; }
+}
+
 /* Give the portrait a narrower column so it reads smaller beside the copy. */
 .music-intro-split { grid-template-columns: 0.82fr 1.18fr; }
 @media (max-width: 760px) { .music-intro-split { grid-template-columns: 1fr; } }
