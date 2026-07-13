@@ -1029,6 +1029,8 @@ textarea.field { height: auto; min-height: 140px; resize: vertical; padding-top:
 .music-lead .detail-text--lead { border: none; padding: 0; }
 .music-lead .detail-text--lead p,
 .music-lead .detail-text--lead .title-serif { color: var(--primary); }
+/* Copy inside the cream feature band sits straight on the ground, no box. */
+.music-lead .photo-feature .detail-text { border: none; padding: 0; }
 .detail-full .media-placeholder { aspect-ratio: 21 / 9; }
 
 /* AI&U opening showcase: the film leads at ~two-thirds width; the five final
