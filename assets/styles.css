@@ -1023,6 +1023,12 @@ textarea.field { height: auto; min-height: 140px; resize: vertical; padding-top:
   padding: var(--space-md);
   color: var(--on-surface-body);
 }
+
+/* Music page: the opening and closing read as page-level lead copy — navy
+   ink, no box — so they frame the boxed body sections between them. */
+.music-lead .detail-text--lead { border: none; padding: 0; }
+.music-lead .detail-text--lead p,
+.music-lead .detail-text--lead .title-serif { color: var(--primary); }
 .detail-full .media-placeholder { aspect-ratio: 21 / 9; }
 
 /* AI&U opening showcase: the film leads at ~two-thirds width; the five final
