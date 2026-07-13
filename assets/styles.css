@@ -1106,13 +1106,16 @@ textarea.field { height: auto; min-height: 140px; resize: vertical; padding-top:
 .music-lead .music-orch::after { content: ""; display: block; clear: both; }
 .music-lead .cd-scatter {
   float: left;
-  width: min(52%, 380px);
+  width: min(56%, 432px);
   margin: 6px var(--space-lg) var(--space-sm) 0;
   justify-content: flex-start;
   align-items: flex-start;
   gap: var(--space-sm) clamp(10px, 2vw, 22px);
 }
-.music-lead .cd-scatter .pola { width: clamp(132px, 22vw, 168px); }
+.music-lead .cd-scatter .pola { width: clamp(148px, 24vw, 192px); }
+/* Keep the wrapping copy from dropping a lone "repertoire." under the CDs:
+   let the browser balance the final lines instead of orphaning one word. */
+.music-lead .music-orch p { text-wrap: pretty; }
 @media (max-width: 640px) {
   .music-lead .cd-scatter {
     float: none;
@@ -1134,6 +1137,14 @@ textarea.field { height: auto; min-height: 140px; resize: vertical; padding-top:
 .music-intro-split .portrait-frame { grid-area: img; }
 .music-intro-split .music-lead-a { grid-area: texta; }
 .music-intro-split .music-lead-b { grid-area: textb; }
+/* Desktop: the tall portrait spans both text rows. Without this, the two
+   auto rows grow equally to match the portrait's height and shove a big gap
+   between "From childhood to adult" and "Listening is key". Make the second
+   row absorb all the slack so the two copy blocks stay grouped at the top and
+   the empty space falls below, beside the lower portrait. */
+@media (min-width: 761px) {
+  .music-intro-split { grid-template-rows: auto 1fr; }
+}
 /* Phones: single column — the first section leads, then the portrait, then the
    rest of the copy, so the image lands right after "From childhood to adult". */
 @media (max-width: 760px) {
@@ -2534,31 +2545,6 @@ a.t-org:hover { color: var(--on-surface); }
 }
 
 /* ---- Craft page: editorial "Index" spreads + lightbox ---------------- */
-
-/* Numbered contents list at the top of the gallery. */
-.craft-index {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-xs) var(--space-lg);
-  padding-bottom: var(--space-md);
-  margin-bottom: var(--space-xl);
-  border-bottom: 1px solid var(--outline-variant);
-}
-.craft-index a {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 8px;
-  font: 500 15px/1.3 var(--font-grotesque);
-  color: var(--on-surface-body);
-  text-decoration: none;
-  transition: color .2s ease;
-}
-.craft-index a b {
-  font-weight: 700;
-  color: var(--secondary);
-  letter-spacing: .04em;
-}
-.craft-index a:hover { color: var(--primary); }
 
 /* Each craft is a two-column spread; the text column and image column
    swap sides on alternating groups for an editorial rhythm. */
