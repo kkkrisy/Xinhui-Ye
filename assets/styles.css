@@ -1055,6 +1055,21 @@ textarea.field { height: auto; min-height: 140px; resize: vertical; padding-top:
   aspect-ratio: 3 / 4;
   overflow: hidden;
   border-radius: var(--radius-lg);
+  position: relative;
+}
+/* The zoom crops out the photo's baked-in credit, so restore it in the corner. */
+.music-lead .portrait-frame::after {
+  content: "\00A9 Xinhui Ye";
+  position: absolute;
+  right: 12px;
+  bottom: 10px;
+  font-family: var(--font-grotesque);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.78);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.55);
+  pointer-events: none;
 }
 .music-lead .portrait-frame img {
   width: 100% !important;
