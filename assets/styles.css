@@ -1061,7 +1061,7 @@ textarea.field { height: auto; min-height: 140px; resize: vertical; padding-top:
   height: 100% !important;
   object-fit: cover !important;
   object-position: 52% 57%;
-  transform: scale(1.28);
+  transform: scale(1.15);
   transform-origin: 52% 57%;
 }
 .detail-full .media-placeholder { aspect-ratio: 21 / 9; }
