@@ -1031,6 +1031,19 @@ textarea.field { height: auto; min-height: 140px; resize: vertical; padding-top:
 .music-lead .detail-text--lead .title-serif { color: var(--primary); }
 /* Copy inside the cream feature band sits straight on the ground, no box. */
 .music-lead .photo-feature .detail-text { border: none; padding: 0; }
+/* The orchestra photo floats inside the vice-leader copy so the text wraps
+   it rather than sitting under a full-width band. */
+.music-lead .music-wrap::after { content: ""; display: block; clear: both; }
+.music-lead .wrap-img {
+  float: right;
+  width: min(48%, 400px);
+  height: auto;
+  margin: 4px 0 var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-lg);
+}
+@media (max-width: 640px) {
+  .music-lead .wrap-img { float: none; width: 100%; margin: 0 0 var(--space-md); }
+}
 .detail-full .media-placeholder { aspect-ratio: 21 / 9; }
 
 /* AI&U opening showcase: the film leads at ~two-thirds width; the five final
