@@ -2464,7 +2464,14 @@ a.t-org:hover { color: var(--on-surface); }
   letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--on-surface-variant);
+  margin: 0 0 var(--space-xs);
+}
+.gallery-group__note {
+  max-width: 60ch;
   margin: 0 0 var(--space-sm);
+  color: var(--on-surface-variant);
+  font-size: 15px;
+  line-height: 1.6;
 }
 
 /* Masonry: columns of varied height, each photo keeps its true shape. */
