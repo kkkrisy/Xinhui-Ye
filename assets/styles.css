@@ -240,6 +240,27 @@ a { color: inherit; }
 .btn--outline { background: transparent; color: var(--on-surface); border-color: var(--outline); padding: 0 24px; }
 .btn--outline-on-dark { background: transparent; color: var(--inverse-on-surface); border-color: var(--inverse-on-surface); padding: 0 24px; }
 
+/* Creme outline pills (Back to highlights) fill into the site's mint pill on
+   hover — mint fill, navy text, mint frame, matching every other hover accent.
+   Hover only where a real pointer hovers so it never latches on a touch tap;
+   :active flashes mint during a press, :focus-visible covers the keyboard. */
+@media (hover: hover) {
+  .btn--outline:hover {
+    background: var(--tertiary);
+    border-color: var(--tertiary);
+    color: var(--on-tertiary);
+    opacity: 1;
+  }
+}
+.btn--outline:active,
+.btn--outline:focus-visible {
+  background: var(--tertiary);
+  border-color: var(--tertiary);
+  color: var(--on-tertiary);
+  opacity: 1;
+  outline: none;
+}
+
 /* small "READ" / "READ MORE" pills used on cards */
 .btn--sm { height: 36px; padding: 0 20px; font-size: 11px; }
 
