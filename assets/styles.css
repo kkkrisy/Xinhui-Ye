@@ -1045,10 +1045,26 @@ textarea.field { height: auto; min-height: 140px; resize: vertical; padding-top:
   .music-lead .wrap-img { float: none; width: 100%; margin: 0 0 var(--space-md); }
 }
 
-/* The two recorded CDs sit as taped snapshots; size them a little larger than
-   the default scatter polaroid and give the pair some room. */
-.music-lead .cd-scatter { gap: var(--space-md) clamp(24px, 5vw, 56px); padding-top: var(--space-sm); }
-.music-lead .cd-scatter .pola { width: clamp(200px, 30vw, 260px); }
+/* The two recorded CDs sit as taped snapshots floated to the left, with the
+   orchestra copy wrapping around them on the right. */
+.music-lead .music-orch::after { content: ""; display: block; clear: both; }
+.music-lead .cd-scatter {
+  float: left;
+  width: min(52%, 380px);
+  margin: 6px var(--space-lg) var(--space-sm) 0;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: var(--space-sm) clamp(10px, 2vw, 22px);
+}
+.music-lead .cd-scatter .pola { width: clamp(132px, 22vw, 168px); }
+@media (max-width: 640px) {
+  .music-lead .cd-scatter {
+    float: none;
+    width: 100%;
+    margin: 0 0 var(--space-md);
+    justify-content: center;
+  }
+}
 
 /* Give the portrait a narrower column so it reads smaller beside the copy. */
 .music-intro-split { grid-template-columns: 0.82fr 1.18fr; }
