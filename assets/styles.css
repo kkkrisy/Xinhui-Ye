@@ -1084,14 +1084,28 @@ textarea.field { height: auto; min-height: 140px; resize: vertical; padding-top:
   }
 }
 
-/* Give the portrait a narrower column so it reads smaller beside the copy. */
-.music-intro-split { grid-template-columns: 0.82fr 1.18fr; }
-/* Phones: single column, and the lead copy leads — the portrait follows below
-   it (DOM order is image-first for the desktop side-by-side). */
+/* Portrait in a narrower left column beside the copy; the lead splits into two
+   blocks (childhood / listening) so the same portrait can sit between them on
+   phones. Desktop: portrait spans both text rows on the left. */
+.music-intro-split {
+  grid-template-columns: 0.82fr 1.18fr;
+  grid-template-areas:
+    "img texta"
+    "img textb";
+}
+.music-intro-split .portrait-frame { grid-area: img; }
+.music-intro-split .music-lead-a { grid-area: texta; }
+.music-intro-split .music-lead-b { grid-area: textb; }
+/* Phones: single column — the first section leads, then the portrait, then the
+   rest of the copy, so the image lands right after "From childhood to adult". */
 @media (max-width: 760px) {
-  .music-intro-split { grid-template-columns: 1fr; }
-  .music-intro-split .portrait-frame { order: 2; }
-  .music-intro-split .detail-text--lead { order: 1; }
+  .music-intro-split {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "texta"
+      "img"
+      "textb";
+  }
 }
 
 /* The portrait is mostly dark studio backdrop; frame it to a 3:4 window and
