@@ -1036,7 +1036,7 @@ textarea.field { height: auto; min-height: 140px; resize: vertical; padding-top:
 .music-lead .music-wrap::after { content: ""; display: block; clear: both; }
 .music-lead .wrap-img {
   float: right;
-  width: min(64%, 560px);
+  width: min(72%, 640px);
   height: auto;
   margin: 4px 0 var(--space-sm) var(--space-lg);
   border-radius: var(--radius-lg);
@@ -1045,12 +1045,24 @@ textarea.field { height: auto; min-height: 140px; resize: vertical; padding-top:
   .music-lead .wrap-img { float: none; width: 100%; margin: 0 0 var(--space-md); }
 }
 
-/* Portrait runs tall; crop a little off the top and bottom so it sits closer
-   to the height of the intro copy beside it. */
-.music-lead .portrait-crop {
+/* Give the portrait a narrower column so it reads smaller beside the copy. */
+.music-intro-split { grid-template-columns: 0.82fr 1.18fr; }
+@media (max-width: 760px) { .music-intro-split { grid-template-columns: 1fr; } }
+
+/* The portrait is mostly dark studio backdrop; frame it to a 3:4 window and
+   zoom into the figure so the empty top/sides are trimmed away. */
+.music-lead .portrait-frame {
   aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+}
+.music-lead .portrait-frame img {
+  width: 100% !important;
+  height: 100% !important;
   object-fit: cover !important;
-  object-position: center 38%;
+  object-position: 52% 57%;
+  transform: scale(1.28);
+  transform-origin: 52% 57%;
 }
 .detail-full .media-placeholder { aspect-ratio: 21 / 9; }
 
