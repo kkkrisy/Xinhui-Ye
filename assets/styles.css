@@ -319,10 +319,10 @@ a { color: inherit; }
   font-weight: 800;
   color: var(--on-surface);
 }
-/* Link you're hovering: mint accent (matches the back-to-top hover). */
+/* Link you're hovering: coral signal — the same colour as the wordmark. */
 .nav-links a:hover {
   font-weight: 800;
-  color: var(--tertiary);
+  color: var(--secondary);
 }
 
 /* MENU pill (mobile) — Jess Hill style: navy pill with hamburger dashes in
