@@ -535,6 +535,39 @@ document.addEventListener("DOMContentLoaded", () => {
     onMobileChange(applyClip);
   });
 
+  /* ---- Observational deck (phones): picture-only cards ----------------
+     Each data-collection card (weekly diary, board, group reflection) shows
+     just its picture on phones; the whole caption — heading and copy — folds
+     behind a "Read more" toggle so the swipe reel stays compact. On desktop
+     the caption always shows and no toggle appears. */
+  document.querySelectorAll(".deck-stage .deck-card").forEach((card) => {
+    const col = card.querySelector(".deck-col");
+    const grid = card.querySelector(".deck-grid") || card;
+    if (!col) return;
+
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "more-toggle deck-more";
+    btn.textContent = "Read more";
+    btn.setAttribute("aria-expanded", "false");
+    grid.appendChild(btn);            // sits under the image; the caption slots between when open
+
+    const setOpen = (open) => {
+      col.classList.toggle("is-collapsed", !open);
+      btn.classList.toggle("is-open", open);
+      btn.textContent = open ? "Read less" : "Read more";
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+    };
+    btn.addEventListener("click", () => setOpen(col.classList.contains("is-collapsed")));
+
+    const applyCollapse = () => {
+      if (mobileMQ.matches) setOpen(false);         // phones: picture only, caption folded
+      else { col.classList.remove("is-collapsed"); } // desktop: caption always shown (toggle hidden via CSS)
+    };
+    applyCollapse();
+    onMobileChange(applyCollapse);
+  });
+
   /* ---- Deter image/video saving ------------------------------------- */
   // Not bulletproof (screenshots, devtools and direct URLs still work), but
   // it blocks right-click "Save image as…" and click-drag saving.
