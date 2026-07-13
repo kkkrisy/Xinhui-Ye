@@ -2457,30 +2457,91 @@ a.t-org:hover { color: var(--on-surface); }
   .hl-nav .label-short { display: inline; }
 }
 
-/* ---- Craft page: masonry gallery + lightbox -------------------------- */
-.gallery-group { margin-bottom: var(--space-lg); }
-.gallery-group > h2 {
+/* ---- Craft page: editorial "Index" spreads + lightbox ---------------- */
+
+/* Numbered contents list at the top of the gallery. */
+.craft-index {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs) var(--space-lg);
+  padding-bottom: var(--space-md);
+  margin-bottom: var(--space-xl);
+  border-bottom: 1px solid var(--outline-variant);
+}
+.craft-index a {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  font: 500 15px/1.3 var(--font-grotesque);
+  color: var(--on-surface-body);
+  text-decoration: none;
+  transition: color .2s ease;
+}
+.craft-index a b {
+  font-weight: 700;
+  color: var(--secondary);
+  letter-spacing: .04em;
+}
+.craft-index a:hover { color: var(--primary); }
+
+/* Each craft is a two-column spread; the text column and image column
+   swap sides on alternating groups for an editorial rhythm. */
+.gallery-group {
+  display: grid;
+  grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.4fr);
+  gap: var(--space-md) var(--space-lg);
+  align-items: start;
+  padding: var(--space-lg) 0;
+  border-top: 1px solid var(--outline-variant);
+  scroll-margin-top: 96px;
+}
+.gallery-group:first-of-type { border-top: 0; padding-top: 0; }
+.gallery-group--flip .gallery-group__text { order: 2; }
+
+/* The writing column — pins in place while the photos scroll past. */
+.gallery-group__text {
+  position: sticky;
+  top: 96px;
+}
+.gallery-group__num {
+  display: block;
   font: 700 13px/1 var(--font-grotesque);
   letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--on-surface-variant);
-  margin: 0 0 var(--space-xs);
+  color: var(--secondary);
+  margin-bottom: var(--space-sm);
+}
+.gallery-group > .gallery-group__text > h2 {
+  font: 800 clamp(24px, 3vw, 32px)/1.08 var(--font-grotesque);
+  letter-spacing: -0.02em;
+  text-transform: none;
+  color: var(--on-surface);
+  margin: 0 0 var(--space-sm);
+  text-wrap: balance;
 }
 .gallery-group__note {
-  max-width: 60ch;
-  margin: 0 0 var(--space-sm);
+  max-width: 42ch;
+  margin: 0;
   color: var(--on-surface-variant);
   font-size: 15px;
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
-/* Masonry: columns of varied height, each photo keeps its true shape. */
+/* Masonry within the image column: two columns of varied height,
+   each photo keeps its true shape. */
 .thumb-grid {
-  columns: 4 220px;
+  columns: 2 200px;
   column-gap: var(--space-xs);
 }
-@media (max-width: 900px) { .thumb-grid { columns: 3 180px; } }
-@media (max-width: 560px) { .thumb-grid { columns: 2 140px; } }
+@media (max-width: 1024px) { .thumb-grid { columns: 2 170px; } }
+@media (max-width: 560px)  { .thumb-grid { columns: 2 140px; } }
+
+/* Stack the spread on narrow screens; text no longer pins. */
+@media (max-width: 760px) {
+  .gallery-group { grid-template-columns: 1fr; gap: var(--space-md); }
+  .gallery-group--flip .gallery-group__text { order: 0; }
+  .gallery-group__text { position: static; }
+  .gallery-group__note { max-width: 60ch; }
+}
 .thumb {
   padding: 0;
   border: 0;
@@ -2987,8 +3048,7 @@ a.t-org:hover { color: var(--on-surface); }
     height: 100%;
     object-fit: cover;
   }
-  .gallery-group { margin-bottom: var(--space-xl); }
-  .gallery-group > h2 { font-size: 15px; margin-bottom: var(--space-sm); }
+  .gallery-group > .gallery-group__text > h2 { font-size: 26px; }
 }
 
 /* ---- Testimonials (phones): compact quotes, two in view ---------------- */
