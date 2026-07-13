@@ -1036,13 +1036,21 @@ textarea.field { height: auto; min-height: 140px; resize: vertical; padding-top:
 .music-lead .music-wrap::after { content: ""; display: block; clear: both; }
 .music-lead .wrap-img {
   float: right;
-  width: min(48%, 400px);
+  width: min(64%, 560px);
   height: auto;
   margin: 4px 0 var(--space-sm) var(--space-lg);
   border-radius: var(--radius-lg);
 }
 @media (max-width: 640px) {
   .music-lead .wrap-img { float: none; width: 100%; margin: 0 0 var(--space-md); }
+}
+
+/* Portrait runs tall; crop a little off the top and bottom so it sits closer
+   to the height of the intro copy beside it. */
+.music-lead .portrait-crop {
+  aspect-ratio: 3 / 4;
+  object-fit: cover !important;
+  object-position: center 38%;
 }
 .detail-full .media-placeholder { aspect-ratio: 21 / 9; }
 
