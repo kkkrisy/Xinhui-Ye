@@ -391,6 +391,27 @@ document.addEventListener("DOMContentLoaded", () => {
       applyMode();
       onMobileChange(applyMode);
 
+      // A matching Close control at the foot of each paper, so once you have
+      // read to the end (mobile fold) you can collapse the card right there
+      // instead of scrolling back up to its tab. Built in JS, so it never
+      // shows in the no-JS fallback where both papers are simply expanded;
+      // CSS reveals it only for the open card in the folded (mobile) mode.
+      cards.forEach((c) => {
+        const body = c.querySelector(".paper-body");
+        if (!body) return;
+        const close = document.createElement("button");
+        close.type = "button";
+        close.className = "paper-close";
+        close.setAttribute("aria-label", "Close this card");
+        close.innerHTML = "<span>Close</span>";
+        close.addEventListener("click", (e) => {
+          e.stopPropagation();
+          setFolded(c, false);
+          c.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+        body.appendChild(close);
+      });
+
       cards.forEach((c) => {
         // The whole card beneath is clickable (its exposed frame + tab); a
         // button in the tab keeps it keyboard-reachable and its click bubbles
