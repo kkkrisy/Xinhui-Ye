@@ -1086,7 +1086,13 @@ textarea.field { height: auto; min-height: 140px; resize: vertical; padding-top:
 
 /* Give the portrait a narrower column so it reads smaller beside the copy. */
 .music-intro-split { grid-template-columns: 0.82fr 1.18fr; }
-@media (max-width: 760px) { .music-intro-split { grid-template-columns: 1fr; } }
+/* Phones: single column, and the lead copy leads — the portrait follows below
+   it (DOM order is image-first for the desktop side-by-side). */
+@media (max-width: 760px) {
+  .music-intro-split { grid-template-columns: 1fr; }
+  .music-intro-split .portrait-frame { order: 2; }
+  .music-intro-split .detail-text--lead { order: 1; }
+}
 
 /* The portrait is mostly dark studio backdrop; frame it to a 3:4 window and
    zoom into the figure so the empty top/sides are trimmed away. */
