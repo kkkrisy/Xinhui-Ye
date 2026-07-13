@@ -3069,14 +3069,12 @@ a.t-org:hover { color: var(--on-surface); }
     background: var(--inverse-on-surface);
     color: var(--inverse-surface);
   }
-  /* Press / keyboard-focus feedback: the site's mint accent, matching the menu
-     close pill. (Hover is handled below, gated to real pointers.) */
-  .paper-stack.is-folded .paper-card.is-open .paper-close:active,
-  .paper-stack.is-folded .paper-card.is-open .paper-close:focus-visible,
-  .paper-stack.is-folded .paper-card[data-paper="mmm"].is-open .paper-close:active,
-  .paper-stack.is-folded .paper-card[data-paper="mmm"].is-open .paper-close:focus-visible,
-  .paper-stack.is-folded .paper-card[data-paper="pheno"].is-open .paper-close:active,
-  .paper-stack.is-folded .paper-card[data-paper="pheno"].is-open .paper-close:focus-visible {
+  /* Press / keyboard-focus feedback: the site's mint accent. Only the navy-fill
+     pills (on the cream papers) flip to mint — a cream pill stays cream, since
+     only navy buttons go mint across the site. (Hover is handled below, gated
+     to real pointers.) */
+  .paper-stack.is-folded .paper-card:not([data-paper="mmm"]):not([data-paper="pheno"]).is-open .paper-close:active,
+  .paper-stack.is-folded .paper-card:not([data-paper="mmm"]):not([data-paper="pheno"]).is-open .paper-close:focus-visible {
     background: var(--tertiary);
     color: var(--on-tertiary);
     border-color: var(--tertiary);
@@ -3085,12 +3083,11 @@ a.t-org:hover { color: var(--on-surface); }
 }
 
 /* Hover only where a real pointer hovers (so it never latches on a touch tap),
-   and only in the mobile fold where the Close pill exists. Navy or cream at
-   rest, mint on hover — the same navy→mint flip every other button uses. */
+   and only in the mobile fold where the Close pill exists. The navy pills flip
+   to mint; the cream pills (on the navy papers) stay cream — only navy buttons
+   go mint. */
 @media (max-width: 760px) and (hover: hover) {
-  .paper-stack.is-folded .paper-card.is-open .paper-close:hover,
-  .paper-stack.is-folded .paper-card[data-paper="mmm"].is-open .paper-close:hover,
-  .paper-stack.is-folded .paper-card[data-paper="pheno"].is-open .paper-close:hover {
+  .paper-stack.is-folded .paper-card:not([data-paper="mmm"]):not([data-paper="pheno"]).is-open .paper-close:hover {
     background: var(--tertiary);
     color: var(--on-tertiary);
     border-color: var(--tertiary);

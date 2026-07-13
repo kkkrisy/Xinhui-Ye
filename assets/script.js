@@ -506,7 +506,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ".coach-frame--swipe, [data-carousel], .testimonials, .gallery-group, .photo-scatter";
   const foldables = Array.from(
     document.querySelectorAll(".detail-blocks .block-copy, .detail-blocks .detail-text")
-  ).filter((el) => !el.closest(INTERACTIVE));
+  ).filter((el) => !el.closest(INTERACTIVE) && !el.closest("[data-no-clip]"));
 
   // Skip index 0 — that's the intro section, which is always left full.
   foldables.slice(1).forEach((block) => {
