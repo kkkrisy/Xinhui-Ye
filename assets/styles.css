@@ -3318,3 +3318,376 @@ a.t-org:hover { color: var(--on-surface); }
 @media (prefers-reduced-motion: reduce) {
   .book-flip__inner { transition: none; }
 }
+
+/* ---- Nisse — Designed with AI (highlight detail) ----------------------
+   The Nisse case study borrows the app's own muted, dusty palette for its
+   figures (sampled from the running app), while the page chrome stays in
+   the site's indigo/cream system. Everything here is flat — depth comes
+   from the cream feature bands, never shadow — and deliberately still:
+   the product's "calm is a feature" principle applies to its case study. */
+
+/* Three "what tools get wrong" cards share the answer-card stock */
+.nisse-wrongs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+}
+.nisse-wrongs .answer-card { background: var(--surface); }
+.nisse-wrongs .answer-card .title-serif { margin: 0 0 var(--space-xs); }
+.nisse-wrongs .answer-card p:last-child { color: var(--on-surface-body); margin: 0; }
+@media (max-width: 860px) { .nisse-wrongs { grid-template-columns: 1fr; } }
+
+/* Positioning map — flat SVG on the cream band */
+.nisse-map { margin: 0; }
+.nisse-map svg {
+  display: block;
+  width: 100%;
+  max-width: 820px;
+  margin: 0 auto;
+  height: auto;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+}
+.nisse-map .map-axis {
+  font-family: var(--font-grotesque);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  fill: var(--on-surface-variant);
+}
+.nisse-map .map-label {
+  font-family: var(--font-grotesque);
+  font-size: 13px;
+  fill: var(--on-surface-variant);
+}
+.nisse-map .map-nisse {
+  font-family: var(--font-grotesque);
+  font-size: 16px;
+  font-weight: 700;
+  fill: #fffef9;
+}
+.nisse-map .caption { text-align: center; margin-top: var(--space-sm); }
+
+/* Four principles — a text-led numbered grid, on purpose */
+.nisse-principles {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+.nisse-principles li {
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-lg);
+  padding: clamp(24px, 3vw, 36px);
+}
+.nisse-principles .np-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-full);
+  background: var(--primary);
+  color: var(--on-primary);
+  font-family: var(--font-grotesque);
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: var(--space-sm);
+}
+.nisse-principles .np-title {
+  font-family: var(--font-grotesque);
+  font-weight: 700;
+  font-size: 19px;
+  color: var(--primary);
+  margin: 0 0 var(--space-xs);
+}
+.nisse-principles .np-desc {
+  font-size: 16px;
+  line-height: 26px;
+  color: var(--on-surface-body);
+  margin: 0;
+}
+@media (max-width: 760px) { .nisse-principles { grid-template-columns: 1fr; } }
+
+/* The life of a task — five stations on one continuous line */
+.nisse-journey-wrap { margin: 0; }
+.nisse-journey {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-md);
+  position: relative;
+}
+/* the connecting line runs behind the blobs, through their centers */
+.nisse-journey::before {
+  content: "";
+  position: absolute;
+  top: 17px;
+  left: 4%;
+  right: 4%;
+  height: 2px;
+  background: var(--outline-variant);
+}
+.nisse-journey li { position: relative; }
+.nisse-journey .nj-blob {
+  display: block;
+  width: 34px;
+  height: 34px;
+  background: var(--njc, #b9b7ae);
+  border-radius: 46% 54% 52% 48% / 55% 46% 54% 45%;
+  margin-bottom: var(--space-sm);
+}
+.nisse-journey .nj-title {
+  font-family: var(--font-grotesque);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--primary);
+  margin: 0 0 6px;
+}
+.nisse-journey .nj-desc {
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--on-surface-variant);
+  margin: 0;
+}
+/* station 4 is a side path — optional, so it reads dashed */
+.nisse-journey .nj-optional .nj-blob {
+  background: var(--surface);
+  border: 2px dashed var(--njc, #8d9eae);
+}
+.nisse-journey-wrap .caption { margin-top: var(--space-md); }
+@media (max-width: 860px) {
+  .nisse-journey { grid-template-columns: 1fr; gap: var(--space-md); }
+  .nisse-journey::before {
+    top: 4%;
+    bottom: 4%;
+    left: 16px;
+    right: auto;
+    width: 2px;
+    height: auto;
+  }
+  .nisse-journey li { padding-left: 56px; }
+  .nisse-journey .nj-blob { position: absolute; left: 0; top: 0; }
+}
+
+/* The household pulse — two moods, nestled CSS blobs, deliberately static */
+.nisse-pebbles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+.nisse-pebble-fig { margin: 0; text-align: center; }
+.nisse-pebble {
+  position: relative;
+  width: min(100%, 380px);
+  aspect-ratio: 1 / 0.92;
+  margin: 0 auto;
+}
+.nisse-pebble .pb {
+  position: absolute;
+  background: var(--c, #b9b7ae);
+  border: 5px solid #f3efe3;      /* cream seams between cells */
+}
+/* calm week: cells roughly even, nestled like packed lily pads */
+.pb-a { width: 38%; height: 36%; left: 8%;  top: 6%;  border-radius: 55% 45% 48% 52% / 52% 55% 45% 48%; }
+.pb-b { width: 34%; height: 33%; left: 44%; top: 2%;  border-radius: 47% 53% 55% 45% / 55% 48% 52% 45%; }
+.pb-c { width: 33%; height: 32%; left: 4%;  top: 40%; border-radius: 52% 48% 45% 55% / 48% 52% 55% 45%; }
+.pb-d { width: 36%; height: 35%; left: 36%; top: 36%; border-radius: 45% 55% 52% 48% / 52% 45% 48% 55%; }
+.pb-e { width: 30%; height: 29%; left: 66%; top: 33%; border-radius: 55% 45% 55% 45% / 45% 55% 45% 55%; }
+.pb-f { width: 32%; height: 30%; left: 30%; top: 66%; border-radius: 48% 52% 47% 53% / 55% 45% 55% 45%; }
+/* busy week: the kitchen swells, the shape leans */
+.nisse-pebble--busy .pb-a { width: 48%; height: 46%; left: 2%; top: 2%; }
+.nisse-pebble--busy .pb-c { width: 40%; height: 38%; left: 2%; top: 48%; }
+.nisse-pebble--busy .pb-d { width: 32%; height: 31%; left: 44%; top: 42%; }
+.nisse-pebble--busy .pb-e { width: 24%; height: 23%; left: 72%; top: 36%; }
+.nisse-pebble--busy .pb-f { width: 26%; height: 24%; left: 40%; top: 72%; }
+/* state dot rides the blob's edge */
+.pb-dot {
+  position: absolute;
+  right: 6%;
+  top: 8%;
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-full);
+  border: 3px solid #f3efe3;
+}
+.pb-dot--amber { background: #c89b62; }
+.pb-dot--red   { background: #cb3034; }
+/* the qualitative center */
+.nisse-pebble .pb-core {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  transform: translate(-50%, -50%);
+  background: var(--surface);
+  border-radius: var(--radius-full);
+  padding: 12px 22px;
+  text-align: center;
+  white-space: nowrap;
+}
+.nisse-pebble .pb-core strong {
+  display: block;
+  font-family: var(--font-grotesque);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--primary);
+}
+.nisse-pebble .pb-core em {
+  display: block;
+  font-style: normal;
+  font-size: 12px;
+  color: var(--on-surface-variant);
+}
+.nisse-pebble-fig .caption { margin-top: var(--space-sm); }
+@media (max-width: 760px) { .nisse-pebbles { grid-template-columns: 1fr; gap: var(--space-lg); } }
+
+/* Palette board — blob swatches, not squares */
+.nisse-palette { margin: 0; }
+.nisse-swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  justify-content: center;
+}
+.nisse-swatches .sw {
+  text-align: center;
+  font-family: var(--font-grotesque);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--on-surface-variant);
+}
+.nisse-swatches .sw::before {
+  content: "";
+  display: block;
+  width: 74px;
+  height: 68px;
+  margin: 0 auto 8px;
+  background: var(--c);
+  border-radius: 52% 48% 45% 55% / 48% 55% 45% 52%;
+}
+.nisse-swatches .sw:nth-child(even)::before { border-radius: 45% 55% 52% 48% / 55% 45% 52% 48%; }
+.nisse-swatches .sw b {
+  display: block;
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.nisse-states {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm) var(--space-lg);
+  justify-content: center;
+  margin-top: var(--space-md);
+}
+.nisse-states .st {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-grotesque);
+  font-size: 13px;
+  color: var(--on-surface-body);
+}
+.nisse-states .st i {
+  width: 12px;
+  height: 12px;
+  border-radius: var(--radius-full);
+  background: var(--c);
+}
+.nisse-palette .caption {
+  text-align: center;
+  max-width: 640px;
+  margin: var(--space-md) auto 0;
+}
+
+/* Wireframe boards: transparent PNGs sit straight on the ground */
+.nisse-board img { border-radius: 0; }
+.nisse-board .caption { margin-top: var(--space-sm); }
+.nisse-board--narrow { max-width: 300px; }
+
+/* IA map — one card per surface, nodes as quiet rows */
+.nisse-ia {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-md);
+}
+.ia-col {
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+}
+.ia-head {
+  font-family: var(--font-grotesque);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin: 0 0 var(--space-sm);
+}
+.ia-node {
+  display: block;
+  font-size: 14px;
+  line-height: 21px;
+  color: var(--on-surface-body);
+  padding: 7px 0;
+}
+.ia-node + .ia-node { border-top: 1px solid var(--outline-variant); }
+.ia-node--dev {
+  color: var(--on-surface-variant);
+  font-style: italic;
+}
+@media (max-width: 1024px) { .nisse-ia { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px)  { .nisse-ia { grid-template-columns: 1fr; } }
+
+/* Kit pairing: the narrow shopping board beside its note */
+.nisse-kit { display: flex; flex-direction: column; gap: var(--space-lg); }
+.nisse-kit-pair {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: var(--space-lg);
+  align-items: center;
+}
+@media (max-width: 760px) {
+  .nisse-kit-pair { grid-template-columns: 1fr; }
+  .nisse-board--narrow { max-width: 260px; margin-inline: auto; }
+}
+
+/* The graveyard — a respectful archive, desaturated on purpose */
+.nisse-graveyard {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+.nisse-graveyard .grave {
+  background: var(--surface-container-high);
+  border-radius: var(--radius-lg);
+  padding: clamp(24px, 3vw, 36px);
+}
+.grave-title {
+  font-family: var(--font-grotesque);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--on-surface-variant);
+  margin: 0 0 var(--space-sm);
+}
+.grave-desc {
+  font-size: 15px;
+  line-height: 25px;
+  color: var(--on-surface-variant);
+  margin: 0 0 var(--space-sm);
+}
+.grave-epitaph {
+  font-style: italic;
+  font-size: 15px;
+  color: var(--on-surface-body);
+  margin: 0;
+}
+@media (max-width: 760px) { .nisse-graveyard { grid-template-columns: 1fr; } }

@@ -3,3 +3,6 @@
 assets/_originals/
 
 .DS_Store
+
+# Python bytecode from local tool runs
+__pycache__/
