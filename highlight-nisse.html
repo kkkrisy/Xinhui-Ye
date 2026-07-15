@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Xinhui Ye — Nisse, Designed with AI</title>
+  <meta name="description" content="Nisse — a calm home-management app for couples, designed end to end in an AI-native loop with Claude, Claude Code and VS Code." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Spectral:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <meta name="theme-color" content="#333462" />
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+
+  <header class="site-nav" id="top">
+    <a class="site-wordmark" href="index.html">Xinhui Ye</a>
+    <nav class="nav-pill" aria-label="Primary">
+      <div class="nav-links">
+        <a href="index.html">About</a>
+        <a href="highlights.html" aria-current="page">Highlights</a>
+        <a href="craft.html">Craft</a>
+        <a href="contact.html">Get in touch</a>
+      </div>
+      <button class="menu-toggle" data-menu-open aria-label="Open menu"><span>Menu</span><span class="menu-icon" aria-hidden="true"></span></button>
+    </nav>
+  </header>
+
+  <div class="nav-overlay" aria-hidden="true">
+    <div class="nav-overlay__head">
+      <span class="nav-overlay__brand">Xinhui Ye</span>
+      <button class="menu-toggle menu-close" data-menu-close aria-label="Close menu"><span>Menu</span><span class="menu-icon menu-icon--x" aria-hidden="true"></span></button>
+    </div>
+    <nav class="nav-overlay__links" aria-label="Mobile">
+      <a href="index.html">About</a>
+      <a href="highlights.html" aria-current="page">Highlights</a>
+      <a href="craft.html">Craft</a>
+      <a href="contact.html">Get in touch</a>
+    </nav>
+    <div class="nav-overlay__foot">
+      <a class="nav-overlay__mail" href="mailto:kristinyxh@gmail.com">kristinyxh@gmail.com</a>
+      <div class="nav-overlay__social">
+        <a href="https://www.linkedin.com/in/xinhui-ye-673a63150" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://scholar.google.nl/citations?hl=en&user=P7ArCXEAAAAJ" target="_blank" rel="noopener">Google Scholar</a>
+        <a href="https://www.instagram.com/kkkrisy_/" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <section class="band defense-playful nisse-page" style="padding-top: var(--space-lg);">
+      <div class="container">
+        <h1 class="headline-lg" style="margin-bottom: var(--space-lg);">Nisse, Designed with AI</h1>
+
+        <div class="detail-blocks">
+
+          <!-- ===== Intro: the film leads, the pitch beside it ===== -->
+          <div class="photo-block photo-block--plain photo-block--wide" style="align-items: start;">
+            <div class="media media--film">
+              <video class="film" autoplay muted loop playsinline controls controlsList="nodownload noplaybackrate noremoteplayback" disablePictureInPicture disableRemotePlayback preload="metadata" poster="assets/nisse-poster.jpg" oncontextmenu="return false">
+                <source src="assets/nisse-promo.mp4" type="video/mp4" />
+                Your browser can&rsquo;t play this video.
+              </video>
+            </div>
+            <div class="block-copy" style="align-self: stretch; display: flex; flex-direction: column;">
+              <p class="title-serif">A calm home for invisible work</p>
+              <p class="block-desc">Nisse is a home-management app for couples who share a household &mdash; named after the Scandinavian house spirit that quietly keeps a home in order. Most task apps help one person manage a home. Nisse helps two people <em>share</em> one, including the part nobody sees: noticing, planning, and remembering.</p>
+              <p class="block-desc">It is also a proof of a new way of working. After years of researching how designers collaborate, I designed this end to end in an AI-native loop &mdash; Claude as a thinking partner, Claude Code inside VS Code turning the design system into the working app the film shows. What people call vibe coding, held to a designer&rsquo;s standard.</p>
+              <div class="tag-row" style="margin-top: auto; padding-top: var(--space-md);">
+                <span class="tag">Product strategy</span>
+                <span class="tag">UX</span>
+                <span class="tag">Visual system</span>
+                <span class="tag">VS Code</span>
+                <span class="tag">Claude Code</span>
+                <span class="tag">Claude</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ===== How it was made — the AI-native loop ===== -->
+          <div class="block-copy detail-prose">
+            <p class="title-serif">How it was made</p>
+            <p class="block-desc">Everything on this page came out of one loop: think a question through in conversation with Claude, decide as a designer, build it immediately with Claude Code in VS Code, then judge the result on a real screen and go again. Strategy, wireframes, information architecture, the design language, the running prototype in the film &mdash; same loop, different altitudes.</p>
+            <p class="block-desc">What changes with AI is not the craft; it is the distance. An idea used to take a week to become something you could hold &mdash; now it takes an evening, so I could afford to build four directions and throw three away. And when production gets that cheap, judgment becomes the whole job: knowing what to ask, what to test, and what to reject. That part is the same muscle research trained &mdash; it just gets exercised at product speed.</p>
+          </div>
+
+          <!-- ===== The problem ===== -->
+          <div class="detail-text">
+            <p class="title-serif">Chores get split. Mental load doesn&rsquo;t.</p>
+            <p>In most households the physical work is negotiable. What rarely gets shared is the cognitive work around it: knowing the filter needs replacing, remembering when the plants were last watered, deciding that the bathroom can wait but the fridge can&rsquo;t. Researchers call this <strong>cognitive household labor</strong> &mdash; anticipating, deciding, monitoring. It&rsquo;s continuous, it&rsquo;s invisible, and it tends to land on one partner by default. That person becomes the household&rsquo;s project manager without ever applying for the job.</p>
+            <p>The consequence isn&rsquo;t just fatigue. It&rsquo;s resentment that neither partner can quite name, because from the outside, the work doesn&rsquo;t exist. That tension shaped every decision in this project.</p>
+          </div>
+
+          <figure class="pull-quote">
+            <svg class="pull-quote__mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h7v7c0 3.9-2.4 6.5-6 7.5l-1-2c2.1-.7 3.3-1.9 3.6-3.5H4V4zm9 0h7v7c0 3.9-2.4 6.5-6 7.5l-1-2c2.1-.7 3.3-1.9 3.6-3.5H13V4z"/></svg>
+            <blockquote>How do you make invisible work visible &mdash;<br />without turning a relationship into a scoreboard?</blockquote>
+          </figure>
+
+          <!-- ===== Research & landscape ===== -->
+          <div class="photo-feature">
+            <div class="detail-text">
+              <p class="title-serif">What existing tools get wrong</p>
+              <p>I mapped the landscape &mdash; family organizers (Cozi, OurHome), chore apps (Tody), reminder tools, couple-focused apps. Three patterns kept repeating:</p>
+            </div>
+            <div class="nisse-wrongs">
+              <div class="answer-card">
+                <p class="title-serif">Individual-first</p>
+                <p>Almost every tool models a household as one owner who delegates. Whoever sets up the app becomes the manager &mdash; again. The app reproduces the very dynamic it should dissolve.</p>
+              </div>
+              <div class="answer-card">
+                <p class="title-serif">Deadlines and guilt</p>
+                <p>Hard due dates for work that is inherently soft. Cleaning the windows isn&rsquo;t due Tuesday at 9:00; it&rsquo;s due <em>roughly this month</em>. Fixed deadlines manufacture artificial failure &mdash; red badges for a home that is actually fine.</p>
+              </div>
+              <div class="answer-card">
+                <p class="title-serif">Gamification</p>
+                <p>Points, streaks, leaderboards. Gamification turns partners into competitors and care into currency. Nobody wants to be told they&rsquo;re &ldquo;losing&rdquo; at their own home.</p>
+              </div>
+            </div>
+            <div class="detail-text">
+              <p>The problem was never task storage &mdash; every app stores tasks. The problem is <strong>awareness asymmetry</strong>: one person holds the model of the household in their head, and the tools reinforce it.</p>
+            </div>
+
+            <!-- Positioning map, rebuilt flat in the site's language -->
+            <figure class="nisse-map" role="img" aria-label="Positioning map: competitors cluster in the individual-first, deadline-driven corner; Nisse sits alone in the calm, household-first corner.">
+              <svg viewBox="0 0 820 520" xmlns="http://www.w3.org/2000/svg">
+                <!-- axes -->
+                <line x1="60" y1="260" x2="760" y2="260" stroke="#c9c7bd" stroke-width="1.5" />
+                <line x1="410" y1="40" x2="410" y2="480" stroke="#c9c7bd" stroke-width="1.5" />
+                <!-- axis labels -->
+                <text x="66" y="248" class="map-axis">individual-first</text>
+                <text x="754" y="248" text-anchor="end" class="map-axis">household-first</text>
+                <text x="422" y="56" class="map-axis">rhythm &amp; calm</text>
+                <text x="422" y="474" class="map-axis">deadlines &amp; gamification</text>
+                <!-- competitor pebbles, lower-left -->
+                <ellipse cx="150" cy="392" rx="17" ry="15" fill="#b9b7ae" />
+                <text x="150" y="424" text-anchor="middle" class="map-label">Cozi</text>
+                <ellipse cx="236" cy="352" rx="15" ry="14" fill="#b9b7ae" />
+                <text x="236" y="382" text-anchor="middle" class="map-label">OurHome</text>
+                <ellipse cx="192" cy="318" rx="13" ry="12" fill="#c4c2b9" />
+                <text x="192" y="296" text-anchor="middle" class="map-label">Tody</text>
+                <ellipse cx="300" cy="416" rx="14" ry="13" fill="#c4c2b9" />
+                <text x="300" y="446" text-anchor="middle" class="map-label">reminder apps</text>
+                <!-- Nisse, alone upper-right -->
+                <path d="M628 128 c26 -14 58 -8 70 14 c12 22 2 50 -22 62 c-24 12 -54 6 -66 -14 c-12 -20 -6 -48 18 -62 z" fill="#a78792" />
+                <text x="654" y="166" text-anchor="middle" class="map-nisse">Nisse</text>
+              </svg>
+              <figcaption class="caption">Every existing tool crowds one corner. The calm, household-first quadrant was empty.</figcaption>
+            </figure>
+          </div>
+
+          <!-- ===== Four principles ===== -->
+          <div class="block-copy detail-prose">
+            <p class="title-serif">Four principles, written before any screen</p>
+            <p class="block-desc">Every later decision was tested against them.</p>
+          </div>
+          <ol class="nisse-principles">
+            <li>
+              <span class="np-num">1</span>
+              <p class="np-title">Household-first, not user-first.</p>
+              <p class="np-desc">The home is the primary object, not the account holder. Tasks belong to the household. There is no admin.</p>
+            </li>
+            <li>
+              <span class="np-num">2</span>
+              <p class="np-title">A mirror, not a scoreboard.</p>
+              <p class="np-desc">Fairness data exists for reflection, never for competition. No points, no streaks, no numeric scores anywhere.</p>
+            </li>
+            <li>
+              <span class="np-num">3</span>
+              <p class="np-title">Rhythm over deadlines.</p>
+              <p class="np-desc">Domestic work moves in cadences, not due dates. Tasks live in soft time windows and only get a fixed date when a person deliberately promotes them.</p>
+            </li>
+            <li>
+              <span class="np-num">4</span>
+              <p class="np-title">Calm is a feature.</p>
+              <p class="np-desc">The resting state of the app is quiet. Motion is reserved for onboarding and transitions. The app should lower the temperature of the household, not raise it.</p>
+            </li>
+          </ol>
+
+          <!-- ===== Core concept ===== -->
+          <div class="detail-text">
+            <p class="title-serif">The core concept: a shared pool, in soft time</p>
+            <p>In Nisse, tasks are created without an owner. They sit in a shared household pool, visible to both partners, and are <strong>claimed at pickup &mdash; not assigned at creation</strong>. This one structural choice removes the delegation dynamic entirely. Nobody hands out work; nobody nags. The question shifts from &ldquo;did you do what I asked&rdquo; to &ldquo;what does our home need, and what will I pick up.&rdquo;</p>
+            <p>Recurring chores carry a rhythm (&ldquo;every ~2 weeks&rdquo;) instead of a deadline. Inside their window they float freely; as the window ripens, their state shifts gently. Only genuinely broken rhythms turn red &mdash; not the passing of a Tuesday. Any floating task can be <strong>promoted</strong> to a settled calendar date when life demands it: guests on Saturday, and the bathroom gets a real date. And once a month, Nisse offers a gentle retrospective of how the household&rsquo;s work actually distributed itself &mdash; a conversation starter for two adults, never a verdict. The mirror shows; it doesn&rsquo;t judge.</p>
+          </div>
+
+          <!-- The life of a task, as one strip -->
+          <figure class="nisse-journey-wrap">
+            <ol class="nisse-journey">
+              <li>
+                <span class="nj-blob" style="--njc:#b9b7ae"></span>
+                <p class="nj-title">Born ownerless</p>
+                <p class="nj-desc">Created straight into the shared pool. No name attached, no avatar.</p>
+              </li>
+              <li>
+                <span class="nj-blob" style="--njc:#a9bca0"></span>
+                <p class="nj-title">Floating in its window</p>
+                <p class="nj-desc">Lives in a rhythm, not a deadline. Ripens gently as the window closes.</p>
+              </li>
+              <li>
+                <span class="nj-blob" style="--njc:#a78792"></span>
+                <p class="nj-title">Claimed</p>
+                <p class="nj-desc">Takes a partner&rsquo;s color at the moment of pickup &mdash; not at creation.</p>
+              </li>
+              <li class="nj-optional">
+                <span class="nj-blob" style="--njc:#8d9eae"></span>
+                <p class="nj-title">Promoted, if life demands</p>
+                <p class="nj-desc">&ldquo;Guests on Saturday&rdquo; &mdash; a floating chore settles onto a real date. Optional, reversible.</p>
+              </li>
+              <li>
+                <span class="nj-blob" style="--njc:#859d85"></span>
+                <p class="nj-title">Reflected in the mirror</p>
+                <p class="nj-desc">Becomes proportion in the monthly recap &mdash; never points.</p>
+              </li>
+            </ol>
+            <figcaption class="caption">The life of a task &mdash; the conceptual spine of the product.</figcaption>
+          </figure>
+
+          <!-- ===== The visual system ===== -->
+          <div class="photo-feature photo-feature--navy-titles">
+            <div class="detail-text">
+              <p class="title-serif">The visual system: load you can see</p>
+              <p>Abstract, organic blobs are the core visual unit. Each life-zone of the home &mdash; kitchen, bathroom, plants, deep clean &mdash; is a blob, <strong>sized by its current workload</strong>. The mental load of the household literally becomes visible area: you feel a heavy zone before you read a single word. Early explorations with literal &ldquo;digital twin&rdquo; floor plans were abandoned &mdash; literal representation invites literal thinking; abstraction lets size, color and state carry the meaning. Zones aren&rsquo;t only rooms, either: &ldquo;plants&rdquo; and &ldquo;deep clean&rdquo; sit alongside place-blocks as equals, because that&rsquo;s how the work actually feels.</p>
+              <p>The top of the home screen answers one question at a glance &mdash; <em>how is our home doing?</em> &mdash; with a pebble: the zone blobs nestled into one organic shape, each cell&rsquo;s area reflecting its zone&rsquo;s load, a qualitative phrase at the center. Never a number, never a percentage. A home doesn&rsquo;t have a score.</p>
+            </div>
+
+            <!-- The pulse pebble, two moods, built flat in CSS -->
+            <div class="nisse-pebbles">
+              <figure class="nisse-pebble-fig">
+                <div class="nisse-pebble" aria-hidden="true">
+                  <span class="pb pb-a" style="--c:#a78792"></span>
+                  <span class="pb pb-b" style="--c:#8d9eae"></span>
+                  <span class="pb pb-c" style="--c:#859d85"></span>
+                  <span class="pb pb-d" style="--c:#939475"></span>
+                  <span class="pb pb-e" style="--c:#ad827c"></span>
+                  <span class="pb pb-f" style="--c:#7e918f"></span>
+                  <span class="pb-core"><strong>mostly calm</strong><em>maybe water the plants</em></span>
+                </div>
+                <figcaption class="caption">A calm week &mdash; even cells, one quiet suggestion.</figcaption>
+              </figure>
+              <figure class="nisse-pebble-fig">
+                <div class="nisse-pebble nisse-pebble--busy" aria-hidden="true">
+                  <span class="pb pb-a" style="--c:#a78792"><i class="pb-dot pb-dot--amber"></i></span>
+                  <span class="pb pb-b" style="--c:#8d9eae"></span>
+                  <span class="pb pb-c" style="--c:#859d85"><i class="pb-dot pb-dot--red"></i></span>
+                  <span class="pb pb-d" style="--c:#939475"></span>
+                  <span class="pb pb-e" style="--c:#ad827c"></span>
+                  <span class="pb pb-f" style="--c:#7e918f"></span>
+                  <span class="pb-core"><strong>the kitchen is ripening</strong><em>one thing needs you</em></span>
+                </div>
+                <figcaption class="caption">A busier week &mdash; the heavy zones swell, states shift, the shape breathes.</figcaption>
+              </figure>
+            </div>
+
+            <div class="detail-text">
+              <p>The encoding stays small on purpose. <strong>Size</strong> is the amount of open work in a zone. <strong>A muted, dusty hue plus an icon</strong> is the zone&rsquo;s identity &mdash; each color desaturated enough to coexist with every other on one screen without noise. <strong>A small dot on the blob&rsquo;s edge</strong> is state: pastel for calm, amber for ripening, and red strictly reserved for genuinely overdue. Copy follows the same restraint &mdash; qualitative everywhere the product could have used a number. &ldquo;Mostly calm.&rdquo; &ldquo;The kitchen is ripening.&rdquo; The interface talks like a considerate housemate, not a project tracker. And motion is reserved for onboarding and transitions: the resting home screen is completely still, which is why these figures don&rsquo;t move either.</p>
+            </div>
+
+            <!-- Palette, sampled from the working app -->
+            <figure class="nisse-palette">
+              <div class="nisse-swatches">
+                <span class="sw" style="--c:#a78792"><b>heather</b>#A78792</span>
+                <span class="sw" style="--c:#ad827c"><b>clay</b>#AD827C</span>
+                <span class="sw" style="--c:#939475"><b>olive</b>#939475</span>
+                <span class="sw" style="--c:#8d9eae"><b>slate</b>#8D9EAE</span>
+                <span class="sw" style="--c:#859d85"><b>moss</b>#859D85</span>
+                <span class="sw" style="--c:#7e918f"><b>lichen</b>#7E918F</span>
+              </div>
+              <div class="nisse-states">
+                <span class="st"><i style="--c:#a9bca0"></i>calm</span>
+                <span class="st"><i style="--c:#c89b62"></i>ripening</span>
+                <span class="st"><i style="--c:#cb3034"></i>overdue &mdash; the only red in the app, and it&rsquo;s warm</span>
+              </div>
+              <figcaption class="caption">Zone fills sampled straight from the running app. Dark mode is specified pair by pair as its own system &mdash; warm dark ground, fills lifted rather than inverted &mdash; and follows the OS automatically: one less household decision.</figcaption>
+            </figure>
+
+            <!-- The space lens board -->
+            <figure class="detail-figure nisse-board">
+              <img src="assets/nisse-wireframe-2.png" alt="Wireframe board of the home space lens: the blob map with household pulse, plus the hidden edit modes — spacing sliders, color themes, managing and adding blobs" loading="lazy" />
+              <figcaption class="caption">The space lens &mdash; the blob map is the default view; editing hides behind a long-press so the resting state stays quiet.</figcaption>
+            </figure>
+          </div>
+
+          <!-- ===== The architecture ===== -->
+          <div class="block-copy detail-prose">
+            <p class="title-serif">The architecture</p>
+            <p class="block-desc">The whole product is two lenses over one shared pool &mdash; a spatial lens for &ldquo;what does the home need,&rdquo; a time lens for &ldquo;what does this week look like&rdquo; &mdash; plus a shopping tab, one + button, and settings that mostly govern how softly Nisse speaks. Rebuilt below from the working IA board: one node per surface, structured by what is reached from where.</p>
+          </div>
+          <div class="nisse-ia">
+            <div class="ia-col">
+              <p class="ia-head">Onboarding</p>
+              <span class="ia-node">zone picker</span>
+              <span class="ia-node">starter chore library</span>
+              <span class="ia-node">partner joins household</span>
+            </div>
+            <div class="ia-col">
+              <p class="ia-head">Home &mdash; chores</p>
+              <span class="ia-node">blob view &#8646; list view</span>
+              <span class="ia-node">household pulse</span>
+              <span class="ia-node">things need you &rarr; chore detail</span>
+              <span class="ia-node">takk feed &rarr; send takk</span>
+            </div>
+            <div class="ia-col">
+              <p class="ia-head">Zone &amp; chore detail</p>
+              <span class="ia-node">chore list + state dots</span>
+              <span class="ia-node">rhythm card &middot; usual window</span>
+              <span class="ia-node">done &middot; undo &middot; backdate</span>
+              <span class="ia-node">plan it out &middot; day + part of day</span>
+              <span class="ia-node">attributed history</span>
+            </div>
+            <div class="ia-col">
+              <p class="ia-head">Calendar</p>
+              <span class="ia-node">floating pool &middot; now-ish &middot; someday</span>
+              <span class="ia-node">week agenda &middot; chores &middot; events &middot; busy blocks</span>
+              <span class="ia-node">drag to a day = plan it</span>
+              <span class="ia-node">drag to a past day = log done</span>
+            </div>
+            <div class="ia-col">
+              <p class="ia-head">Shopping</p>
+              <span class="ia-node">store lists</span>
+              <span class="ia-node">add &middot; check &middot; clear done</span>
+            </div>
+            <div class="ia-col">
+              <p class="ia-head">Create ( + )</p>
+              <span class="ia-node">to-do &middot; name &middot; zone &middot; rhythm</span>
+              <span class="ia-node">to-attend &middot; title &middot; date? &middot; time?</span>
+              <span class="ia-node">to-buy &middot; item &rarr; store list</span>
+            </div>
+            <div class="ia-col">
+              <p class="ia-head">Household</p>
+              <span class="ia-node">trail &mdash; who did what</span>
+              <span class="ia-node">filter: everyone / R / X</span>
+              <span class="ia-node">looking back &mdash; monthly recap</span>
+            </div>
+            <div class="ia-col">
+              <p class="ia-head">Settings</p>
+              <span class="ia-node">how Nisse speaks up &middot; quiet &middot; murmur &middot; only-red</span>
+              <span class="ia-node">quiet hours &middot; away mode</span>
+              <span class="ia-node">household members</span>
+              <span class="ia-node ia-node--dev">calendar sync &middot; in dev</span>
+            </div>
+          </div>
+
+          <!-- ===== Key flows: the wireframe deck ===== -->
+          <div class="block-copy detail-prose">
+            <p class="title-serif">Key flows, in wireframe</p>
+            <p class="block-desc">Round-two wireframes, drawn to settle behavior before any visual polish. Four flows carry the concept.</p>
+          </div>
+          <div class="deck-track" data-deck>
+           <div class="deck-stage">
+
+            <article class="deck-card">
+              <div class="deck-grid">
+                <div class="media"><img src="assets/nisse-wireframe-7.png" alt="Wireframe board: the single + button opening three capture sheets — new to-do with zone and rhythm, new to-attend, new to-buy" style="width:100%; display:block;" /></div>
+                <div class="deck-col">
+                  <p class="title-serif">Capture &mdash; the field that isn&rsquo;t there</p>
+                  <p>One + button, three sheets: to-do, to-attend, to-buy. A new chore gets a name, a zone, and an optional rhythm &mdash; and that&rsquo;s all. The most important form field in the app is the one that doesn&rsquo;t exist: there is no &ldquo;assign to.&rdquo; Work is born ownerless, into the shared pool.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="deck-card">
+              <div class="deck-grid">
+                <div class="media"><img src="assets/nisse-wireframe-3.png" alt="Wireframe board: zone page and chore detail — rhythm card reading 'ripens around day 9', done just now, done earlier with backdating, plan it out, attributed history" style="width:100%; display:block;" /></div>
+                <div class="deck-col">
+                  <p class="title-serif">A chore&rsquo;s life &mdash; rhythm, not deadline</p>
+                  <p>Every chore carries a rhythm card &mdash; &ldquo;every 7&ndash;12 days, ripens around day 9&rdquo; &mdash; instead of a due date. Mark it done, undo it, backdate it (&ldquo;when did this actually happen?&rdquo; keeps the rhythm honest), or plan it out to a day and a part of day. Red appears only when a rhythm is genuinely broken.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="deck-card">
+              <div class="deck-grid">
+                <div class="media"><img src="assets/nisse-wireframe-4.png" alt="Wireframe board: the calendar time lens — a tray of unscheduled chores above the week stream, and an appointment detail sheet with reschedule options" style="width:100%; display:block;" /></div>
+                <div class="deck-col">
+                  <p class="title-serif">The week &mdash; promoting is a gesture</p>
+                  <p>The time lens mixes settled dates, busy blocks and floating chores in one week stream. Drag a floating chore onto a day to plan it; drag it onto a past day to log it done after the fact. Promotion is a gesture, not a form &mdash; and releasing a chore returns it to its window.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="deck-card">
+              <div class="deck-grid">
+                <div class="media"><img src="assets/nisse-wireframe-8.png" alt="Wireframe board: the household trail showing who did what with takk stamps, the add-member sheet, and the takk notification as it lands on a partner's phone" style="width:100%; display:block;" /></div>
+                <div class="deck-col">
+                  <p class="title-serif">Household &amp; takk &mdash; recognition, not points</p>
+                  <p>The household trail shows who did what &mdash; attribution without a scoreboard. And <em>takk</em> (Norwegian for &ldquo;thanks&rdquo;) lets one partner stamp a little gratitude on any deed; it drops softly onto the other&rsquo;s phone. The app gets to deliver good news, not only complaints.</p>
+                </div>
+              </div>
+            </article>
+
+           </div><!-- /.deck-stage -->
+          </div><!-- /.deck-track -->
+
+          <!-- The rest of the kit -->
+          <div class="nisse-kit">
+            <figure class="detail-figure nisse-board">
+              <img src="assets/nisse-wireframe-1.png" alt="Wireframe board: onboarding in four steps — name the household, seed the blob map, invite a partner, and a soft notification ask ending on the blob home" loading="lazy" />
+              <figcaption class="caption">Onboarding &mdash; four steps, no feature tour, ending on the blob home. The notification ask shows a sample nudge before asking: &ldquo;Nisse speaks softly. One gentle pulse a day.&rdquo;</figcaption>
+            </figure>
+            <div class="nisse-kit-pair">
+              <figure class="detail-figure nisse-board nisse-board--narrow">
+                <img src="assets/nisse-wireframe-6.png" alt="Wireframe: shared shopping lists per store, with live 'who got it' state on checked items" loading="lazy" />
+                <figcaption class="caption">Shopping &mdash; shared store lists with live &ldquo;who got it&rdquo; state.</figcaption>
+              </figure>
+              <div class="block-copy nisse-kit-note">
+                <p class="title-serif">Quiet by settings, too</p>
+                <p class="block-desc">The settings surface is mostly about restraint: how Nisse speaks up (gentle &mdash; one pulse a day &middot; quiet &mdash; weekly digest &middot; off), quiet hours, away mode. The monthly recap lives here as reflection, not gamification &mdash; &ldquo;June: the house hummed along; most loved blob: yard.&rdquo; Deletion always explains recovery, and &ldquo;recently deleted&rdquo; keeps everything for 30 days.</p>
+              </div>
+            </div>
+            <figure class="detail-figure nisse-board">
+              <img src="assets/nisse-wireframe-9.png" alt="Wireframe board: settings, the 'how Nisse speaks up' voice options, the June monthly recap, recently deleted with restore, and confirm dialogs that explain recovery" loading="lazy" />
+              <figcaption class="caption">Settings, reflection &amp; safety nets &mdash; the recap reads &ldquo;the house hummed along,&rdquo; and every delete explains how to undo it.</figcaption>
+            </figure>
+          </div>
+
+          <!-- ===== What didn't make it ===== -->
+          <div class="block-copy detail-prose">
+            <p class="title-serif">What didn&rsquo;t make it</p>
+            <p class="block-desc">The rejected directions defined the product as much as the accepted ones.</p>
+          </div>
+          <div class="nisse-graveyard">
+            <div class="grave">
+              <p class="grave-title">Silent windows</p>
+              <p class="grave-desc">Tasks stayed invisible inside their cadence window and only surfaced when attention was needed. It created a purely negative feedback loop &mdash; the app only ever spoke to complain. Now status is always visible, and mostly it&rsquo;s visibly <em>fine</em>.</p>
+              <p class="grave-epitaph">&ldquo;Only spoke to complain.&rdquo;</p>
+            </div>
+            <div class="grave">
+              <p class="grave-title">Arc rings &amp; geometric indicators</p>
+              <p class="grave-desc">Every iteration toward neat, thin, mechanical shapes &mdash; progress rings, puzzle layouts &mdash; got pulled back. Geometry reads as measurement; measurement reads as judgment. The correct direction, every time, was looser and more pebble-like.</p>
+              <p class="grave-epitaph">&ldquo;Geometry reads as judgment.&rdquo;</p>
+            </div>
+            <div class="grave">
+              <p class="grave-title">External halos for state</p>
+              <p class="grave-desc">State began as a glow around each blob &mdash; too loud at pebble scale; the composition started shouting. State moved to a small dot on the blob&rsquo;s edge: legible up close, silent from afar.</p>
+              <p class="grave-epitaph">&ldquo;The composition started shouting.&rdquo;</p>
+            </div>
+            <div class="grave">
+              <p class="grave-title">The literal home</p>
+              <p class="grave-desc">Realistic room representations made the app feel like a facilities dashboard. Abstract blobs made it feel like a living thing.</p>
+              <p class="grave-epitaph">&ldquo;A facilities dashboard, not a living thing.&rdquo;</p>
+            </div>
+          </div>
+
+          <!-- ===== Learnings ===== -->
+          <figure class="pull-quote">
+            <svg class="pull-quote__mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h7v7c0 3.9-2.4 6.5-6 7.5l-1-2c2.1-.7 3.3-1.9 3.6-3.5H4V4zm9 0h7v7c0 3.9-2.4 6.5-6 7.5l-1-2c2.1-.7 3.3-1.9 3.6-3.5H13V4z"/></svg>
+            <blockquote>Structure is ethics. The most consequential design decision<br />in Nisse is a missing form field.</blockquote>
+          </figure>
+
+          <div class="detail-text">
+            <p><strong>Removing &ldquo;assign to&rdquo; did more for fairness than any fairness feature could.</strong> And restraint, it turns out, has to be designed repeatedly &mdash; calm isn&rsquo;t a default you set once but a choice you re-make at every screen, against every instinct to add a number, a badge, a pulse of motion. Qualitative beats quantitative in emotional territory: a home described as &ldquo;mostly calm&rdquo; starts a different conversation than a home scored 73%. And abstraction is honest &mdash; blobs don&rsquo;t pretend to know your house; they only claim to know how much it&rsquo;s asking of you right now.</p>
+            <p>The same lessons apply to the way it was built. Working with Claude Code didn&rsquo;t lower the bar for design judgment &mdash; it raised the price of not having any. Next: treatment explorations of the pulse pebble, a full prototype of the claim-and-promote gestures, and living with the fairness mirror through a real monthly cycle with real couples &mdash; because a mirror can only be judged after a household has actually looked into it.</p>
+            <p><em>If this made you think about the invisible work in your own home &mdash; that&rsquo;s the point.</em></p>
+          </div>
+
+        </div>
+
+        <div class="utility-row hl-nav">
+          <a class="btn btn--outline" href="highlights.html"><span class="label-full">&#8249; Back to highlights</span><span class="label-short">&#8249; Back</span></a>
+          <a class="btn btn--outline" href="highlight-defense.html"><span class="label-full">Next highlight &#8250;</span><span class="label-short">Next &#8250;</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <a class="back-to-top" href="#top">&#x2303;<span>Back to top</span></a>
+      <div class="footer-social">
+        <a href="https://www.linkedin.com/in/xinhui-ye-673a63150" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://scholar.google.nl/citations?hl=en&user=P7ArCXEAAAAJ" target="_blank" rel="noopener">Google Scholar</a>
+        <a href="https://www.instagram.com/kkkrisy_/" target="_blank" rel="noopener">Instagram</a>
+      </div>
+      <p class="footer-copy"><strong>@2026 Xinhui Ye</strong> All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script src="assets/script.js"></script>
+
+  <!-- Vercel Web Analytics -->
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
