@@ -3328,18 +3328,23 @@ a.t-org:hover { color: var(--on-surface); }
 
 /* Four "what tools get wrong" cards share the answer-card stock — 2×2,
    because four across would crush the copy at this width */
+/* Lift the Nisse research/visual-system panels from the site's beige (#f3efe3)
+   to a brighter warm cream, still a touch below the near-white cards so the
+   cards stay legible against it. */
+.nisse-page .photo-feature { background: #f9f6ef; }
+
 .nisse-wrongs {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: var(--space-md);
 }
 .nisse-wrongs .answer-card {
-  background: #ffffff;                 /* brighter than the warm cream ground */
+  --clay-ink: #8a5a52;                 /* a darker clay than the map dots, for readable text */
+  background: var(--surface);
   display: flex;
   flex-direction: column;
-  box-shadow: 0 1px 3px rgba(46, 46, 56, 0.05), 0 6px 20px rgba(46, 46, 56, 0.04);
 }
-.nisse-wrongs .answer-card .title-serif { color: #ad827c; margin: 0 0 var(--space-xs); }
+.nisse-wrongs .answer-card .title-serif { color: var(--clay-ink); margin: 0 0 var(--space-xs); }
 .nisse-wrongs .answer-card p { color: var(--on-surface-body); margin: 0; }
 
 /* the "we think…" stance folds away by default: you read the four patterns,
@@ -3355,7 +3360,7 @@ a.t-org:hover { color: var(--on-surface); }
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  color: #ad827c;
+  color: var(--clay-ink);
   font-weight: 600;
   font-size: 14px;
   letter-spacing: 0.02em;
@@ -3368,8 +3373,8 @@ a.t-org:hover { color: var(--on-surface); }
   flex: none;
   width: 32px;
   height: 2px;
-  background: #ad827c;
-  opacity: 0.5;
+  background: var(--clay-ink);
+  opacity: 0.55;
 }
 /* +/– toggle sign */
 .nisse-wrongs .answer-card .wrong-fold > summary::after {
@@ -3380,13 +3385,13 @@ a.t-org:hover { color: var(--on-surface); }
 }
 .nisse-wrongs .answer-card .wrong-fold[open] > summary::after { content: "\2013"; }
 .nisse-wrongs .answer-card .wrong-fold > summary:focus-visible {
-  outline: 2px solid #ad827c;
+  outline: 2px solid var(--clay-ink);
   outline-offset: 3px;
   border-radius: 2px;
 }
 .nisse-wrongs .answer-card .wrong-fix {
   margin: var(--space-sm) 0 0;
-  color: #ad827c;
+  color: var(--clay-ink);
   font-weight: 500;
 }
 @media (prefers-reduced-motion: no-preference) {
