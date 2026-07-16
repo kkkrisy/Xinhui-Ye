@@ -3340,6 +3340,39 @@ a.t-org:hover { color: var(--on-surface); }
 .nisse-list li { padding: 6px 0; }
 .nisse-list .nl-cat { font-weight: 700; color: var(--primary); }
 
+/* Read-more fold — a native <details> whose <summary> is styled as a pill
+   button. No JS. The label swaps between "Read more" and "Read less". */
+.nisse-more > summary {
+  list-style: none;
+  cursor: pointer;
+  width: max-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-grotesque);
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--primary);
+  padding: 10px 22px;
+  border: 1px solid var(--primary);
+  border-radius: var(--radius-full);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.nisse-more > summary::-webkit-details-marker { display: none; }
+.nisse-more > summary::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+}
+.nisse-more[open] > summary::after { transform: translateY(2px) rotate(-135deg); }
+.nisse-more > summary:hover { background: var(--primary); color: #fff; }
+.nisse-more[open] > summary { margin-bottom: var(--space-md); }
+.nisse-more[open] .rm-more,
+.nisse-more:not([open]) .rm-less { display: none; }
+
 /* Four "what tools get wrong" cards share the answer-card stock — 2×2,
    because four across would crush the copy at this width */
 .nisse-wrongs {
@@ -3437,7 +3470,7 @@ a.t-org:hover { color: var(--on-surface); }
 .nisse-map svg {
   display: block;
   width: 100%;
-  max-width: 680px;
+  max-width: 100%;
   margin: 0 auto;
   height: auto;
   background: var(--map-bg);
@@ -3469,11 +3502,16 @@ a.t-org:hover { color: var(--on-surface); }
   stroke-width: 2.25;
 }
 .nisse-map .map-nisse-core { fill: var(--primary); }
+/* Axis labels read as a separate chrome layer — indigo, uppercase and tracked
+   out — so they never blur into the clay app labels sitting near the axes. */
 .nisse-map .map-axis {
   font-family: var(--font-grotesque);
-  font-size: 12px;
-  font-weight: 500;
-  fill: var(--map-ink);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  fill: var(--primary);
+  fill-opacity: 0.62;
 }
 .nisse-map .map-label {
   font-family: var(--font-grotesque);
