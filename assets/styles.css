@@ -642,13 +642,19 @@ body.menu-open .nav-overlay__head { visibility: hidden; }
 }
 .media img { border-radius: var(--radius-lg); }
 
-/* Hero image on the Nisse detail page — left-aligned, roughly two-thirds width */
+/* Hero image on the Nisse detail page — floated left, roughly two-thirds
+   width, so the copy beside it wraps around the image. */
 .media--hero-left {
+  float: left;
   width: 70%;
-  margin-right: auto;
+  margin: 4px var(--space-lg) var(--space-md) 0;
 }
 @media (max-width: 640px) {
-  .media--hero-left { width: 100%; }
+  .media--hero-left {
+    float: none;
+    width: 100%;
+    margin: 0 0 var(--space-md);
+  }
 }
 
 .caption {
@@ -1496,6 +1502,7 @@ a.t-org:hover { color: var(--on-surface); }
 /* Coloured feature band: the framework → party photos grouped on warm
    cream, sitting tighter together than the rest of the page. */
 .photo-feature {
+  clear: both;   /* sit below any floated hero above, never wrap into it */
   background: #f3efe3;
   border-radius: var(--radius-lg);
   padding: clamp(28px, 4vw, 56px);
