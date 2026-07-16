@@ -3382,58 +3382,136 @@ a.t-org:hover { color: var(--on-surface); }
   grid-template-columns: repeat(2, 1fr);
   gap: var(--space-md);
 }
-.nisse-wrongs .answer-card { background: var(--surface); }
+.nisse-wrongs .answer-card {
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+}
 .nisse-wrongs .answer-card .title-serif { margin: 0 0 var(--space-xs); }
-.nisse-wrongs .answer-card p:last-child { color: var(--on-surface-body); margin: 0; }
+.nisse-wrongs .answer-card p { color: var(--on-surface-body); margin: 0; }
+/* the "we think…" stance — the studio's answer to each failure, set off from
+   the diagnosis above it by a hairline and the brand indigo */
+.nisse-wrongs .answer-card .wrong-fix {
+  margin-top: auto;
+  padding-top: var(--space-sm);
+  color: var(--primary);
+  font-weight: 500;
+}
+.nisse-wrongs .answer-card .wrong-fix::before {
+  content: "";
+  display: block;
+  width: 32px;
+  height: 2px;
+  margin-bottom: var(--space-sm);
+  background: var(--primary);
+  opacity: 0.5;
+}
 @media (max-width: 860px) { .nisse-wrongs { grid-template-columns: 1fr; } }
 
-/* Positioning map — flat SVG on the cream band. Descriptive axes, neither
-   end "better"; the mark itself encodes scorekeeping (filled = keeps score,
-   hollow = doesn't, accent ring = Nisse). Everything resolves through the
-   page's tokens; nothing here moves. */
-.nisse-map { margin: 0; }
+/* The Maple review — the crossed-out five-star praise floats, and the studio's
+   reading of it wraps around. Ties to the app's warm palette; strike is the
+   one warm red the product allows itself. */
+.nisse-review {
+  margin: var(--space-lg) 0;
+  overflow: hidden;   /* contain the float */
+}
+.nisse-review .review-chip {
+  float: right;
+  width: min(300px, 42%);
+  margin: 4px 0 var(--space-md) var(--space-lg);
+  padding: var(--space-md);
+  background: var(--surface-container);
+  border-radius: var(--radius-lg);
+}
+.nisse-review .review-stars {
+  display: block;
+  font-size: 18px;
+  letter-spacing: 2px;
+  color: #c89b62;   /* the app's "ripening" amber */
+}
+.nisse-review .review-quote {
+  margin: var(--space-sm) 0 var(--space-xs);
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  line-height: 1.4;
+  color: var(--on-surface);
+}
+.nisse-review .review-quote s {
+  text-decoration: line-through;
+  text-decoration-color: #cb3034;   /* the one warm red — crossing it out */
+  text-decoration-thickness: 2px;
+}
+.nisse-review .review-src {
+  font-family: var(--font-grotesque);
+  font-size: 0.8rem;
+  color: var(--on-surface-variant);
+}
+.nisse-review .review-body > p { margin: 0 0 var(--space-sm); }
+.nisse-review .review-body > p:last-child { margin-bottom: 0; }
+@media (max-width: 640px) {
+  .nisse-review .review-chip {
+    float: none;
+    width: auto;
+    margin: 0 0 var(--space-md);
+  }
+}
+
+/* Positioning map — warmed to the app's own palette rather than a neutral
+   research chart: peach ground, dusty-clay marks, a soft moss wash on the
+   calm corner, brand indigo for Nisse. The mark still encodes scorekeeping
+   (filled = keeps score, hollow = doesn't, indigo ring = Nisse). Nothing
+   here moves. Local tokens cascade into the stacked fallback below. */
+.nisse-map {
+  margin: 0;
+  --map-bg: var(--surface-container);   /* peach — the app's warm ground */
+  --map-mark: #ad827c;                   /* clay — same dusty family as the blobs */
+  --map-good: #859d85;                   /* moss — the calm corner */
+  --map-ink: #8a7266;                    /* warm dusty ink for axes + labels */
+}
 .nisse-map svg {
   display: block;
   width: 100%;
   max-width: 680px;
   margin: 0 auto;
   height: auto;
-  background: var(--surface);
+  background: var(--map-bg);
   border-radius: var(--radius-lg);
 }
 .nisse-map .map-hair {
-  stroke: var(--outline);
-  stroke-opacity: 0.4;
+  stroke: var(--map-ink);
+  stroke-opacity: 0.35;
   stroke-width: 1;
   fill: none;
 }
 .nisse-map .map-quad {
-  stroke: var(--outline);
-  stroke-opacity: 0.4;
-  stroke-width: 1;
-  stroke-dasharray: 4 5;
-  fill: none;
+  stroke: var(--map-good);
+  stroke-opacity: 0.55;
+  stroke-width: 1.25;
+  fill: var(--map-good);
+  fill-opacity: 0.12;
 }
-.nisse-map .map-dot { fill: var(--on-surface-variant); }
+.nisse-map .map-dot { fill: var(--map-mark); }
 .nisse-map .map-dot--open {
-  fill: var(--surface);
-  stroke: var(--on-surface-variant);
-  stroke-width: 1;
+  fill: var(--map-bg);
+  stroke: var(--map-mark);
+  stroke-width: 1.25;
 }
 .nisse-map .map-ring {
   fill: none;
   stroke: var(--primary);
-  stroke-width: 2;
+  stroke-width: 2.25;
 }
+.nisse-map .map-nisse-core { fill: var(--primary); }
 .nisse-map .map-axis {
   font-family: var(--font-grotesque);
   font-size: 12px;
-  fill: var(--on-surface-variant);
+  font-weight: 500;
+  fill: var(--map-ink);
 }
 .nisse-map .map-label {
   font-family: var(--font-grotesque);
   font-size: 12px;
-  fill: var(--on-surface-variant);
+  fill: var(--map-ink);
 }
 .nisse-map .map-nisse {
   font-family: var(--font-grotesque);
@@ -3447,9 +3525,15 @@ a.t-org:hover { color: var(--on-surface); }
    drops to a stacked list of the four quadrants instead of shrinking type. */
 .nisse-map .nisse-map-stack { display: none; }
 .nisse-map-stack .ms-quad {
-  background: var(--surface);
+  background: var(--map-bg);
   border-radius: var(--radius-md);
   padding: 14px 16px;
+}
+/* the calm corner — the one that holds Nisse — gets the same moss wash as
+   the highlighted quadrant on the plotted map */
+.nisse-map-stack .ms-quad:nth-child(2) {
+  background: color-mix(in srgb, var(--map-good) 12%, var(--map-bg));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--map-good) 45%, transparent);
 }
 .nisse-map-stack .ms-head {
   margin: 0 0 8px;
@@ -3483,17 +3567,18 @@ a.t-org:hover { color: var(--on-surface); }
   width: 8px;
   height: 8px;
   border-radius: var(--radius-full);
-  background: var(--on-surface-variant);
+  background: var(--map-mark);
 }
 .nisse-map-stack .mk--open {
-  background: var(--surface);
-  border: 1px solid var(--on-surface-variant);
+  background: var(--map-bg);
+  border: 1px solid var(--map-mark);
 }
 .nisse-map-stack .mk--ring {
   width: 10px;
   height: 10px;
-  background: transparent;
+  background: var(--primary);
   border: 2px solid var(--primary);
+  box-shadow: 0 0 0 2px var(--map-bg), 0 0 0 3.5px var(--primary);
 }
 .nisse-map-stack .ms-legend {
   margin: 0;
