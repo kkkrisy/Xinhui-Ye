@@ -3418,7 +3418,7 @@ a.t-org:hover { color: var(--on-surface); }
   background: var(--surface-container);   /* peach */
   border-radius: var(--radius-sm);
   box-shadow: 0 12px 26px rgba(46, 46, 56, 0.13);
-  transform: rotate(-3.4deg);
+  transform: rotate(5.5deg);
   position: relative;
 }
 /* A strip of frosted tape across the top edge, set slightly askew from the
@@ -3429,7 +3429,7 @@ a.t-org:hover { color: var(--on-surface); }
   left: 50%;
   width: 112px;
   height: 27px;
-  transform: translateX(-50%) rotate(-4deg);
+  transform: translateX(-50%) rotate(5deg);
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.26), rgba(255, 255, 255, 0.52));
   border-inline: 1px solid rgba(255, 255, 255, 0.4);
   box-shadow: 0 1px 4px rgba(46, 46, 56, 0.12);
@@ -3469,7 +3469,7 @@ a.t-org:hover { color: var(--on-surface); }
     width: auto;
     max-width: 420px;
     margin: 0 auto var(--space-md);
-    transform: rotate(-2.4deg);
+    transform: rotate(4deg);
   }
 }
 
