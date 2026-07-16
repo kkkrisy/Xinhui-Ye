@@ -3609,6 +3609,7 @@ a.t-org:hover { color: var(--on-surface); }
 .nisse-board img { border-radius: 0; }
 .nisse-board .caption { margin-top: var(--space-sm); }
 .nisse-board--narrow { max-width: 300px; }
+.nisse-board--half { max-width: 720px; margin-inline: auto; }
 
 /* IA map — one card per surface, nodes as quiet rows */
 .nisse-ia {
