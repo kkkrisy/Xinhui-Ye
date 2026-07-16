@@ -3929,6 +3929,115 @@ a.t-org:hover { color: var(--on-surface); }
 .nisse-board--narrow { max-width: 300px; }
 .nisse-board--half { max-width: 720px; margin-inline: auto; }
 
+/* ---- The full wireframe map + Behance-style zoom viewer -------------- */
+/* On the page, the map is a single big board you click to open full-screen. */
+.wire-map { margin: 0; }
+.wire-map__trigger {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  /* the built-in magnifier keyword, upgraded to a drawn magnifier below */
+  cursor: zoom-in;
+  cursor: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='36'%20height='36'%20viewBox='0%200%2036%2036'%3E%3Cg%20fill='none'%20stroke='%231a1714'%20stroke-width='5'%20stroke-linecap='round'%3E%3Ccircle%20cx='15'%20cy='15'%20r='10'/%3E%3Cpath%20d='M22%2022l9%209'/%3E%3Cpath%20d='M15%2010v10M10%2015h10'/%3E%3C/g%3E%3Cg%20fill='none'%20stroke='%23fff'%20stroke-width='2.4'%20stroke-linecap='round'%3E%3Ccircle%20cx='15'%20cy='15'%20r='10'/%3E%3Cpath%20d='M22%2022l9%209'/%3E%3Cpath%20d='M15%2010v10M10%2015h10'/%3E%3C/g%3E%3C/svg%3E") 15 15, zoom-in;
+}
+.wire-map__trigger img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+}
+.wire-map__hint {
+  position: absolute;
+  bottom: var(--space-sm);
+  right: var(--space-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  font-family: var(--font-grotesque);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #fff;
+  background: rgba(20, 18, 16, 0.55);
+  border-radius: var(--radius-full);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+}
+.wire-map__trigger:hover .wire-map__hint,
+.wire-map__trigger:focus-visible .wire-map__hint { opacity: 1; transform: translateY(0); }
+.wire-map .caption { margin-top: var(--space-sm); }
+
+/* Full-screen viewer (built by script.js, appended to <body>) */
+.wire-viewer {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  background: rgba(20, 18, 16, 0.94);
+  display: none;
+  opacity: 0;
+  transition: opacity 0.22s ease;
+}
+.wire-viewer.is-open { display: block; opacity: 1; }
+.wire-viewer__canvas {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: none;
+}
+.wire-viewer__img {
+  display: block;
+  max-width: 94vw;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  user-select: none;
+  -webkit-user-drag: none;
+  will-change: transform;
+}
+/* fit state — the magnifier-plus invites a zoom in */
+.wire-viewer__canvas[data-state="fit"] {
+  cursor: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='36'%20height='36'%20viewBox='0%200%2036%2036'%3E%3Cg%20fill='none'%20stroke='%231a1714'%20stroke-width='5'%20stroke-linecap='round'%3E%3Ccircle%20cx='15'%20cy='15'%20r='10'/%3E%3Cpath%20d='M22%2022l9%209'/%3E%3Cpath%20d='M15%2010v10M10%2015h10'/%3E%3C/g%3E%3Cg%20fill='none'%20stroke='%23fff'%20stroke-width='2.4'%20stroke-linecap='round'%3E%3Ccircle%20cx='15'%20cy='15'%20r='10'/%3E%3Cpath%20d='M22%2022l9%209'/%3E%3Cpath%20d='M15%2010v10M10%2015h10'/%3E%3C/g%3E%3C/svg%3E") 15 15, zoom-in;
+}
+/* zoomed state — the magnifier-minus offers a zoom out */
+.wire-viewer__canvas[data-state="zoom"] {
+  cursor: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='36'%20height='36'%20viewBox='0%200%2036%2036'%3E%3Cg%20fill='none'%20stroke='%231a1714'%20stroke-width='5'%20stroke-linecap='round'%3E%3Ccircle%20cx='15'%20cy='15'%20r='10'/%3E%3Cpath%20d='M22%2022l9%209'/%3E%3Cpath%20d='M10%2015h10'/%3E%3C/g%3E%3Cg%20fill='none'%20stroke='%23fff'%20stroke-width='2.4'%20stroke-linecap='round'%3E%3Ccircle%20cx='15'%20cy='15'%20r='10'/%3E%3Cpath%20d='M22%2022l9%209'/%3E%3Cpath%20d='M10%2015h10'/%3E%3C/g%3E%3C/svg%3E") 15 15, zoom-out;
+}
+.wire-viewer__close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 2;
+  width: 52px;
+  height: 52px;
+  font-size: 26px;
+  line-height: 1;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.14);
+  border: 0;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: background 0.18s ease;
+}
+.wire-viewer__close:hover,
+.wire-viewer__close:focus-visible { background: rgba(255, 255, 255, 0.3); }
+@media (max-width: 600px) {
+  .wire-viewer__close { top: 12px; right: 12px; width: 44px; height: 44px; font-size: 22px; }
+  .wire-map__hint { bottom: 10px; right: 10px; }
+}
+
 /* IA map — one card per surface, nodes as quiet rows */
 .nisse-ia {
   display: grid;

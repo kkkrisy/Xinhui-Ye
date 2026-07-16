@@ -589,6 +589,127 @@ document.addEventListener("DOMContentLoaded", () => {
     onMobileChange(applyCollapse);
   });
 
+  /* ---- Wireframe map: Behance-style full-screen zoom ----------------- */
+  // One big board on the page. Click it to open full-screen. Inside, the
+  // cursor is a magnifier: click once to zoom to 2× (moving the mouse pans
+  // the board, so every flow is readable up close), click again to zoom
+  // back out. The × at top-right — or Esc — leaves the viewer.
+  const wireMap = document.querySelector("[data-wiremap]");
+  const wireTrigger = wireMap && wireMap.querySelector("[data-wiremap-open]");
+  if (wireMap && wireTrigger) {
+    const ZOOM = 2;                       // "zoom in twice" — 2× the fitted size
+    const srcImg = wireTrigger.querySelector("img");
+
+    // Build the viewer once, lazily, and reuse it.
+    const viewer = document.createElement("div");
+    viewer.className = "wire-viewer";
+    viewer.setAttribute("aria-hidden", "true");
+    viewer.innerHTML =
+      '<button class="wire-viewer__close" type="button" aria-label="Close the wireframe map">&times;</button>' +
+      '<div class="wire-viewer__canvas" data-state="fit">' +
+        '<img class="wire-viewer__img" alt="" />' +
+      '</div>';
+    document.body.appendChild(viewer);
+
+    const canvas = viewer.querySelector(".wire-viewer__canvas");
+    const img = viewer.querySelector(".wire-viewer__img");
+    const closeBtn = viewer.querySelector(".wire-viewer__close");
+    img.src = srcImg.currentSrc || srcImg.src;
+    img.alt = srcImg.alt;
+
+    let zoomed = false;
+    let lastPointer = { x: 0.5, y: 0.5 }; // fraction of canvas, for pan follow
+
+    // Position the image for the current pointer fraction when zoomed.
+    const pan = (fx, fy) => {
+      // offsetWidth/Height give the fitted layout size and — unlike
+      // getBoundingClientRect — are unaffected by the transform we apply,
+      // so the maths stays correct across repeated pans.
+      const fitW = img.offsetWidth, fitH = img.offsetHeight;
+      const scaledW = fitW * ZOOM, scaledH = fitH * ZOOM;
+      const vw = canvas.clientWidth, vh = canvas.clientHeight;
+      // How far we can travel; if the scaled image is smaller than the
+      // viewport on an axis, keep it centred (overflow 0).
+      const overX = Math.max(0, scaledW - vw);
+      const overY = Math.max(0, scaledH - vh);
+      const tx = -overX * (fx - 0.5);
+      const ty = -overY * (fy - 0.5);
+      img.style.transform = "translate(" + tx + "px," + ty + "px) scale(" + ZOOM + ")";
+    };
+
+    const setZoom = (on, fx, fy) => {
+      zoomed = on;
+      canvas.dataset.state = on ? "zoom" : "fit";
+      if (on) {
+        img.style.transition = "transform 0.22s ease";
+        pan(fx, fy);
+        // drop the transition after the zoom-in so panning stays instant
+        window.setTimeout(() => { img.style.transition = "none"; }, 240);
+      } else {
+        img.style.transition = "transform 0.22s ease";
+        img.style.transform = "";
+      }
+    };
+
+    const pointerFraction = (e) => {
+      const rect = canvas.getBoundingClientRect();
+      return {
+        x: Math.min(1, Math.max(0, (e.clientX - rect.left) / rect.width)),
+        y: Math.min(1, Math.max(0, (e.clientY - rect.top) / rect.height)),
+      };
+    };
+
+    const open = () => {
+      viewer.classList.add("is-open");
+      viewer.setAttribute("aria-hidden", "false");
+      document.body.classList.add("wire-lock");
+      document.body.style.overflow = "hidden";
+      setZoom(false);
+    };
+    const close = () => {
+      viewer.classList.remove("is-open");
+      viewer.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("wire-lock");
+      document.body.style.overflow = "";
+      setZoom(false);
+    };
+
+    wireTrigger.addEventListener("click", open);
+    closeBtn.addEventListener("click", close);
+
+    // Click the board to toggle zoom, centred on where you clicked.
+    canvas.addEventListener("click", (e) => {
+      if (e.target === closeBtn) return;
+      const f = pointerFraction(e);
+      lastPointer = f;
+      setZoom(!zoomed, f.x, f.y);
+    });
+
+    // While zoomed, follow the cursor so the whole board is reachable.
+    canvas.addEventListener("mousemove", (e) => {
+      if (!zoomed) return;
+      const f = pointerFraction(e);
+      lastPointer = f;
+      pan(f.x, f.y);
+    });
+
+    // Touch: drag to pan while zoomed.
+    canvas.addEventListener("touchmove", (e) => {
+      if (!zoomed || !e.touches[0]) return;
+      const f = pointerFraction(e.touches[0]);
+      lastPointer = f;
+      pan(f.x, f.y);
+    }, { passive: true });
+
+    // Keep the pan honest if the window resizes mid-view.
+    window.addEventListener("resize", () => { if (zoomed) pan(lastPointer.x, lastPointer.y); });
+
+    document.addEventListener("keydown", (e) => {
+      if (!viewer.classList.contains("is-open")) return;
+      if (e.key === "Escape") close();
+    });
+  }
+
   /* ---- Deter image/video saving ------------------------------------- */
   // Not bulletproof (screenshots, devtools and direct URLs still work), but
   // it blocks right-click "Save image as…" and click-drag saving.
