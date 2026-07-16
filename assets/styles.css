@@ -3382,8 +3382,8 @@ a.t-org:hover { color: var(--on-surface); }
   flex: 1 1 auto;
   width: 100%;
   min-height: 0;
-  object-fit: cover;
-  background: var(--surface-container);   /* warm ground before the image loads */
+  object-fit: contain;
+  padding: var(--space-sm) var(--space-md) 0;
 }
 .flip-card__front .title-serif {
   margin: 0;
