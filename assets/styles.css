@@ -3348,7 +3348,7 @@ a.t-org:hover { color: var(--on-surface); }
 .nisse-wrongs .answer-card p { color: var(--on-surface-body); margin: 0; }
 
 /* the "we think…" stance folds away by default: you read the four patterns,
-   then click "What we believe" to unfold the studio's answer to each. Native
+   then click "We think" to unfold the studio's answer to each. Native
    <details>, so it works without JS. The clay accent is from the app palette. */
 .nisse-wrongs .answer-card .wrong-fold {
   margin-top: auto;
@@ -3376,14 +3376,15 @@ a.t-org:hover { color: var(--on-surface); }
   background: var(--clay-ink);
   opacity: 0.55;
 }
-/* +/– toggle sign */
+/* ^ toggle caret */
 .nisse-wrongs .answer-card .wrong-fold > summary::after {
-  content: "+";
+  content: "^";
   font-weight: 500;
   font-size: 18px;
   line-height: 1;
+  transition: transform 0.15s ease;
 }
-.nisse-wrongs .answer-card .wrong-fold[open] > summary::after { content: "\2013"; }
+.nisse-wrongs .answer-card .wrong-fold[open] > summary::after { transform: rotate(180deg); }
 .nisse-wrongs .answer-card .wrong-fold > summary:focus-visible {
   outline: 2px solid var(--clay-ink);
   outline-offset: 3px;
