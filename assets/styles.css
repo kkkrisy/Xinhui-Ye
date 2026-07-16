@@ -3410,7 +3410,7 @@ a.t-org:hover { color: var(--on-surface); }
   justify-content: flex-start;
 }
 .flip-card__back p { margin: 0; color: var(--on-surface-body); }
-.flip-card__back .wrong-fix { margin-top: var(--space-sm); color: var(--clay-ink); font-weight: 500; }
+.flip-card__back .wrong-fix { margin-top: var(--space-sm); color: #ad827c; font-weight: 500; }
 @media (prefers-reduced-motion: reduce) {
   .flip-card__inner { transition: none; }
 }
