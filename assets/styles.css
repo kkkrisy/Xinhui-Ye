@@ -3506,6 +3506,7 @@ a.t-org:hover { color: var(--on-surface); }
 .nisse-review .review-quote {
   margin: var(--space-md) 0 var(--space-sm);
   font-family: var(--font-serif);
+  font-style: italic;
   font-size: 1.6rem;
   line-height: 1.4;
   color: var(--on-surface);
