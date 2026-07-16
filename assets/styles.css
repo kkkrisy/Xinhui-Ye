@@ -3463,7 +3463,6 @@ a.t-org:hover { color: var(--on-surface); }
   line-height: 1.5;
   color: var(--on-surface);
 }
-.research-note__body strong { font-weight: 700; color: var(--primary); }
 @media (max-width: 640px) {
   .research-note {
     width: auto;
