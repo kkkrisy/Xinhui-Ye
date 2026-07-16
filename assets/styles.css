@@ -642,6 +642,15 @@ body.menu-open .nav-overlay__head { visibility: hidden; }
 }
 .media img { border-radius: var(--radius-lg); }
 
+/* Hero image on the Nisse detail page — left-aligned, roughly two-thirds width */
+.media--hero-left {
+  width: 70%;
+  margin-right: auto;
+}
+@media (max-width: 640px) {
+  .media--hero-left { width: 100%; }
+}
+
 .caption {
   margin-top: var(--space-xs);
   color: var(--on-surface-variant);
