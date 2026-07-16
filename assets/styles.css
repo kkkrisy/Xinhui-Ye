@@ -3408,6 +3408,61 @@ a.t-org:hover { color: var(--on-surface); }
 }
 @media (max-width: 860px) { .nisse-wrongs { grid-template-columns: 1fr; } }
 
+/* Research note — the cognitive-labor finding pinned to the section as a
+   sticky paper aside, so the data reads as a discovered artifact rather than
+   an opening wall of text. Floats beside the lead-in on desktop, stacks above
+   it on phones. Peach stock + a coral pushpin set it apart from the white
+   review chip and the cream page. */
+.detail-text--noted::after { content: ""; display: table; clear: both; }
+.research-note {
+  float: right;
+  width: min(330px, 46%);
+  margin: 6px 0 var(--space-sm) var(--space-lg);
+  padding: var(--space-md);
+  background: var(--surface-container);   /* peach */
+  border-radius: var(--radius-sm);
+  box-shadow: 0 12px 26px rgba(46, 46, 56, 0.13);
+  transform: rotate(-1.6deg);
+  position: relative;
+}
+.research-note__pin {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  transform: translateX(-50%);
+  border-radius: var(--radius-full);
+  background: radial-gradient(circle at 34% 32%, #ffc4ac 0 3px, var(--secondary) 4px 100%);
+  box-shadow: 0 3px 5px rgba(46, 46, 56, 0.28);
+}
+.research-note__eyebrow {
+  margin: 0 0 var(--space-xs);
+  font-family: var(--font-grotesque);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+.research-note__body {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 1.02rem;
+  line-height: 1.5;
+  color: var(--on-surface);
+}
+.research-note__body strong { font-weight: 700; color: var(--primary); }
+@media (max-width: 640px) {
+  .research-note {
+    float: none;
+    width: auto;
+    max-width: 420px;
+    margin: 0 auto var(--space-md);
+    transform: rotate(-1deg);
+  }
+}
+
 /* The Maple review — the crossed-out five-star praise floats, and the studio's
    reading of it wraps around. Ties to the app's warm palette; strike is the
    one warm red the product allows itself. */
