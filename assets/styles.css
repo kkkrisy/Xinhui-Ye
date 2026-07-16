@@ -3352,8 +3352,6 @@ a.t-org:hover { color: var(--on-surface); }
 .nisse-landscape th:last-child,
 .nisse-landscape td:last-child { padding-right: 0; }
 .nisse-landscape td:first-child { font-weight: 600; color: var(--primary); white-space: nowrap; }
-.nisse-landscape td:nth-child(3),
-.nisse-landscape td:nth-child(4) { color: var(--on-surface-variant); }
 @media (max-width: 760px) {
   .nisse-landscape thead { display: none; }
   .nisse-landscape table,
@@ -3417,22 +3415,23 @@ a.t-org:hover { color: var(--on-surface); }
 }
 .nisse-review .review-chip {
   float: right;
-  width: min(300px, 42%);
+  width: min(360px, 48%);
   margin: 4px 0 var(--space-md) var(--space-lg);
-  padding: var(--space-md);
-  background: var(--surface-container);
+  padding: var(--space-lg);
+  background: #ffffff;
+  border: 1px solid var(--surface-container-high);
   border-radius: var(--radius-lg);
 }
 .nisse-review .review-stars {
   display: block;
-  font-size: 18px;
-  letter-spacing: 2px;
+  font-size: 26px;
+  letter-spacing: 4px;
   color: #c89b62;   /* the app's "ripening" amber */
 }
 .nisse-review .review-quote {
-  margin: var(--space-sm) 0 var(--space-xs);
+  margin: var(--space-md) 0 var(--space-sm);
   font-family: var(--font-serif);
-  font-size: 1.25rem;
+  font-size: 1.6rem;
   line-height: 1.4;
   color: var(--on-surface);
 }
@@ -3443,7 +3442,7 @@ a.t-org:hover { color: var(--on-surface); }
 }
 .nisse-review .review-src {
   font-family: var(--font-grotesque);
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   color: var(--on-surface-variant);
 }
 .nisse-review .review-body > p { margin: 0 0 var(--space-sm); }
@@ -3463,7 +3462,7 @@ a.t-org:hover { color: var(--on-surface); }
    here moves. Local tokens cascade into the stacked fallback below. */
 .nisse-map {
   margin: 0;
-  --map-bg: var(--surface-container);   /* peach — the app's warm ground */
+  --map-bg: #ffffff;                     /* white ground */
   --map-mark: #ad827c;                   /* clay — same dusty family as the blobs */
   --map-good: #859d85;                   /* moss — the calm corner */
   --map-ink: #8a7266;                    /* warm dusty ink for axes + labels */
@@ -3475,6 +3474,7 @@ a.t-org:hover { color: var(--on-surface); }
   margin: 0 auto;
   height: auto;
   background: var(--map-bg);
+  border: 1px solid var(--surface-container-high);
   border-radius: var(--radius-lg);
 }
 .nisse-map .map-hair {
