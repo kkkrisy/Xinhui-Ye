@@ -3377,26 +3377,22 @@ a.t-org:hover { color: var(--on-surface); }
   -webkit-backface-visibility: hidden;
   box-shadow: 0 6px 18px rgba(46, 46, 56, 0.08);
 }
-.flip-card__front { padding: 0; }
+/* Both faces share the same padding and put the clay title at the top, so the
+   heading holds its place and colour through the flip. */
+.flip-card__face { padding: clamp(20px, 2.4vw, 28px); }
+.flip-card__face .title-serif { margin: 0 0 var(--space-sm); color: var(--clay-ink); }
 .flip-card__front img {
   flex: 1 1 auto;
   width: 100%;
   min-height: 0;
   object-fit: contain;
-  padding: var(--space-sm) var(--space-md) 0;
-}
-.flip-card__front .title-serif {
-  margin: 0;
-  padding: var(--space-sm) var(--space-md);
-  color: var(--clay-ink);
+  padding-bottom: var(--space-xs);
 }
 .flip-card__back {
   transform: rotateY(180deg);
-  padding: clamp(20px, 2.4vw, 28px);
   gap: var(--space-xs);
-  justify-content: center;
+  justify-content: flex-start;
 }
-.flip-card__back .title-serif { margin: 0 0 6px; color: var(--clay-ink); }
 .flip-card__back p { margin: 0; color: var(--on-surface-body); }
 .flip-card__back .wrong-fix { margin-top: var(--space-sm); color: var(--clay-ink); font-weight: 500; }
 @media (prefers-reduced-motion: reduce) {
