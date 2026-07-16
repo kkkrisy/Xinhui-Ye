@@ -3408,22 +3408,31 @@ a.t-org:hover { color: var(--on-surface); }
 }
 @media (max-width: 860px) { .nisse-wrongs { grid-template-columns: 1fr; } }
 
-/* Research note — the cognitive-labor finding pinned to the section as a
-   sticky paper aside, so the data reads as a discovered artifact rather than
-   an opening wall of text. Floats beside the lead-in on desktop, stacks above
-   it on phones. Peach stock + a coral pushpin set it apart from the white
-   review chip and the cream page. */
-.detail-text--noted::after { content: ""; display: table; clear: both; }
+/* Research note — the cognitive-labor finding pinned as a sticky paper aside,
+   so the data reads as a discovered artifact rather than a wall of text. It
+   sits beside the opening pull-quote (see .pull-quote--noted). Peach stock + a
+   coral pushpin set it apart from the white review chip and the cream page. */
 .research-note {
-  float: right;
-  width: min(330px, 46%);
-  margin: 6px 0 var(--space-sm) var(--space-lg);
+  width: min(330px, 100%);
   padding: var(--space-md);
   background: var(--surface-container);   /* peach */
   border-radius: var(--radius-sm);
   box-shadow: 0 12px 26px rgba(46, 46, 56, 0.13);
   transform: rotate(-1.6deg);
   position: relative;
+}
+/* The opening quote and the research note, side by side: the question on the
+   left, the finding that provokes it pinned to the right. Stacks on phones. */
+.pull-quote--noted {
+  display: flex;
+  align-items: center;
+  gap: clamp(var(--space-md), 4vw, var(--space-xl));
+}
+.pull-quote--noted .pull-quote__main { flex: 1 1 auto; min-width: 0; }
+.pull-quote--noted .research-note { flex: 0 0 auto; }
+@media (max-width: 760px) {
+  .pull-quote--noted { flex-direction: column; align-items: stretch; }
+  .pull-quote--noted .research-note { align-self: center; }
 }
 .research-note__pin {
   position: absolute;
