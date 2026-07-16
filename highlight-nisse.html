@@ -64,13 +64,13 @@
           <div class="block-copy detail-prose">
             <p class="title-serif">A calm home for invisible work</p>
             <p class="block-desc">Nisse is a home management app for couples who share a household, named after the Scandinavian house spirit that quietly keeps a home in order. Most task apps help one person manage a home. Nisse helps two people <em>share</em> one, including the part nobody sees: noticing, planning, and remembering.</p>
-            <p class="block-desc">I studied collaboration for years. Then I looked at my own home and realized I had been studying it there too. Keeping a house running is collaboration: staying somewhat fair, holding the whole picture in your head, showing up as a unit. Your neighbors know you as number 12. You arrive at a double date as a pair. You are somebody&rsquo;s mom or somebody&rsquo;s pawrent. You are still yourself, but part of the time the world counts you as a team, and the work at home is what keeps that team standing. Research has a name for the hidden half of it. <strong><em>Cognitive household labor</em></strong>: the anticipating, deciding, and monitoring that runs underneath the visible chores, and that lands on one partner by default. I wanted to see whether design could move it.</p>
+            <p class="block-desc">I studied collaboration for years. Then I looked at my own home and realized I had been studying it there too. Keeping a house running is collaboration: staying somewhat fair, holding the whole picture in your head, showing up as a unit. Your neighbors know you as number 12. You arrive at a double date as a pair. You are somebody&rsquo;s mom or somebody&rsquo;s pawrent. You are still yourself, but part of the time the world counts you as a team, and the work at home is what keeps that team standing. Research has a name for the hidden half of it. <strong><em>Cognitive household labor</em></strong>: the noticing, the planning, and the remembering that runs underneath the visible chores, and that lands on one partner by default. I wanted to see whether design could move it.</p>
           </div>
 
           <!-- ===== The problem ===== -->
           <div class="detail-text">
             <p class="title-serif">Chores get split. Mental load doesn&rsquo;t.</p>
-            <p>In most households the physical work is negotiable. What rarely gets shared is the cognitive work around it: knowing the filter needs replacing, remembering when the plants were last watered, deciding that the bathroom can wait but the fridge can&rsquo;t. Researchers call this <strong>cognitive household labor</strong> &mdash; anticipating, deciding, monitoring. It&rsquo;s continuous, it&rsquo;s invisible, and it tends to land on one partner by default. That person becomes the household&rsquo;s project manager without ever applying for the job.</p>
+            <p>In most households the physical work is negotiable. What rarely gets shared is the cognitive work around it: knowing the filter needs replacing, remembering when the plants were last watered, deciding that the bathroom can wait but the fridge can&rsquo;t. Researchers call this <strong>cognitive household labor</strong> &mdash; the noticing, the planning, the remembering. It&rsquo;s continuous, it&rsquo;s invisible, and it tends to land on one partner by default. That person becomes the household&rsquo;s project manager without ever applying for the job.</p>
             <p>The consequence isn&rsquo;t just fatigue. It&rsquo;s resentment that neither partner can quite name, because from the outside, the work doesn&rsquo;t exist. That tension shaped every decision in this project.</p>
           </div>
 
@@ -79,56 +79,204 @@
             <blockquote>How do you make invisible work visible &mdash;<br />without turning a relationship into a scoreboard?</blockquote>
           </figure>
 
-          <!-- ===== Research & landscape ===== -->
+          <!-- ===== Research: what existing tools get wrong ===== -->
           <div class="photo-feature">
             <div class="detail-text">
               <p class="title-serif">What existing tools get wrong</p>
-              <p>I mapped the landscape &mdash; family organizers (Cozi, OurHome), chore apps (Tody), reminder tools, couple-focused apps. Three patterns kept repeating:</p>
-            </div>
-            <div class="nisse-wrongs">
-              <div class="answer-card">
-                <p class="title-serif">Individual-first</p>
-                <p>Almost every tool models a household as one owner who delegates. Whoever sets up the app becomes the manager &mdash; again. The app reproduces the very dynamic it should dissolve.</p>
-              </div>
-              <div class="answer-card">
-                <p class="title-serif">Deadlines and guilt</p>
-                <p>Hard due dates for work that is inherently soft. Cleaning the windows isn&rsquo;t due Tuesday at 9:00; it&rsquo;s due <em>roughly this month</em>. Fixed deadlines manufacture artificial failure &mdash; red badges for a home that is actually fine.</p>
-              </div>
-              <div class="answer-card">
-                <p class="title-serif">Gamification</p>
-                <p>Points, streaks, leaderboards. Gamification turns partners into competitors and care into currency. Nobody wants to be told they&rsquo;re &ldquo;losing&rdquo; at their own home.</p>
-              </div>
-            </div>
-            <div class="detail-text">
-              <p>The problem was never task storage &mdash; every app stores tasks. The problem is <strong>awareness asymmetry</strong>: one person holds the model of the household in their head, and the tools reinforce it.</p>
+              <p>&ldquo;Mental load&rdquo; is a slogan. The research underneath it is sharper. In 70 interviews across 35 couples, sociologist Allison Daminger breaks cognitive household labor into four moves: <strong>anticipation</strong> (noticing a need before it becomes urgent), <strong>identification</strong> (working out the options), <strong>decision</strong> (choosing), and <strong>monitoring</strong> (checking it actually happened). Women led on cognitive labor in 26 of the 32 heterosexual couples she studied &mdash; on average leading in 4.6 of nine life domains, against their partner&rsquo;s 1.6.</p>
+              <p>The finding that reorganized this project is the one that looks like good news: <strong>decision-making came out roughly equal.</strong> The imbalance concentrates almost entirely in anticipation and monitoring. In the noticing and the checking.</p>
+              <p>Now look at what the category ships. Assignment is a decision. A checkbox is a decision, recorded. A due date is a decision, scheduled. The whole market is a beautiful interface for the one move that was already close to fair &mdash; and it hands anticipation and monitoring straight back to whoever was already carrying them, now with a database attached and a notification budget.</p>
+              <p>It&rsquo;s also the cheap half. Cognitive load, not physical load, is what tracks with how people feel: in a 2024 study of mothers of young children, the division of <em>cognitive</em> labor was associated with every measure of psychological wellbeing tested, while the division of <em>physical</em> labor was associated with almost none of them. Load is not hours. Load is holding the model.</p>
+              <p>So I went wider than the usual three names &mdash; twenty products across seven families, every one built for adults sharing a home. They are not bad products. They are products aimed at a different problem.</p>
             </div>
 
-            <!-- Positioning map, rebuilt flat in the site's language -->
-            <figure class="nisse-map" role="img" aria-label="Positioning map: competitors cluster in the individual-first, deadline-driven corner; Nisse sits alone in the calm, household-first corner.">
-              <svg viewBox="0 0 820 520" xmlns="http://www.w3.org/2000/svg">
-                <!-- axes -->
-                <line x1="60" y1="260" x2="760" y2="260" stroke="#c9c7bd" stroke-width="1.5" />
-                <line x1="410" y1="40" x2="410" y2="480" stroke="#c9c7bd" stroke-width="1.5" />
-                <!-- axis labels -->
-                <text x="66" y="248" class="map-axis">individual-first</text>
-                <text x="754" y="248" text-anchor="end" class="map-axis">household-first</text>
-                <text x="422" y="56" class="map-axis">rhythm &amp; calm</text>
-                <text x="422" y="474" class="map-axis">deadlines &amp; gamification</text>
-                <!-- competitor pebbles, lower-left -->
-                <ellipse cx="150" cy="392" rx="17" ry="15" fill="#b9b7ae" />
-                <text x="150" y="424" text-anchor="middle" class="map-label">Cozi</text>
-                <ellipse cx="236" cy="352" rx="15" ry="14" fill="#b9b7ae" />
-                <text x="236" y="382" text-anchor="middle" class="map-label">OurHome</text>
-                <ellipse cx="192" cy="318" rx="13" ry="12" fill="#c4c2b9" />
-                <text x="192" y="296" text-anchor="middle" class="map-label">Tody</text>
-                <ellipse cx="300" cy="416" rx="14" ry="13" fill="#c4c2b9" />
-                <text x="300" y="446" text-anchor="middle" class="map-label">reminder apps</text>
-                <!-- Nisse, alone upper-right -->
-                <path d="M628 128 c26 -14 58 -8 70 14 c12 22 2 50 -22 62 c-24 12 -54 6 -66 -14 c-12 -20 -6 -48 18 -62 z" fill="#a78792" />
-                <text x="654" y="166" text-anchor="middle" class="map-nisse">Nisse</text>
-              </svg>
-              <figcaption class="caption">Every existing tool crowds one corner. The calm, household-first quadrant was empty.</figcaption>
+            <!-- The market, read across — quiet table, hairline rules only -->
+            <div class="nisse-landscape">
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col">Family</th>
+                    <th scope="col">Examples</th>
+                    <th scope="col">Mechanism</th>
+                    <th scope="col">What it does to cognitive load</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Family organizers</td>
+                    <td>Cozi, Skylight, Homsy</td>
+                    <td data-th="Mechanism">Shared calendar, lists, assignment</td>
+                    <td data-th="What it does to cognitive load">Stores the model; doesn&rsquo;t share it. Someone still fills it.</td>
+                  </tr>
+                  <tr>
+                    <td>Cleaning-state apps</td>
+                    <td>Tody, Sweepy, Don&rsquo;t Forget Me</td>
+                    <td data-th="Mechanism">Time-since-last-done &ldquo;dirtiness&rdquo;</td>
+                    <td data-th="What it does to cognitive load">Genuinely offloads monitoring &mdash; for one person.</td>
+                  </tr>
+                  <tr>
+                    <td>Flatshare fairness</td>
+                    <td>Flatastic, Nipto, Chap, Plastnofy</td>
+                    <td data-th="Mechanism">Rotation, scoring, expense split</td>
+                    <td data-th="What it does to cognitive load">Built for strangers who need proof, not partners who need trust.</td>
+                  </tr>
+                  <tr>
+                    <td>Couple coordination</td>
+                    <td>Cupla, SameWave</td>
+                    <td data-th="Mechanism">Consolidating shared life</td>
+                    <td data-th="What it does to cognitive load">Fewer apps, same manager.</td>
+                  </tr>
+                  <tr>
+                    <td>Assignment-first</td>
+                    <td>RemindHer, ChoreBuster</td>
+                    <td data-th="Mechanism">A name on every task, always</td>
+                    <td data-th="What it does to cognitive load">Formalizes delegation as the product.</td>
+                  </tr>
+                  <tr>
+                    <td>General productivity</td>
+                    <td>Todoist, Apple Reminders</td>
+                    <td data-th="Mechanism">Shared lists</td>
+                    <td data-th="What it does to cognitive load">No concept of a household at all.</td>
+                  </tr>
+                  <tr>
+                    <td>AI concierge</td>
+                    <td>Maple, Ohai, Milo, Yohana</td>
+                    <td data-th="Mechanism">The assistant does the noticing</td>
+                    <td data-th="What it does to cognitive load">Takes the manager&rsquo;s job. Doesn&rsquo;t share it.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="detail-text">
+              <p>Read across it and four patterns fall out.</p>
+            </div>
+
+            <div class="nisse-wrongs">
+              <div class="answer-card">
+                <p class="title-serif">There is always an admin</p>
+                <p>Almost every tool models a household as one owner who delegates. Whoever sets up the app becomes the manager, again. This isn&rsquo;t a UX accident: research on smart homes and &ldquo;digital housekeeping&rdquo; keeps finding that the person who administers a household&rsquo;s systems accumulates a central point of control. The technology re-inscribes the arrangement it promised to dissolve.</p>
+              </div>
+              <div class="answer-card">
+                <p class="title-serif">The &ldquo;assign to&rdquo; field is a RAT machine</p>
+                <p>Eve Rodsky has the best name for the core failure: <strong>RAT &mdash; Random Assignment of a Task.</strong> One partner does the conception and the planning, then hands over the execution. &ldquo;Can you grab milk on the way home?&rdquo; The mental work never moved; only the walking did. An assign-to field industrializes this, and the category sells it as the feature. A five-star review of Maple, written as praise: <em>nice to be able to assign tasks to my husband and get them off my mental load.</em> That&rsquo;s the load moving one inch and staying in the same head.</p>
+              </div>
+              <div class="answer-card">
+                <p class="title-serif">Those that fixed the clock kept the score</p>
+                <p>Family organizers give soft work hard due dates. Cleaning the windows isn&rsquo;t due Tuesday at 9:00; it&rsquo;s due <em>roughly this month</em>. Fixed deadlines manufacture artificial failure &mdash; red badges for a home that&rsquo;s actually fine. In fairness, the category half-solved this: Tody, Sweepy and Don&rsquo;t Forget Me replaced deadlines with a rising sense of dirtiness, and the framing is right &mdash; the app holds the standard, so neither partner has to be the one with the standards. Then they attach points and a leaderboard. Nobody wants to be told they&rsquo;re losing at their own home.</p>
+              </div>
+              <div class="answer-card">
+                <p class="title-serif">Automate the manager</p>
+                <p>The newest and best-funded answer is to let an assistant do the noticing. Ohai &mdash; built by the founder of Care.com &mdash; states the thesis plainly: <em>when we make invisible work visible, we can then make it disappear.</em> But an assistant has to hand the work to somebody, so it assigns: Maple will run a nightly routine that allocates your overdue to-dos for you. The noticing gets solved and ownership gets pinned in the same motion. The second partner still doesn&rsquo;t hold a model of the home; they hold a notification. Awareness doesn&rsquo;t transfer &mdash; it evaporates, and re-condenses on whoever notices first when the assistant is wrong. Which is the same person as before.</p>
+              </div>
+            </div>
+
+            <div class="detail-text">
+              <p>And the maximal version of that bet has already been run. Yohana, Panasonic&rsquo;s family concierge, put <em>real humans</em> behind the app: 300,000 tasks completed, more than a million hours handed back to families. It closed in September 2025. Note where it sits on the map, though &mdash; Yohana never touched the noticing. You told it your to-do list; a team of people did the doing. Panasonic&rsquo;s own account of the closure is the most useful sentence in this whole category: they had been unable to solve <em>using</em> the time Yohana created to strengthen family ties. Handing hours back turned out not to be the same as sharing the load.</p>
+            </div>
+
+            <figure class="pull-quote">
+              <svg class="pull-quote__mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h7v7c0 3.9-2.4 6.5-6 7.5l-1-2c2.1-.7 3.3-1.9 3.6-3.5H4V4zm9 0h7v7c0 3.9-2.4 6.5-6 7.5l-1-2c2.1-.7 3.3-1.9 3.6-3.5H13V4z"/></svg>
+              <blockquote>In 1983 Ruth Schwartz Cowan showed that a century of labour-saving household technology didn&rsquo;t reduce housework &mdash; it raised standards and concentrated the work on one person. <em>More Work for Mother.</em> Most of this category is that book&rsquo;s software edition.</blockquote>
             </figure>
+
+            <!-- Positioning map — descriptive axes, flat in the site's language -->
+            <figure class="nisse-map">
+              <svg viewBox="0 0 680 545" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Market map: twenty tools plotted by who does the noticing — a person or the system — and when ownership is fixed — at creation or at pickup. The top-right corner, where the system notices and ownership stays open until pickup, holds Tody, Sweepy, Don't Forget Me and Nisse. Nisse is the only one there without a score.">
+                <!-- axes — hairline, crossing at centre, no ticks -->
+                <line class="map-hair" x1="90" y1="265" x2="610" y2="265" />
+                <line class="map-hair" x1="345" y1="60" x2="345" y2="470" />
+                <!-- axis labels, in the gutters -->
+                <text class="map-axis" x="345" y="40" text-anchor="middle">ownership at pickup</text>
+                <text class="map-axis" x="345" y="498" text-anchor="middle">ownership fixed at creation</text>
+                <text class="map-axis" x="90" y="283">a person does the noticing</text>
+                <text class="map-axis" x="610" y="283" text-anchor="end">the system does the noticing</text>
+                <!-- the corner in question -->
+                <rect class="map-quad" x="352" y="68" width="250" height="190" rx="12" />
+                <!-- top-left: person notices, ownership unfixed -->
+                <circle class="map-dot--open" cx="200" cy="100" r="4" /><text class="map-label" x="200" y="90" text-anchor="middle">Skylight</text>
+                <circle class="map-dot--open" cx="285" cy="130" r="4" /><text class="map-label" x="285" y="120" text-anchor="middle">Homsy</text>
+                <circle class="map-dot--open" cx="130" cy="145" r="4" /><text class="map-label" x="130" y="135" text-anchor="middle">Cozi</text>
+                <circle class="map-dot--open" cx="255" cy="180" r="4" /><text class="map-label" x="255" y="170" text-anchor="middle">Cupla</text>
+                <circle class="map-dot--open" cx="160" cy="205" r="4" /><text class="map-label" x="160" y="195" text-anchor="middle">Todoist / Reminders</text>
+                <circle class="map-dot--open" cx="290" cy="235" r="4" /><text class="map-label" x="290" y="225" text-anchor="middle">SameWave</text>
+                <!-- bottom-left: person notices, ownership at creation -->
+                <circle class="map-dot--open" cx="110" cy="295" r="4" /><text class="map-label" x="118" y="299">Yohana (closed 2025)</text>
+                <circle class="map-dot--open" cx="125" cy="323" r="4" /><text class="map-label" x="133" y="327">RemindHer</text>
+                <circle class="map-dot--open" cx="170" cy="351" r="4" /><text class="map-label" x="178" y="355">ChoreBuster</text>
+                <circle class="map-dot--open" cx="240" cy="379" r="4" /><text class="map-label" x="248" y="383">Plastnofy</text>
+                <circle class="map-dot" cx="200" cy="407" r="4" /><text class="map-label" x="208" y="411">Chap</text>
+                <circle class="map-dot" cx="260" cy="435" r="4" /><text class="map-label" x="268" y="439">Flatastic</text>
+                <circle class="map-dot" cx="295" cy="463" r="4" /><text class="map-label" x="303" y="467">Nipto</text>
+                <!-- bottom-right: system notices, ownership at creation -->
+                <circle class="map-dot--open" cx="450" cy="340" r="4" /><text class="map-label" x="450" y="330" text-anchor="middle">Maple</text>
+                <circle class="map-dot--open" cx="520" cy="390" r="4" /><text class="map-label" x="520" y="380" text-anchor="middle">Ohai</text>
+                <circle class="map-dot--open" cx="410" cy="420" r="4" /><text class="map-label" x="410" y="410" text-anchor="middle">Milo</text>
+                <!-- top-right: system notices, ownership at pickup -->
+                <circle class="map-dot" cx="500" cy="175" r="4" /><text class="map-label" x="500" y="165" text-anchor="middle">Sweepy</text>
+                <circle class="map-dot" cx="420" cy="200" r="4" /><text class="map-label" x="420" y="190" text-anchor="middle">Tody</text>
+                <circle class="map-dot--open" cx="540" cy="235" r="4" /><text class="map-label" x="540" y="225" text-anchor="middle">Don&rsquo;t Forget Me</text>
+                <circle class="map-ring" cx="430" cy="115" r="6" /><text class="map-nisse" x="430" y="101" text-anchor="middle">Nisse</text>
+                <!-- legend -->
+                <line class="map-hair" x1="90" y1="516" x2="610" y2="516" />
+                <circle class="map-dot" cx="96" cy="536" r="4" /><text class="map-label" x="108" y="540">keeps score</text>
+                <circle class="map-dot--open" cx="200" cy="536" r="4" /><text class="map-label" x="212" y="540">no score</text>
+                <circle class="map-ring" cx="290" cy="536" r="6" /><text class="map-label" x="304" y="540">Nisse</text>
+              </svg>
+              <!-- Narrow-viewport fallback: the same map as four stacked quadrants -->
+              <div class="nisse-map-stack">
+                <div class="ms-quad">
+                  <p class="ms-head">a person does the noticing &middot; ownership at pickup</p>
+                  <ul>
+                    <li><i class="mk mk--open"></i>Skylight</li>
+                    <li><i class="mk mk--open"></i>Homsy</li>
+                    <li><i class="mk mk--open"></i>Cozi</li>
+                    <li><i class="mk mk--open"></i>Cupla</li>
+                    <li><i class="mk mk--open"></i>Todoist / Reminders</li>
+                    <li><i class="mk mk--open"></i>SameWave</li>
+                  </ul>
+                </div>
+                <div class="ms-quad">
+                  <p class="ms-head">the system does the noticing &middot; ownership at pickup</p>
+                  <ul>
+                    <li class="ms-nisse"><i class="mk mk--ring"></i>Nisse</li>
+                    <li><i class="mk"></i>Tody</li>
+                    <li><i class="mk"></i>Sweepy</li>
+                    <li><i class="mk mk--open"></i>Don&rsquo;t Forget Me</li>
+                  </ul>
+                </div>
+                <div class="ms-quad">
+                  <p class="ms-head">a person does the noticing &middot; ownership fixed at creation</p>
+                  <ul>
+                    <li><i class="mk mk--open"></i>Yohana (closed 2025)</li>
+                    <li><i class="mk mk--open"></i>RemindHer</li>
+                    <li><i class="mk mk--open"></i>ChoreBuster</li>
+                    <li><i class="mk mk--open"></i>Plastnofy</li>
+                    <li><i class="mk"></i>Chap</li>
+                    <li><i class="mk"></i>Flatastic</li>
+                    <li><i class="mk"></i>Nipto</li>
+                  </ul>
+                </div>
+                <div class="ms-quad">
+                  <p class="ms-head">the system does the noticing &middot; ownership fixed at creation</p>
+                  <ul>
+                    <li><i class="mk mk--open"></i>Maple</li>
+                    <li><i class="mk mk--open"></i>Ohai</li>
+                    <li><i class="mk mk--open"></i>Milo</li>
+                  </ul>
+                </div>
+                <p class="ms-legend"><span><i class="mk"></i>keeps score</span><span><i class="mk mk--open"></i>no score</span><span><i class="mk mk--ring"></i>Nisse</span></p>
+              </div>
+              <figcaption class="caption">The corner isn&rsquo;t empty. It&rsquo;s just never had two people in it without a scoreboard.</figcaption>
+            </figure>
+
+            <div class="detail-text">
+              <p>I didn&rsquo;t get to that corner first. Tody, Sweepy and Don&rsquo;t Forget Me are already in it, with years of retention between them &mdash; which is the useful thing this map says: the corner isn&rsquo;t empty because the idea fails. It&rsquo;s occupied, and it works. But look at what those three have in common. They are single-player cleaning schedules. They arrive at ownerless-by-default not as a principle but because there was never a second person to assign to. And the moment two of them let another human in, they reached for a leaderboard. <strong>The gap isn&rsquo;t the corner. It&rsquo;s getting there with two people in the house and not reaching for the score.</strong></p>
+            </div>
+
+            <div class="detail-text">
+              <p>The problem was never task storage &mdash; every app stores tasks. The problem is <strong>awareness asymmetry</strong>: one person holds the model of the household in their head, and the tools ratify it. Some by naming her the admin. Some by handing her an assign button. Some by offering to replace her altogether.</p>
+            </div>
           </div>
 
           <!-- ===== Four principles ===== -->
