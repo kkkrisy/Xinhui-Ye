@@ -3470,7 +3470,7 @@ a.t-org:hover { color: var(--on-surface); }
 .nisse-map svg {
   display: block;
   width: 100%;
-  max-width: 100%;
+  max-width: 760px;
   margin: 0 auto;
   height: auto;
   background: var(--map-bg);
