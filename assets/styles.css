@@ -3474,7 +3474,7 @@ a.t-org:hover { color: var(--on-surface); }
 }
 .nisse-review .review-chip {
   float: right;
-  width: min(360px, 48%);
+  width: min(440px, 56%);
   margin: 4px 0 var(--space-md) var(--space-lg);
   padding: var(--space-lg);
   background: #ffffff;
