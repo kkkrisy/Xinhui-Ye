@@ -3338,14 +3338,14 @@ a.t-org:hover { color: var(--on-surface); }
   display: flex;
   flex-direction: column;
 }
-.nisse-wrongs .answer-card .title-serif { margin: 0 0 var(--space-xs); }
+.nisse-wrongs .answer-card .title-serif { color: #ad827c; margin: 0 0 var(--space-xs); }
 .nisse-wrongs .answer-card p { color: var(--on-surface-body); margin: 0; }
 /* the "we think…" stance — the studio's answer to each failure, set off from
-   the diagnosis above it by a hairline and the brand indigo */
+   the diagnosis above it by a hairline and the clay accent from the app palette */
 .nisse-wrongs .answer-card .wrong-fix {
   margin-top: auto;
   padding-top: var(--space-sm);
-  color: var(--primary);
+  color: #ad827c;
   font-weight: 500;
 }
 .nisse-wrongs .answer-card .wrong-fix::before {
@@ -3354,7 +3354,7 @@ a.t-org:hover { color: var(--on-surface); }
   width: 32px;
   height: 2px;
   margin-bottom: var(--space-sm);
-  background: var(--primary);
+  background: #ad827c;
   opacity: 0.5;
 }
 @media (max-width: 860px) { .nisse-wrongs { grid-template-columns: 1fr; } }
