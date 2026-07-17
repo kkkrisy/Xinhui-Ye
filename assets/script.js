@@ -597,7 +597,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const wireMap = document.querySelector("[data-wiremap]");
   const wireTrigger = wireMap && wireMap.querySelector("[data-wiremap-open]");
   if (wireMap && wireTrigger) {
-    const ZOOM = 2;                       // "zoom in twice" — 2× the fitted size
+    // Click steps up through these multiples of the fitted (overview) size,
+    // then wraps back to the overview. The board is tall and dense, so the
+    // first step frames a region and the last is close to 1:1 — big enough
+    // to read any single wireframe clearly.
+    const ZOOM_STEPS = [1, 4, 9];
     const srcImg = wireTrigger.querySelector("img");
 
     // Build the viewer once, lazily, and reuse it.
@@ -617,16 +621,17 @@ document.addEventListener("DOMContentLoaded", () => {
     img.src = srcImg.currentSrc || srcImg.src;
     img.alt = srcImg.alt;
 
-    let zoomed = false;
+    let stepIdx = 0;                      // index into ZOOM_STEPS; 0 = overview
     let lastPointer = { x: 0.5, y: 0.5 }; // fraction of canvas, for pan follow
 
-    // Position the image for the current pointer fraction when zoomed.
+    // Position the image for the current pointer fraction at the current step.
     const pan = (fx, fy) => {
       // offsetWidth/Height give the fitted layout size and — unlike
       // getBoundingClientRect — are unaffected by the transform we apply,
       // so the maths stays correct across repeated pans.
+      const scale = ZOOM_STEPS[stepIdx];
       const fitW = img.offsetWidth, fitH = img.offsetHeight;
-      const scaledW = fitW * ZOOM, scaledH = fitH * ZOOM;
+      const scaledW = fitW * scale, scaledH = fitH * scale;
       const vw = canvas.clientWidth, vh = canvas.clientHeight;
       // How far we can travel; if the scaled image is smaller than the
       // viewport on an axis, keep it centred (overflow 0).
@@ -634,20 +639,23 @@ document.addEventListener("DOMContentLoaded", () => {
       const overY = Math.max(0, scaledH - vh);
       const tx = -overX * (fx - 0.5);
       const ty = -overY * (fy - 0.5);
-      img.style.transform = "translate(" + tx + "px," + ty + "px) scale(" + ZOOM + ")";
+      img.style.transform = "translate(" + tx + "px," + ty + "px) scale(" + scale + ")";
     };
 
-    const setZoom = (on, fx, fy) => {
-      zoomed = on;
-      canvas.dataset.state = on ? "zoom" : "fit";
-      if (on) {
-        img.style.transition = "transform 0.22s ease";
-        pan(fx, fy);
-        // drop the transition after the zoom-in so panning stays instant
-        window.setTimeout(() => { img.style.transition = "none"; }, 240);
-      } else {
-        img.style.transition = "transform 0.22s ease";
+    // Apply the current step, centred on the given pointer fraction.
+    const applyStep = (fx, fy) => {
+      const scale = ZOOM_STEPS[stepIdx];
+      const last = stepIdx === ZOOM_STEPS.length - 1;
+      // "fit" at the overview, "zoom" (minus cursor — next click resets) at the
+      // final step, "zoom-in" (plus cursor — more zoom available) in between.
+      canvas.dataset.state = stepIdx === 0 ? "fit" : (last ? "zoom" : "zoom-in");
+      img.style.transition = "transform 0.22s ease";
+      if (scale === 1) {
         img.style.transform = "";
+      } else {
+        pan(fx, fy);
+        // drop the transition after the move so panning stays instant
+        window.setTimeout(() => { img.style.transition = "none"; }, 240);
       }
     };
 
@@ -664,30 +672,34 @@ document.addEventListener("DOMContentLoaded", () => {
       viewer.setAttribute("aria-hidden", "false");
       document.body.classList.add("wire-lock");
       document.body.style.overflow = "hidden";
-      setZoom(false);
+      stepIdx = 0;
+      applyStep(0.5, 0.5);
     };
     const close = () => {
       viewer.classList.remove("is-open");
       viewer.setAttribute("aria-hidden", "true");
       document.body.classList.remove("wire-lock");
       document.body.style.overflow = "";
-      setZoom(false);
+      stepIdx = 0;
+      applyStep(0.5, 0.5);
     };
 
     wireTrigger.addEventListener("click", open);
     closeBtn.addEventListener("click", close);
 
-    // Click the board to toggle zoom, centred on where you clicked.
+    // Click the board to step deeper — overview → region → close-up — then
+    // wrap back to the overview, each step centred on where you clicked.
     canvas.addEventListener("click", (e) => {
       if (e.target === closeBtn) return;
       const f = pointerFraction(e);
       lastPointer = f;
-      setZoom(!zoomed, f.x, f.y);
+      stepIdx = (stepIdx + 1) % ZOOM_STEPS.length;
+      applyStep(f.x, f.y);
     });
 
     // While zoomed, follow the cursor so the whole board is reachable.
     canvas.addEventListener("mousemove", (e) => {
-      if (!zoomed) return;
+      if (stepIdx === 0) return;
       const f = pointerFraction(e);
       lastPointer = f;
       pan(f.x, f.y);
@@ -695,14 +707,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Touch: drag to pan while zoomed.
     canvas.addEventListener("touchmove", (e) => {
-      if (!zoomed || !e.touches[0]) return;
+      if (stepIdx === 0 || !e.touches[0]) return;
       const f = pointerFraction(e.touches[0]);
       lastPointer = f;
       pan(f.x, f.y);
     }, { passive: true });
 
     // Keep the pan honest if the window resizes mid-view.
-    window.addEventListener("resize", () => { if (zoomed) pan(lastPointer.x, lastPointer.y); });
+    window.addEventListener("resize", () => { if (stepIdx > 0) pan(lastPointer.x, lastPointer.y); });
 
     document.addEventListener("keydown", (e) => {
       if (!viewer.classList.contains("is-open")) return;
