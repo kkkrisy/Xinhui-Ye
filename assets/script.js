@@ -622,41 +622,59 @@ document.addEventListener("DOMContentLoaded", () => {
     img.alt = srcImg.alt;
 
     let stepIdx = 0;                      // index into ZOOM_STEPS; 0 = overview
-    let lastPointer = { x: 0.5, y: 0.5 }; // fraction of canvas, for pan follow
+    // view holds the fraction (0–1) of the image sitting at the viewport centre.
+    // Drag and scroll move it; the cursor no longer drags the image around.
+    let view = { x: 0.5, y: 0.5 };
 
-    // Position the image for the current pointer fraction at the current step.
-    const pan = (fx, fy) => {
-      // offsetWidth/Height give the fitted layout size and — unlike
-      // getBoundingClientRect — are unaffected by the transform we apply,
-      // so the maths stays correct across repeated pans.
+    // How far the scaled image can travel on each axis (0 if it fits).
+    const overflowXY = () => {
       const scale = ZOOM_STEPS[stepIdx];
-      const fitW = img.offsetWidth, fitH = img.offsetHeight;
-      const scaledW = fitW * scale, scaledH = fitH * scale;
-      const vw = canvas.clientWidth, vh = canvas.clientHeight;
-      // How far we can travel; if the scaled image is smaller than the
-      // viewport on an axis, keep it centred (overflow 0).
-      const overX = Math.max(0, scaledW - vw);
-      const overY = Math.max(0, scaledH - vh);
-      const tx = -overX * (fx - 0.5);
-      const ty = -overY * (fy - 0.5);
+      // offsetWidth/Height give the fitted layout size and — unlike
+      // getBoundingClientRect — are unaffected by the transform we apply.
+      return {
+        x: Math.max(0, img.offsetWidth * scale - canvas.clientWidth),
+        y: Math.max(0, img.offsetHeight * scale - canvas.clientHeight),
+      };
+    };
+
+    const clamp01 = (n) => Math.min(1, Math.max(0, n));
+
+    // Paint the image at the current view fraction and zoom step.
+    const paint = () => {
+      const scale = ZOOM_STEPS[stepIdx];
+      const over = overflowXY();
+      // Axes with no overflow stay centred.
+      const fx = over.x ? view.x : 0.5;
+      const fy = over.y ? view.y : 0.5;
+      const tx = -over.x * (fx - 0.5);
+      const ty = -over.y * (fy - 0.5);
       img.style.transform = "translate(" + tx + "px," + ty + "px) scale(" + scale + ")";
     };
 
-    // Apply the current step, centred on the given pointer fraction.
+    // Apply the current step. On zoom-in, centre on the given fraction; on the
+    // way back to the overview, recentre.
     const applyStep = (fx, fy) => {
       const scale = ZOOM_STEPS[stepIdx];
-      const last = stepIdx === ZOOM_STEPS.length - 1;
-      // "fit" at the overview, "zoom" (minus cursor — next click resets) at the
-      // final step, "zoom-in" (plus cursor — more zoom available) in between.
-      canvas.dataset.state = stepIdx === 0 ? "fit" : (last ? "zoom" : "zoom-in");
+      // "fit" at the overview; "grab"/"grabbing" once zoomed so the cursor
+      // reads as drag-to-pan rather than a magnifier chasing the pointer.
+      canvas.dataset.state = stepIdx === 0 ? "fit" : "grab";
+      view = { x: clamp01(fx), y: clamp01(fy) };
       img.style.transition = "transform 0.22s ease";
       if (scale === 1) {
         img.style.transform = "";
       } else {
-        pan(fx, fy);
-        // drop the transition after the move so panning stays instant
+        paint();
+        // drop the transition after the move so dragging stays instant
         window.setTimeout(() => { img.style.transition = "none"; }, 240);
       }
+    };
+
+    // Nudge the view by a pixel delta (used by both drag and wheel/scroll).
+    const nudge = (dx, dy) => {
+      const over = overflowXY();
+      if (over.x) view.x = clamp01(view.x + dx / over.x);
+      if (over.y) view.y = clamp01(view.y + dy / over.y);
+      paint();
     };
 
     const pointerFraction = (e) => {
@@ -687,34 +705,53 @@ document.addEventListener("DOMContentLoaded", () => {
     wireTrigger.addEventListener("click", open);
     closeBtn.addEventListener("click", close);
 
-    // Click the board to step deeper — overview → region → close-up — then
-    // wrap back to the overview, each step centred on where you clicked.
-    canvas.addEventListener("click", (e) => {
+    // A tap steps the zoom deeper — overview → region → close-up — then wraps
+    // back to the overview, centred on where you tapped. A drag pans instead,
+    // so once zoomed you move around by dragging, not by chasing the cursor.
+    const DRAG_THRESHOLD = 6;             // px of movement that turns a tap into a drag
+    let down = null;                      // { x, y, moved } while a pointer is held
+
+    canvas.addEventListener("pointerdown", (e) => {
+      if (e.target === closeBtn || e.button !== 0) return;
+      down = { x: e.clientX, y: e.clientY, moved: false };
+      canvas.setPointerCapture(e.pointerId);
+      if (stepIdx > 0) canvas.dataset.state = "grabbing";
+    });
+
+    canvas.addEventListener("pointermove", (e) => {
+      if (!down) return;
+      const dx = e.clientX - down.x, dy = e.clientY - down.y;
+      if (!down.moved && Math.hypot(dx, dy) > DRAG_THRESHOLD) down.moved = true;
+      if (down.moved && stepIdx > 0) {
+        nudge(-dx, -dy);                  // drag the board with the pointer
+        down.x = e.clientX; down.y = e.clientY;
+      }
+    });
+
+    const endPointer = (e) => {
+      if (!down) return;
+      const wasDrag = down.moved;
+      down = null;
+      try { canvas.releasePointerCapture(e.pointerId); } catch (_) {}
+      if (stepIdx > 0) canvas.dataset.state = "grab";
+      if (wasDrag) return;                // a drag never changes zoom
       if (e.target === closeBtn) return;
       const f = pointerFraction(e);
-      lastPointer = f;
       stepIdx = (stepIdx + 1) % ZOOM_STEPS.length;
       applyStep(f.x, f.y);
-    });
+    };
+    canvas.addEventListener("pointerup", endPointer);
+    canvas.addEventListener("pointercancel", () => { down = null; if (stepIdx > 0) canvas.dataset.state = "grab"; });
 
-    // While zoomed, follow the cursor so the whole board is reachable.
-    canvas.addEventListener("mousemove", (e) => {
+    // Wheel / trackpad scrolls the board freely while zoomed.
+    canvas.addEventListener("wheel", (e) => {
       if (stepIdx === 0) return;
-      const f = pointerFraction(e);
-      lastPointer = f;
-      pan(f.x, f.y);
-    });
+      e.preventDefault();
+      nudge(e.deltaX, e.deltaY);
+    }, { passive: false });
 
-    // Touch: drag to pan while zoomed.
-    canvas.addEventListener("touchmove", (e) => {
-      if (stepIdx === 0 || !e.touches[0]) return;
-      const f = pointerFraction(e.touches[0]);
-      lastPointer = f;
-      pan(f.x, f.y);
-    }, { passive: true });
-
-    // Keep the pan honest if the window resizes mid-view.
-    window.addEventListener("resize", () => { if (stepIdx > 0) pan(lastPointer.x, lastPointer.y); });
+    // Keep the view honest if the window resizes mid-view.
+    window.addEventListener("resize", () => { if (stepIdx > 0) paint(); });
 
     document.addEventListener("keydown", (e) => {
       if (!viewer.classList.contains("is-open")) return;

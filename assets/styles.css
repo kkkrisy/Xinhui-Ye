@@ -4074,15 +4074,13 @@ a.t-org:hover { color: var(--on-surface); }
   -webkit-user-drag: none;
   will-change: transform;
 }
-/* fit + intermediate states — the magnifier-plus invites a further zoom in */
-.wire-viewer__canvas[data-state="fit"],
-.wire-viewer__canvas[data-state="zoom-in"] {
+/* overview — the magnifier-plus invites a zoom in */
+.wire-viewer__canvas[data-state="fit"] {
   cursor: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='36'%20height='36'%20viewBox='0%200%2036%2036'%3E%3Cg%20fill='none'%20stroke='%231a1714'%20stroke-width='5'%20stroke-linecap='round'%3E%3Ccircle%20cx='15'%20cy='15'%20r='10'/%3E%3Cpath%20d='M22%2022l9%209'/%3E%3Cpath%20d='M15%2010v10M10%2015h10'/%3E%3C/g%3E%3Cg%20fill='none'%20stroke='%23fff'%20stroke-width='2.4'%20stroke-linecap='round'%3E%3Ccircle%20cx='15'%20cy='15'%20r='10'/%3E%3Cpath%20d='M22%2022l9%209'/%3E%3Cpath%20d='M15%2010v10M10%2015h10'/%3E%3C/g%3E%3C/svg%3E") 15 15, zoom-in;
 }
-/* zoomed state — the magnifier-minus offers a zoom out */
-.wire-viewer__canvas[data-state="zoom"] {
-  cursor: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='36'%20height='36'%20viewBox='0%200%2036%2036'%3E%3Cg%20fill='none'%20stroke='%231a1714'%20stroke-width='5'%20stroke-linecap='round'%3E%3Ccircle%20cx='15'%20cy='15'%20r='10'/%3E%3Cpath%20d='M22%2022l9%209'/%3E%3Cpath%20d='M10%2015h10'/%3E%3C/g%3E%3Cg%20fill='none'%20stroke='%23fff'%20stroke-width='2.4'%20stroke-linecap='round'%3E%3Ccircle%20cx='15'%20cy='15'%20r='10'/%3E%3Cpath%20d='M22%2022l9%209'/%3E%3Cpath%20d='M10%2015h10'/%3E%3C/g%3E%3C/svg%3E") 15 15, zoom-out;
-}
+/* zoomed — grab to drag the board around; grabbing while held */
+.wire-viewer__canvas[data-state="grab"] { cursor: grab; }
+.wire-viewer__canvas[data-state="grabbing"] { cursor: grabbing; }
 .wire-viewer__close {
   position: absolute;
   top: 20px;
