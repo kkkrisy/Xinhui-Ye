@@ -3976,16 +3976,26 @@ a.t-org:hover { color: var(--on-surface); }
 .wire-map__trigger:focus-visible .wire-map__hint { opacity: 1; transform: translateY(0); }
 .wire-map .caption { margin-top: var(--space-sm); }
 
-/* Windowed preview — crop the tall map to just the first two flows (1a onboarding
-   + 1b space lens), then invite a zoom for the seven flows below. The map is
-   2236×9171 and its background is transparent, so the fade dissolves cleanly into
-   the page and the magnifier cue tells people there is more to look at. */
+/* Windowed preview — crop the tall map to just one flow (1b, the home space
+   lens), then invite a zoom for the eight flows around it. The map is 2236×9171
+   and its background is transparent, so the fade dissolves cleanly into the page
+   and the magnifier cue tells people there is more to look at. 1b occupies the
+   band y≈1050–2830 of the 9171-tall image, so the window is that slice and the
+   image is shifted up to reveal it. */
 .wire-map--window .wire-map__trigger {
-  aspect-ratio: 2236 / 2860;          /* show only the top ~31% of the map */
+  aspect-ratio: 2236 / 1780;          /* the 1b band */
   box-shadow: inset 0 0 0 1px rgba(20, 18, 16, 0.06);
 }
-/* the image overflows the shorter window and is clipped at the top edge */
-.wire-map--window .wire-map__trigger img { border-radius: 0; }
+/* pull the full-height image up so the 1b band sits in the window; it overflows
+   both edges and is clipped by the trigger's overflow:hidden */
+.wire-map--window .wire-map__trigger img {
+  position: absolute;
+  top: -59%;                          /* 1050 / 1780 of the window height */
+  left: 0;
+  width: 100%;
+  height: auto;
+  border-radius: 0;
+}
 .wire-map__fade {
   position: absolute;
   left: 0;
@@ -4064,8 +4074,9 @@ a.t-org:hover { color: var(--on-surface); }
   -webkit-user-drag: none;
   will-change: transform;
 }
-/* fit state — the magnifier-plus invites a zoom in */
-.wire-viewer__canvas[data-state="fit"] {
+/* fit + intermediate states — the magnifier-plus invites a further zoom in */
+.wire-viewer__canvas[data-state="fit"],
+.wire-viewer__canvas[data-state="zoom-in"] {
   cursor: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='36'%20height='36'%20viewBox='0%200%2036%2036'%3E%3Cg%20fill='none'%20stroke='%231a1714'%20stroke-width='5'%20stroke-linecap='round'%3E%3Ccircle%20cx='15'%20cy='15'%20r='10'/%3E%3Cpath%20d='M22%2022l9%209'/%3E%3Cpath%20d='M15%2010v10M10%2015h10'/%3E%3C/g%3E%3Cg%20fill='none'%20stroke='%23fff'%20stroke-width='2.4'%20stroke-linecap='round'%3E%3Ccircle%20cx='15'%20cy='15'%20r='10'/%3E%3Cpath%20d='M22%2022l9%209'/%3E%3Cpath%20d='M15%2010v10M10%2015h10'/%3E%3C/g%3E%3C/svg%3E") 15 15, zoom-in;
 }
 /* zoomed state — the magnifier-minus offers a zoom out */
