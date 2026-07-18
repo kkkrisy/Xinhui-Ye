@@ -618,7 +618,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const canvas = viewer.querySelector(".wire-viewer__canvas");
     const img = viewer.querySelector(".wire-viewer__img");
     const closeBtn = viewer.querySelector(".wire-viewer__close");
-    img.src = srcImg.currentSrc || srcImg.src;
+    // The page preview uses the light-background map (dark ink reads on the
+    // cream page); the full-screen viewer sits on a dark backdrop, so swap in
+    // the light-ink variant when one is provided.
+    img.src = srcImg.getAttribute("data-zoom-src") || srcImg.currentSrc || srcImg.src;
     img.alt = srcImg.alt;
 
     let stepIdx = 0;                      // index into ZOOM_STEPS; 0 = overview
