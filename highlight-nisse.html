@@ -296,21 +296,39 @@
               <p>The colors had a narrow brief: calm, but warm. Office blues read as work and candy brights read as a game, and neither belongs in a living room. Muted, dusty tones landed in between. They are soft enough to live on a home screen all day, and warm enough that the app feels like it likes you.</p>
             </div>
 
-            <!-- Palette, sampled from the working app -->
-            <figure class="nisse-palette">
-              <div class="nisse-swatches">
-                <span class="sw" style="--c:#a78792"><b>heather</b>#A78792</span>
-                <span class="sw" style="--c:#ad827c"><b>clay</b>#AD827C</span>
-                <span class="sw" style="--c:#939475"><b>olive</b>#939475</span>
-                <span class="sw" style="--c:#8d9eae"><b>slate</b>#8D9EAE</span>
-                <span class="sw" style="--c:#859d85"><b>moss</b>#859D85</span>
-                <span class="sw" style="--c:#7e918f"><b>lichen</b>#7E918F</span>
+            <!-- Visual system board, sampled from the working build -->
+            <figure class="nisse-system" aria-label="The Nisse visual system: zone hues, urgency states, typeface and grounds, sampled from the working build">
+              <div class="nb-card nb-ramp" role="img" aria-label="Tints of heather, the signature zone hue, stepping from near-ink plum down to near-cream"></div>
+              <div class="nb-card nb-grad" role="img" aria-label="The urgency ramp: ripening amber warming into overdue red"></div>
+              <div class="nb-card nb-spec" aria-label="Type specimen, SF Pro on plum">
+                <span>AaBbCc</span>
+                <span>01234567</span>
+                <span>{(!@#$?&amp;)}</span>
               </div>
-              <div class="nisse-states">
-                <span class="st"><i style="--c:#a9bca0"></i>calm</span>
-                <span class="st"><i style="--c:#c89b62"></i>ripening</span>
-                <span class="st"><i style="--c:#cb3034"></i>overdue</span>
+              <div class="nb-card nb-chips" aria-label="The three task states as they render in the app">
+                <span class="nb-chip nb-chip--calm">calm</span>
+                <span class="nb-chip nb-chip--ripening">ripening</span>
+                <span class="nb-chip nb-chip--overdue">overdue</span>
               </div>
+              <div class="nb-card nb-type">
+                <span class="nb-type__label">Main typeface</span>
+                <span class="nb-type__weights">Regular<br />Medium</span>
+                <span class="nb-type__name">SF&nbsp;Pro</span>
+              </div>
+              <div class="nb-card nb-logo" role="img" aria-label="Two overlapping blob outlines on a plum-to-heather gradient: two partners, one shared pool">
+                <i class="nb-blob nb-blob--a"></i>
+                <i class="nb-blob nb-blob--b"></i>
+              </div>
+              <div class="nb-card nb-strips" aria-label="The five zone hues and the warm paper ground">
+                <span class="nb-strip" style="--c:#B07E90"><b>#B07E90</b></span>
+                <span class="nb-strip" style="--c:#6E5A76"><b>#6E5A76</b></span>
+                <span class="nb-strip" style="--c:#7E93A8"><b>#7E93A8</b></span>
+                <span class="nb-strip" style="--c:#7E9B84"><b>#7E9B84</b></span>
+                <span class="nb-strip" style="--c:#A9756A"><b>#A9756A</b></span>
+                <span class="nb-strip nb-strip--paper" style="--c:#F4EFE6"><b>#F4EFE6</b></span>
+              </div>
+              <div class="nb-card nb-dark" aria-label="The dark mode ground"><b>#201D18</b></div>
+              <figcaption class="caption">Sampled straight from the working build: heather, plum, slate, moss and clay for the zones, amber and red reserved for urgency, SF&nbsp;Pro throughout, and two grounds &mdash; warm paper by day, near-black #201D18 after dark.</figcaption>
             </figure>
 
           </div>

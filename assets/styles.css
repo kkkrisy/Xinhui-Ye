@@ -3793,63 +3793,216 @@ a.t-org:hover { color: var(--on-surface); }
   .nisse-journey .nj-blob { position: absolute; left: 0; top: 0; }
 }
 
-/* Palette board — blob swatches, not squares */
-.nisse-palette { margin: 0; }
-.nisse-swatches {
+/* Visual system board — a bento sheet of flat cards, every value sampled
+   from the working build: a heather tint ramp, the amber→red urgency
+   gradient, an SF Pro specimen on plum, the three state pills as the app
+   renders them, the two-partner mark, the five zone hues as strips beside
+   the warm paper ground, and the dark-mode ground. Flat per the site rules:
+   depth comes from the card colors, never shadow. */
+.nisse-system {
+  margin: 0;
+  display: grid;
+  gap: var(--space-sm);
+  grid-template-columns: 1fr 1.3fr 1.5fr 0.9fr;
+  grid-template-rows:
+    minmax(clamp(120px, 14vw, 175px), auto)
+    minmax(clamp(150px, 17vw, 215px), auto)
+    minmax(clamp(210px, 24vw, 310px), auto);
+  grid-template-areas:
+    "ramp  grad   spec   spec"
+    "chips type   spec   spec"
+    "logo  strips strips dark";
+}
+.nisse-system .nb-card {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Tints of heather, near-ink down to near-cream; the top step runs deeper,
+   like a ground swallowing the ramp */
+.nb-ramp {
+  grid-area: ramp;
+  background: linear-gradient(
+    to bottom,
+    #3d2d34 0 19%,
+    #59414b 19% 31%,
+    #755461 31% 43%,
+    #916877 43% 55%,
+    #b07e90 55% 67%,
+    #c6a2ad 67% 79%,
+    #d9c0c6 79% 90%,
+    #ecdede 90% 100%
+  );
+}
+
+/* The urgency ramp: ripening amber warming into overdue red */
+.nb-grad {
+  grid-area: grad;
+  background: linear-gradient(120deg, #edb055, #e7a23b 35%, #c1531f 78%, #d8402e);
+}
+
+/* Type specimen on plum, the deepest zone hue */
+.nb-spec {
+  grid-area: spec;
+  background: #6e5a76;
+  color: #fbf8f1;
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-md);
-  justify-content: center;
-}
-.nisse-swatches .sw {
-  text-align: center;
-  font-family: var(--font-grotesque);
-  font-size: 12px;
-  letter-spacing: 0.04em;
-  color: var(--on-surface-variant);
-}
-.nisse-swatches .sw::before {
-  content: "";
-  display: block;
-  width: 74px;
-  height: 68px;
-  margin: 0 auto 8px;
-  background: var(--c);
-  border-radius: 52% 48% 45% 55% / 48% 55% 45% 52%;
-}
-.nisse-swatches .sw:nth-child(even)::before { border-radius: 45% 55% 52% 48% / 55% 45% 52% 48%; }
-.nisse-swatches .sw b {
-  display: block;
-  font-weight: 700;
-  color: var(--primary);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-.nisse-states {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-sm) var(--space-lg);
-  justify-content: center;
-  margin-top: var(--space-md);
-}
-.nisse-states .st {
-  display: inline-flex;
+  flex-direction: column;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  gap: 0.06em;
+  font-family: -apple-system, "SF Pro", system-ui, sans-serif;
+  font-weight: 500;
+  font-size: clamp(40px, 5.6vw, 84px);
+  line-height: 1.14;
+  letter-spacing: 0.01em;
+}
+
+/* The three task states, rendered the way the app renders them: calm is
+   quiet paper, only urgency takes a color */
+.nb-chips {
+  grid-area: chips;
+  background: #f4edef;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.nb-chip {
   font-family: var(--font-grotesque);
   font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  padding: 9px 22px;
+  border-radius: var(--radius-full);
+}
+.nb-chip--calm { background: #fbf8f1; color: #2c2a26; border: 1px solid #e9e1d1; }
+.nb-chip--ripening { background: #e7a23b; color: #42300e; }
+.nb-chip--overdue { background: #d8402e; color: #fbf8f1; }
+
+/* Main typeface card */
+.nb-type {
+  grid-area: type;
+  background: #f4efe6;
+  border: 1px solid #e9e1d1;
+  padding: clamp(14px, 1.8vw, 24px) clamp(16px, 2vw, 26px);
+}
+.nb-type__label {
+  position: absolute;
+  top: clamp(14px, 1.8vw, 24px);
+  left: clamp(16px, 2vw, 26px);
+  font-family: var(--font-grotesque);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--on-surface-variant);
+}
+.nb-type__weights {
+  position: absolute;
+  top: clamp(14px, 1.8vw, 24px);
+  right: clamp(16px, 2vw, 26px);
+  text-align: right;
+  font-family: var(--font-grotesque);
+  font-size: 13px;
+  line-height: 1.45;
   color: var(--on-surface-body);
 }
-.nisse-states .st i {
-  width: 12px;
-  height: 12px;
-  border-radius: var(--radius-full);
-  background: var(--c);
+.nb-type__name {
+  position: absolute;
+  bottom: clamp(10px, 1.4vw, 18px);
+  left: clamp(16px, 2vw, 26px);
+  font-family: -apple-system, "SF Pro", system-ui, sans-serif;
+  font-weight: 500;
+  font-size: clamp(38px, 4.4vw, 64px);
+  line-height: 1.1;
+  color: #2c2a26;
 }
-.nisse-palette .caption {
+
+/* The mark: two blob outlines overlapping — two partners, one shared pool */
+.nb-logo {
+  grid-area: logo;
+  background: linear-gradient(135deg, #6e5a76, #b07e90 58%, #c6a2ad);
+}
+.nb-blob {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  aspect-ratio: 1.05;
+  border: clamp(8px, 1vw, 13px) solid rgba(251, 248, 241, 0.95);
+}
+.nb-blob--a {
+  width: clamp(96px, 54%, 156px);
+  border-radius: 45% 55% 60% 40% / 52% 46% 54% 48%;
+  transform: translate(-74%, -72%) rotate(8deg);
+}
+.nb-blob--b {
+  width: clamp(86px, 48%, 140px);
+  border-radius: 52% 48% 44% 56% / 56% 50% 50% 44%;
+  transform: translate(-28%, -26%) rotate(-10deg);
+}
+
+/* The five zone hues as strips, ending on the warm paper ground */
+.nb-strips {
+  grid-area: strips;
+  display: flex;
+}
+.nb-strip {
+  flex: 1;
+  background: var(--c);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 16px;
+}
+.nb-strip b,
+.nb-dark b {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: var(--font-grotesque);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: rgba(251, 248, 241, 0.92);
+}
+.nb-strip--paper b { color: #8a5a52; }
+
+/* The dark-mode ground, amber label as the one thing glowing in it */
+.nb-dark {
+  grid-area: dark;
+  background: #201d18;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 16px;
+}
+.nb-dark b { color: #edb055; }
+
+.nisse-system .caption {
+  grid-column: 1 / -1;
   text-align: center;
   max-width: 640px;
-  margin: var(--space-md) auto 0;
+  margin: var(--space-xs) auto 0;
+}
+
+@media (max-width: 860px) {
+  .nisse-system {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+      "ramp  grad"
+      "chips type"
+      "spec  spec"
+      "logo  dark"
+      "strips strips";
+  }
+  .nb-ramp, .nb-grad { min-height: 150px; }
+  .nb-chips, .nb-type { min-height: 165px; }
+  .nb-spec { min-height: 230px; font-size: clamp(36px, 9vw, 56px); }
+  .nb-logo, .nb-dark { min-height: 190px; }
+  .nb-strips { min-height: 210px; }
 }
 
 /* Wireframe boards: transparent PNGs sit straight on the ground */
