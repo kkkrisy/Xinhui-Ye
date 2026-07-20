@@ -4034,8 +4034,16 @@ a.t-org:hover { color: var(--on-surface); }
   .wire-map__hint { bottom: 10px; right: 10px; }
 }
 
-/* IA board — the working map as one image, zoomable like the wireframe board */
-.wire-map--board .wire-map__trigger img { border-radius: var(--radius-lg); }
+/* IA board — the working map as one image inside the cream band. The board's
+   own ground is nearly the band's cream, so a hairline keeps its edge. */
+.nisse-ia-board { margin: 0; }
+.nisse-ia-board img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--outline-variant);
+  background: #fffdf7;
+}
 
 /* The screens — the running app, grouped in six rooms. Each group is a short
    intro plus a centred row of phone shots; the shots are device silhouettes on
