@@ -3793,161 +3793,95 @@ a.t-org:hover { color: var(--on-surface); }
   .nisse-journey .nj-blob { position: absolute; left: 0; top: 0; }
 }
 
-/* Visual system board — a bento sheet of flat cards, every value sampled
-   from the working build: the home-screen blob pulse, the amber→red urgency
-   gradient, an SF Pro specimen on plum, the three state pills as the app
-   renders them, the day/night hue lifts, the five zone hues as strips beside
-   the warm paper ground, and the dark-mode ground. Flat per the site rules:
-   depth comes from the card colors, never shadow. */
+/* Visual system — three pieces of the app's own design language, drawn in
+   its own idiom: paper cards with hairline edges and quiet small-caps
+   labels, the way the app titles its rhythm card. Every value is sampled
+   from the working build. Flat per the site rules: no shadow anywhere. */
 .nisse-system {
   margin: 0;
   display: grid;
   gap: var(--space-sm);
-  grid-template-columns: 1fr 1.3fr 1.5fr 0.9fr;
-  grid-template-rows:
-    minmax(clamp(120px, 14vw, 175px), auto)
-    minmax(clamp(150px, 17vw, 215px), auto)
-    minmax(clamp(210px, 24vw, 310px), auto);
+  grid-template-columns: 1.15fr 1fr;
   grid-template-areas:
-    "pulse grad   spec   spec"
-    "chips type   spec   spec"
-    "modes strips strips dark";
+    "hues   type"
+    "rhythm rhythm";
 }
 .nisse-system .nb-card {
-  border-radius: var(--radius-lg);
-  overflow: hidden;
   position: relative;
-}
-
-/* The home pulse in miniature — three zone blobs straight off the home
-   screen: the app's real organic radii, rotations and stroke icons, sized
-   by their open work, one wearing the overdue badge */
-.nb-pulse {
-  grid-area: pulse;
-  background: #f4efe6;
+  background: #fbf8f1;
   border: 1px solid #e9e1d1;
+  border-radius: var(--radius-lg);
+  padding: clamp(18px, 2.2vw, 28px);
 }
-.nb-pblob {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  aspect-ratio: 1.02;
-}
-.nb-pblob svg {
-  width: 48%;
-  fill: none;
-  stroke: #faf5ec;
-  stroke-width: 1.6;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.nb-pblob--bedroom {
-  width: clamp(76px, 46%, 108px);
-  left: 9%;
-  top: 50%;
-  transform: translateY(-52%) rotate(8deg);
-  background: #b07e90;
-  border-radius: 45% 55% 60% 40% / 52% 46% 54% 48%;
-}
-/* The overdue badge, exactly as the build draws it: a red dot ringed by
-   the ground it sits on */
-.nb-pblob--bedroom::after {
-  content: "";
-  position: absolute;
-  top: 4%;
-  right: 6%;
-  width: 11px;
-  height: 11px;
-  border-radius: 50%;
-  background: #d8402e;
-  border: 2px solid #f4efe6;
-}
-.nb-pblob--yard {
-  width: clamp(54px, 33%, 78px);
-  right: 10%;
-  top: 12%;
-  transform: rotate(5deg);
-  background: #7e9b84;
-  border-radius: 48% 52% 58% 42% / 54% 44% 56% 46%;
-}
-.nb-pblob--bath {
-  width: clamp(40px, 24%, 58px);
-  right: 24%;
-  bottom: 9%;
-  transform: rotate(12deg);
-  background: #7e93a8;
-  border-radius: 60% 40% 52% 48% / 46% 58% 42% 54%;
-}
-
-/* The urgency ramp: ripening amber warming into overdue red */
-.nb-grad {
-  grid-area: grad;
-  background: linear-gradient(120deg, #edb055, #e7a23b 35%, #c1531f 78%, #d8402e);
-}
-
-/* Type specimen on plum, the deepest zone hue */
-.nb-spec {
-  grid-area: spec;
-  background: #6e5a76;
-  color: #fbf8f1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.06em;
-  font-family: -apple-system, "SF Pro", system-ui, sans-serif;
-  font-weight: 500;
-  font-size: clamp(40px, 5.6vw, 84px);
-  line-height: 1.14;
-  letter-spacing: 0.01em;
-}
-
-/* The three task states, rendered the way the app renders them: calm is
-   quiet paper, only urgency takes a color */
-.nb-chips {
-  grid-area: chips;
-  background: #f4edef;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-.nb-chip {
+/* Small-caps card labels, matching the app's "THE RHYTHM SO FAR" */
+.nb-label {
+  display: block;
   font-family: var(--font-grotesque);
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.03em;
-  padding: 9px 22px;
-  border-radius: var(--radius-full);
-}
-.nb-chip--calm { background: #fbf8f1; color: #2c2a26; border: 1px solid #e9e1d1; }
-.nb-chip--ripening { background: #e7a23b; color: #42300e; }
-.nb-chip--overdue { background: #d8402e; color: #fbf8f1; }
-
-/* Main typeface card */
-.nb-type {
-  grid-area: type;
-  background: #f4efe6;
-  border: 1px solid #e9e1d1;
-  padding: clamp(14px, 1.8vw, 24px) clamp(16px, 2vw, 26px);
-}
-.nb-type__label {
-  position: absolute;
-  top: clamp(14px, 1.8vw, 24px);
-  left: clamp(16px, 2vw, 26px);
-  font-family: var(--font-grotesque);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
+  color: #6b675e;
+}
+
+/* The hues — five zone blobs with their values, plus the lifted versions
+   the build swaps in after dark: lighter, hue kept, still muted */
+.nb-hues { grid-area: hues; }
+.nb-hue-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin: clamp(20px, 2.6vw, 34px) 4px;
+}
+.nb-hue {
+  flex: 1;
+  text-align: center;
+  font-family: var(--font-grotesque);
+  font-size: 11px;
+  letter-spacing: 0.05em;
   color: var(--on-surface-variant);
 }
+.nb-hue::before {
+  content: "";
+  display: block;
+  width: clamp(40px, 4vw, 56px);
+  aspect-ratio: 1.02;
+  margin: 0 auto 10px;
+  background: var(--c);
+  border-radius: 45% 55% 60% 40% / 52% 46% 54% 48%;
+}
+.nb-hue:nth-child(even)::before { border-radius: 52% 48% 44% 56% / 56% 50% 50% 44%; }
+.nb-night {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #201d18;
+  border-radius: 12px;
+  padding: 12px 16px;
+}
+.nb-night__label {
+  margin-right: auto;
+  font-family: var(--font-grotesque);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #a79f90;
+}
+.nb-night-dot {
+  width: 16px;
+  aspect-ratio: 1.02;
+  background: var(--c);
+  border-radius: 52% 48% 44% 56% / 56% 50% 50% 44%;
+}
+.nb-night-dot:nth-child(odd) { border-radius: 45% 55% 60% 40% / 52% 46% 54% 48%; }
+
+/* The typeface — the system voice the app speaks in */
+.nb-type { grid-area: type; }
 .nb-type__weights {
   position: absolute;
-  top: clamp(14px, 1.8vw, 24px);
-  right: clamp(16px, 2vw, 26px);
+  top: clamp(18px, 2.2vw, 28px);
+  right: clamp(18px, 2.2vw, 28px);
   text-align: right;
   font-family: var(--font-grotesque);
   font-size: 13px;
@@ -3955,91 +3889,102 @@ a.t-org:hover { color: var(--on-surface); }
   color: var(--on-surface-body);
 }
 .nb-type__name {
-  position: absolute;
-  bottom: clamp(10px, 1.4vw, 18px);
-  left: clamp(16px, 2vw, 26px);
+  display: block;
+  margin-top: clamp(26px, 3.4vw, 48px);
   font-family: -apple-system, "SF Pro", system-ui, sans-serif;
   font-weight: 500;
-  font-size: clamp(38px, 4.4vw, 64px);
+  font-size: clamp(40px, 4.4vw, 60px);
   line-height: 1.1;
   color: #2c2a26;
 }
-
-/* Day and night — the same five zone hues, and the lifted versions the
-   build swaps in after dark (lighter, hue kept, still muted) */
-.nb-modes {
-  grid-area: modes;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid #e9e1d1;
+.nb-type__glyphs {
+  display: block;
+  margin-top: 8px;
+  font-family: -apple-system, "SF Pro", system-ui, sans-serif;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  color: #6b675e;
 }
-.nb-mode {
-  flex: 1;
+
+/* How urgency looks — the app's rhythm strip: past care as dots on a quiet
+   track, the amber usual window, the red today mark */
+.nb-rhythm { grid-area: rhythm; }
+.nb-track {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 9px;
-  padding: 34px 16px 16px;
+  height: 86px;
+  margin: clamp(18px, 2.4vw, 30px) clamp(4px, 2vw, 24px) 0;
 }
-.nb-mode--day { background: #f4efe6; }
-.nb-mode--night { background: #201d18; }
-.nb-mode__label {
+.nb-track::before {
+  content: "";
   position: absolute;
-  top: 13px;
-  left: 16px;
-  font-family: var(--font-grotesque);
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  left: 0;
+  right: 0;
+  top: 18px;
+  height: 2px;
+  border-radius: 1px;
+  background: #ddd3c2;
 }
-.nb-mode--day .nb-mode__label { color: #6b675e; }
-.nb-mode--night .nb-mode__label { color: #a79f90; }
-.nb-dot {
-  width: clamp(24px, 13%, 32px);
-  aspect-ratio: 1.02;
+.nb-tick-dot {
+  position: absolute;
+  top: 18px;
+  left: var(--x);
+  width: 12px;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
   background: var(--c);
-  border-radius: 52% 48% 44% 56% / 56% 50% 50% 44%;
 }
-.nb-dot:nth-child(odd) { border-radius: 45% 55% 60% 40% / 52% 46% 54% 48%; }
-
-/* The five zone hues as strips, ending on the warm paper ground */
-.nb-strips {
-  grid-area: strips;
-  display: flex;
+.nb-tick-dot--last { width: 18px; }
+.nb-window {
+  position: absolute;
+  top: 18px;
+  left: 48%;
+  width: 30%;
+  height: 22px;
+  transform: translateY(-50%);
+  background: #efd9ae;
+  border: 1.5px solid #dcae60;
+  border-radius: var(--radius-full);
 }
-.nb-strip {
-  flex: 1;
-  background: var(--c);
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding-bottom: 16px;
+.nb-today {
+  position: absolute;
+  top: 18px;
+  left: 88%;
+  width: 3px;
+  height: 26px;
+  transform: translate(-50%, -50%);
+  border-radius: 2px;
+  background: #c1531f;
 }
-.nb-strip b,
-.nb-dark b {
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
+.nb-track__sub {
+  position: absolute;
+  top: 38px;
+  transform: translateX(-50%);
+  text-align: center;
   font-family: var(--font-grotesque);
   font-size: 12px;
   font-weight: 600;
-  letter-spacing: 0.06em;
-  color: rgba(251, 248, 241, 0.92);
+  color: #2c2a26;
+  white-space: nowrap;
 }
-.nb-strip--paper b { color: #8a5a52; }
-
-/* The dark-mode ground, amber label as the one thing glowing in it */
-.nb-dark {
-  grid-area: dark;
-  background: #201d18;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding-bottom: 16px;
+.nb-track__sub em {
+  display: block;
+  margin-top: 2px;
+  font-style: normal;
+  font-weight: 400;
+  color: #6b675e;
 }
-.nb-dark b { color: #edb055; }
+.nb-track__sub--last { left: 32%; }
+.nb-track__sub--window { left: 63%; color: #c08659; }
+.nb-track__sub--today { left: 88%; color: #c1531f; }
+.nb-rhythm__note {
+  margin: 16px 0 0;
+  text-align: center;
+  font-family: var(--font-grotesque);
+  font-size: 13px;
+  line-height: 1.5;
+  color: #6b675e;
+}
 
 .nisse-system .caption {
   grid-column: 1 / -1;
@@ -4048,22 +3993,17 @@ a.t-org:hover { color: var(--on-surface); }
   margin: var(--space-xs) auto 0;
 }
 
-@media (max-width: 860px) {
+@media (max-width: 760px) {
   .nisse-system {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto;
+    grid-template-columns: 1fr;
     grid-template-areas:
-      "pulse grad"
-      "chips type"
-      "spec  spec"
-      "modes dark"
-      "strips strips";
+      "hues"
+      "type"
+      "rhythm";
   }
-  .nb-pulse, .nb-grad { min-height: 150px; }
-  .nb-chips, .nb-type { min-height: 165px; }
-  .nb-spec { min-height: 230px; font-size: clamp(36px, 9vw, 56px); }
-  .nb-modes, .nb-dark { min-height: 210px; }
-  .nb-strips { min-height: 210px; }
+  .nb-hue-row { flex-wrap: wrap; gap: 6px; margin-inline: 0; }
+  .nb-hue { font-size: 10px; letter-spacing: 0.02em; }
+  .nb-track { margin-inline: 0; }
 }
 
 /* Wireframe boards: transparent PNGs sit straight on the ground */

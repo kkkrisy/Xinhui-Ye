@@ -296,57 +296,47 @@
               <p>The colors had a narrow brief: calm, but warm. Office blues read as work and candy brights read as a game, and neither belongs in a living room. Muted, dusty tones landed in between. They are soft enough to live on a home screen all day, and warm enough that the app feels like it likes you.</p>
             </div>
 
-            <!-- Visual system board, sampled from the working build -->
-            <figure class="nisse-system" aria-label="The Nisse visual system: zone hues, urgency states, typeface and grounds, sampled from the working build">
-              <div class="nb-card nb-pulse" role="img" aria-label="The home pulse: zones drawn as soft blobs sized by their open work, each wearing its icon, with a red dot flagging overdue">
-                <i class="nb-pblob nb-pblob--bedroom"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 17.5v-7h16v7M4 14.5h16M7 10.5V8h6.5v2.5" /></svg></i>
-                <i class="nb-pblob nb-pblob--yard"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 17.5C6.5 10.5 12 6 18.5 6c0 6.5-4.5 11.5-12 11.5zM6.5 17.5c1.8-4.5 4.5-7.5 8.5-9.5" /></svg></i>
-                <i class="nb-pblob nb-pblob--bath"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4.5c2.8 3.6 4.7 5.9 4.7 8.3a4.7 4.7 0 0 1-9.4 0c0-2.4 1.9-4.7 4.7-8.3z" /></svg></i>
-              </div>
-              <div class="nb-card nb-grad" role="img" aria-label="The urgency ramp: ripening amber warming into overdue red"></div>
-              <div class="nb-card nb-spec" aria-label="Type specimen, SF Pro on plum">
-                <span>AaBbCc</span>
-                <span>01234567</span>
-                <span>{(!@#$?&amp;)}</span>
-              </div>
-              <div class="nb-card nb-chips" aria-label="The three task states as they render in the app">
-                <span class="nb-chip nb-chip--calm">calm</span>
-                <span class="nb-chip nb-chip--ripening">ripening</span>
-                <span class="nb-chip nb-chip--overdue">overdue</span>
+            <!-- Visual system: three pieces of the app's design language, sampled from the working build -->
+            <figure class="nisse-system" aria-label="Three pieces of the Nisse design language, sampled from the working build: the zone hues, urgency drawn as a rhythm window, and the typeface">
+              <div class="nb-card nb-hues">
+                <span class="nb-label">The hues</span>
+                <div class="nb-hue-row">
+                  <span class="nb-hue" style="--c:#B07E90"><b>#B07E90</b></span>
+                  <span class="nb-hue" style="--c:#6E5A76"><b>#6E5A76</b></span>
+                  <span class="nb-hue" style="--c:#7E93A8"><b>#7E93A8</b></span>
+                  <span class="nb-hue" style="--c:#7E9B84"><b>#7E9B84</b></span>
+                  <span class="nb-hue" style="--c:#A9756A"><b>#A9756A</b></span>
+                </div>
+                <div class="nb-night" aria-label="The lifted versions the app swaps in after dark: lighter, hue kept, still muted">
+                  <span class="nb-night__label">After dark</span>
+                  <span class="nb-night-dot" style="--c:#C08FA1"></span>
+                  <span class="nb-night-dot" style="--c:#877392"></span>
+                  <span class="nb-night-dot" style="--c:#8FA3B6"></span>
+                  <span class="nb-night-dot" style="--c:#90AB97"></span>
+                  <span class="nb-night-dot" style="--c:#BC8578"></span>
+                </div>
               </div>
               <div class="nb-card nb-type">
-                <span class="nb-type__label">Main typeface</span>
+                <span class="nb-label">Main typeface</span>
                 <span class="nb-type__weights">Regular<br />Medium</span>
                 <span class="nb-type__name">SF&nbsp;Pro</span>
+                <span class="nb-type__glyphs">AaBbCc&nbsp;0123456789</span>
               </div>
-              <div class="nb-card nb-modes" aria-label="The five zone hues by day, and the lifted versions the app swaps in after dark: lighter, hue kept, still muted">
-                <div class="nb-mode nb-mode--day">
-                  <span class="nb-mode__label">By day</span>
-                  <span class="nb-dot" style="--c:#B07E90"></span>
-                  <span class="nb-dot" style="--c:#6E5A76"></span>
-                  <span class="nb-dot" style="--c:#7E93A8"></span>
-                  <span class="nb-dot" style="--c:#7E9B84"></span>
-                  <span class="nb-dot" style="--c:#A9756A"></span>
+              <div class="nb-card nb-rhythm">
+                <span class="nb-label">How urgency looks</span>
+                <div class="nb-track" role="img" aria-label="A rhythm strip: past care as dots on a quiet track, the last done dot eight days back, the amber usual window ahead, and a red mark for today, sitting just past the window">
+                  <i class="nb-tick-dot" style="--c:#B07E90; --x:5%"></i>
+                  <i class="nb-tick-dot" style="--c:#7E9B84; --x:16%"></i>
+                  <i class="nb-tick-dot nb-tick-dot--last" style="--c:#B07E90; --x:32%"></i>
+                  <i class="nb-window"></i>
+                  <i class="nb-today"></i>
+                  <span class="nb-track__sub nb-track__sub--last">last done<em>8 days ago</em></span>
+                  <span class="nb-track__sub nb-track__sub--window">usual window</span>
+                  <span class="nb-track__sub nb-track__sub--today">today</span>
                 </div>
-                <div class="nb-mode nb-mode--night">
-                  <span class="nb-mode__label">After dark</span>
-                  <span class="nb-dot" style="--c:#C08FA1"></span>
-                  <span class="nb-dot" style="--c:#877392"></span>
-                  <span class="nb-dot" style="--c:#8FA3B6"></span>
-                  <span class="nb-dot" style="--c:#90AB97"></span>
-                  <span class="nb-dot" style="--c:#BC8578"></span>
-                </div>
+                <p class="nb-rhythm__note">Calm inside the window, ripening amber as it closes, red only when the rhythm truly breaks. No deadlines anywhere.</p>
               </div>
-              <div class="nb-card nb-strips" aria-label="The five zone hues and the warm paper ground">
-                <span class="nb-strip" style="--c:#B07E90"><b>#B07E90</b></span>
-                <span class="nb-strip" style="--c:#6E5A76"><b>#6E5A76</b></span>
-                <span class="nb-strip" style="--c:#7E93A8"><b>#7E93A8</b></span>
-                <span class="nb-strip" style="--c:#7E9B84"><b>#7E9B84</b></span>
-                <span class="nb-strip" style="--c:#A9756A"><b>#A9756A</b></span>
-                <span class="nb-strip nb-strip--paper" style="--c:#F4EFE6"><b>#F4EFE6</b></span>
-              </div>
-              <div class="nb-card nb-dark" aria-label="The dark mode ground"><b>#201D18</b></div>
-              <figcaption class="caption">Sampled straight from the working build: heather, plum, slate, moss and clay for the zones, amber and red reserved for urgency, SF&nbsp;Pro throughout, and two grounds &mdash; warm paper by day, near-black #201D18 after dark.</figcaption>
+              <figcaption class="caption">Sampled straight from the working build: five dusty zone hues that lift after dark, urgency drawn as a window instead of a deadline, and SF&nbsp;Pro speaking quietly throughout.</figcaption>
             </figure>
 
           </div>
