@@ -3793,28 +3793,20 @@ a.t-org:hover { color: var(--on-surface); }
   .nisse-journey .nj-blob { position: absolute; left: 0; top: 0; }
 }
 
-/* Visual system — three pieces of the app's own design language, drawn in
-   its own idiom: paper cards with hairline edges and quiet small-caps
-   labels, the way the app titles its rhythm card. Every value is sampled
-   from the working build. Flat per the site rules: no shadow anywhere. */
+/* Visual system — the blob poster: the five zone hues as overlapping soft
+   blobs in the app's own shapes, hex values inside, one wearing the amber
+   ripening ring and red overdue dot; beside it a compact token column for
+   typeface, states, grounds (with the after-dark lifts) and the app's
+   shape-and-voice softness. Values sampled from the working build. Flat
+   per the site rules: no shadow anywhere. */
 .nisse-system {
   margin: 0;
   display: grid;
-  gap: var(--space-sm);
+  gap: clamp(24px, 4vw, 56px);
   grid-template-columns: 1.15fr 1fr;
-  grid-template-areas:
-    "hues   type"
-    "rhythm rhythm";
+  align-items: center;
 }
-.nisse-system .nb-card {
-  position: relative;
-  background: #fbf8f1;
-  border: 1px solid #e9e1d1;
-  border-radius: var(--radius-lg);
-  padding: clamp(18px, 2.2vw, 28px);
-}
-/* Small-caps card labels, matching the app's "THE RHYTHM SO FAR" */
-.nb-label {
+.ns-key {
   display: block;
   font-family: var(--font-grotesque);
   font-size: 11px;
@@ -3823,187 +3815,165 @@ a.t-org:hover { color: var(--on-surface); }
   letter-spacing: 0.1em;
   color: #6b675e;
 }
-
-/* The hues — five zone blobs with their values, plus the lifted versions
-   the build swaps in after dark: lighter, hue kept, still muted */
-.nb-hues { grid-area: hues; }
-.nb-hue-row {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  margin: clamp(20px, 2.6vw, 34px) 4px;
-}
-.nb-hue {
-  flex: 1;
-  text-align: center;
+.ns-hex {
   font-family: var(--font-grotesque);
-  font-size: 11px;
-  letter-spacing: 0.05em;
-  color: var(--on-surface-variant);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: #45454d;
 }
-.nb-hue::before {
-  content: "";
-  display: block;
-  width: clamp(40px, 4vw, 56px);
-  aspect-ratio: 1.02;
-  margin: 0 auto 10px;
-  background: var(--c);
-  border-radius: 45% 55% 60% 40% / 52% 46% 54% 48%;
-}
-.nb-hue:nth-child(even)::before { border-radius: 52% 48% 44% 56% / 56% 50% 50% 44%; }
-.nb-night {
+
+/* The cluster — the app's real organic radii and slight rotations */
+.ns-cluster { position: relative; height: 340px; }
+.ns-blob {
+  position: absolute;
   display: flex;
   align-items: center;
-  gap: 10px;
-  background: #201d18;
-  border-radius: 12px;
-  padding: 12px 16px;
-}
-.nb-night__label {
-  margin-right: auto;
-  font-family: var(--font-grotesque);
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: #a79f90;
-}
-.nb-night-dot {
-  width: 16px;
-  aspect-ratio: 1.02;
+  justify-content: center;
   background: var(--c);
-  border-radius: 52% 48% 44% 56% / 56% 50% 50% 44%;
-}
-.nb-night-dot:nth-child(odd) { border-radius: 45% 55% 60% 40% / 52% 46% 54% 48%; }
-
-/* The typeface — the system voice the app speaks in */
-.nb-type { grid-area: type; }
-.nb-type__weights {
-  position: absolute;
-  top: clamp(18px, 2.2vw, 28px);
-  right: clamp(18px, 2.2vw, 28px);
-  text-align: right;
+  color: rgba(251, 248, 241, 0.95);
   font-family: var(--font-grotesque);
-  font-size: 13px;
-  line-height: 1.45;
-  color: var(--on-surface-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
 }
-.nb-type__name {
-  display: block;
-  margin-top: clamp(26px, 3.4vw, 48px);
-  font-family: -apple-system, "SF Pro", system-ui, sans-serif;
-  font-weight: 500;
-  font-size: clamp(40px, 4.4vw, 60px);
-  line-height: 1.1;
-  color: #2c2a26;
+.ns-blob--heather {
+  width: 152px; height: 148px; left: 6%; top: 10%;
+  border-radius: 45% 55% 60% 40% / 52% 46% 54% 48%;
+  transform: rotate(6deg);
+  outline: 2.5px solid #e7a23b;
+  outline-offset: 3px;
 }
-.nb-type__glyphs {
+/* The overdue dot, drawn the way the build draws it: ringed by its ground */
+.ns-blob--heather::after {
+  content: "";
+  position: absolute;
+  top: 4px; right: 12px;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: #d8402e;
+  border: 2px solid #f9f6ef;
+}
+.ns-blob--plum {
+  width: 118px; height: 114px; left: 42%; top: 2%;
+  border-radius: 52% 48% 44% 56% / 56% 50% 50% 44%;
+  transform: rotate(-8deg);
+}
+.ns-blob--slate {
+  width: 104px; height: 102px; left: 66%; top: 30%;
+  border-radius: 60% 40% 52% 48% / 46% 58% 42% 54%;
+  transform: rotate(10deg);
+}
+.ns-blob--moss {
+  width: 124px; height: 120px; left: 30%; top: 48%;
+  border-radius: 48% 52% 58% 42% / 54% 44% 56% 46%;
+  transform: rotate(-4deg);
+}
+.ns-blob--clay {
+  width: 94px; height: 92px; left: 8%; top: 62%;
+  border-radius: 44% 56% 48% 52% / 58% 46% 54% 42%;
+  transform: rotate(9deg);
+}
+.ns-legend {
+  position: absolute;
+  left: 60%; bottom: 2%;
+  max-width: 250px;
+  margin: 0;
+  font-family: var(--font-grotesque);
+  font-size: 12px;
+  line-height: 1.55;
+  color: #6b675e;
+}
+.ns-legend b { color: #c08659; font-weight: 600; }
+.ns-legend strong { color: #c1531f; font-weight: 600; }
+
+/* The token column */
+.ns-side { display: flex; flex-direction: column; gap: 18px; }
+.ns-cell { border-top: 1px solid #e5dcc8; padding-top: 14px; }
+.ns-cell:first-child { border-top: 0; padding-top: 0; }
+.ns-type-name {
   display: block;
   margin-top: 8px;
   font-family: -apple-system, "SF Pro", system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 34px;
+  line-height: 1.1;
+  color: #2c2a26;
+}
+.ns-type-glyphs {
+  display: block;
+  margin-top: 2px;
+  font-family: -apple-system, "SF Pro", system-ui, sans-serif;
   font-size: 15px;
-  letter-spacing: 0.02em;
   color: #6b675e;
 }
-
-/* How urgency looks — the app's rhythm strip: past care as dots on a quiet
-   track, the amber usual window, the red today mark */
-.nb-rhythm { grid-area: rhythm; }
-.nb-track {
-  position: relative;
-  height: 86px;
-  margin: clamp(18px, 2.4vw, 30px) clamp(4px, 2vw, 24px) 0;
+.ns-states {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
 }
-.nb-track::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 18px;
-  height: 2px;
-  border-radius: 1px;
-  background: #ddd3c2;
+.ns-pill {
+  font-family: var(--font-grotesque);
+  font-size: 12px;
+  color: #2c2a26;
+  background: #fbf8f1;
+  border: 1px solid #e9e1d1;
+  border-radius: var(--radius-full);
+  padding: 5px 12px;
 }
-.nb-tick-dot {
-  position: absolute;
-  top: 18px;
-  left: var(--x);
-  width: 12px;
-  aspect-ratio: 1;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  background: var(--c);
+.ns-state-pair {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
 }
-.nb-tick-dot--last { width: 18px; }
-.nb-window {
-  position: absolute;
-  top: 18px;
-  left: 48%;
-  width: 30%;
-  height: 22px;
-  transform: translateY(-50%);
+.ns-win {
+  width: 46px; height: 15px;
   background: #efd9ae;
   border: 1.5px solid #dcae60;
   border-radius: var(--radius-full);
 }
-.nb-today {
-  position: absolute;
-  top: 18px;
-  left: 88%;
-  width: 3px;
-  height: 26px;
-  transform: translate(-50%, -50%);
-  border-radius: 2px;
-  background: #c1531f;
+.ns-tick { width: 3px; height: 18px; background: #c1531f; border-radius: 2px; }
+.ns-grounds { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; }
+.ns-grounds > span { display: inline-flex; align-items: center; gap: 8px; }
+.ns-ground { width: 30px; height: 20px; border-radius: 6px; }
+.ns-ground--paper { background: #f4efe6; border: 1px solid #e2d8c4; }
+.ns-ground--dark { background: #201d18; }
+.ns-night-row { display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; }
+.ns-night-row i {
+  width: 14px; height: 14px;
+  background: var(--c);
+  border-radius: 52% 48% 44% 56% / 56% 50% 50% 44%;
 }
-.nb-track__sub {
-  position: absolute;
-  top: 38px;
-  transform: translateX(-50%);
-  text-align: center;
-  font-family: var(--font-grotesque);
-  font-size: 12px;
-  font-weight: 600;
-  color: #2c2a26;
-  white-space: nowrap;
-}
-.nb-track__sub em {
+.ns-night-row i:nth-child(odd) { border-radius: 45% 55% 60% 40% / 52% 46% 54% 48%; }
+.ns-night-row .ns-hex { margin-left: 4px; color: #6b675e; }
+.ns-voice {
   display: block;
-  margin-top: 2px;
-  font-style: normal;
-  font-weight: 400;
-  color: #6b675e;
-}
-.nb-track__sub--last { left: 32%; }
-.nb-track__sub--window { left: 63%; color: #c08659; }
-.nb-track__sub--today { left: 88%; color: #c1531f; }
-.nb-rhythm__note {
-  margin: 16px 0 0;
-  text-align: center;
+  margin-top: 8px;
   font-family: var(--font-grotesque);
   font-size: 13px;
-  line-height: 1.5;
+  line-height: 1.55;
+  color: #45454d;
+}
+.ns-voice em {
+  font-style: normal;
   color: #6b675e;
 }
 
-.nisse-system .caption {
-  grid-column: 1 / -1;
-  text-align: center;
-  max-width: 640px;
-  margin: var(--space-xs) auto 0;
-}
-
-@media (max-width: 760px) {
-  .nisse-system {
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "hues"
-      "type"
-      "rhythm";
+@media (max-width: 820px) {
+  .nisse-system { grid-template-columns: 1fr; }
+  .ns-cluster { height: 400px; }
+  .ns-blob--heather { width: 128px; height: 125px; left: 4%; }
+  .ns-blob--plum { width: 100px; height: 97px; left: 46%; }
+  .ns-blob--slate { width: 88px; height: 86px; left: 64%; top: 34%; }
+  .ns-blob--moss { width: 104px; height: 101px; top: 46%; }
+  .ns-blob--clay { width: 80px; height: 78px; top: 60%; }
+  .ns-legend {
+    left: 0; right: 0; bottom: 0;
+    max-width: none;
+    text-align: center;
   }
-  .nb-hue-row { flex-wrap: wrap; gap: 6px; margin-inline: 0; }
-  .nb-hue { font-size: 10px; letter-spacing: 0.02em; }
-  .nb-track { margin-inline: 0; }
 }
 
 /* Wireframe boards: transparent PNGs sit straight on the ground */
