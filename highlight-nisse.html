@@ -298,7 +298,11 @@
 
             <!-- Visual system board, sampled from the working build -->
             <figure class="nisse-system" aria-label="The Nisse visual system: zone hues, urgency states, typeface and grounds, sampled from the working build">
-              <div class="nb-card nb-ramp" role="img" aria-label="Tints of heather, the signature zone hue, stepping from near-ink plum down to near-cream"></div>
+              <div class="nb-card nb-pulse" role="img" aria-label="The home pulse: zones drawn as soft blobs sized by their open work, each wearing its icon, with a red dot flagging overdue">
+                <i class="nb-pblob nb-pblob--bedroom"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 17.5v-7h16v7M4 14.5h16M7 10.5V8h6.5v2.5" /></svg></i>
+                <i class="nb-pblob nb-pblob--yard"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 17.5C6.5 10.5 12 6 18.5 6c0 6.5-4.5 11.5-12 11.5zM6.5 17.5c1.8-4.5 4.5-7.5 8.5-9.5" /></svg></i>
+                <i class="nb-pblob nb-pblob--bath"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4.5c2.8 3.6 4.7 5.9 4.7 8.3a4.7 4.7 0 0 1-9.4 0c0-2.4 1.9-4.7 4.7-8.3z" /></svg></i>
+              </div>
               <div class="nb-card nb-grad" role="img" aria-label="The urgency ramp: ripening amber warming into overdue red"></div>
               <div class="nb-card nb-spec" aria-label="Type specimen, SF Pro on plum">
                 <span>AaBbCc</span>
@@ -315,9 +319,23 @@
                 <span class="nb-type__weights">Regular<br />Medium</span>
                 <span class="nb-type__name">SF&nbsp;Pro</span>
               </div>
-              <div class="nb-card nb-logo" role="img" aria-label="Two overlapping blob outlines on a plum-to-heather gradient: two partners, one shared pool">
-                <i class="nb-blob nb-blob--a"></i>
-                <i class="nb-blob nb-blob--b"></i>
+              <div class="nb-card nb-modes" aria-label="The five zone hues by day, and the lifted versions the app swaps in after dark: lighter, hue kept, still muted">
+                <div class="nb-mode nb-mode--day">
+                  <span class="nb-mode__label">By day</span>
+                  <span class="nb-dot" style="--c:#B07E90"></span>
+                  <span class="nb-dot" style="--c:#6E5A76"></span>
+                  <span class="nb-dot" style="--c:#7E93A8"></span>
+                  <span class="nb-dot" style="--c:#7E9B84"></span>
+                  <span class="nb-dot" style="--c:#A9756A"></span>
+                </div>
+                <div class="nb-mode nb-mode--night">
+                  <span class="nb-mode__label">After dark</span>
+                  <span class="nb-dot" style="--c:#C08FA1"></span>
+                  <span class="nb-dot" style="--c:#877392"></span>
+                  <span class="nb-dot" style="--c:#8FA3B6"></span>
+                  <span class="nb-dot" style="--c:#90AB97"></span>
+                  <span class="nb-dot" style="--c:#BC8578"></span>
+                </div>
               </div>
               <div class="nb-card nb-strips" aria-label="The five zone hues and the warm paper ground">
                 <span class="nb-strip" style="--c:#B07E90"><b>#B07E90</b></span>
@@ -357,7 +375,7 @@
               <div class="detail-text">
                 <p class="screen-group__title">The home and its work</p>
               </div>
-              <div class="shelf-strip" tabindex="0" role="group" aria-label="Home, zone and chore screens. Scroll sideways to see all six.">
+              <div class="shelf-strip" tabindex="0" role="group" aria-label="Home, zone and chore screens. Scroll sideways to see all four.">
                 <div class="shelf-lead">
                   <p>Home answers the question of how the household is doing: blobs sized by their open work, a quiet read on press and hold, and a list for the days you would rather scan than feel. Tap through a zone to a single chore and the whole philosophy sits on one screen, a rhythm card instead of a due date.</p>
                 </div>
@@ -366,16 +384,8 @@
                   <figcaption class="caption"><strong>Blob view</strong> &middot; the zones sized by load. Most of Nisse&rsquo;s decisions were made for this screen.</figcaption>
                 </figure>
                 <figure>
-                  <img src="assets/02-home-list.png" alt="Nisse home screen in list view: the same zones and chores as rows" loading="lazy" />
-                  <figcaption class="caption"><strong>List view</strong> &middot; the identical home as rows, one toggle away.</figcaption>
-                </figure>
-                <figure>
                   <img src="assets/eidting%20blob.png" alt="Arrange mode: zone blobs in edit state with a panel to rename a zone and pick its color and icon" loading="lazy" />
                   <figcaption class="caption"><strong>Arrange mode</strong> &middot; rearrange, recolor or add a zone. Zones can be rooms, plants, the dog.</figcaption>
-                </figure>
-                <figure>
-                  <img src="assets/06-block-living-room.png" alt="Zone detail for the living room: six chores with their rhythms and state dots" loading="lazy" />
-                  <figcaption class="caption"><strong>Zone detail</strong> &middot; one area&rsquo;s open chores and their rhythms.</figcaption>
                 </figure>
                 <figure>
                   <img src="assets/chore-sheets-nobg.png" alt="Chore detail for changing the sheets: the rhythm card with last done, usual window and today, plus mark it done, plan it out, and the attributed history" loading="lazy" />
