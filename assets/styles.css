@@ -4035,15 +4035,12 @@ a.t-org:hover { color: var(--on-surface); }
 }
 
 /* IA board — the working map as one image inside the outlined frame. The
-   board's own ground is nearly the page cream, so a hairline keeps its edge. */
+   export is transparent, so the nodes sit straight on the page ground. */
 .nisse-ia-board { margin: 0; }
 .nisse-ia-board img {
   display: block;
   width: 100%;
   height: auto;
-  border: 1px solid var(--outline-variant);
-  border-radius: var(--radius-lg);
-  background: #fffdf7;
 }
 
 /* The screens — the running app, grouped in six rooms. Each group is a short
@@ -4073,11 +4070,6 @@ a.t-org:hover { color: var(--on-surface); }
   width: 100%;
   height: auto;
   /* the exports carry their own soft ground shadow — no second one on top */
-}
-/* the one shot exported on an opaque ground gets its corners rounded to match */
-.nisse-shots img.shot--flat {
-  border-radius: 28px;
-  box-shadow: 0 14px 24px -14px rgba(20, 18, 16, 0.28);
 }
 .nisse-shots .caption { margin-top: var(--space-sm); }
 @media (max-width: 560px) {
