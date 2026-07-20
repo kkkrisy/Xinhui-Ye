@@ -3794,9 +3794,9 @@ a.t-org:hover { color: var(--on-surface); }
 }
 
 /* Visual system board — a bento sheet of flat cards, every value sampled
-   from the working build: a heather tint ramp, the amber→red urgency
+   from the working build: the home-screen blob pulse, the amber→red urgency
    gradient, an SF Pro specimen on plum, the three state pills as the app
-   renders them, the two-partner mark, the five zone hues as strips beside
+   renders them, the day/night hue lifts, the five zone hues as strips beside
    the warm paper ground, and the dark-mode ground. Flat per the site rules:
    depth comes from the card colors, never shadow. */
 .nisse-system {
@@ -3809,9 +3809,9 @@ a.t-org:hover { color: var(--on-surface); }
     minmax(clamp(150px, 17vw, 215px), auto)
     minmax(clamp(210px, 24vw, 310px), auto);
   grid-template-areas:
-    "ramp  grad   spec   spec"
+    "pulse grad   spec   spec"
     "chips type   spec   spec"
-    "logo  strips strips dark";
+    "modes strips strips dark";
 }
 .nisse-system .nb-card {
   border-radius: var(--radius-lg);
@@ -3819,21 +3819,65 @@ a.t-org:hover { color: var(--on-surface); }
   position: relative;
 }
 
-/* Tints of heather, near-ink down to near-cream; the top step runs deeper,
-   like a ground swallowing the ramp */
-.nb-ramp {
-  grid-area: ramp;
-  background: linear-gradient(
-    to bottom,
-    #3d2d34 0 19%,
-    #59414b 19% 31%,
-    #755461 31% 43%,
-    #916877 43% 55%,
-    #b07e90 55% 67%,
-    #c6a2ad 67% 79%,
-    #d9c0c6 79% 90%,
-    #ecdede 90% 100%
-  );
+/* The home pulse in miniature — three zone blobs straight off the home
+   screen: the app's real organic radii, rotations and stroke icons, sized
+   by their open work, one wearing the overdue badge */
+.nb-pulse {
+  grid-area: pulse;
+  background: #f4efe6;
+  border: 1px solid #e9e1d1;
+}
+.nb-pblob {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1.02;
+}
+.nb-pblob svg {
+  width: 48%;
+  fill: none;
+  stroke: #faf5ec;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.nb-pblob--bedroom {
+  width: clamp(76px, 46%, 108px);
+  left: 9%;
+  top: 50%;
+  transform: translateY(-52%) rotate(8deg);
+  background: #b07e90;
+  border-radius: 45% 55% 60% 40% / 52% 46% 54% 48%;
+}
+/* The overdue badge, exactly as the build draws it: a red dot ringed by
+   the ground it sits on */
+.nb-pblob--bedroom::after {
+  content: "";
+  position: absolute;
+  top: 4%;
+  right: 6%;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #d8402e;
+  border: 2px solid #f4efe6;
+}
+.nb-pblob--yard {
+  width: clamp(54px, 33%, 78px);
+  right: 10%;
+  top: 12%;
+  transform: rotate(5deg);
+  background: #7e9b84;
+  border-radius: 48% 52% 58% 42% / 54% 44% 56% 46%;
+}
+.nb-pblob--bath {
+  width: clamp(40px, 24%, 58px);
+  right: 24%;
+  bottom: 9%;
+  transform: rotate(12deg);
+  background: #7e93a8;
+  border-radius: 60% 40% 52% 48% / 46% 58% 42% 54%;
 }
 
 /* The urgency ramp: ripening amber warming into overdue red */
@@ -3921,28 +3965,45 @@ a.t-org:hover { color: var(--on-surface); }
   color: #2c2a26;
 }
 
-/* The mark: two blob outlines overlapping — two partners, one shared pool */
-.nb-logo {
-  grid-area: logo;
-  background: linear-gradient(135deg, #6e5a76, #b07e90 58%, #c6a2ad);
+/* Day and night — the same five zone hues, and the lifted versions the
+   build swaps in after dark (lighter, hue kept, still muted) */
+.nb-modes {
+  grid-area: modes;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e9e1d1;
 }
-.nb-blob {
+.nb-mode {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 9px;
+  padding: 34px 16px 16px;
+}
+.nb-mode--day { background: #f4efe6; }
+.nb-mode--night { background: #201d18; }
+.nb-mode__label {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  aspect-ratio: 1.05;
-  border: clamp(8px, 1vw, 13px) solid rgba(251, 248, 241, 0.95);
+  top: 13px;
+  left: 16px;
+  font-family: var(--font-grotesque);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
-.nb-blob--a {
-  width: clamp(96px, 54%, 156px);
-  border-radius: 45% 55% 60% 40% / 52% 46% 54% 48%;
-  transform: translate(-74%, -72%) rotate(8deg);
-}
-.nb-blob--b {
-  width: clamp(86px, 48%, 140px);
+.nb-mode--day .nb-mode__label { color: #6b675e; }
+.nb-mode--night .nb-mode__label { color: #a79f90; }
+.nb-dot {
+  width: clamp(24px, 13%, 32px);
+  aspect-ratio: 1.02;
+  background: var(--c);
   border-radius: 52% 48% 44% 56% / 56% 50% 50% 44%;
-  transform: translate(-28%, -26%) rotate(-10deg);
 }
+.nb-dot:nth-child(odd) { border-radius: 45% 55% 60% 40% / 52% 46% 54% 48%; }
 
 /* The five zone hues as strips, ending on the warm paper ground */
 .nb-strips {
@@ -3992,16 +4053,16 @@ a.t-org:hover { color: var(--on-surface); }
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
     grid-template-areas:
-      "ramp  grad"
+      "pulse grad"
       "chips type"
       "spec  spec"
-      "logo  dark"
+      "modes dark"
       "strips strips";
   }
-  .nb-ramp, .nb-grad { min-height: 150px; }
+  .nb-pulse, .nb-grad { min-height: 150px; }
   .nb-chips, .nb-type { min-height: 165px; }
   .nb-spec { min-height: 230px; font-size: clamp(36px, 9vw, 56px); }
-  .nb-logo, .nb-dark { min-height: 190px; }
+  .nb-modes, .nb-dark { min-height: 210px; }
   .nb-strips { min-height: 210px; }
 }
 
