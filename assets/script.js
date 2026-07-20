@@ -594,14 +594,16 @@ document.addEventListener("DOMContentLoaded", () => {
   // cursor is a magnifier: click once to zoom to 2× (moving the mouse pans
   // the board, so every flow is readable up close), click again to zoom
   // back out. The × at top-right — or Esc — leaves the viewer.
-  const wireMap = document.querySelector("[data-wiremap]");
-  const wireTrigger = wireMap && wireMap.querySelector("[data-wiremap-open]");
-  if (wireMap && wireTrigger) {
+  document.querySelectorAll("[data-wiremap]").forEach((wireMap) => {
+    const wireTrigger = wireMap.querySelector("[data-wiremap-open]");
+    if (!wireTrigger) return;
     // Click steps up through these multiples of the fitted (overview) size,
-    // then wraps back to the overview. The board is tall and dense, so the
-    // first step frames a region and the last is close to 1:1 — big enough
-    // to read any single wireframe clearly.
-    const ZOOM_STEPS = [1, 4, 9];
+    // then wraps back to the overview. The wireframe board is tall and dense,
+    // so its default steps frame a region and then get close to 1:1 — big
+    // enough to read any single wireframe clearly. Squarer, lighter boards
+    // (the IA map) override the steps via data-wiremap-steps="1,2.5,4".
+    const ZOOM_STEPS = (wireMap.dataset.wiremapSteps || "1,4,9")
+      .split(",").map(Number).filter((n) => n > 0);
     const srcImg = wireTrigger.querySelector("img");
 
     // Build the viewer once, lazily, and reuse it.
@@ -621,7 +623,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // The page preview uses the light-background map (dark ink reads on the
     // cream page); the full-screen viewer sits on a dark backdrop, so swap in
     // the light-ink variant when one is provided.
-    img.src = srcImg.getAttribute("data-zoom-src") || srcImg.currentSrc || srcImg.src;
     img.alt = srcImg.alt;
 
     let stepIdx = 0;                      // index into ZOOM_STEPS; 0 = overview
@@ -689,6 +690,8 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const open = () => {
+      // Fetch the full-size board on first open, not at page load.
+      if (!img.src) img.src = srcImg.getAttribute("data-zoom-src") || srcImg.currentSrc || srcImg.src;
       viewer.classList.add("is-open");
       viewer.setAttribute("aria-hidden", "false");
       document.body.classList.add("wire-lock");
@@ -760,7 +763,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!viewer.classList.contains("is-open")) return;
       if (e.key === "Escape") close();
     });
-  }
+  });
 
   /* ---- Deter image/video saving ------------------------------------- */
   // Not bulletproof (screenshots, devtools and direct URLs still work), but

@@ -3793,77 +3793,6 @@ a.t-org:hover { color: var(--on-surface); }
   .nisse-journey .nj-blob { position: absolute; left: 0; top: 0; }
 }
 
-/* The household pulse — two moods, nestled CSS blobs, deliberately static */
-.nisse-pebbles {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-md);
-}
-.nisse-pebble-fig { margin: 0; text-align: center; }
-.nisse-pebble {
-  position: relative;
-  width: min(100%, 380px);
-  aspect-ratio: 1 / 0.92;
-  margin: 0 auto;
-}
-.nisse-pebble .pb {
-  position: absolute;
-  background: var(--c, #b9b7ae);
-  border: 5px solid #f3efe3;      /* cream seams between cells */
-}
-/* calm week: cells roughly even, nestled like packed lily pads */
-.pb-a { width: 38%; height: 36%; left: 8%;  top: 6%;  border-radius: 55% 45% 48% 52% / 52% 55% 45% 48%; }
-.pb-b { width: 34%; height: 33%; left: 44%; top: 2%;  border-radius: 47% 53% 55% 45% / 55% 48% 52% 45%; }
-.pb-c { width: 33%; height: 32%; left: 4%;  top: 40%; border-radius: 52% 48% 45% 55% / 48% 52% 55% 45%; }
-.pb-d { width: 36%; height: 35%; left: 36%; top: 36%; border-radius: 45% 55% 52% 48% / 52% 45% 48% 55%; }
-.pb-e { width: 30%; height: 29%; left: 66%; top: 33%; border-radius: 55% 45% 55% 45% / 45% 55% 45% 55%; }
-.pb-f { width: 32%; height: 30%; left: 30%; top: 66%; border-radius: 48% 52% 47% 53% / 55% 45% 55% 45%; }
-/* busy week: the kitchen swells, the shape leans */
-.nisse-pebble--busy .pb-a { width: 48%; height: 46%; left: 2%; top: 2%; }
-.nisse-pebble--busy .pb-c { width: 40%; height: 38%; left: 2%; top: 48%; }
-.nisse-pebble--busy .pb-d { width: 32%; height: 31%; left: 44%; top: 42%; }
-.nisse-pebble--busy .pb-e { width: 24%; height: 23%; left: 72%; top: 36%; }
-.nisse-pebble--busy .pb-f { width: 26%; height: 24%; left: 40%; top: 72%; }
-/* state dot rides the blob's edge */
-.pb-dot {
-  position: absolute;
-  right: 6%;
-  top: 8%;
-  width: 14px;
-  height: 14px;
-  border-radius: var(--radius-full);
-  border: 3px solid #f3efe3;
-}
-.pb-dot--amber { background: #c89b62; }
-.pb-dot--red   { background: #cb3034; }
-/* the qualitative center */
-.nisse-pebble .pb-core {
-  position: absolute;
-  left: 50%;
-  top: 46%;
-  transform: translate(-50%, -50%);
-  background: var(--surface);
-  border-radius: var(--radius-full);
-  padding: 12px 22px;
-  text-align: center;
-  white-space: nowrap;
-}
-.nisse-pebble .pb-core strong {
-  display: block;
-  font-family: var(--font-grotesque);
-  font-weight: 700;
-  font-size: 15px;
-  color: var(--primary);
-}
-.nisse-pebble .pb-core em {
-  display: block;
-  font-style: normal;
-  font-size: 12px;
-  color: var(--on-surface-variant);
-}
-.nisse-pebble-fig .caption { margin-top: var(--space-sm); }
-@media (max-width: 760px) { .nisse-pebbles { grid-template-columns: 1fr; gap: var(--space-lg); } }
-
 /* Palette board — blob swatches, not squares */
 .nisse-palette { margin: 0; }
 .nisse-swatches {
@@ -4105,40 +4034,46 @@ a.t-org:hover { color: var(--on-surface); }
   .wire-map__hint { bottom: 10px; right: 10px; }
 }
 
-/* IA map — one card per surface, nodes as quiet rows */
-.nisse-ia {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-md);
-}
-.ia-col {
-  border: 1px solid var(--outline-variant);
-  border-radius: var(--radius-lg);
-  padding: var(--space-md);
-}
-.ia-head {
-  font-family: var(--font-grotesque);
-  font-weight: 700;
-  font-size: 13px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+/* IA board — the working map as one image, zoomable like the wireframe board */
+.wire-map--board .wire-map__trigger img { border-radius: var(--radius-lg); }
+
+/* The screens — the running app, grouped in six rooms. Each group is a short
+   intro plus a centred row of phone shots; the shots are device silhouettes on
+   transparency, so the shadow follows the phone, not a rectangle. */
+.nisse-screens .screen-group__title {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 26px;
   color: var(--primary);
   margin: 0 0 var(--space-sm);
 }
-.ia-node {
+.nisse-shots {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-lg) var(--space-md);
+}
+.nisse-shots figure {
+  margin: 0;
+  flex: 1 1 220px;
+  max-width: 300px;
+}
+.nisse-shots img {
   display: block;
-  font-size: 14px;
-  line-height: 21px;
-  color: var(--on-surface-body);
-  padding: 7px 0;
+  width: 100%;
+  height: auto;
+  /* the exports carry their own soft ground shadow — no second one on top */
 }
-.ia-node + .ia-node { border-top: 1px solid var(--outline-variant); }
-.ia-node--dev {
-  color: var(--on-surface-variant);
-  font-style: italic;
+/* the one shot exported on an opaque ground gets its corners rounded to match */
+.nisse-shots img.shot--flat {
+  border-radius: 28px;
+  box-shadow: 0 14px 24px -14px rgba(20, 18, 16, 0.28);
 }
-@media (max-width: 1024px) { .nisse-ia { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 560px)  { .nisse-ia { grid-template-columns: 1fr; } }
+.nisse-shots .caption { margin-top: var(--space-sm); }
+@media (max-width: 560px) {
+  .nisse-shots figure { flex-basis: 100%; max-width: 260px; }
+}
 
 /* Kit pairing: the narrow shopping board beside its note */
 .nisse-kit { display: flex; flex-direction: column; gap: var(--space-lg); }

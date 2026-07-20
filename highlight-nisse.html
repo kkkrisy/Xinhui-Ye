@@ -290,44 +290,11 @@
             <figcaption class="caption">The life of a task &mdash; the conceptual spine of the product.</figcaption>
           </figure>
 
-          <!-- ===== The visual system ===== -->
+          <!-- ===== The palette ===== -->
           <div class="photo-feature photo-feature--navy-titles">
             <div class="detail-text">
-              <p class="title-serif">The visual system: load you can see</p>
-              <p>Abstract, organic blobs are the core visual unit. Each life-zone of the home &mdash; kitchen, bathroom, plants, deep clean &mdash; is a blob, <strong>sized by its current workload</strong>. The mental load of the household literally becomes visible area: you feel a heavy zone before you read a single word. Early explorations with literal &ldquo;digital twin&rdquo; floor plans were abandoned &mdash; literal representation invites literal thinking; abstraction lets size, color and state carry the meaning. Zones aren&rsquo;t only rooms, either: &ldquo;plants&rdquo; and &ldquo;deep clean&rdquo; sit alongside place-blocks as equals, because that&rsquo;s how the work actually feels.</p>
-              <p>The top of the home screen answers one question at a glance &mdash; <em>how is our home doing?</em> &mdash; with a pebble: the zone blobs nestled into one organic shape, each cell&rsquo;s area reflecting its zone&rsquo;s load, a qualitative phrase at the center. Never a number, never a percentage. A home doesn&rsquo;t have a score.</p>
-            </div>
-
-            <!-- The pulse pebble, two moods, built flat in CSS -->
-            <div class="nisse-pebbles">
-              <figure class="nisse-pebble-fig">
-                <div class="nisse-pebble" aria-hidden="true">
-                  <span class="pb pb-a" style="--c:#a78792"></span>
-                  <span class="pb pb-b" style="--c:#8d9eae"></span>
-                  <span class="pb pb-c" style="--c:#859d85"></span>
-                  <span class="pb pb-d" style="--c:#939475"></span>
-                  <span class="pb pb-e" style="--c:#ad827c"></span>
-                  <span class="pb pb-f" style="--c:#7e918f"></span>
-                  <span class="pb-core"><strong>mostly calm</strong><em>maybe water the plants</em></span>
-                </div>
-                <figcaption class="caption">A calm week &mdash; even cells, one quiet suggestion.</figcaption>
-              </figure>
-              <figure class="nisse-pebble-fig">
-                <div class="nisse-pebble nisse-pebble--busy" aria-hidden="true">
-                  <span class="pb pb-a" style="--c:#a78792"><i class="pb-dot pb-dot--amber"></i></span>
-                  <span class="pb pb-b" style="--c:#8d9eae"></span>
-                  <span class="pb pb-c" style="--c:#859d85"><i class="pb-dot pb-dot--red"></i></span>
-                  <span class="pb pb-d" style="--c:#939475"></span>
-                  <span class="pb pb-e" style="--c:#ad827c"></span>
-                  <span class="pb pb-f" style="--c:#7e918f"></span>
-                  <span class="pb-core"><strong>the kitchen is ripening</strong><em>one thing needs you</em></span>
-                </div>
-                <figcaption class="caption">A busier week &mdash; the heavy zones swell, states shift, the shape breathes.</figcaption>
-              </figure>
-            </div>
-
-            <div class="detail-text">
-              <p>The encoding stays small on purpose. <strong>Size</strong> is the amount of open work in a zone. <strong>A muted, dusty hue plus an icon</strong> is the zone&rsquo;s identity &mdash; each color desaturated enough to coexist with every other on one screen without noise. <strong>A small dot on the blob&rsquo;s edge</strong> is state: pastel for calm, amber for ripening, and red strictly reserved for genuinely overdue. Copy follows the same restraint &mdash; qualitative everywhere the product could have used a number. &ldquo;Mostly calm.&rdquo; &ldquo;The kitchen is ripening.&rdquo; The interface talks like a considerate housemate, not a project tracker. And motion is reserved for onboarding and transitions: the resting home screen is completely still, which is why these figures don&rsquo;t move either.</p>
+              <p class="title-serif">The palette</p>
+              <p>The colors had a narrow brief: calm, but warm. Nothing that reads as office software, nothing that shouts either &mdash; no candy brights, no gamified cheer, but no gravity. Muted, dusty tones landed in that gap: soft enough to live on a home screen all day, warm enough that the app feels like it likes you.</p>
             </div>
 
             <!-- Palette, sampled from the working app -->
@@ -345,7 +312,7 @@
                 <span class="st"><i style="--c:#c89b62"></i>ripening</span>
                 <span class="st"><i style="--c:#cb3034"></i>overdue &mdash; the only red in the app, and it&rsquo;s warm</span>
               </div>
-              <figcaption class="caption">Zone fills sampled straight from the running app. Dark mode is specified pair by pair as its own system &mdash; warm dark ground, fills lifted rather than inverted &mdash; and follows the OS automatically: one less household decision.</figcaption>
+              <figcaption class="caption">Sampled straight from the running app. The rest of the visual system, the screens below can show for themselves.</figcaption>
             </figure>
 
           </div>
@@ -353,67 +320,165 @@
           <!-- ===== The architecture ===== -->
           <div class="block-copy detail-prose">
             <p class="title-serif">The architecture</p>
-            <p class="block-desc">The whole product is two lenses over one shared pool &mdash; a spatial lens for &ldquo;what does the home need,&rdquo; a time lens for &ldquo;what does this week look like&rdquo; &mdash; plus a shopping tab, one + button, and settings that mostly govern how softly Nisse speaks. Rebuilt below from the working IA board: one node per surface, structured by what is reached from where.</p>
+            <p class="block-desc">Nisse is deliberately small: seven sections, and only three of them are tabs. Home is the space lens &mdash; what does our home need. Calendar is the time lens &mdash; what does this week look like. Grocery is the errand lens &mdash; what do we pick up while we&rsquo;re out. Everything else hangs off those three: a + layer for capture, the household view behind the two partner chips, and settings behind the header, where Nisse mostly learns how softly to speak.</p>
+            <p class="block-desc">The board counts 61 screens, sheets and states, but the shape matters more than the number. Depth flows top to bottom, and it runs out fast &mdash; almost nothing is more than two taps from a tab, and most surfaces aren&rsquo;t destinations at all but sheets that slide up, do one thing, and leave. The heaviest column is Home, which is the point: the space lens carries the product, from the pulse down through a zone to a single chore and its plan.</p>
+            <p class="block-desc">The dashed row at the bottom is my favorite part of the board. One screen, many doors: the same chore detail opens from the pulse, from its zone, from the calendar, and from planning. A &#10003; on a to-attend lands it on the calendar; a &#10003; on a to-buy lands it in its grocery pile; tapping a partner chip opens the household trail already filtered to them. The sections stay separate on the map and porous in the hand &mdash; which is roughly how a home works too.</p>
           </div>
-          <div class="nisse-ia">
-            <div class="ia-col">
-              <p class="ia-head">Onboarding</p>
-              <span class="ia-node">zone picker</span>
-              <span class="ia-node">starter chore library</span>
-              <span class="ia-node">partner joins household</span>
+          <figure class="wire-map wire-map--board" data-wiremap data-wiremap-steps="1,2.5,4">
+            <button class="wire-map__trigger" type="button" data-wiremap-open aria-label="Open the information architecture board full-screen — click again inside to step in close">
+              <img src="assets/Information%20Architecture-selection.png" alt="The Nisse information architecture board — one root, seven sections, 61 screens, sheets and states. App chrome, Home, Calendar, Grocery, Add, Household and Settings run as columns, depth flowing top to bottom, with a dashed cross-links row at the bottom: one screen, many doors" loading="lazy" />
+              <span class="wire-map__cue" aria-hidden="true">
+                <svg class="wire-map__glass" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="10.5" cy="10.5" r="7.5" />
+                  <line x1="21" y1="21" x2="16" y2="16" />
+                  <line x1="10.5" y1="7.5" x2="10.5" y2="13.5" />
+                  <line x1="7.5" y1="10.5" x2="13.5" y2="10.5" />
+                </svg>
+                <span class="wire-map__cue-text">click to read the board up close</span>
+              </span>
+            </button>
+            <figcaption class="caption">The working IA board &mdash; one node per surface, structured by what is reached from where.</figcaption>
+          </figure>
+
+          <!-- ===== The screens ===== -->
+          <div class="photo-feature photo-feature--navy-titles nisse-screens">
+            <div class="detail-text">
+              <p class="title-serif">The screens</p>
+              <p>Below is the app as it stands &mdash; every screen, grouped the way you&rsquo;d actually move through them. All of it runs; nothing here is a mockup of a mockup.</p>
             </div>
-            <div class="ia-col">
-              <p class="ia-head">Home &mdash; chores</p>
-              <span class="ia-node">blob view &#8646; list view</span>
-              <span class="ia-node">household pulse</span>
-              <span class="ia-node">things need you &rarr; chore detail</span>
-              <span class="ia-node">takk feed &rarr; send takk</span>
+
+            <div class="screen-group">
+              <div class="detail-text">
+                <p class="screen-group__title">Home &mdash; the space lens</p>
+                <p>The default answer to &ldquo;how is our home doing.&rdquo; The zone blobs float free, each sized by its open work. Press and hold anywhere for a quiet read &mdash; the roll of things that need you, and the roll of thanks. The same home flips into a list for the days you&rsquo;d rather scan than feel.</p>
+              </div>
+              <div class="nisse-shots">
+                <figure>
+                  <img src="assets/01-home-pulse.png" alt="Nisse home screen in blob view — eight zone blobs sized by load, with the quiet read below: things need you, things are done" loading="lazy" />
+                  <figcaption class="caption"><strong>Blob view</strong> &mdash; the household&rsquo;s zones, sized by load, with the quiet read pulled up: what needs you, and what your partner quietly did. The screen most of Nisse&rsquo;s decisions were made for.</figcaption>
+                </figure>
+                <figure>
+                  <img src="assets/02-home-list.png" alt="Nisse home screen in list view — the same zones and chores as rows" loading="lazy" />
+                  <figcaption class="caption"><strong>List view</strong> &mdash; the identical home as rows, one toggle away. Same data, different mood.</figcaption>
+                </figure>
+                <figure>
+                  <img class="shot--flat" src="assets/eidting%20blob.png" alt="Arrange mode — zone blobs in edit state with a panel to rename a zone and pick its color and icon" loading="lazy" />
+                  <figcaption class="caption"><strong>Arrange mode</strong> &mdash; long-press to rearrange, recolor or add a zone. Zones are whatever the work feels like: rooms, plants, the dog.</figcaption>
+                </figure>
+              </div>
             </div>
-            <div class="ia-col">
-              <p class="ia-head">Zone &amp; chore detail</p>
-              <span class="ia-node">chore list + state dots</span>
-              <span class="ia-node">rhythm card &middot; usual window</span>
-              <span class="ia-node">done &middot; undo &middot; backdate</span>
-              <span class="ia-node">plan it out &middot; day + part of day</span>
-              <span class="ia-node">attributed history</span>
+
+            <div class="screen-group">
+              <div class="detail-text">
+                <p class="screen-group__title">Into the work &mdash; zone and chore</p>
+                <p>Tap a blob and you&rsquo;re inside one area of the home: its chores, their rhythms, their state dots. Tap a chore and you get the whole philosophy on one screen &mdash; a rhythm card instead of a due date, a usual window instead of an alarm, and a plan screen for when life wants a real day.</p>
+              </div>
+              <div class="nisse-shots">
+                <figure>
+                  <img src="assets/06-block-living-room.png" alt="Zone detail for the living room — six chores with their rhythms and state dots" loading="lazy" />
+                  <figcaption class="caption"><strong>Zone detail</strong> &mdash; one area&rsquo;s open chores and their rhythms. Rename and delete live here too, behind a confirm.</figcaption>
+                </figure>
+                <figure>
+                  <img src="assets/07-chore-detail.png" alt="Chore detail — the rhythm card with last done, usual window and today, plus mark it done, plan it out, and the attributed history" loading="lazy" />
+                  <figcaption class="caption"><strong>Chore detail</strong> &mdash; freshness, not deadlines. The rhythm card shows the usual window; done, undo and backdate keep the record honest.</figcaption>
+                </figure>
+                <figure>
+                  <img src="assets/08-plan.png" alt="Plan things out — a triage screen splitting chores into now-ish, if possible and someday, no rush" loading="lazy" />
+                  <figcaption class="caption"><strong>Plan things out</strong> &mdash; triage for the days you want a plan: what needs you now-ish, what can wait for someday.</figcaption>
+                </figure>
+              </div>
             </div>
-            <div class="ia-col">
-              <p class="ia-head">Calendar</p>
-              <span class="ia-node">floating pool &middot; now-ish &middot; someday</span>
-              <span class="ia-node">week agenda &middot; chores &middot; events &middot; busy blocks</span>
-              <span class="ia-node">drag to a day = plan it</span>
-              <span class="ia-node">drag to a past day = log done</span>
+
+            <div class="screen-group">
+              <div class="detail-text">
+                <p class="screen-group__title">Calendar &mdash; the time lens</p>
+                <p>The week as the household actually experiences it: events, busy blocks, and chores that have earned a date. Unplanned chores wait in a tray at the edge &mdash; drag one onto a day to plan it, drag it onto a yesterday to log that it already happened. Both partners&rsquo; calendars share the strip.</p>
+              </div>
+              <div class="nisse-shots">
+                <figure>
+                  <img src="assets/03-calendar.png" alt="Calendar week strip — the unplanned tray on top, then Saturday through Friday with events, chores and busy blocks for both partners" loading="lazy" />
+                  <figcaption class="caption"><strong>Week strip</strong> &mdash; swipe from four weeks back to eight ahead. Planned chores sit among real life, not instead of it, and the unplanned tray waits on top: dragging a chore onto a day is the whole planning UI.</figcaption>
+                </figure>
+              </div>
             </div>
-            <div class="ia-col">
-              <p class="ia-head">Shopping</p>
-              <span class="ia-node">store lists</span>
-              <span class="ia-node">add &middot; check &middot; clear done</span>
+
+            <div class="screen-group">
+              <div class="detail-text">
+                <p class="screen-group__title">Capture &mdash; the + layer</p>
+                <p>One + button, three sheets, and the only typing Nisse ever really asks for. A to-do picks a zone and a rhythm and is born ownerless. A to-attend takes a date and lands on the calendar. A to-buy names an item and lands in its pile. Each sheet is built to be closed within seconds.</p>
+              </div>
+              <div class="nisse-shots">
+                <figure>
+                  <img src="assets/13-add-todo.png" alt="Add a to-do sheet — name, where it lives, its rhythm. No deadline, no owner: it ripens on its rhythm and either of you can catch it" loading="lazy" />
+                  <figcaption class="caption"><strong>Add a to-do</strong> &mdash; name, zone, rhythm, including a custom one. No assignee field. There has never been an assignee field.</figcaption>
+                </figure>
+                <figure>
+                  <img src="assets/14-add-event.png" alt="Add a to-attend sheet — title, date, time, whose calendar" loading="lazy" />
+                  <figcaption class="caption"><strong>Add a to-attend</strong> &mdash; title, date if known, time if it matters, whose calendar.</figcaption>
+                </figure>
+                <figure>
+                  <img src="assets/15-add-item-to-buy.png" alt="Add a to-buy sheet — an item and the pile it lands in" loading="lazy" />
+                  <figcaption class="caption"><strong>Add a to-buy</strong> &mdash; an item and its pile. Done before the thought fades.</figcaption>
+                </figure>
+              </div>
             </div>
-            <div class="ia-col">
-              <p class="ia-head">Create ( + )</p>
-              <span class="ia-node">to-do &middot; name &middot; zone &middot; rhythm</span>
-              <span class="ia-node">to-attend &middot; title &middot; date? &middot; time?</span>
-              <span class="ia-node">to-buy &middot; item &rarr; store list</span>
+
+            <div class="screen-group">
+              <div class="detail-text">
+                <p class="screen-group__title">Grocery &mdash; the errand lens</p>
+                <p>The third tab is the humblest: piles, one per shop or need. Check things off in the aisle, clear the done ones, make a new pile when a trip becomes a habit.</p>
+              </div>
+              <div class="nisse-shots">
+                <figure>
+                  <img src="assets/04-shopping.png" alt="Grocery tab — three piles with items to check off, a completed drawer, and a new list button" loading="lazy" />
+                  <figcaption class="caption"><strong>Piles</strong> &mdash; the household&rsquo;s standing errands at a glance: check, clear, add. Built for one hand and a full basket.</figcaption>
+                </figure>
+              </div>
             </div>
-            <div class="ia-col">
-              <p class="ia-head">Household</p>
-              <span class="ia-node">trail &mdash; who did what</span>
-              <span class="ia-node">filter: everyone / R / X</span>
-              <span class="ia-node">looking back &mdash; monthly recap</span>
+
+            <div class="screen-group">
+              <div class="detail-text">
+                <p class="screen-group__title">The two of you &mdash; household &amp; recap</p>
+                <p>Behind the two partner chips lives the only place Nisse talks about people instead of chores. The trail shows who did what, lately &mdash; filterable, never ranked. A small thanks costs two taps. And once a month, the recap: how the work actually distributed itself, told per person as a story, never as a score.</p>
+              </div>
+              <div class="nisse-shots">
+                <figure>
+                  <img src="assets/05-household.png" alt="The household trail — who did what around the house, in order, with filters for everyone or one person" loading="lazy" />
+                  <figcaption class="caption"><strong>The trail</strong> &mdash; who did what, in order. Filter to everyone, or to one of you when you&rsquo;re feeling generous.</figcaption>
+                </figure>
+                <figure>
+                  <img src="assets/11-monthly-recap.png" alt="Monthly recap — June looked back on: a story about the house, a per-person month, and the thanks exchanged" loading="lazy" />
+                  <figcaption class="caption"><strong>Monthly recap</strong> &mdash; looking back, kindly. Proportions and stories, no points. The mirror, not the scoreboard.</figcaption>
+                </figure>
+              </div>
             </div>
-            <div class="ia-col">
-              <p class="ia-head">Settings</p>
-              <span class="ia-node">how Nisse speaks up &middot; quiet &middot; murmur &middot; only-red</span>
-              <span class="ia-node">quiet hours &middot; away mode</span>
-              <span class="ia-node">household members</span>
-              <span class="ia-node ia-node--dev">calendar sync &middot; in dev</span>
+
+            <div class="screen-group">
+              <div class="detail-text">
+                <p class="screen-group__title">The quiet parts &mdash; settings &amp; safety nets</p>
+                <p>Settings mostly govern how softly Nisse speaks: quiet, a daily murmur, or only-when-red; quiet hours; the theme follows the OS. And because a shared home needs forgiveness more than most apps do, recently deleted keeps every removed zone restorable &mdash; nothing a tired thumb does at midnight is permanent.</p>
+              </div>
+              <div class="nisse-shots">
+                <figure>
+                  <img src="assets/09-settings.png" alt="Settings — appearance following the phone, household members, and doors to how Nisse speaks up and recently deleted" loading="lazy" />
+                  <figcaption class="caption"><strong>Settings</strong> &mdash; theme, household members, and the two doors that matter: how Nisse speaks up, and the undo drawer.</figcaption>
+                </figure>
+                <figure>
+                  <img src="assets/10-notifications.png" alt="How Nisse speaks up — voice modes quiet, daily murmur and only when red, plus appreciation notes and quiet hours" loading="lazy" />
+                  <figcaption class="caption"><strong>How Nisse speaks up</strong> &mdash; quiet, murmur, or only-when-red. Every note is an observation about the house, never a command to a person.</figcaption>
+                </figure>
+                <figure>
+                  <img src="assets/12-recently-deleted.png" alt="Recently deleted — deleted zones and their chores stay restorable for 30 days" loading="lazy" />
+                  <figcaption class="caption"><strong>Recently deleted</strong> &mdash; the undo drawer for whole zones. Calm includes being hard to break.</figcaption>
+                </figure>
+              </div>
             </div>
           </div>
 
-          <!-- ===== Key flows: the full wireframe map ===== -->
+          <!-- ===== Before pixels: the wireframe board ===== -->
           <div class="block-copy detail-prose">
-            <p class="title-serif">Key flows, in wireframe</p>
-            <p class="block-desc">Round-two wireframes, drawn to settle behavior before any visual polish &mdash; every flow on one board: onboarding, capture, a chore&rsquo;s life, the calendar week, household &amp; takk, shopping, and settings. Below is a peek at one flow &mdash; click to open the full board, then click to step in and read the detail up close; keep clicking to step back out.</p>
+            <p class="title-serif">Before pixels</p>
+            <p class="block-desc">Every screen above was settled in wireframe first &mdash; round-two frames, drawn to pin down behavior while the visuals were still cheap to throw away. The full board is here for anyone who likes reading a product in grayscale: click to open, click again to step in close.</p>
           </div>
           <figure class="wire-map wire-map--window" data-wiremap>
             <button class="wire-map__trigger" type="button" data-wiremap-open aria-label="Open the full wireframe map full-screen — this preview shows only one of nine flows; zoom in to read them all">
@@ -429,7 +494,7 @@
                 <span class="wire-map__cue-text">1 of 9 flows &mdash; click to explore the whole board</span>
               </span>
             </button>
-            <figcaption class="caption">A peek at one flow &mdash; open the full board to explore all nine up close.</figcaption>
+            <figcaption class="caption">Nine flows on one board. Behavior first; the polish came after.</figcaption>
           </figure>
 
           <!-- ===== What didn't make it ===== -->
