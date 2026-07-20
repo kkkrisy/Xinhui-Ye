@@ -4043,9 +4043,10 @@ a.t-org:hover { color: var(--on-surface); }
   height: auto;
 }
 
-/* The screens — the running app, grouped in six rooms. Each group is a short
-   intro plus a centred row of phone shots; the shots are device silhouettes on
-   transparency, so the shadow follows the phone, not a rectangle. */
+/* The screens — the running app on three filmstrip shelves. Each shelf is a
+   sideways-scrolling strip: a lead card carrying the group narrative, then the
+   phone shots at a shared width with a short caption under each. The shots are
+   device silhouettes on transparency, so the shadow follows the phone. */
 .nisse-screens .screen-group__title {
   font-family: var(--font-serif);
   font-weight: 600;
@@ -4054,26 +4055,52 @@ a.t-org:hover { color: var(--on-surface); }
   color: var(--primary);
   margin: 0 0 var(--space-sm);
 }
-.nisse-shots {
+.nisse-screens { display: flex; flex-direction: column; gap: var(--space-xl); }
+.screen-shelf .detail-text { margin-bottom: 0; }
+.shelf-strip {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--space-lg) var(--space-md);
+  align-items: flex-start;
+  gap: var(--space-md);
+  overflow-x: auto;
+  padding: 6px 4px 14px;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--outline-variant) transparent;
 }
-.nisse-shots figure {
+.shelf-strip::-webkit-scrollbar { height: 8px; }
+.shelf-strip::-webkit-scrollbar-track { background: transparent; }
+.shelf-strip::-webkit-scrollbar-thumb {
+  background: var(--outline-variant);
+  border-radius: 999px;
+}
+.shelf-lead {
+  flex: 0 0 218px;
+  align-self: center;
+  scroll-snap-align: start;
+  padding-right: var(--space-xs);
+}
+.shelf-lead p {
   margin: 0;
-  flex: 1 1 220px;
-  max-width: 300px;
+  color: var(--primary);
+  font-size: 15px;
+  line-height: 24px;
 }
-.nisse-shots img {
+.shelf-strip figure {
+  margin: 0;
+  flex: 0 0 216px;
+  scroll-snap-align: start;
+}
+.shelf-strip img {
   display: block;
   width: 100%;
   height: auto;
   /* the exports carry their own soft ground shadow — no second one on top */
 }
-.nisse-shots .caption { margin-top: var(--space-sm); }
+.shelf-strip .caption { margin-top: var(--space-xs); font-size: 13px; line-height: 20px; }
 @media (max-width: 560px) {
-  .nisse-shots figure { flex-basis: 100%; max-width: 260px; }
+  .shelf-lead { flex-basis: 78vw; }
+  .shelf-strip figure { flex-basis: 62vw; }
 }
 
 /* Kit pairing: the narrow shopping board beside its note */
