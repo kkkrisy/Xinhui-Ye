@@ -4034,14 +4034,15 @@ a.t-org:hover { color: var(--on-surface); }
   .wire-map__hint { bottom: 10px; right: 10px; }
 }
 
-/* IA board — the working map as one image inside the cream band. The board's
-   own ground is nearly the band's cream, so a hairline keeps its edge. */
+/* IA board — the working map as one image inside the outlined frame. The
+   board's own ground is nearly the page cream, so a hairline keeps its edge. */
 .nisse-ia-board { margin: 0; }
 .nisse-ia-board img {
   display: block;
   width: 100%;
   height: auto;
   border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-lg);
   background: #fffdf7;
 }
 
