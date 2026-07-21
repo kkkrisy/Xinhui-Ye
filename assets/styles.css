@@ -1321,6 +1321,28 @@ textarea.field { height: auto; min-height: 140px; resize: vertical; padding-top:
 @media (prefers-reduced-motion: reduce) {
   .record-disc { animation: none; }
 }
+/* Dark variant: deep-indigo media block matching the site's indigo bands.
+   The active row inverts to cream (the light version's indigo fill would
+   vanish on this background), and dots/disc get faint cream rims so
+   indigo-colored elements stay visible on indigo. */
+.music-record--dark { background: var(--inverse-surface); }
+.music-record--dark .title-serif,
+.music-record--dark .record-track { color: var(--inverse-on-surface); }
+.music-record--dark .record-sub { color: var(--inverse-on-surface); opacity: 0.8; }
+.music-record--dark .record-track:hover { background: rgba(255, 239, 214, 0.08); }
+.music-record--dark .record-track.is-active {
+  background: var(--inverse-on-surface);
+  color: var(--primary);
+}
+.music-record--dark .record-dot { box-shadow: 0 0 0 1.5px rgba(255, 239, 214, 0.35); }
+.music-record--dark .record-disc {
+  background:
+    radial-gradient(circle at center, var(--inverse-surface) 0 8%, transparent 8.5%),
+    repeating-radial-gradient(circle at center,
+      var(--record-label) 0 2px,
+      color-mix(in srgb, var(--record-label) 65%, white) 2px 4px);
+  box-shadow: 0 0 0 1.5px rgba(255, 239, 214, 0.25);
+}
 .detail-full .media-placeholder { aspect-ratio: 21 / 9; }
 
 /* AI&U opening showcase: the film leads at ~two-thirds width; the five final
