@@ -136,6 +136,40 @@ document.addEventListener("DOMContentLoaded", () => {
     buildDots(wrap, track, Array.from(track.children));
   });
 
+  /* Board swipe (Nisse "look and the logic"): the information-architecture and
+     visual-language boards differ in proportion, so the track takes the height
+     of whichever board is in view — the wide visual-language board never leaves
+     dead space beneath it. Progressive: with no JS both boards share the taller
+     frame (CSS) and still read fine. */
+  document.querySelectorAll(".board-track").forEach((track) => {
+    const slides = Array.from(track.children);
+    if (slides.length < 2) return;
+    let ticking = false;
+    const nearestIndex = () => {
+      let nearest = 0, best = Infinity;
+      slides.forEach((s, n) => {
+        const d = Math.abs(s.offsetLeft - track.offsetLeft - track.scrollLeft);
+        if (d < best) { best = d; nearest = n; }
+      });
+      return nearest;
+    };
+    const fit = () => { track.style.height = slides[nearestIndex()].offsetHeight + "px"; };
+    // Size once the boards have real dimensions, and again on resize.
+    const imgs = Array.from(track.querySelectorAll("img"));
+    let pending = imgs.length;
+    const ready = () => { if (--pending <= 0) fit(); };
+    imgs.forEach((im) => {
+      if (im.complete && im.naturalHeight) ready();
+      else im.addEventListener("load", ready, { once: true });
+    });
+    if (!imgs.length) fit();
+    fit();
+    track.addEventListener("scroll", () => {
+      if (!ticking) { ticking = true; requestAnimationFrame(() => { ticking = false; fit(); }); }
+    }, { passive: true });
+    window.addEventListener("resize", fit);
+  });
+
   /* Craft gallery reels (phones): dots under each swipeable group */
   document.querySelectorAll(".gallery-group").forEach((group) => {
     const grid = group.querySelector(".thumb-grid");

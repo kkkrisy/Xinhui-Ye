@@ -3940,11 +3940,16 @@ a.t-org:hover { color: var(--on-surface); }
    matched pair rather than two mismatched blocks. */
 .board-track {
   display: flex;
+  align-items: flex-start;
   gap: var(--space-sm);
   overflow-x: auto;
+  overflow-y: hidden;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   scrollbar-width: none;
+  /* script.js sizes the track to whichever board is in view, so the wide
+     visual-language board doesn't leave dead space under it. */
+  transition: height 0.35s ease;
 }
 .board-track::-webkit-scrollbar { display: none; }
 .board-track:focus-visible { outline: 2px solid var(--primary); outline-offset: 6px; border-radius: var(--radius-sm); }
@@ -3958,20 +3963,17 @@ a.t-org:hover { color: var(--on-surface); }
   gap: var(--space-sm);
 }
 .board-slide .board-media {
-  flex: 1;
   display: flex;
-  align-items: center;
   justify-content: center;
-  min-height: 0;
 }
 .board-slide .board-media img {
   display: block;
-  width: auto;
+  width: 100%;
   height: auto;
   max-width: 100%;
-  max-height: 72vh;
   margin: 0;
 }
+@media (prefers-reduced-motion: reduce) { .board-track { transition: none; } }
 
 /* The screens — the running app on three filmstrip shelves. Each shelf is a
    sideways-scrolling strip: a lead card carrying the group narrative, then the
