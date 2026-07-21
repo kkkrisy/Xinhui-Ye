@@ -1210,7 +1210,6 @@ textarea.field { height: auto; min-height: 140px; resize: vertical; padding-top:
    stay hidden, so the clips remain playable as plain HTML. */
 .music-record {
   --record-label: var(--primary);
-  margin-top: var(--space-lg);
   display: grid;
   grid-template-columns: minmax(200px, 280px) 1fr;
   gap: clamp(24px, 4vw, 56px);
