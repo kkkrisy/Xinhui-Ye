@@ -3933,6 +3933,45 @@ a.t-org:hover { color: var(--on-surface); }
   color: var(--on-surface-variant);
   margin: 0 0 var(--space-sm);
 }
+/* The two boards ride one swipe track — information architecture first, visual
+   language second. Reuses the site carousel JS (arrows on desktop, dots on
+   phones, drag/swipe everywhere). Each board sits in an equal-height frame so
+   the wide visual-language board and the taller architecture board read as a
+   matched pair rather than two mismatched blocks. */
+.board-track {
+  display: flex;
+  gap: var(--space-sm);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+.board-track::-webkit-scrollbar { display: none; }
+.board-track:focus-visible { outline: 2px solid var(--primary); outline-offset: 6px; border-radius: var(--radius-sm); }
+.board-slide {
+  flex: 0 0 100%;
+  min-width: 0;
+  margin: 0;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+.board-slide .board-media {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+}
+.board-slide .board-media img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 72vh;
+  margin: 0;
+}
 
 /* The screens — the running app on three filmstrip shelves. Each shelf is a
    sideways-scrolling strip: a lead card carrying the group narrative, then the
