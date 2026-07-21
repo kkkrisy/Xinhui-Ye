@@ -3730,69 +3730,6 @@ a.t-org:hover { color: var(--on-surface); }
 }
 @media (max-width: 760px) { .nisse-principles { grid-template-columns: 1fr; } }
 
-/* The life of a task — five stations on one continuous line */
-.nisse-journey-wrap { margin: 0; }
-.nisse-journey {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: var(--space-md);
-  position: relative;
-}
-/* the connecting line runs behind the blobs, through their centers */
-.nisse-journey::before {
-  content: "";
-  position: absolute;
-  top: 17px;
-  left: 4%;
-  right: 4%;
-  height: 2px;
-  background: var(--outline-variant);
-}
-.nisse-journey li { position: relative; }
-.nisse-journey .nj-blob {
-  display: block;
-  width: 34px;
-  height: 34px;
-  background: var(--njc, #b9b7ae);
-  border-radius: 46% 54% 52% 48% / 55% 46% 54% 45%;
-  margin-bottom: var(--space-sm);
-}
-.nisse-journey .nj-title {
-  font-family: var(--font-grotesque);
-  font-weight: 700;
-  font-size: 15px;
-  color: var(--primary);
-  margin: 0 0 6px;
-}
-.nisse-journey .nj-desc {
-  font-size: 14px;
-  line-height: 22px;
-  color: var(--on-surface-variant);
-  margin: 0;
-}
-/* station 4 is a side path — optional, so it reads dashed */
-.nisse-journey .nj-optional .nj-blob {
-  background: var(--surface);
-  border: 2px dashed var(--njc, #8d9eae);
-}
-.nisse-journey-wrap .caption { margin-top: var(--space-md); }
-@media (max-width: 860px) {
-  .nisse-journey { grid-template-columns: 1fr; gap: var(--space-md); }
-  .nisse-journey::before {
-    top: 4%;
-    bottom: 4%;
-    left: 16px;
-    right: auto;
-    width: 2px;
-    height: auto;
-  }
-  .nisse-journey li { padding-left: 56px; }
-  .nisse-journey .nj-blob { position: absolute; left: 0; top: 0; }
-}
-
 /* Wireframe boards: transparent PNGs sit straight on the ground */
 .nisse-board img { border-radius: 0; }
 .nisse-board .caption { margin-top: var(--space-sm); }
