@@ -3922,6 +3922,17 @@ a.t-org:hover { color: var(--on-surface); }
   width: 100%;
   height: auto;
 }
+/* The look and the logic — a small label above each board so the two read as
+   a titled pair (the IA image no longer carries its own baked-in heading). */
+.board-label {
+  font-family: var(--font-grotesque);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--on-surface-variant);
+  margin: 0 0 var(--space-sm);
+}
 
 /* The screens — the running app on three filmstrip shelves. Each shelf is a
    sideways-scrolling strip: a lead card carrying the group narrative, then the
