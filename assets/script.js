@@ -799,6 +799,78 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  /* ---- Music page: spinning-disc recordings player ------------------ */
+  // One clip plays at a time. The disc spins while playing and its label
+  // (color + title) follows the selected track. Falls back to the native
+  // <audio> controls when JS is off (is-enhanced never gets added).
+  document.querySelectorAll("[data-record-player]").forEach((player) => {
+    const labelEl = player.querySelector(".record-label");
+    const tracks = Array.from(player.querySelectorAll(".record-track"));
+    if (!tracks.length) return;
+    player.classList.add("is-enhanced");
+
+    const fmt = (s) => {
+      s = Math.max(0, Math.round(s));
+      return Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0");
+    };
+    const audioOf = (t) => t.querySelector("audio");
+    const timeOf = (t) => t.querySelector(".record-time");
+    const showDuration = (t) => {
+      const d = audioOf(t).duration;
+      if (d && isFinite(d)) timeOf(t).textContent = fmt(d);
+    };
+
+    const select = (track) => {
+      tracks.forEach((t) => t.classList.toggle("is-active", t === track));
+      player.style.setProperty("--record-label", track.dataset.color);
+      if (labelEl) labelEl.innerHTML = track.dataset.name.split("|").join("<br />");
+    };
+
+    tracks.forEach((track) => {
+      const audio = audioOf(track);
+      audio.removeAttribute("controls");
+
+      if (audio.readyState >= 1) showDuration(track);
+      audio.addEventListener("loadedmetadata", () => showDuration(track));
+      audio.addEventListener("timeupdate", () => {
+        // Count down the remaining time while playing.
+        if (!audio.paused && isFinite(audio.duration))
+          timeOf(track).textContent = fmt(audio.duration - audio.currentTime);
+      });
+      audio.addEventListener("play", () => {
+        tracks.forEach((other) => {
+          if (other === track) return;
+          const a = audioOf(other);
+          a.pause();
+          a.currentTime = 0;
+          showDuration(other);
+        });
+        select(track);
+        track.classList.add("is-playing");
+        player.classList.add("is-playing");
+      });
+      audio.addEventListener("pause", () => {
+        track.classList.remove("is-playing");
+        if (tracks.every((t) => audioOf(t).paused))
+          player.classList.remove("is-playing");
+      });
+      audio.addEventListener("ended", () => {
+        audio.currentTime = 0;
+        showDuration(track);
+      });
+
+      const btn = track.querySelector(".record-play");
+      btn &&
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          audio.paused ? audio.play() : audio.pause();
+        });
+      track.addEventListener("click", () => {
+        if (audio.paused) audio.play();
+      });
+    });
+  });
+
   /* ---- Deter image/video saving ------------------------------------- */
   // Not bulletproof (screenshots, devtools and direct URLs still work), but
   // it blocks right-click "Save image as…" and click-drag saving.
