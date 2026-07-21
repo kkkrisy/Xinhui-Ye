@@ -99,6 +99,55 @@
             </div>
           </div>
 
+          <!-- Three recordings — spinning-disc player. Audio-only tracks
+               extracted from the home videos; the disc label follows the
+               selected clip. With JS off, native audio controls show. -->
+          <div class="music-record" data-record-player>
+            <div class="record-disc" aria-hidden="true">
+              <span class="record-label">French<br />Ballade</span>
+            </div>
+            <div class="record-list">
+              <p class="title-serif">A third record, unofficial</p>
+              <p class="record-sub">Home recordings, one accordion only &mdash; choose a side.</p>
+
+              <div class="record-track is-active" data-color="#333462" data-name="French|Ballade">
+                <span class="record-dot" style="background: #333462;"></span>
+                <span class="record-title">French Ballade</span>
+                <span class="record-mood">Unhurried and elegant, a slow swing that leans wistful; late-night, low-lit, a little melancholy.</span>
+                <span class="record-time">0:56</span>
+                <button class="record-play" type="button" aria-label="Play French Ballade">
+                  <svg class="record-ic-play" width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2l10 6-10 6z"/></svg>
+                  <svg class="record-ic-pause" width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M3 2h3.5v12H3zM9.5 2H13v12H9.5z"/></svg>
+                </button>
+                <audio preload="metadata" controls src="assets/french-ballade.mp3"></audio>
+              </div>
+
+              <div class="record-track" data-color="#ff8a65" data-name="Samba|Carnival">
+                <span class="record-dot" style="background: #ff8a65;"></span>
+                <span class="record-title">Samba Carnival</span>
+                <span class="record-mood">Dense syncopation and bright ornamentation, festive and propulsive, built to keep moving.</span>
+                <span class="record-time">0:24</span>
+                <button class="record-play" type="button" aria-label="Play Samba Carnival">
+                  <svg class="record-ic-play" width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2l10 6-10 6z"/></svg>
+                  <svg class="record-ic-pause" width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M3 2h3.5v12H3zM9.5 2H13v12H9.5z"/></svg>
+                </button>
+                <audio preload="metadata" controls src="assets/samba-carnival.mp3"></audio>
+              </div>
+
+              <div class="record-track" data-color="#0f9d84" data-name="Bossa|Nova">
+                <span class="record-dot" style="background: #0f9d84;"></span>
+                <span class="record-title">Bossa Nova</span>
+                <span class="record-mood">Warm jazz bass under supple cross-rhythms, with harmony that drifts somewhere unexpected.</span>
+                <span class="record-time">0:30</span>
+                <button class="record-play" type="button" aria-label="Play Bossa Nova">
+                  <svg class="record-ic-play" width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2l10 6-10 6z"/></svg>
+                  <svg class="record-ic-pause" width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M3 2h3.5v12H3zM9.5 2H13v12H9.5z"/></svg>
+                </button>
+                <audio preload="metadata" controls src="assets/bossa-nova.mp3"></audio>
+              </div>
+            </div>
+          </div>
+
         </div>
 
         <div class="utility-row hl-nav">
