@@ -3988,6 +3988,11 @@ a.t-org:hover { color: var(--on-surface); }
   margin: 0 0 var(--space-sm);
 }
 .nisse-screens { display: flex; flex-direction: column; gap: var(--space-xl); }
+/* The screens read as an outlined frame rather than a filled cream band — the
+   phone shots and copy sit straight on the page ground inside a 1px rule (the
+   same frame treatment as the CV and coaching boxes). */
+.nisse-screens.photo-feature { background: transparent; border: 1px solid var(--outline); }
+.nisse-screens .detail-text { border: none; padding: 0; }
 .screen-shelf .detail-text { margin-bottom: 0; }
 .shelf-strip {
   display: flex;
