@@ -211,6 +211,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  /* ---- Nisse screen shelves: retire the swipe nudge ------------------- */
+  // The "N screens ››" pill on each shelf has done its job once the person
+  // swipes; the first real scroll fades it out for good.
+  document.querySelectorAll(".shelf-scroller").forEach((wrap) => {
+    const strip = wrap.querySelector(".shelf-strip");
+    if (!strip) return;
+    strip.addEventListener("scroll", () => {
+      if (strip.scrollLeft > 12) wrap.classList.add("is-scrolled");
+    }, { passive: true });
+  });
+
   /* ---- Back to top -------------------------------------------------- */
   // #top points at the sticky nav, which is always "in view", so the native
   // anchor jump does nothing. Scroll the window manually instead.

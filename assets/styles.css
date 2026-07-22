@@ -3765,119 +3765,18 @@ a.t-org:hover { color: var(--on-surface); }
 }
 .nisse-map .caption { text-align: center; margin-top: var(--space-sm); }
 
-/* Below ~720px the SVG's 12px labels would render under 11px, so the map
-   redraws as a compact 2×2 quadrant grid — same four corners, same axes in
-   the gutters — instead of shrinking type or falling back to flat lists. */
-.nisse-map .nisse-map-stack { display: none; }
-.nisse-map-stack .ms-axis {
-  margin: 0;
-  font-family: var(--font-grotesque);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-  color: var(--primary);
-  opacity: 0.62;
-  text-align: center;
-}
-/* side labels stand upright in the left/right gutters */
-.nisse-map-stack .ms-axis--side { writing-mode: vertical-rl; }
-.nisse-map-stack .ms-axis--left { transform: rotate(180deg); }
-/* The four corners as a hairline-divided table: the 1px grid gap lets the
-   ink-coloured ground show through, drawing the two axes of the plotted map. */
-.nisse-map-stack .ms-grid {
-  grid-area: grid;
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1px;
-  background: color-mix(in srgb, var(--map-ink) 35%, var(--map-bg));
-  border: 1px solid var(--surface-container-high);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-}
-.nisse-map-stack .ms-quad {
-  background: var(--map-bg);
-  padding: 12px;
-}
-/* the calm corner — the one that holds Nisse — gets the same moss wash as
-   the highlighted quadrant on the plotted map */
-.nisse-map-stack .ms-quad--calm {
-  background: color-mix(in srgb, var(--map-good) 12%, var(--map-bg));
-}
-.nisse-map-stack ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-.nisse-map-stack li {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  font-family: var(--font-grotesque);
-  font-size: 12px;
-  line-height: 1.25;
-  color: var(--on-surface-body);
-}
-.nisse-map-stack .ms-nisse {
-  font-weight: 700;
-  color: var(--primary);
-}
-.nisse-map-stack .mk {
-  flex: none;
-  width: 8px;
-  height: 8px;
-  border-radius: var(--radius-full);
-  background: var(--map-mark);
-}
-.nisse-map-stack .mk--open {
-  background: var(--map-bg);
-  border: 1px solid var(--map-mark);
-}
-.nisse-map-stack .mk--ring {
-  width: 10px;
-  height: 10px;
-  background: var(--primary);
-  border: 2px solid var(--primary);
-  box-shadow: 0 0 0 2px var(--map-bg), 0 0 0 3.5px var(--primary);
-}
-.nisse-map-stack .ms-legend {
-  grid-area: legend;
-  margin: 4px 0 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 6px 16px;
-  font-family: var(--font-grotesque);
-  font-size: 12px;
-  color: var(--on-surface-variant);
-}
-.nisse-map-stack .ms-legend span {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-}
+/* Below ~720px the wide SVG's labels would render under 5px, so the map
+   swaps to a second SVG: the same twenty dots recomposed portrait, with a
+   narrower viewBox so type stays legible at phone width. */
+.nisse-map .map-axis--edge { font-size: 8.5px; }
+.nisse-map .nisse-map__svg--phone { display: none; }
 @media (max-width: 720px) {
-  .nisse-map svg { display: none; }
-  .nisse-map .nisse-map-stack {
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr) auto;
-    grid-template-areas:
-      ".    top    ."
-      "left grid   right"
-      ".    bottom ."
-      "legend legend legend";
-    align-items: center;
-    justify-items: center;
-    gap: 8px;
-  }
-  .nisse-map-stack .ms-axis--top { grid-area: top; }
-  .nisse-map-stack .ms-axis--bottom { grid-area: bottom; }
-  .nisse-map-stack .ms-axis--left { grid-area: left; }
-  .nisse-map-stack .ms-axis--right { grid-area: right; }
+  .nisse-map .nisse-map__svg--wide { display: none; }
+  .nisse-map .nisse-map__svg--phone { display: block; }
+  .nisse-map .nisse-map__svg--phone .map-label { font-size: 10px; }
+  .nisse-map .nisse-map__svg--phone .map-axis { font-size: 9.5px; }
+  .nisse-map .nisse-map__svg--phone .map-axis--edge { font-size: 8.5px; }
+  .nisse-map .nisse-map__svg--phone .map-nisse { font-size: 12px; }
 }
 
 /* Four principles — a text-led numbered grid, on purpose */
@@ -4187,6 +4086,29 @@ a.t-org:hover { color: var(--on-surface); }
 .nisse-screens.photo-feature { background: transparent; border: 1px solid var(--outline); }
 .nisse-screens .detail-text { border: none; padding: 0; }
 .screen-shelf .detail-text { margin-bottom: 0; }
+/* Lead copy sits beside the strip on wide screens (as before, but it now
+   stays put while the strip scrolls); on phones it stacks above, so a
+   screenshot is always in view instead of hiding off-screen. */
+.screen-shelf {
+  display: grid;
+  grid-template-columns: 218px minmax(0, 1fr);
+  column-gap: var(--space-md);
+  align-items: center;
+}
+.screen-shelf .detail-text { grid-column: 1 / -1; }
+.shelf-scroller { position: relative; min-width: 0; }
+/* The right edge dissolves into the page ground — the cut-off screenshot
+   plus the fade say "there's more" without any extra chrome. */
+.shelf-scroller::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 14px;   /* keep clear of the scrollbar */
+  width: 40px;
+  background: linear-gradient(to right, rgba(255, 254, 249, 0), var(--surface) 82%);
+  pointer-events: none;
+}
 .shelf-strip {
   display: flex;
   align-items: flex-start;
@@ -4204,12 +4126,7 @@ a.t-org:hover { color: var(--on-surface); }
   background: var(--outline-variant);
   border-radius: 999px;
 }
-.shelf-lead {
-  flex: 0 0 218px;
-  align-self: center;
-  scroll-snap-align: start;
-  padding-right: var(--space-xs);
-}
+.shelf-lead { padding-right: var(--space-xs); }
 .shelf-lead p {
   margin: 0;
   color: var(--primary);
@@ -4228,9 +4145,44 @@ a.t-org:hover { color: var(--on-surface); }
   /* the exports carry their own soft ground shadow — no second one on top */
 }
 .shelf-strip .caption { margin-top: var(--space-xs); font-size: 13px; line-height: 20px; }
+/* One small pill counts the screens and breathes toward the edge; it fades
+   for good after the first swipe (script.js adds .is-scrolled). Phones only —
+   wide screens already show several screens plus the scrollbar. */
+.shelf-nudge {
+  position: absolute;
+  z-index: 2;
+  top: 38%;
+  right: 10px;
+  display: none;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 13px;
+  border-radius: var(--radius-full);
+  background: var(--primary);
+  color: var(--on-primary);
+  font-family: var(--font-grotesque);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  box-shadow: 0 6px 16px rgba(46, 46, 56, 0.18);
+  pointer-events: none;
+  transition: opacity 0.45s ease;
+}
+.shelf-nudge__chev { display: inline-block; animation: shelf-chev 1.4s ease-in-out infinite; }
+@keyframes shelf-chev {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(4px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .shelf-nudge__chev { animation: none; }
+}
+.shelf-scroller.is-scrolled .shelf-nudge { opacity: 0; }
 @media (max-width: 560px) {
-  .shelf-lead { flex-basis: 78vw; }
+  .screen-shelf { grid-template-columns: 1fr; }
+  .shelf-lead { padding-right: 0; margin-bottom: var(--space-xs); }
   .shelf-strip figure { flex-basis: 62vw; }
+  .shelf-nudge { display: inline-flex; }
 }
 
 /* Kit pairing: the narrow shopping board beside its note */
