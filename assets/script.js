@@ -211,6 +211,44 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  /* ---- Nisse market map: tap-to-zoom on phones ------------------------ */
+  // The plotted map keeps its desktop composition on phones, rendered small.
+  // Tapping it opens a full-screen pan view holding a clone of the same SVG
+  // at a readable width. Desktop never opens it — the plot is already big.
+  const nisseMap = document.querySelector(".nisse-map");
+  if (nisseMap && nisseMap.querySelector(".map-zoom")) {
+    const zoomBox = nisseMap.querySelector(".map-zoom");
+    const pan = zoomBox.querySelector(".map-zoom__pan");
+    const phoneMQ = window.matchMedia("(max-width: 720px)");
+    const openMap = () => {
+      if (!phoneMQ.matches) return;
+      if (!pan.querySelector("svg")) {
+        const clone = nisseMap.querySelector(".nisse-map__svg--wide").cloneNode(true);
+        clone.removeAttribute("class");
+        clone.removeAttribute("role");
+        clone.setAttribute("aria-hidden", "true");
+        pan.appendChild(clone);
+      }
+      zoomBox.classList.add("is-open");
+      zoomBox.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      // land on the middle of the plot; Nisse's corner is a small pan away
+      pan.scrollLeft = (pan.scrollWidth - pan.clientWidth) / 2;
+    };
+    const closeMap = () => {
+      zoomBox.classList.remove("is-open");
+      zoomBox.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    };
+    nisseMap.querySelectorAll("[data-map-zoom]").forEach((t) =>
+      t.addEventListener("click", (e) => { e.stopPropagation(); openMap(); })
+    );
+    zoomBox.querySelector("[data-map-zoom-close]").addEventListener("click", closeMap);
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && zoomBox.classList.contains("is-open")) closeMap();
+    });
+  }
+
   /* ---- Nisse screen shelves: retire the swipe nudge ------------------- */
   // The "N screens ››" pill on each shelf has done its job once the person
   // swipes; the first real scroll fades it out for good.

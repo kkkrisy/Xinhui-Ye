@@ -3765,18 +3765,85 @@ a.t-org:hover { color: var(--on-surface); }
 }
 .nisse-map .caption { text-align: center; margin-top: var(--space-sm); }
 
-/* Below ~720px the wide SVG's labels would render under 5px, so the map
-   swaps to a second SVG: the same twenty dots recomposed portrait, with a
-   narrower viewBox so type stays legible at phone width. */
-.nisse-map .map-axis--edge { font-size: 8.5px; }
-.nisse-map .nisse-map__svg--phone { display: none; }
+/* On phones the same plot simply renders small — the composition stays
+   identical to desktop — and a "tap to zoom" chip opens the full-screen
+   pan view below, where script.js drops a clone of the SVG at a width
+   the labels are actually readable at. */
+.nisse-map .map-tap { position: relative; }
+.nisse-map .map-tap__hint {
+  display: none;
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  align-items: center;
+  padding: 4px 10px;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--primary);
+  color: var(--on-primary);
+  font-family: var(--font-grotesque);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  box-shadow: 0 6px 16px rgba(46, 46, 56, 0.18);
+  cursor: pointer;
+}
+.map-zoom {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: none;
+  flex-direction: column;
+  background: var(--surface);
+}
+.map-zoom.is-open { display: flex; }
+.map-zoom__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  padding: 12px var(--page-pad);
+  border-bottom: 1px solid var(--outline-variant);
+}
+.map-zoom__title {
+  font-family: var(--font-grotesque);
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--primary);
+}
+.map-zoom__close {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--outline);
+  background: transparent;
+  color: var(--on-surface);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+/* Both directions scroll, so a thumb can wander the plot. The cloned SVG is
+   ~2.5 viewports wide — labels land back around their desktop size. */
+.map-zoom__pan {
+  flex: 1;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: var(--space-sm);
+}
+.map-zoom__pan svg {
+  display: block;
+  width: 250vw;
+  max-width: none;
+  height: auto;
+}
 @media (max-width: 720px) {
-  .nisse-map .nisse-map__svg--wide { display: none; }
-  .nisse-map .nisse-map__svg--phone { display: block; }
-  .nisse-map .nisse-map__svg--phone .map-label { font-size: 10px; }
-  .nisse-map .nisse-map__svg--phone .map-axis { font-size: 9.5px; }
-  .nisse-map .nisse-map__svg--phone .map-axis--edge { font-size: 8.5px; }
-  .nisse-map .nisse-map__svg--phone .map-nisse { font-size: 12px; }
+  .nisse-map .map-tap { cursor: pointer; }
+  .nisse-map .map-tap__hint { display: inline-flex; }
 }
 
 /* Four principles — a text-led numbered grid, on purpose */

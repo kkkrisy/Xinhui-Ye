@@ -151,8 +151,12 @@
               </div>
             </figure>
 
-            <!-- Positioning map — descriptive axes, flat in the site's language -->
+            <!-- Positioning map — descriptive axes, flat in the site's language.
+                 One plot for every screen: on phones it renders small inside a
+                 tap-to-zoom target, and the overlay below shows the same SVG
+                 large enough to read, pannable with a thumb. -->
             <figure class="nisse-map">
+              <div class="map-tap" data-map-zoom>
               <svg class="nisse-map__svg--wide" viewBox="-160 0 1020 555" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Market map: twenty tools plotted by who does the noticing, a person or the system, and when ownership is fixed, at creation or at pickup. The top right corner, where the system notices and ownership stays open until pickup, holds Tody, Sweepy, Don't Forget Me and Nisse. Nisse is the only one there without a score.">
                 <!-- axes — hairline, crossing at centre, no ticks -->
                 <line class="map-hair" x1="-100" y1="265" x2="800" y2="265" />
@@ -193,48 +197,18 @@
                 <circle class="map-dot--open" cx="200" cy="536" r="5" /><text class="map-label" x="212" y="540">no score</text>
                 <circle class="map-ring" cx="290" cy="536" r="9" /><circle class="map-nisse-core" cx="290" cy="536" r="4" /><text class="map-label" x="306" y="540">Nisse</text>
               </svg>
-              <!-- Narrow-viewport version: the same plotted map, recomposed
-                   portrait so the dots and labels stay legible on a phone -->
-              <svg class="nisse-map__svg--phone" viewBox="0 0 320 565" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Market map: twenty tools plotted by who does the noticing, a person or the system, and when ownership is fixed, at creation or at pickup. The top right corner, where the system notices and ownership stays open until pickup, holds Tody, Sweepy, Don't Forget Me and Nisse. Nisse is the only one there without a score.">
-                <!-- axes -->
-                <line class="map-hair" x1="8" y1="250" x2="312" y2="250" />
-                <line class="map-hair" x1="160" y1="36" x2="160" y2="505" />
-                <!-- axis labels -->
-                <text class="map-axis" x="160" y="24" text-anchor="middle">ownership at pickup</text>
-                <text class="map-axis" x="160" y="528" text-anchor="middle">ownership fixed at creation</text>
-                <text class="map-axis map-axis--edge" x="8" y="266" text-anchor="start">a person does the noticing</text>
-                <text class="map-axis map-axis--edge" x="312" y="280" text-anchor="end">the system does the noticing</text>
-                <!-- the corner in question -->
-                <rect class="map-quad" x="170" y="44" width="142" height="192" rx="10" />
-                <!-- top-left: person notices, ownership at pickup -->
-                <circle class="map-dot--open" cx="80" cy="78" r="4" /><text class="map-label" x="80" y="68" text-anchor="middle">Skylight</text>
-                <circle class="map-dot--open" cx="120" cy="100" r="4" /><text class="map-label" x="120" y="90" text-anchor="middle">Homsy</text>
-                <circle class="map-dot--open" cx="30" cy="108" r="4" /><text class="map-label" x="30" y="98" text-anchor="middle">Cozi</text>
-                <circle class="map-dot--open" cx="110" cy="148" r="4" /><text class="map-label" x="110" y="138" text-anchor="middle">Cupla</text>
-                <circle class="map-dot--open" cx="75" cy="190" r="4" /><text class="map-label" x="75" y="180" text-anchor="middle">Todoist / Reminders</text>
-                <circle class="map-dot--open" cx="120" cy="225" r="4" /><text class="map-label" x="120" y="215" text-anchor="middle">SameWave</text>
-                <!-- top-right: system notices, ownership at pickup -->
-                <circle class="map-ring" cx="225" cy="95" r="8" /><circle class="map-nisse-core" cx="225" cy="95" r="3.5" /><text class="map-nisse" x="225" y="78" text-anchor="middle">Nisse</text>
-                <circle class="map-dot" cx="195" cy="150" r="4" /><text class="map-label" x="195" y="140" text-anchor="middle">Tody</text>
-                <circle class="map-dot" cx="265" cy="135" r="4" /><text class="map-label" x="265" y="125" text-anchor="middle">Sweepy</text>
-                <circle class="map-dot--open" cx="260" cy="205" r="4" /><text class="map-label" x="260" y="195" text-anchor="middle">Don&rsquo;t Forget Me</text>
-                <!-- bottom-left: person notices, ownership at creation -->
-                <circle class="map-dot--open" cx="55" cy="308" r="4" /><text class="map-label" x="60" y="298" text-anchor="middle">Yohana (closed 2025)</text>
-                <circle class="map-dot--open" cx="112" cy="342" r="4" /><text class="map-label" x="112" y="332" text-anchor="middle">RemindHer</text>
-                <circle class="map-dot--open" cx="46" cy="375" r="4" /><text class="map-label" x="46" y="365" text-anchor="middle">ChoreBuster</text>
-                <circle class="map-dot--open" cx="118" cy="408" r="4" /><text class="map-label" x="118" y="398" text-anchor="middle">Plastnofy</text>
-                <circle class="map-dot" cx="42" cy="440" r="4" /><text class="map-label" x="42" y="430" text-anchor="middle">Chap</text>
-                <circle class="map-dot" cx="110" cy="468" r="4" /><text class="map-label" x="110" y="458" text-anchor="middle">Flatastic</text>
-                <circle class="map-dot" cx="60" cy="496" r="4" /><text class="map-label" x="60" y="486" text-anchor="middle">Nipto</text>
-                <!-- bottom-right: system notices, ownership at creation -->
-                <circle class="map-dot--open" cx="215" cy="330" r="4" /><text class="map-label" x="215" y="320" text-anchor="middle">Maple</text>
-                <circle class="map-dot--open" cx="280" cy="380" r="4" /><text class="map-label" x="280" y="370" text-anchor="middle">Ohai</text>
-                <circle class="map-dot--open" cx="210" cy="430" r="4" /><text class="map-label" x="210" y="420" text-anchor="middle">Milo</text>
-                <!-- legend -->
-                <circle class="map-dot" cx="52" cy="551" r="4" /><text class="map-label" x="62" y="555">keeps score</text>
-                <circle class="map-dot--open" cx="146" cy="551" r="4" /><text class="map-label" x="156" y="555">no score</text>
-                <circle class="map-ring" cx="228" cy="551" r="7" /><circle class="map-nisse-core" cx="228" cy="551" r="3" /><text class="map-label" x="242" y="555">Nisse</text>
-              </svg>
+              <button class="map-tap__hint" data-map-zoom type="button">Tap to zoom &#8853;</button>
+              </div>
+              <!-- Full-screen zoom: script.js clones the SVG above into the pan
+                   area at a readable width. Lives inside .nisse-map so the
+                   map's scoped styles still reach the clone. -->
+              <div class="map-zoom" aria-hidden="true">
+                <div class="map-zoom__head">
+                  <span class="map-zoom__title">The market map</span>
+                  <button class="map-zoom__close" data-map-zoom-close aria-label="Close map">&#215;</button>
+                </div>
+                <div class="map-zoom__pan"></div>
+              </div>
               <figcaption class="caption">The corner was not empty, but nothing in it was built for two people without a scoreboard.</figcaption>
             </figure>
 
