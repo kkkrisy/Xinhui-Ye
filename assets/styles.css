@@ -211,6 +211,19 @@ a { color: inherit; }
   border-bottom: 2px solid var(--primary);   /* navy line beneath the header */
 }
 
+/* Visually hidden, still read by screen readers */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .stack-sm > * + * { margin-top: var(--space-sm); }
 .stack-md > * + * { margin-top: var(--space-md); }
 
@@ -3496,8 +3509,15 @@ a.t-org:hover { color: var(--on-surface); }
   transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
   transform-style: preserve-3d;
 }
-.nisse-wrongs .answer-card:hover .flip-card__inner,
-.nisse-wrongs .answer-card:focus-within .flip-card__inner {
+/* Hover / keyboard-focus flips are for pointer devices; on touch the flip is
+   a tap, driven by .is-flipped from script.js (same pattern as .cert-flip). */
+@media (hover: hover) {
+  .nisse-wrongs .answer-card:hover .flip-card__inner,
+  .nisse-wrongs .answer-card:focus-within .flip-card__inner {
+    transform: rotateY(180deg);
+  }
+}
+.nisse-wrongs .answer-card.is-flipped .flip-card__inner {
   transform: rotateY(180deg);
 }
 .flip-card__face {
@@ -3536,8 +3556,29 @@ a.t-org:hover { color: var(--on-surface); }
 @media (prefers-reduced-motion: reduce) {
   .flip-card__inner { transition: none; }
 }
-@media (max-width: 860px) { .nisse-wrongs { grid-template-columns: 1fr; } }
-@media (max-width: 520px) { .nisse-wrongs .answer-card { height: 400px; } }
+/* Phones keep the 2×2 grid so all four patterns share one screen instead of
+   a long scroll. The type gets very small on purpose — the front stays a
+   readable index (title + drawing) and a tap opens the full text. The grid
+   claws back a little of the band's padding for breathing room. */
+@media (max-width: 860px) {
+  .nisse-wrongs {
+    gap: 10px;
+    margin-inline: -12px;
+  }
+  .nisse-wrongs .answer-card { height: clamp(240px, 76vw, 320px); }
+  .flip-card__face { padding: 12px; }
+  .flip-card__face .title-serif {
+    font-size: 14px;
+    line-height: 1.25;
+    margin-bottom: var(--space-xs);
+  }
+  .flip-card__back p {
+    font-size: 9.5px;
+    line-height: 1.4;
+  }
+  .flip-card__back { overflow-y: auto; }   /* safety net for the longest copy */
+  .nisse-wrongs .flip-card__back .wrong-fix { margin-top: var(--space-xs); }
+}
 
 /* Research note — the cognitive-labor finding pinned as a sticky paper aside,
    so the data reads as a discovered artifact rather than a wall of text. It
@@ -3725,40 +3766,60 @@ a.t-org:hover { color: var(--on-surface); }
 .nisse-map .caption { text-align: center; margin-top: var(--space-sm); }
 
 /* Below ~720px the SVG's 12px labels would render under 11px, so the map
-   drops to a stacked list of the four quadrants instead of shrinking type. */
+   redraws as a compact 2×2 quadrant grid — same four corners, same axes in
+   the gutters — instead of shrinking type or falling back to flat lists. */
 .nisse-map .nisse-map-stack { display: none; }
+.nisse-map-stack .ms-axis {
+  margin: 0;
+  font-family: var(--font-grotesque);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--primary);
+  opacity: 0.62;
+  text-align: center;
+}
+/* side labels stand upright in the left/right gutters */
+.nisse-map-stack .ms-axis--side { writing-mode: vertical-rl; }
+.nisse-map-stack .ms-axis--left { transform: rotate(180deg); }
+/* The four corners as a hairline-divided table: the 1px grid gap lets the
+   ink-coloured ground show through, drawing the two axes of the plotted map. */
+.nisse-map-stack .ms-grid {
+  grid-area: grid;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: color-mix(in srgb, var(--map-ink) 35%, var(--map-bg));
+  border: 1px solid var(--surface-container-high);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
 .nisse-map-stack .ms-quad {
   background: var(--map-bg);
-  border-radius: var(--radius-md);
-  padding: 14px 16px;
+  padding: 12px;
 }
 /* the calm corner — the one that holds Nisse — gets the same moss wash as
    the highlighted quadrant on the plotted map */
-.nisse-map-stack .ms-quad:nth-child(2) {
+.nisse-map-stack .ms-quad--calm {
   background: color-mix(in srgb, var(--map-good) 12%, var(--map-bg));
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--map-good) 45%, transparent);
-}
-.nisse-map-stack .ms-head {
-  margin: 0 0 8px;
-  font-family: var(--font-grotesque);
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--on-surface-variant);
 }
 .nisse-map-stack ul {
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
-  flex-wrap: wrap;
-  gap: 6px 16px;
+  flex-direction: column;
+  gap: 6px;
 }
 .nisse-map-stack li {
   display: inline-flex;
   align-items: center;
   gap: 7px;
   font-family: var(--font-grotesque);
-  font-size: 14px;
+  font-size: 12px;
+  line-height: 1.25;
   color: var(--on-surface-body);
 }
 .nisse-map-stack .ms-nisse {
@@ -3784,9 +3845,11 @@ a.t-org:hover { color: var(--on-surface); }
   box-shadow: 0 0 0 2px var(--map-bg), 0 0 0 3.5px var(--primary);
 }
 .nisse-map-stack .ms-legend {
-  margin: 0;
+  grid-area: legend;
+  margin: 4px 0 0;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 6px 16px;
   font-family: var(--font-grotesque);
   font-size: 12px;
@@ -3800,10 +3863,21 @@ a.t-org:hover { color: var(--on-surface); }
 @media (max-width: 720px) {
   .nisse-map svg { display: none; }
   .nisse-map .nisse-map-stack {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-sm);
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas:
+      ".    top    ."
+      "left grid   right"
+      ".    bottom ."
+      "legend legend legend";
+    align-items: center;
+    justify-items: center;
+    gap: 8px;
   }
+  .nisse-map-stack .ms-axis--top { grid-area: top; }
+  .nisse-map-stack .ms-axis--bottom { grid-area: bottom; }
+  .nisse-map-stack .ms-axis--left { grid-area: left; }
+  .nisse-map-stack .ms-axis--right { grid-area: right; }
 }
 
 /* Four principles — a text-led numbered grid, on purpose */

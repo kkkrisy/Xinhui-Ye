@@ -201,6 +201,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  /* ---- Nisse "what tools get wrong" flip cards ----------------------- */
+  // Pointer devices flip on hover/focus in CSS; touch flips on tap here.
+  document.querySelectorAll(".nisse-wrongs .answer-card").forEach((card) => {
+    const toggleFlip = () => card.classList.toggle("is-flipped");
+    card.addEventListener("click", toggleFlip);
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggleFlip(); }
+    });
+  });
+
   /* ---- Back to top -------------------------------------------------- */
   // #top points at the sticky nav, which is always "in view", so the native
   // anchor jump does nothing. Scroll the window manually instead.
