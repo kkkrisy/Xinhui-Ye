@@ -193,48 +193,56 @@
                 <circle class="map-dot--open" cx="200" cy="536" r="5" /><text class="map-label" x="212" y="540">no score</text>
                 <circle class="map-ring" cx="290" cy="536" r="9" /><circle class="map-nisse-core" cx="290" cy="536" r="4" /><text class="map-label" x="306" y="540">Nisse</text>
               </svg>
-              <!-- Narrow-viewport fallback: the same map as four stacked quadrants -->
+              <!-- Narrow-viewport fallback: the same map, kept as a real 2×2
+                   quadrant grid with the axis labels in the gutters, so it
+                   still reads as a map rather than a stack of lists -->
               <div class="nisse-map-stack">
-                <div class="ms-quad">
-                  <p class="ms-head">a person does the noticing &middot; ownership at pickup</p>
-                  <ul>
-                    <li><i class="mk mk--open"></i>Skylight</li>
-                    <li><i class="mk mk--open"></i>Homsy</li>
-                    <li><i class="mk mk--open"></i>Cozi</li>
-                    <li><i class="mk mk--open"></i>Cupla</li>
-                    <li><i class="mk mk--open"></i>Todoist / Reminders</li>
-                    <li><i class="mk mk--open"></i>SameWave</li>
-                  </ul>
+                <p class="ms-axis ms-axis--top">ownership at pickup</p>
+                <p class="ms-axis ms-axis--side ms-axis--left">a person notices</p>
+                <div class="ms-grid">
+                  <div class="ms-quad">
+                    <p class="ms-head sr-only">a person does the noticing &middot; ownership at pickup</p>
+                    <ul>
+                      <li><i class="mk mk--open"></i>Skylight</li>
+                      <li><i class="mk mk--open"></i>Homsy</li>
+                      <li><i class="mk mk--open"></i>Cozi</li>
+                      <li><i class="mk mk--open"></i>Cupla</li>
+                      <li><i class="mk mk--open"></i>Todoist / Reminders</li>
+                      <li><i class="mk mk--open"></i>SameWave</li>
+                    </ul>
+                  </div>
+                  <div class="ms-quad ms-quad--calm">
+                    <p class="ms-head sr-only">the system does the noticing &middot; ownership at pickup</p>
+                    <ul>
+                      <li class="ms-nisse"><i class="mk mk--ring"></i>Nisse</li>
+                      <li><i class="mk"></i>Tody</li>
+                      <li><i class="mk"></i>Sweepy</li>
+                      <li><i class="mk mk--open"></i>Don&rsquo;t Forget Me</li>
+                    </ul>
+                  </div>
+                  <div class="ms-quad">
+                    <p class="ms-head sr-only">a person does the noticing &middot; ownership fixed at creation</p>
+                    <ul>
+                      <li><i class="mk mk--open"></i>Yohana (closed 2025)</li>
+                      <li><i class="mk mk--open"></i>RemindHer</li>
+                      <li><i class="mk mk--open"></i>ChoreBuster</li>
+                      <li><i class="mk mk--open"></i>Plastnofy</li>
+                      <li><i class="mk"></i>Chap</li>
+                      <li><i class="mk"></i>Flatastic</li>
+                      <li><i class="mk"></i>Nipto</li>
+                    </ul>
+                  </div>
+                  <div class="ms-quad">
+                    <p class="ms-head sr-only">the system does the noticing &middot; ownership fixed at creation</p>
+                    <ul>
+                      <li><i class="mk mk--open"></i>Maple</li>
+                      <li><i class="mk mk--open"></i>Ohai</li>
+                      <li><i class="mk mk--open"></i>Milo</li>
+                    </ul>
+                  </div>
                 </div>
-                <div class="ms-quad">
-                  <p class="ms-head">the system does the noticing &middot; ownership at pickup</p>
-                  <ul>
-                    <li class="ms-nisse"><i class="mk mk--ring"></i>Nisse</li>
-                    <li><i class="mk"></i>Tody</li>
-                    <li><i class="mk"></i>Sweepy</li>
-                    <li><i class="mk mk--open"></i>Don&rsquo;t Forget Me</li>
-                  </ul>
-                </div>
-                <div class="ms-quad">
-                  <p class="ms-head">a person does the noticing &middot; ownership fixed at creation</p>
-                  <ul>
-                    <li><i class="mk mk--open"></i>Yohana (closed 2025)</li>
-                    <li><i class="mk mk--open"></i>RemindHer</li>
-                    <li><i class="mk mk--open"></i>ChoreBuster</li>
-                    <li><i class="mk mk--open"></i>Plastnofy</li>
-                    <li><i class="mk"></i>Chap</li>
-                    <li><i class="mk"></i>Flatastic</li>
-                    <li><i class="mk"></i>Nipto</li>
-                  </ul>
-                </div>
-                <div class="ms-quad">
-                  <p class="ms-head">the system does the noticing &middot; ownership fixed at creation</p>
-                  <ul>
-                    <li><i class="mk mk--open"></i>Maple</li>
-                    <li><i class="mk mk--open"></i>Ohai</li>
-                    <li><i class="mk mk--open"></i>Milo</li>
-                  </ul>
-                </div>
+                <p class="ms-axis ms-axis--side ms-axis--right">the system notices</p>
+                <p class="ms-axis ms-axis--bottom">ownership fixed at creation</p>
                 <p class="ms-legend"><span><i class="mk"></i>keeps score</span><span><i class="mk mk--open"></i>no score</span><span><i class="mk mk--ring"></i>Nisse</span></p>
               </div>
               <figcaption class="caption">The corner was not empty, but nothing in it was built for two people without a scoreboard.</figcaption>
