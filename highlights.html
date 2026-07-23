@@ -59,8 +59,21 @@
     <section class="band band--white" style="padding-top: var(--space-lg);">
       <div class="container">
 
+        <!-- Category filter. Each pill is a real link (?filter=design etc.),
+             so a filtered URL can be shared as a focused portfolio link;
+             script.js filters in place and keeps the address bar in sync. -->
+        <nav class="filter-bar" aria-label="Filter highlights" data-filter-bar>
+          <a class="filter-pill is-active" href="highlights.html" data-filter="all" aria-pressed="true">All</a>
+          <a class="filter-pill" href="highlights.html?filter=design" data-filter="design" aria-pressed="false">Design</a>
+          <a class="filter-pill" href="highlights.html?filter=research" data-filter="research" aria-pressed="false">Research</a>
+          <a class="filter-pill" href="highlights.html?filter=teaching" data-filter="teaching" aria-pressed="false">Teaching</a>
+          <a class="filter-pill" href="highlights.html?filter=music" data-filter="music" aria-pressed="false">Music</a>
+        </nav>
+
+        <div class="hl-list">
+
         <!-- Highlight: Nisse, Designed with AI -->
-        <article class="hl-item">
+        <article class="hl-item" data-tags="design">
           <div class="media"><img src="assets/nisse-hero.png" alt="Nisse — 'one shared picture of the house, without a single nag' beside the app's blob home screen" style="width:100%; aspect-ratio: 4 / 3; object-fit: cover; display:block;" /></div>
           <div>
             <h2 class="headline-lg">UI/UX Design: For the Chores Nobody Sees</h2>
@@ -71,7 +84,7 @@
         </article>
 
         <!-- Highlight: Defense Day -->
-        <article class="hl-item">
+        <article class="hl-item" data-tags="research">
           <div class="media"><img src="assets/defense-day-2-card.jpeg" alt="Xinhui with her full doctoral committee after the defense" style="width:100%; aspect-ratio: 4 / 3; object-fit: cover; display:block;" /></div>
           <div>
             <h2 class="headline-lg">Defense Day</h2>
@@ -83,7 +96,7 @@
         </article>
 
         <!-- Highlight: Longitudinal Observation -->
-        <article class="hl-item">
+        <article class="hl-item" data-tags="research">
           <div class="media"><img src="assets/longitudinal-11-web-card.jpg" alt="Designers in a co-design session" style="width:100%; aspect-ratio: 4 / 3; object-fit: cover; display:block;" /></div>
           <div>
             <h2 class="headline-lg">Longitudinal Observation</h2>
@@ -94,7 +107,7 @@
         </article>
 
         <!-- Highlight: Two Talks at INTERACT -->
-        <article class="hl-item">
+        <article class="hl-item" data-tags="research">
           <div class="media"><img src="assets/interact-5-card.jpeg" alt="Xinhui presenting at IFIP INTERACT 2025" style="width:100%; aspect-ratio: 4 / 3; object-fit: cover; display:block;" /></div>
           <div>
             <h2 class="headline-lg">Two Talks at INTERACT</h2>
@@ -105,7 +118,7 @@
         </article>
 
         <!-- Highlight: Teaching Outcome -->
-        <article class="hl-item">
+        <article class="hl-item" data-tags="teaching">
           <div class="media"><img src="assets/coaching-workshop.jpg" alt="Two student teams sketching and ideating together around a table during a Constructive Design Research coaching session" style="width:100%; aspect-ratio: 4 / 3; object-fit: cover; display:block;" /></div>
           <div>
             <h2 class="headline-lg">Teaching Outcome</h2>
@@ -116,7 +129,7 @@
         </article>
 
         <!-- Highlight: Sehr Gut, in German -->
-        <article class="hl-item">
+        <article class="hl-item" data-tags="design">
           <div class="media"><img src="assets/master-web-card.jpg" alt="Xinhui during her master's studies in Germany" style="width:100%; aspect-ratio: 4 / 3; object-fit: cover; display:block;" /></div>
           <div>
             <h2 class="headline-lg">Sehr Gut, in German</h2>
@@ -127,7 +140,7 @@
         </article>
 
         <!-- Highlight: Music on Record -->
-        <article class="hl-item">
+        <article class="hl-item" data-tags="music">
           <div class="media"><img src="assets/accordion-2-web-card.jpg" alt="Xinhui playing the accordion" style="width:100%; aspect-ratio: 4 / 3; object-fit: cover; display:block;" /></div>
           <div>
             <h2 class="headline-lg">Music on Record</h2>
@@ -136,6 +149,8 @@
             <p class="utility-row"><a class="btn btn--primary btn--mint-hover" href="highlight-music.html">Read more</a></p>
           </div>
         </article>
+
+        </div>
 
       </div>
     </section>
