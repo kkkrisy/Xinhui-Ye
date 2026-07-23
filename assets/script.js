@@ -972,6 +972,21 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  /* ---- Secret door to the quick portfolio --------------------------- */
+  // A little coral asterisk in the footer of every page. Quiet at rest;
+  // hovering it whispers where it goes. Curious people get rewarded.
+  const footerHome = document.querySelector(".site-footer .container");
+  if (footerHome) {
+    const door = document.createElement("a");
+    door.className = "secret-door";
+    door.href = "portfolio.html";
+    door.setAttribute("aria-label", "A shortcut for the curious — the quick portfolio");
+    door.innerHTML =
+      '<span class="secret-door__star" aria-hidden="true">✳</span>' +
+      '<span class="secret-door__hint">pssst… the five-minute version of everything</span>';
+    footerHome.appendChild(door);
+  }
+
   /* ---- Deter image/video saving ------------------------------------- */
   // Not bulletproof (screenshots, devtools and direct URLs still work), but
   // it blocks right-click "Save image as…" and click-drag saving.
