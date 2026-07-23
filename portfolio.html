@@ -29,8 +29,6 @@
 
   /* Diagrams and boards are shown at their natural proportions, never cropped. */
   .p-fig-full img, .p-fig-full video { width: 100%; height: auto; display: block; border-radius: 14px; background: #FFFFFF; }
-  .p-scrollbox { max-height: 560px; overflow-y: auto; border-radius: 14px; background: #FFFFFF; }
-  .p-scrollbox img { width: 100%; height: auto; display: block; }
 
   @media (prefers-reduced-motion: reduce) {
     .p-ticker { animation: none !important; }
@@ -94,7 +92,7 @@
       <span style="padding: 7px 14px; border: 1.5px solid #141414; border-radius: 999px; font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase">Product designer</span>
       <span style="padding: 7px 14px; border: 1.5px solid #141414; border-radius: 999px; font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase">Eindhoven, NL</span>
     </div>
-    <h1 style="margin: 0; font-size: 64px; font-weight: 800; line-height: 1.02; letter-spacing: -0.035em; text-wrap: balance">Seriously thorough design.</h1>
+    <h1 style="margin: 0; font-size: 64px; font-weight: 800; line-height: 1.02; letter-spacing: -0.035em; text-wrap: balance">Design that does its homework.</h1>
     <p style="margin: 0; max-width: 560px; font-size: 18px; line-height: 1.6; color: #4A473E">Hi, I'm Xinhui. I spent six years at TU Eindhoven researching how design teams create together, and I bring that same rigour to designing products end to end. Evidence first, people at the centre. No superhero cape required.</p>
     <div style="display: flex; gap: 12px; flex-wrap: wrap">
       <a class="p-btn-dark" href="#work" style="padding: 14px 28px; font-size: 15px">See the work →</a>
@@ -165,26 +163,35 @@
         <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #333747">Tasks are born ownerless in a shared pool and claimed at pickup, never assigned at creation. Chores carry a rhythm, such as every two weeks or so, instead of a deadline. A monthly mirror shows how the work spread itself over the month. It starts conversations rather than handing out verdicts. Removing the assign field did more for fairness than any fairness feature could.</p>
       </div>
     </div>
-    <div class="p-figs-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start">
-      <figure class="p-fig-full" style="margin: 0; display: flex; flex-direction: column; gap: 8px">
-        <img src="assets/there%20is%20always%20an%20admin.png" alt="Finding from the competitive audit: there is always an admin" loading="lazy">
-        <figcaption style="font-size: 12px; font-weight: 500; color: #555B6E">From the audit of 20 products: every tool models a home as one admin handing work down.</figcaption>
-      </figure>
-      <figure class="p-fig-full" style="margin: 0; display: flex; flex-direction: column; gap: 8px">
-        <img src="assets/ownership%20gets%20fixed%20too%20early.png" alt="Finding from the competitive audit: ownership gets fixed too early" loading="lazy">
-        <figcaption style="font-size: 12px; font-weight: 500; color: #555B6E">The second pattern: ownership gets fixed the moment a task is created.</figcaption>
-      </figure>
+    <div style="display: flex; flex-direction: column; gap: 14px">
+      <h4 style="margin: 0; font-size: 18px; font-weight: 700">Four mistakes, from the audit of 20 products</h4>
+      <div class="p-figs-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start">
+        <figure class="p-fig-full" style="margin: 0; display: flex; flex-direction: column; gap: 8px">
+          <img src="assets/there%20is%20always%20an%20admin.png" alt="Finding from the competitive audit: there is always an admin" loading="lazy">
+          <figcaption style="font-size: 13px; font-weight: 700; color: #333747">There is always an admin.</figcaption>
+        </figure>
+        <figure class="p-fig-full" style="margin: 0; display: flex; flex-direction: column; gap: 8px">
+          <img src="assets/ownership%20gets%20fixed%20too%20early.png" alt="Finding from the competitive audit: ownership gets fixed too early" loading="lazy">
+          <figcaption style="font-size: 13px; font-weight: 700; color: #333747">Ownership gets fixed too early.</figcaption>
+        </figure>
+        <figure class="p-fig-full" style="margin: 0; display: flex; flex-direction: column; gap: 8px">
+          <img src="assets/pressure%20stands%20in%20for%20care.png" alt="Finding from the competitive audit: pressure stands in for care" loading="lazy">
+          <figcaption style="font-size: 13px; font-weight: 700; color: #333747">Pressure stands in for care.</figcaption>
+        </figure>
+        <figure class="p-fig-full" style="margin: 0; display: flex; flex-direction: column; gap: 8px">
+          <img src="assets/A%20smarter%20manager%20is%20still%20a%20manager.png" alt="Finding from the competitive audit: a smarter manager is still a manager" loading="lazy">
+          <figcaption style="font-size: 13px; font-weight: 700; color: #333747">A smarter manager is still a manager.</figcaption>
+        </figure>
+      </div>
     </div>
+    <figure class="p-fig-full" style="margin: 0; display: flex; flex-direction: column; gap: 8px">
+      <video src="assets/nisse-promo.mp4" controls playsinline preload="metadata" style="aspect-ratio: 16 / 9"></video>
+      <figcaption style="font-size: 12px; font-weight: 500; color: #555B6E">The promo film, cut from real screens.</figcaption>
+    </figure>
     <div style="display: flex; flex-direction: column; gap: 14px">
       <h4 style="margin: 0; font-size: 18px; font-weight: 700">From nine flows to one architecture</h4>
       <p style="margin: 0; max-width: 720px; font-size: 14px; line-height: 1.65; color: #333747">Every flow was wireframed before any visual polish: nine flows on one board, argued over and settled. Out of that came the information architecture, one root with six sections and 57 screens, sheets and states.</p>
     </div>
-    <figure style="margin: 0; display: flex; flex-direction: column; gap: 8px">
-      <div class="p-scrollbox">
-        <img src="assets/nisse-wireframe-map.png" alt="The full Nisse wireframe map: nine flows on one tall board" loading="lazy">
-      </div>
-      <figcaption style="font-size: 12px; font-weight: 500; color: #555B6E">The round two wireframe board, all nine flows. It is tall; scroll inside to see the whole thing.</figcaption>
-    </figure>
     <figure class="p-fig-full" style="margin: 0; display: flex; flex-direction: column; gap: 8px">
       <img src="assets/nisse-information-architecture.png" alt="The Nisse information architecture: one root, six sections and 57 screens, sheets and states" loading="lazy">
       <figcaption style="font-size: 12px; font-weight: 500; color: #555B6E">The information architecture: Home, Calendar, Grocery, Add, Household and Settings, with cross links at the bottom.</figcaption>
@@ -193,10 +200,6 @@
       <h4 style="margin: 0; font-size: 18px; font-weight: 700">A visual system where load becomes area</h4>
       <p style="margin: 0; max-width: 720px; font-size: 14px; line-height: 1.65; color: #333747">Each zone of the home is an organic blob sized by its current workload, so you feel a heavy kitchen before reading a word. Muted hues sit together without noise, a small edge dot carries state, and red is reserved strictly for genuinely overdue. The copy stays qualitative: "mostly calm", never 73%.</p>
     </div>
-    <figure class="p-fig-full" style="margin: 0; display: flex; flex-direction: column; gap: 8px">
-      <img src="assets/nisse-visual-language.png" alt="The Nisse design language board: five muted zone hues, the ripening and overdue states, the paper and after dark grounds, the typeface, and the soft blob shapes" loading="lazy">
-      <figcaption style="font-size: 12px; font-weight: 500; color: #555B6E">The design language board: hues, states, grounds, type and shapes on one page.</figcaption>
-    </figure>
     <div style="display: flex; flex-direction: column; gap: 14px">
       <h4 style="margin: 0; font-size: 18px; font-weight: 700">The real thing, on a real phone</h4>
       <p style="margin: 0; max-width: 720px; font-size: 14px; line-height: 1.65; color: #333747">These are not mockups. They are screens from the app as it runs on my iPhone today.</p>
@@ -219,10 +222,6 @@
         <figcaption style="font-size: 12px; font-weight: 500; color: #555B6E">Monthly recap</figcaption>
       </figure>
     </div>
-    <figure class="p-fig-full" style="margin: 0; display: flex; flex-direction: column; gap: 8px">
-      <video src="assets/nisse-promo.mp4" controls playsinline preload="metadata" style="aspect-ratio: 16 / 9"></video>
-      <figcaption style="font-size: 12px; font-weight: 500; color: #555B6E">The promo film, cut from real screens.</figcaption>
-    </figure>
     <div class="p-quote" style="display: flex; flex-direction: column; gap: 18px; padding: 32px 36px; background: #141414; color: #F2EDE1; border-radius: 18px">
       <blockquote style="margin: 0; font-size: 24px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.3; text-wrap: balance">"Structure is ethics. The most consequential design decision in Nisse is a missing form field."</blockquote>
       <div style="display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap">
