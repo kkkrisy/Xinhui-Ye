@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Xinhui Ye — Portfolio</title>
-<meta name="description" content="Three projects, start to finish — the quick-scroll portfolio of Xinhui Ye, design researcher and product designer.">
-<!-- Shared by link, found through the little door — not meant for search engines. -->
+<title>Xinhui Ye · Portfolio</title>
+<meta name="description" content="Three projects from start to finish. The short portfolio of Xinhui Ye, design researcher and product designer.">
+<!-- Shared by link and found through the little door. Not meant for search engines. -->
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,6 +27,11 @@
   .p-footer-link { color: #F2EDE1; }
   .p-footer-link:hover { color: #C7431D; }
 
+  /* Diagrams and boards are shown at their natural proportions, never cropped. */
+  .p-fig-full img, .p-fig-full video { width: 100%; height: auto; display: block; border-radius: 14px; background: #FFFFFF; }
+  .p-scrollbox { max-height: 560px; overflow-y: auto; border-radius: 14px; background: #FFFFFF; }
+  .p-scrollbox img { width: 100%; height: auto; display: block; }
+
   @media (prefers-reduced-motion: reduce) {
     .p-ticker { animation: none !important; }
   }
@@ -45,6 +50,8 @@
     .p-case-body-top { padding-top: 28px !important; }
     .p-cols-2 { grid-template-columns: 1fr !important; }
     .p-figs-3 { grid-template-columns: 1fr 1fr !important; }
+    .p-figs-5 { grid-template-columns: 1fr 1fr 1fr !important; }
+    .p-screens-4 { grid-template-columns: 1fr 1fr !important; }
     .p-stats { grid-template-columns: 1fr 1fr !important; }
     .p-about-grid { grid-template-columns: 1fr !important; }
     .p-craft-grid { grid-template-columns: repeat(3, 1fr) !important; }
@@ -57,7 +64,8 @@
     .p-nav-links { font-size: 13px !important; gap: 12px !important; }
     .p-nav-anchor { display: none !important; }
     .p-hero h1 { font-size: 38px !important; }
-    .p-figs-2, .p-figs-3 { grid-template-columns: 1fr !important; }
+    .p-figs-2, .p-figs-3, .p-vids-3 { grid-template-columns: 1fr !important; }
+    .p-figs-5 { grid-template-columns: 1fr 1fr !important; }
     .p-craft-grid { grid-template-columns: 1fr 1fr !important; }
     .p-stats { grid-template-columns: 1fr !important; }
     .p-meta-grid { grid-template-columns: 1fr !important; }
@@ -86,8 +94,8 @@
       <span style="padding: 7px 14px; border: 1.5px solid #141414; border-radius: 999px; font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase">Product designer</span>
       <span style="padding: 7px 14px; border: 1.5px solid #141414; border-radius: 999px; font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase">Eindhoven, NL</span>
     </div>
-    <h1 style="margin: 0; font-size: 64px; font-weight: 800; line-height: 1.02; letter-spacing: -0.035em; text-wrap: balance">Ridiculously thorough design.</h1>
-    <p style="margin: 0; max-width: 560px; font-size: 18px; line-height: 1.6; color: #4A473E">Hi, I'm Xinhui. I spent six years researching how design teams create together (PhD, TU/e) — and I bring that rigour into designing products end to end. Evidence first, people at the centre. (No superhero cape required.)</p>
+    <h1 style="margin: 0; font-size: 64px; font-weight: 800; line-height: 1.02; letter-spacing: -0.035em; text-wrap: balance">Seriously thorough design.</h1>
+    <p style="margin: 0; max-width: 560px; font-size: 18px; line-height: 1.6; color: #4A473E">Hi, I'm Xinhui. I spent six years at TU Eindhoven researching how design teams create together, and I bring that same rigour to designing products end to end. Evidence first, people at the centre. No superhero cape required.</p>
     <div style="display: flex; gap: 12px; flex-wrap: wrap">
       <a class="p-btn-dark" href="#work" style="padding: 14px 28px; font-size: 15px">See the work →</a>
       <a class="p-btn-outline" href="mailto:kristinyxh@gmail.com" style="padding: 14px 28px; font-size: 15px">kristinyxh@gmail.com</a>
@@ -125,7 +133,7 @@
 
 <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap">
   <h2 class="p-section-title" style="margin: 0; font-size: 44px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.05">Three projects,<br>start to finish.</h2>
-  <p style="margin: 0; max-width: 420px; font-size: 15px; line-height: 1.6; color: #4A473E">Each one owned end to end — the question, the research, the design, and the story that moves stakeholders. Every project branches into a longer story on my site, if you want the detail.</p>
+  <p style="margin: 0; max-width: 420px; font-size: 15px; line-height: 1.6; color: #4A473E">I owned each of these end to end: the question, the research, the design, and the story that won people over. Every project links to a longer read on my site if you want the detail.</p>
 </div>
 
 <section style="display: flex; flex-direction: column; gap: 0; background: #DCE4F2; border-radius: 28px; overflow: hidden">
@@ -133,52 +141,88 @@
     <div style="display: flex; flex-direction: column; gap: 20px">
       <div style="display: flex; gap: 8px; flex-wrap: wrap">
         <span style="padding: 6px 12px; background: #141414; color: #F2EDE1; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: 0.06em">01 · PRODUCT DESIGN</span>
-        <span style="padding: 6px 12px; border: 1.5px solid #141414; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: 0.06em">2025 — NOW</span>
+        <span style="padding: 6px 12px; border: 1.5px solid #141414; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: 0.06em">2026 · NOW</span>
       </div>
-      <h3 style="margin: 0; font-size: 36px; font-weight: 800; letter-spacing: -0.025em; line-height: 1.05; text-wrap: balance">Nisse — a calm home for the chores nobody sees</h3>
-      <p style="margin: 0; font-size: 15px; line-height: 1.65; color: #333747">A home-management app for couples that makes invisible work visible — without turning a relationship into a scoreboard. I found the idea, did the research, set the visual system, and am building it with a front-end engineer, using AI tools to stay close to the real screen.</p>
+      <h3 style="margin: 0; font-size: 36px; font-weight: 800; letter-spacing: -0.025em; line-height: 1.05; text-wrap: balance">Nisse, a calm home for the chores nobody sees</h3>
+      <p style="margin: 0; font-size: 15px; line-height: 1.65; color: #333747">A home app for couples that makes invisible work visible without turning the relationship into a scoreboard. I found the idea, did the research, set the visual system, and built it together with a frontend engineer, judging every idea on a real screen. Nisse now runs as a working app on my own iPhone. The App Store is the next step.</p>
       <div class="p-meta-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 13px; line-height: 1.5">
-        <div><strong>Role</strong><br>Concept, research, UX/UI, art direction</div>
+        <div><strong>Role</strong><br>Concept, research, UX and UI, art direction</div>
         <div><strong>Methods</strong><br>Competitive mapping, wireframing, visual systems</div>
-        <div><strong>Team</strong><br>Me + a front-end engineer</div>
-        <div><strong>Status</strong><br>In build — live prototype</div>
+        <div><strong>Team</strong><br>Me plus a frontend engineer</div>
+        <div><strong>Status</strong><br>Working app on iPhone, not yet in the App Store</div>
       </div>
     </div>
-    <img src="assets/portfolio/nisse-home.png" alt="Nisse — the blob home screen on a phone: noticing, planning, remembering, appreciating" style="width: 100%; border-radius: 18px; background: #FFFFFF">
+    <img src="assets/portfolio/nisse-home.png" alt="The Nisse home screen on a phone: zone blobs sized by workload, for noticing, planning, remembering and appreciating" style="width: 100%; border-radius: 18px; background: #FFFFFF">
   </div>
   <div class="p-case-body" style="display: flex; flex-direction: column; gap: 36px; padding: 0 56px 56px">
     <div class="p-cols-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 36px">
       <div style="display: flex; flex-direction: column; gap: 10px">
         <h4 style="margin: 0; font-size: 18px; font-weight: 700">The problem, grounded in research</h4>
-        <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #333747">Sociologist Allison Daminger's interviews with 35 couples show cognitive household labor — noticing, planning, remembering — lands on one person by default: women led in 26 of 32 couples. I mapped 20 existing products against two questions: who does the noticing, and when ownership gets fixed. Nearly every tool quietly hands one person the clipboard.</p>
+        <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #333747">Sociologist Allison Daminger interviewed 35 couples and found that the thinking side of housework, the noticing, planning and remembering, lands on one person by default. Women led it in 26 of 32 couples. I then mapped 20 existing products against two questions: who does the noticing, and when ownership gets fixed. Nearly every tool quietly hands one person the clipboard.</p>
       </div>
       <div style="display: flex; flex-direction: column; gap: 10px">
         <h4 style="margin: 0; font-size: 18px; font-weight: 700">One structural decision</h4>
-        <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #333747">Tasks are born ownerless in a shared pool and claimed at pickup — never assigned at creation. Chores carry a rhythm ("every ~2 weeks"), not a deadline. A monthly mirror shows how work distributed itself — a conversation starter, never a verdict. Removing the "assign to" field did more for fairness than any fairness feature could.</p>
+        <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #333747">Tasks are born ownerless in a shared pool and claimed at pickup, never assigned at creation. Chores carry a rhythm, such as every two weeks or so, instead of a deadline. A monthly mirror shows how the work spread itself over the month. It starts conversations rather than handing out verdicts. Removing the assign field did more for fairness than any fairness feature could.</p>
       </div>
     </div>
-    <div class="p-figs-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px">
-      <figure style="margin: 0; display: flex; flex-direction: column; gap: 8px">
-        <img src="assets/portfolio/nisse-competitive-audit.png" alt="Competitive analysis pattern: there is always an admin" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 14px; background: #FFFFFF">
-        <figcaption style="font-size: 12px; font-weight: 500; color: #555B6E">Competitive audit — every tool models a home as one owner handing work down.</figcaption>
+    <div class="p-figs-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start">
+      <figure class="p-fig-full" style="margin: 0; display: flex; flex-direction: column; gap: 8px">
+        <img src="assets/there%20is%20always%20an%20admin.png" alt="Finding from the competitive audit: there is always an admin" loading="lazy">
+        <figcaption style="font-size: 12px; font-weight: 500; color: #555B6E">From the audit of 20 products: every tool models a home as one admin handing work down.</figcaption>
       </figure>
-      <figure style="margin: 0; display: flex; flex-direction: column; gap: 8px">
-        <img src="assets/portfolio/nisse-wireframe-map.png" alt="The full Nisse wireframe map: nine flows on one board" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 14px; background: #FFFFFF">
-        <figcaption style="font-size: 12px; font-weight: 500; color: #555B6E">Round-two wireframes — all nine flows settled on one board before visual polish.</figcaption>
+      <figure class="p-fig-full" style="margin: 0; display: flex; flex-direction: column; gap: 8px">
+        <img src="assets/ownership%20gets%20fixed%20too%20early.png" alt="Finding from the competitive audit: ownership gets fixed too early" loading="lazy">
+        <figcaption style="font-size: 12px; font-weight: 500; color: #555B6E">The second pattern: ownership gets fixed the moment a task is created.</figcaption>
       </figure>
     </div>
     <div style="display: flex; flex-direction: column; gap: 14px">
-      <h4 style="margin: 0; font-size: 18px; font-weight: 700">A visual system where load becomes area</h4>
-      <p style="margin: 0; max-width: 720px; font-size: 14px; line-height: 1.65; color: #333747">Each life-zone of the home is an organic blob sized by its current workload — you feel a heavy kitchen before reading a word. Muted hues coexist without noise; a small edge dot carries state, and red is reserved strictly for genuinely overdue. Copy stays qualitative: "mostly calm", never 73%.</p>
-      <div style="display: flex; gap: 10px; flex-wrap: wrap">
-        <div style="display: flex; align-items: center; gap: 8px; padding: 7px 14px; background: #FFFFFF; border-radius: 999px; font-size: 12px; font-weight: 600"><span style="width: 14px; height: 14px; border-radius: 50%; background: #A78792"></span>heather</div>
-        <div style="display: flex; align-items: center; gap: 8px; padding: 7px 14px; background: #FFFFFF; border-radius: 999px; font-size: 12px; font-weight: 600"><span style="width: 14px; height: 14px; border-radius: 50%; background: #AD827C"></span>clay</div>
-        <div style="display: flex; align-items: center; gap: 8px; padding: 7px 14px; background: #FFFFFF; border-radius: 999px; font-size: 12px; font-weight: 600"><span style="width: 14px; height: 14px; border-radius: 50%; background: #939475"></span>olive</div>
-        <div style="display: flex; align-items: center; gap: 8px; padding: 7px 14px; background: #FFFFFF; border-radius: 999px; font-size: 12px; font-weight: 600"><span style="width: 14px; height: 14px; border-radius: 50%; background: #8D9EAE"></span>slate</div>
-        <div style="display: flex; align-items: center; gap: 8px; padding: 7px 14px; background: #FFFFFF; border-radius: 999px; font-size: 12px; font-weight: 600"><span style="width: 14px; height: 14px; border-radius: 50%; background: #859D85"></span>moss</div>
-        <div style="display: flex; align-items: center; gap: 8px; padding: 7px 14px; background: #FFFFFF; border-radius: 999px; font-size: 12px; font-weight: 600"><span style="width: 14px; height: 14px; border-radius: 50%; background: #7E918F"></span>lichen</div>
-      </div>
+      <h4 style="margin: 0; font-size: 18px; font-weight: 700">From nine flows to one architecture</h4>
+      <p style="margin: 0; max-width: 720px; font-size: 14px; line-height: 1.65; color: #333747">Every flow was wireframed before any visual polish: nine flows on one board, argued over and settled. Out of that came the information architecture, one root with six sections and 57 screens, sheets and states.</p>
     </div>
+    <figure style="margin: 0; display: flex; flex-direction: column; gap: 8px">
+      <div class="p-scrollbox">
+        <img src="assets/nisse-wireframe-map.png" alt="The full Nisse wireframe map: nine flows on one tall board" loading="lazy">
+      </div>
+      <figcaption style="font-size: 12px; font-weight: 500; color: #555B6E">The round two wireframe board, all nine flows. It is tall; scroll inside to see the whole thing.</figcaption>
+    </figure>
+    <figure class="p-fig-full" style="margin: 0; display: flex; flex-direction: column; gap: 8px">
+      <img src="assets/nisse-information-architecture.png" alt="The Nisse information architecture: one root, six sections and 57 screens, sheets and states" loading="lazy">
+      <figcaption style="font-size: 12px; font-weight: 500; color: #555B6E">The information architecture: Home, Calendar, Grocery, Add, Household and Settings, with cross links at the bottom.</figcaption>
+    </figure>
+    <div style="display: flex; flex-direction: column; gap: 14px">
+      <h4 style="margin: 0; font-size: 18px; font-weight: 700">A visual system where load becomes area</h4>
+      <p style="margin: 0; max-width: 720px; font-size: 14px; line-height: 1.65; color: #333747">Each zone of the home is an organic blob sized by its current workload, so you feel a heavy kitchen before reading a word. Muted hues sit together without noise, a small edge dot carries state, and red is reserved strictly for genuinely overdue. The copy stays qualitative: "mostly calm", never 73%.</p>
+    </div>
+    <figure class="p-fig-full" style="margin: 0; display: flex; flex-direction: column; gap: 8px">
+      <img src="assets/nisse-visual-language.png" alt="The Nisse design language board: five muted zone hues, the ripening and overdue states, the paper and after dark grounds, the typeface, and the soft blob shapes" loading="lazy">
+      <figcaption style="font-size: 12px; font-weight: 500; color: #555B6E">The design language board: hues, states, grounds, type and shapes on one page.</figcaption>
+    </figure>
+    <div style="display: flex; flex-direction: column; gap: 14px">
+      <h4 style="margin: 0; font-size: 18px; font-weight: 700">The real thing, on a real phone</h4>
+      <p style="margin: 0; max-width: 720px; font-size: 14px; line-height: 1.65; color: #333747">These are not mockups. They are screens from the app as it runs on my iPhone today.</p>
+    </div>
+    <div class="p-screens-4" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px">
+      <figure class="p-fig-full" style="margin: 0; display: flex; flex-direction: column; gap: 8px">
+        <img src="assets/01-home-pulse.png" alt="Nisse home screen in blob view: eight zone blobs sized by load" loading="lazy">
+        <figcaption style="font-size: 12px; font-weight: 500; color: #555B6E">Home</figcaption>
+      </figure>
+      <figure class="p-fig-full" style="margin: 0; display: flex; flex-direction: column; gap: 8px">
+        <img src="assets/03-calendar.png" alt="Calendar week strip with the unplanned tray on top and both partners' events, chores and busy blocks" loading="lazy">
+        <figcaption style="font-size: 12px; font-weight: 500; color: #555B6E">Calendar</figcaption>
+      </figure>
+      <figure class="p-fig-full" style="margin: 0; display: flex; flex-direction: column; gap: 8px">
+        <img src="assets/05-household.png" alt="The household trail: who did what around the house, in order" loading="lazy">
+        <figcaption style="font-size: 12px; font-weight: 500; color: #555B6E">The household trail</figcaption>
+      </figure>
+      <figure class="p-fig-full" style="margin: 0; display: flex; flex-direction: column; gap: 8px">
+        <img src="assets/11-monthly-recap.png" alt="Monthly recap: the month looked back on with a story about the house and the thanks exchanged" loading="lazy">
+        <figcaption style="font-size: 12px; font-weight: 500; color: #555B6E">Monthly recap</figcaption>
+      </figure>
+    </div>
+    <figure class="p-fig-full" style="margin: 0; display: flex; flex-direction: column; gap: 8px">
+      <video src="assets/nisse-promo.mp4" controls playsinline preload="metadata" style="aspect-ratio: 16 / 9"></video>
+      <figcaption style="font-size: 12px; font-weight: 500; color: #555B6E">The promo film, cut from real screens.</figcaption>
+    </figure>
     <div class="p-quote" style="display: flex; flex-direction: column; gap: 18px; padding: 32px 36px; background: #141414; color: #F2EDE1; border-radius: 18px">
       <blockquote style="margin: 0; font-size: 24px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.3; text-wrap: balance">"Structure is ethics. The most consequential design decision in Nisse is a missing form field."</blockquote>
       <div style="display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap">
@@ -198,42 +242,79 @@
       <span style="padding: 6px 12px; border: 1.5px solid #141414; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: 0.06em">TU/e · PUBLISHED IN SHE JI (Q1), 2025</span>
     </div>
     <h3 style="margin: 0; max-width: 700px; font-size: 36px; font-weight: 800; letter-spacing: -0.025em; line-height: 1.05; text-wrap: balance">Five months inside 16 design teams</h3>
-    <p style="margin: 0; max-width: 720px; font-size: 15px; line-height: 1.65; color: #37402F">The most complex study I have designed and run: a longitudinal mixed-method observation of how teams explore ideas together, following 61 participants through their entire design process. Designed end to end — objectives, instruments, fieldwork, analysis, and the storytelling that carried it into a Q1 journal.</p>
+    <p style="margin: 0; max-width: 720px; font-size: 15px; line-height: 1.65; color: #37402F">The most complex study I have designed and run: five months of mixed methods observation, following 61 designers in 16 teams through their entire design process. I owned it end to end, from objectives and instruments to fieldwork, analysis, and the storytelling that carried it into a Q1 journal.</p>
     <div class="p-meta-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; padding: 20px 24px; background: rgba(255, 255, 255, 0.6); border-radius: 14px; font-size: 13px; line-height: 1.5">
-      <div><strong>Role</strong><br>Sole researcher — design to publication</div>
-      <div><strong>Methods</strong><br>Diary study, weekly interviews, card-based reflection, statistics</div>
+      <div><strong>Role</strong><br>Sole researcher, from design to publication</div>
+      <div><strong>Methods</strong><br>Diary study, weekly interviews, reflection cards, statistics</div>
       <div><strong>Scale</strong><br>61 participants · 16 teams · 5 months</div>
       <div><strong>Outcome</strong><br>"Beyond Divergence", She Ji (Q1)</div>
     </div>
   </div>
-  <img src="assets/portfolio/longitudinal-team.jpg" alt="A design team laying out and discussing co-exploration activity cards on a table" style="width: 100%; aspect-ratio: 21 / 8; object-fit: cover; background: #FFFFFF">
+  <img src="assets/portfolio/longitudinal-team.jpg" alt="A design team laying out and discussing their activity cards on a table" style="width: 100%; aspect-ratio: 21 / 8; object-fit: cover; background: #FFFFFF">
   <div class="p-case-body p-case-body-top" style="display: flex; flex-direction: column; gap: 36px; padding: 40px 56px 56px">
     <div class="p-cols-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 36px">
       <div style="display: flex; flex-direction: column; gap: 10px">
         <h4 style="margin: 0; font-size: 18px; font-weight: 700">Instruments people enjoyed using</h4>
-        <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #37402F">Each week every team documented their activities in a shared visual diary — descriptions, images, assignees, emotions — then walked me through it in a group interview. For the closing reflection I turned their digital entries into physical cards. Participants said the weekly reflection made them better teammates; several said it beat their regular coaching sessions.</p>
+        <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #37402F">Every week each team documented their activities in a shared visual diary, with descriptions, images, assignees and emotions, then walked me through it in a group interview. For the closing session I turned their digital entries into physical cards they could sort on the table. Participants told me the weekly reflection made them better teammates, and several said it beat their regular coaching sessions.</p>
       </div>
       <div style="display: flex; flex-direction: column; gap: 10px">
         <h4 style="margin: 0; font-size: 18px; font-weight: 700">From 1,562 activities to five patterns</h4>
-        <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #37402F">The data — 1,562 documented activities, 78 hours of audio — was mapped onto a four-dimensional analytical framework I built, revealing five distinct patterns of co-exploration. Thriving teams co-explored more often and in more varied ways than struggling ones, and the statistics confirmed the contrast.</p>
+        <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #37402F">The study produced 1,562 documented activities and 78 hours of audio. I built an analytical framework with four dimensions to code every activity, and five distinct patterns of exploring together emerged from it. Thriving teams explored together more often and in more varied ways than struggling ones, and the statistics confirmed the contrast.</p>
       </div>
     </div>
-    <div class="p-figs-3" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px">
-      <figure style="margin: 0; display: flex; flex-direction: column; gap: 8px">
-        <img src="assets/portfolio/longitudinal-diary-schema.jpg" alt="Schema of a weekly design-process diary entry, annotated A to E" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 14px; background: #FFFFFF">
-        <figcaption style="font-size: 12px; font-weight: 500; color: #4E5946">The weekly diary schema — description, references, reasoning, emotion.</figcaption>
+    <figure class="p-fig-full" style="margin: 0; display: flex; flex-direction: column; gap: 8px">
+      <img src="assets/longitudinal-1.jpg" alt="Schema of a weekly design process diary entry, annotated A to E" loading="lazy">
+      <figcaption style="font-size: 12px; font-weight: 500; color: #4E5946">The weekly diary schema: what each entry captures, from description and references to reasoning and emotion.</figcaption>
+    </figure>
+    <figure class="p-fig-full" style="margin: 0; display: flex; flex-direction: column; gap: 8px">
+      <img src="assets/longitudinal-2.5.jpg" alt="The continuous diary board, showing a whole design process as one connected timeline" loading="lazy">
+      <figcaption style="font-size: 12px; font-weight: 500; color: #4E5946">One team's entire process on the continuous diary board, week by week.</figcaption>
+    </figure>
+    <div class="p-figs-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start">
+      <figure class="p-fig-full" style="margin: 0; display: flex; flex-direction: column; gap: 8px">
+        <img src="assets/longitudinal-13.jpg" alt="The analytical framework of exploring together, with four dimensions" loading="lazy">
+        <figcaption style="font-size: 12px; font-weight: 500; color: #4E5946">The analytical framework: four dimensions, one line per activity.</figcaption>
       </figure>
-      <figure style="margin: 0; display: flex; flex-direction: column; gap: 8px">
-        <img src="assets/portfolio/longitudinal-framework.jpg" alt="The four-dimensional analytical framework of co-exploration" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 14px; background: #FFFFFF">
-        <figcaption style="font-size: 12px; font-weight: 500; color: #4E5946">The analytical framework — four dimensions, one line per activity.</figcaption>
-      </figure>
-      <figure style="margin: 0; display: flex; flex-direction: column; gap: 8px">
-        <img src="assets/portfolio/longitudinal-patterns.jpg" alt="Bar chart comparing co-exploration in thriving versus struggling teams" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 14px; background: #FFFFFF">
-        <figcaption style="font-size: 12px; font-weight: 500; color: #4E5946">Thriving vs struggling teams — frequency and diversity, at a glance.</figcaption>
+      <figure class="p-fig-full" style="margin: 0; display: flex; flex-direction: column; gap: 8px">
+        <img src="assets/longitudinal-3.jpg" alt="The framework plotted for a single team over the whole project" loading="lazy">
+        <figcaption style="font-size: 12px; font-weight: 500; color: #4E5946">The same framework plotted for a single team, over the whole project.</figcaption>
       </figure>
     </div>
+    <div style="display: flex; flex-direction: column; gap: 14px">
+      <h4 style="margin: 0; font-size: 18px; font-weight: 700">The five patterns</h4>
+      <div class="p-figs-5" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px">
+        <figure class="p-fig-full" style="margin: 0; display: flex; flex-direction: column; gap: 8px">
+          <img src="assets/longitudinal-5.jpg" alt="Pattern one: merging different insights" loading="lazy">
+          <figcaption style="font-size: 12px; font-weight: 500; color: #4E5946">Merging different insights</figcaption>
+        </figure>
+        <figure class="p-fig-full" style="margin: 0; display: flex; flex-direction: column; gap: 8px">
+          <img src="assets/longitudinal-6.jpg" alt="Pattern two: reflecting on existing materials" loading="lazy">
+          <figcaption style="font-size: 12px; font-weight: 500; color: #4E5946">Reflecting on existing materials</figcaption>
+        </figure>
+        <figure class="p-fig-full" style="margin: 0; display: flex; flex-direction: column; gap: 8px">
+          <img src="assets/longitudinal-7.jpg" alt="Pattern three: refining initial concepts" loading="lazy">
+          <figcaption style="font-size: 12px; font-weight: 500; color: #4E5946">Refining initial concepts</figcaption>
+        </figure>
+        <figure class="p-fig-full" style="margin: 0; display: flex; flex-direction: column; gap: 8px">
+          <img src="assets/longitudinal-8.jpg" alt="Pattern four: generating more ideas" loading="lazy">
+          <figcaption style="font-size: 12px; font-weight: 500; color: #4E5946">Generating more ideas</figcaption>
+        </figure>
+        <figure class="p-fig-full" style="margin: 0; display: flex; flex-direction: column; gap: 8px">
+          <img src="assets/longitudinal-9.jpg" alt="Pattern five: seeking cooperation" loading="lazy">
+          <figcaption style="font-size: 12px; font-weight: 500; color: #4E5946">Seeking cooperation</figcaption>
+        </figure>
+      </div>
+    </div>
+    <figure class="p-fig-full" style="margin: 0; display: flex; flex-direction: column; gap: 8px">
+      <img src="assets/longitudinal-14.jpg" alt="Bar chart comparing frequency and diversity of exploring together in thriving versus struggling teams" loading="lazy">
+      <figcaption style="font-size: 12px; font-weight: 500; color: #4E5946">Thriving versus struggling teams: frequency and diversity, side by side.</figcaption>
+    </figure>
+    <figure class="p-fig-full" style="margin: 0; display: flex; flex-direction: column; gap: 8px">
+      <img src="assets/longitudinal-2.jpg" alt="Designers sorting and discussing physical activity cards in the closing group reflection session" loading="lazy">
+      <figcaption style="font-size: 12px; font-weight: 500; color: #4E5946">The closing reflection: teams sorting five months of their own work as physical cards.</figcaption>
+    </figure>
     <div class="p-quote" style="display: flex; flex-direction: column; gap: 18px; padding: 32px 36px; background: #141414; color: #F2EDE1; border-radius: 18px">
-      <blockquote style="margin: 0; font-size: 24px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.3; text-wrap: balance">"Five distinct patterns of co-exploration… actionable insights for professional designers as well as design educators."</blockquote>
+      <blockquote style="margin: 0; font-size: 24px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.3; text-wrap: balance">"What the authors learned offers ideas and insights that can be applied to working designers in professional practice."</blockquote>
       <div style="display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap">
         <div style="display: flex; gap: 32px; flex-wrap: wrap; font-size: 13px; font-weight: 500; color: rgba(242, 237, 225, 0.7)">
           <span>She Ji editor's introduction</span><span>1,562 activities · 78 hrs audio</span><span>5 patterns, statistically confirmed</span>
@@ -251,12 +332,12 @@
         <span style="padding: 6px 12px; background: #141414; color: #F2EDE1; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: 0.06em">03 · STRATEGIC DESIGN</span>
         <span style="padding: 6px 12px; border: 1.5px solid #141414; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: 0.06em">HFG SCHWÄBISCH GMÜND · 2018</span>
       </div>
-      <h3 style="margin: 0; font-size: 36px; font-weight: 800; letter-spacing: -0.025em; line-height: 1.05; text-wrap: balance">AI&amp;U — language learning that learns you first</h3>
-      <p style="margin: 0; font-size: 15px; line-height: 1.65; color: #4A3A2E">My graduation project: a concept for an adaptive language-learning platform that builds a live model of the learner — level, goals, focus rhythms, mood — and shapes every lesson from it. Five months with Chiara Mayer, from expert interviews to paper prototypes to concept films. Graded sehr gut, the top grade.</p>
+      <h3 style="margin: 0; font-size: 36px; font-weight: 800; letter-spacing: -0.025em; line-height: 1.05; text-wrap: balance">AI&amp;U, language learning that learns you first</h3>
+      <p style="margin: 0; font-size: 15px; line-height: 1.65; color: #4A3A2E">My graduation project: a concept for an adaptive language learning platform that builds a live model of the learner, from level and goals to focus rhythms and mood, and shapes every lesson from it. Chiara Mayer and I spent five months on it, from expert interviews to paper prototypes to concept films. Graded sehr gut, the top grade.</p>
       <div class="p-meta-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 13px; line-height: 1.5">
         <div><strong>Role</strong><br>Research, concept, UX, screens, film</div>
         <div><strong>Methods</strong><br>Expert interviews, paper prototyping, user testing</div>
-        <div><strong>Team</strong><br>Duo, 5 months</div>
+        <div><strong>Team</strong><br>A duo, five months</div>
         <div><strong>Outcome</strong><br>sehr gut · public demo days</div>
       </div>
     </div>
@@ -266,32 +347,102 @@
     <div class="p-cols-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 36px">
       <div style="display: flex; flex-direction: column; gap: 10px">
         <h4 style="margin: 0; font-size: 18px; font-weight: 700">Research before designing</h4>
-        <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #4A3A2E">Before drawing a screen, we interviewed the people who knew the territory — language teachers, online-learning researchers, a digital-twin engineer, an AI researcher at DFKI — and each conversation took a wrong assumption off the table. Ideas stayed cheap: flowcharts, cut-paper screens, a throwaway click path.</p>
+        <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #4A3A2E">Before drawing a single screen we interviewed the people who knew the territory: language teachers, researchers in online learning, a digital twin engineer, and an AI researcher at DFKI. Each conversation took a wrong assumption off the table. Ideas stayed cheap at this stage. We worked in flowcharts, cut paper screens, and a throwaway click path.</p>
       </div>
       <div style="display: flex; flex-direction: column; gap: 10px">
         <h4 style="margin: 0; font-size: 18px; font-weight: 700">Test rough, watch closely</h4>
-        <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #4A3A2E">We put the paper prototype in front of real learners and stopped talking — watching someone hesitate says more than asking what they think. Whatever made people pause for the wrong reason got rebuilt. Short films placed the concept in everyday moments — a commute, a work call to prep for — instead of a feature list.</p>
+        <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #4A3A2E">We put the paper prototype in front of real learners and stopped talking, because watching someone hesitate says more than asking what they think. Whatever made people pause for the wrong reason got rebuilt. Short films then placed the concept in everyday moments, like a commute or a work call to prepare for, instead of a feature list.</p>
       </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 14px">
+      <h4 style="margin: 0; font-size: 18px; font-weight: 700">The process, out on the table</h4>
+      <p style="margin: 0; max-width: 720px; font-size: 14px; line-height: 1.65; color: #4A3A2E">Interviews, sticky notes, an affinity wall, mood cards, hand drawn screens, testing, and two days of public demo. This is what owning a project end to end looks like in photos.</p>
     </div>
     <div class="p-figs-3" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px">
       <figure style="margin: 0; display: flex; flex-direction: column; gap: 8px">
-        <img src="assets/portfolio/aiu-paper-prototype.jpg" alt="Walking a user through the paper prototype" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 14px; background: #FFFFFF">
-        <figcaption style="font-size: 12px; font-weight: 500; color: #6B5646">The paper prototype in a user's hands.</figcaption>
+        <img src="assets/interview-1-web.jpg" alt="Interviewing a domain expert in his office" loading="lazy" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 14px; background: #FFFFFF">
+        <figcaption style="font-size: 12px; font-weight: 500; color: #6B5646">Interviewing a domain expert.</figcaption>
       </figure>
       <figure style="margin: 0; display: flex; flex-direction: column; gap: 8px">
-        <img src="assets/portfolio/aiu-knowledge-graph.png" alt="The learner's knowledge graph on the desktop reader" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 14px; background: #FFFFFF">
-        <figcaption style="font-size: 12px; font-weight: 500; color: #6B5646">The learner's knowledge graph — the live model made visible.</figcaption>
+        <img src="assets/ai%26u_WiP%202.JPG" alt="Mapping learners' emotions and moods on cards" loading="lazy" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 14px; background: #FFFFFF">
+        <figcaption style="font-size: 12px; font-weight: 500; color: #6B5646">Mapping learners' moods on cards.</figcaption>
       </figure>
       <figure style="margin: 0; display: flex; flex-direction: column; gap: 8px">
-        <img src="assets/portfolio/aiu-demo-day.jpg" alt="Xinhui explaining AI&amp;U at her stand during the public demo day" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 14px; background: #FFFFFF">
-        <figcaption style="font-size: 12px; font-weight: 500; color: #6B5646">Demo day — two days of explaining the work to strangers.</figcaption>
+        <img src="assets/ai%26u_WiP%203.JPG" alt="Clustering research findings on an affinity wall" loading="lazy" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 14px; background: #FFFFFF">
+        <figcaption style="font-size: 12px; font-weight: 500; color: #6B5646">Clustering findings on the affinity wall.</figcaption>
+      </figure>
+    </div>
+    <div class="p-figs-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px">
+      <figure style="margin: 0; display: flex; flex-direction: column; gap: 8px">
+        <img src="assets/ai%26u_WiP%201.jpg" alt="Early requirements sketched on sticky notes" loading="lazy" style="width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 14px; background: #FFFFFF">
+        <figcaption style="font-size: 12px; font-weight: 500; color: #6B5646">The first requirements, on sticky notes.</figcaption>
+      </figure>
+      <figure style="margin: 0; display: flex; flex-direction: column; gap: 8px">
+        <img src="assets/ai%26u_user%20test%201.jpg" alt="Walking a learner through the paper prototype" loading="lazy" style="width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 14px; background: #FFFFFF">
+        <figcaption style="font-size: 12px; font-weight: 500; color: #6B5646">Walking a learner through the paper prototype.</figcaption>
+      </figure>
+    </div>
+    <div class="p-figs-3" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px">
+      <figure style="margin: 0; display: flex; flex-direction: column; gap: 8px">
+        <img src="assets/ai%26u_user%20test%202.jpeg" alt="The full screen flow drawn by hand, printed and laid out" loading="lazy" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 14px; background: #FFFFFF">
+        <figcaption style="font-size: 12px; font-weight: 500; color: #6B5646">Every screen drawn by hand and laid out.</figcaption>
+      </figure>
+      <figure style="margin: 0; display: flex; flex-direction: column; gap: 8px">
+        <img src="assets/ai%26u_user%20test%203.jpeg" alt="Reading learners' reactions during a test" loading="lazy" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 14px; background: #FFFFFF">
+        <figcaption style="font-size: 12px; font-weight: 500; color: #6B5646">Reading reactions during a test.</figcaption>
+      </figure>
+      <figure style="margin: 0; display: flex; flex-direction: column; gap: 8px">
+        <img src="assets/portfolio/aiu-demo-day.jpg" alt="Xinhui explaining AI&amp;U at her stand during the public demo day" loading="lazy" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 14px; background: #FFFFFF">
+        <figcaption style="font-size: 12px; font-weight: 500; color: #6B5646">Demo day: two days of explaining the work to strangers.</figcaption>
+      </figure>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 14px">
+      <h4 style="margin: 0; font-size: 18px; font-weight: 700">The screens</h4>
+    </div>
+    <div class="p-figs-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start">
+      <figure class="p-fig-full" style="margin: 0; display: flex; flex-direction: column; gap: 8px">
+        <img src="assets/ai%26u_render%201.png" alt="AI&amp;U opening on a phone" loading="lazy">
+        <figcaption style="font-size: 12px; font-weight: 500; color: #6B5646">The app opening on a phone.</figcaption>
+      </figure>
+      <figure class="p-fig-full" style="margin: 0; display: flex; flex-direction: column; gap: 8px">
+        <img src="assets/ai%26u_render%202.png" alt="A word explained in context in AI&amp;U" loading="lazy">
+        <figcaption style="font-size: 12px; font-weight: 500; color: #6B5646">A word explained in context.</figcaption>
+      </figure>
+      <figure class="p-fig-full" style="margin: 0; display: flex; flex-direction: column; gap: 8px">
+        <img src="assets/ai%26u_render%203.png" alt="The learner's knowledge graph on the desktop reader" loading="lazy">
+        <figcaption style="font-size: 12px; font-weight: 500; color: #6B5646">The learner's knowledge graph, the live model made visible.</figcaption>
+      </figure>
+      <figure class="p-fig-full" style="margin: 0; display: flex; flex-direction: column; gap: 8px">
+        <img src="assets/ai%26u_render%205.jpg" alt="The desktop reader looking up a word in context" loading="lazy">
+        <figcaption style="font-size: 12px; font-weight: 500; color: #6B5646">The desktop reader, looking up a word in context.</figcaption>
+      </figure>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 14px">
+      <h4 style="margin: 0; font-size: 18px; font-weight: 700">The films</h4>
+    </div>
+    <figure class="p-fig-full" style="margin: 0; display: flex; flex-direction: column; gap: 8px">
+      <video src="assets/ai%26u-film.mp4" poster="assets/ai%26u-film-poster.jpg" controls playsinline preload="metadata" style="aspect-ratio: 16 / 10"></video>
+      <figcaption style="font-size: 12px; font-weight: 500; color: #6B5646">The main concept film: a day with AI&amp;U.</figcaption>
+    </figure>
+    <div class="p-vids-3" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; align-items: start">
+      <figure class="p-fig-full" style="margin: 0; display: flex; flex-direction: column; gap: 8px">
+        <video src="assets/knowledge-graph.mp4" poster="assets/knowledge-graph-poster.jpg" controls playsinline preload="none" style="aspect-ratio: 16 / 10"></video>
+        <figcaption style="font-size: 12px; font-weight: 500; color: #6B5646">The knowledge graph, in motion.</figcaption>
+      </figure>
+      <figure class="p-fig-full" style="margin: 0; display: flex; flex-direction: column; gap: 8px">
+        <video src="assets/webclipper.mp4" poster="assets/webclipper-poster.jpg" controls playsinline preload="none" style="aspect-ratio: 16 / 10"></video>
+        <figcaption style="font-size: 12px; font-weight: 500; color: #6B5646">Saving content with the web clipper.</figcaption>
+      </figure>
+      <figure class="p-fig-full" style="margin: 0; display: flex; flex-direction: column; gap: 8px">
+        <video src="assets/ai%26u-film-2.mp4" controls playsinline preload="none" style="aspect-ratio: 16 / 10"></video>
+        <figcaption style="font-size: 12px; font-weight: 500; color: #6B5646">Onboarding.</figcaption>
       </figure>
     </div>
     <div class="p-quote" style="display: flex; flex-direction: column; gap: 18px; padding: 32px 36px; background: #141414; color: #F2EDE1; border-radius: 18px">
       <blockquote style="margin: 0; font-size: 24px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.3; text-wrap: balance">"Most tools teach everyone the same way. AI&amp;U works the other way around: it learns who you are first."</blockquote>
       <div style="display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap">
         <div style="display: flex; gap: 32px; flex-wrap: wrap; font-size: 13px; font-weight: 500; color: rgba(242, 237, 225, 0.7)">
-          <span>5 months, cross-disciplinary duo</span><span>Taught &amp; defended in German</span><span>3 concept films</span>
+          <span>5 months, a duo from two disciplines</span><span>Taught and defended in German</span><span>4 concept films</span>
         </div>
         <a class="p-btn-light" href="highlight-master.html" style="padding: 12px 24px; font-size: 13px; white-space: nowrap">Curious? The full story →</a>
       </div>
@@ -304,33 +455,33 @@
 <section class="p-pad" style="max-width: 1140px; margin: 0 auto; padding: 96px 48px 0">
   <div class="p-stats" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px">
     <div style="display: flex; flex-direction: column; gap: 6px; padding: 28px; background: #FAF7EF; border: 1.5px solid rgba(20, 20, 20, 0.12); border-radius: 20px"><span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #8A8578">Seriously longitudinal</span><span style="font-size: 40px; font-weight: 800; letter-spacing: -0.03em">61</span><span style="font-size: 13px; color: #4A473E">participants in my longest study</span></div>
-    <div style="display: flex; flex-direction: column; gap: 6px; padding: 28px; background: #FAF7EF; border: 1.5px solid rgba(20, 20, 20, 0.12); border-radius: 20px"><span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #8A8578">Peer-reviewed</span><span style="font-size: 40px; font-weight: 800; letter-spacing: -0.03em">Q1</span><span style="font-size: 13px; color: #4A473E">journal publication — She Ji, 2025</span></div>
+    <div style="display: flex; flex-direction: column; gap: 6px; padding: 28px; background: #FAF7EF; border: 1.5px solid rgba(20, 20, 20, 0.12); border-radius: 20px"><span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #8A8578">Peer reviewed</span><span style="font-size: 40px; font-weight: 800; letter-spacing: -0.03em">Q1</span><span style="font-size: 13px; color: #4A473E">journal publication, She Ji 2025</span></div>
     <div style="display: flex; flex-direction: column; gap: 6px; padding: 28px; background: #FAF7EF; border: 1.5px solid rgba(20, 20, 20, 0.12); border-radius: 20px"><span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #8A8578">Top grade</span><span style="font-size: 40px; font-weight: 800; letter-spacing: -0.03em">sehr gut</span><span style="font-size: 13px; color: #4A473E">MA Strategic Design, in German</span></div>
-    <div style="display: flex; flex-direction: column; gap: 6px; padding: 28px; background: #FAF7EF; border: 1.5px solid rgba(20, 20, 20, 0.12); border-radius: 20px"><span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #8A8578">Cross-cultural</span><span style="font-size: 40px; font-weight: 800; letter-spacing: -0.03em">4</span><span style="font-size: 13px; color: #4A473E">languages — EN / DE / NL / ZH</span></div>
+    <div style="display: flex; flex-direction: column; gap: 6px; padding: 28px; background: #FAF7EF; border: 1.5px solid rgba(20, 20, 20, 0.12); border-radius: 20px"><span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #8A8578">Languages</span><span style="font-size: 40px; font-weight: 800; letter-spacing: -0.03em">4</span><span style="font-size: 13px; color: #4A473E">EN · DE · NL · ZH</span></div>
   </div>
 </section>
 
 <section id="about" class="p-pad" style="max-width: 1140px; margin: 0 auto; padding: 112px 48px 0; display: flex; flex-direction: column; gap: 44px">
   <div style="display: flex; flex-direction: column; gap: 18px">
     <h2 class="p-section-title" style="margin: 0; font-size: 44px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.05">A creative person<br>who likes logic.</h2>
-    <p style="margin: 0; max-width: 700px; font-size: 16px; line-height: 1.65; color: #4A473E">I'm a passionate maker who's good at listening and observing — someone who loves working by hand and gets just as excited about new technology. I turn messy human data into clear, usable insight, and keep people at the centre of every decision. These days I also teach coding and robotics to kids, and explore what AI tools can do for design work. The longer version of the story lives on <a href="index.html">my site</a>.</p>
+    <p style="margin: 0; max-width: 700px; font-size: 16px; line-height: 1.65; color: #4A473E">I'm a maker at heart, good at listening and observing. I love working with my hands and get just as excited about new technology. I turn messy human data into clear, usable insight and keep people at the centre of every decision. These days I also teach coding and robotics to kids and explore what AI tools can do for design work. The longer version of the story lives on <a href="index.html">my site</a>.</p>
   </div>
   <div class="p-about-grid" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px">
     <div style="display: flex; flex-direction: column; gap: 16px; padding: 28px; background: #FAF7EF; border: 1.5px solid rgba(20, 20, 20, 0.12); border-radius: 20px">
       <h3 style="margin: 0; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #C7431D">Education</h3>
       <div style="display: flex; flex-direction: column; gap: 14px; font-size: 14px; line-height: 1.5; color: #4A473E">
-        <div><strong style="color: #141414">PhD, Human-Computer Interaction</strong><br>TU Eindhoven, NL · 2019–2025</div>
-        <div><strong style="color: #141414">MA, Strategic Design</strong><br>HfG Schwäbisch Gmünd, DE · 2016–2018</div>
-        <div><strong style="color: #141414">BSc, Industrial Design</strong><br>Beijing Institute of Technology, CN · 2011–2015</div>
+        <div><strong style="color: #141414">PhD, Human Computer Interaction</strong><br>TU Eindhoven, NL · 2019 to 2025</div>
+        <div><strong style="color: #141414">MA, Strategic Design</strong><br>HfG Schwäbisch Gmünd, DE · 2016 to 2018</div>
+        <div><strong style="color: #141414">BSc, Industrial Design</strong><br>Beijing Institute of Technology, CN · 2011 to 2015</div>
       </div>
     </div>
     <div style="display: flex; flex-direction: column; gap: 16px; padding: 28px; background: #FAF7EF; border: 1.5px solid rgba(20, 20, 20, 0.12); border-radius: 20px">
       <h3 style="margin: 0; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #C7431D">Research &amp; methods</h3>
       <div style="display: flex; flex-wrap: wrap; gap: 8px">
-        <span style="padding: 6px 12px; background: #F2EDE1; border-radius: 999px; font-size: 12px; font-weight: 600">Mixed-method design</span>
-        <span style="padding: 6px 12px; background: #F2EDE1; border-radius: 999px; font-size: 12px; font-weight: 600">In-depth interviews</span>
+        <span style="padding: 6px 12px; background: #F2EDE1; border-radius: 999px; font-size: 12px; font-weight: 600">Mixed methods</span>
+        <span style="padding: 6px 12px; background: #F2EDE1; border-radius: 999px; font-size: 12px; font-weight: 600">Deep interviews</span>
         <span style="padding: 6px 12px; background: #F2EDE1; border-radius: 999px; font-size: 12px; font-weight: 600">Longitudinal field studies</span>
-        <span style="padding: 6px 12px; background: #F2EDE1; border-radius: 999px; font-size: 12px; font-weight: 600">Co-creation workshops</span>
+        <span style="padding: 6px 12px; background: #F2EDE1; border-radius: 999px; font-size: 12px; font-weight: 600">Participatory workshops</span>
         <span style="padding: 6px 12px; background: #F2EDE1; border-radius: 999px; font-size: 12px; font-weight: 600">Journey mapping</span>
         <span style="padding: 6px 12px; background: #F2EDE1; border-radius: 999px; font-size: 12px; font-weight: 600">Prototype testing</span>
         <span style="padding: 6px 12px; background: #F2EDE1; border-radius: 999px; font-size: 12px; font-weight: 600">Factor analysis</span>
@@ -340,12 +491,14 @@
     <div style="display: flex; flex-direction: column; gap: 16px; padding: 28px; background: #FAF7EF; border: 1.5px solid rgba(20, 20, 20, 0.12); border-radius: 20px">
       <h3 style="margin: 0; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #C7431D">Tools</h3>
       <div style="display: flex; flex-wrap: wrap; gap: 8px">
-        <span style="padding: 6px 12px; background: #F2EDE1; border-radius: 999px; font-size: 12px; font-weight: 600">SPSS</span>
-        <span style="padding: 6px 12px; background: #F2EDE1; border-radius: 999px; font-size: 12px; font-weight: 600">R</span>
-        <span style="padding: 6px 12px; background: #F2EDE1; border-radius: 999px; font-size: 12px; font-weight: 600">Miro</span>
         <span style="padding: 6px 12px; background: #F2EDE1; border-radius: 999px; font-size: 12px; font-weight: 600">Figma</span>
         <span style="padding: 6px 12px; background: #F2EDE1; border-radius: 999px; font-size: 12px; font-weight: 600">Adobe Suite</span>
-        <span style="padding: 6px 12px; background: #F2EDE1; border-radius: 999px; font-size: 12px; font-weight: 600">AI-driven tools</span>
+        <span style="padding: 6px 12px; background: #F2EDE1; border-radius: 999px; font-size: 12px; font-weight: 600">Miro</span>
+        <span style="padding: 6px 12px; background: #F2EDE1; border-radius: 999px; font-size: 12px; font-weight: 600">VS Code</span>
+        <span style="padding: 6px 12px; background: #F2EDE1; border-radius: 999px; font-size: 12px; font-weight: 600">Claude Code &amp; Design</span>
+        <span style="padding: 6px 12px; background: #F2EDE1; border-radius: 999px; font-size: 12px; font-weight: 600">SolidWorks</span>
+        <span style="padding: 6px 12px; background: #F2EDE1; border-radius: 999px; font-size: 12px; font-weight: 600">SPSS</span>
+        <span style="padding: 6px 12px; background: #F2EDE1; border-radius: 999px; font-size: 12px; font-weight: 600">R</span>
         <span style="padding: 6px 12px; background: #F2EDE1; border-radius: 999px; font-size: 12px; font-weight: 600">MAXQDA</span>
       </div>
     </div>
@@ -355,15 +508,15 @@
 <section id="craft" class="p-pad" style="max-width: 1140px; margin: 0 auto; padding: 112px 48px 0; display: flex; flex-direction: column; gap: 32px">
   <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap">
     <h2 class="p-section-title" style="margin: 0; font-size: 44px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.05">Hands that<br>keep making.</h2>
-    <p style="margin: 0; max-width: 420px; font-size: 15px; line-height: 1.6; color: #4A473E">Pottery, floristry, painting, gold leaf, paper, carving — making by hand keeps my eye honest and my patience trained. <a href="craft.html">More on the craft page →</a></p>
+    <p style="margin: 0; max-width: 420px; font-size: 15px; line-height: 1.6; color: #4A473E">Pottery, floristry, painting, gold leaf, paper, carving. Making by hand keeps my eye honest and my patience trained. <a href="craft.html">More on the craft page →</a></p>
   </div>
   <div class="p-craft-grid" style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px">
-    <figure style="margin: 0; display: flex; flex-direction: column; gap: 8px"><img src="assets/portfolio/craft-pottery.jpg" alt="Xinhui shaping a clay vessel" style="width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 16px; background: #E3DCCB"><figcaption style="font-size: 12px; font-weight: 600; color: #8A8578">Pottery</figcaption></figure>
-    <figure style="margin: 0; display: flex; flex-direction: column; gap: 8px"><img src="assets/portfolio/craft-floristry.jpg" alt="Flower arrangement" style="width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 16px; background: #E3DCCB"><figcaption style="font-size: 12px; font-weight: 600; color: #8A8578">Floristry</figcaption></figure>
-    <figure style="margin: 0; display: flex; flex-direction: column; gap: 8px"><img src="assets/portfolio/craft-painting.jpg" alt="Painting" style="width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 16px; background: #E3DCCB"><figcaption style="font-size: 12px; font-weight: 600; color: #8A8578">Painting</figcaption></figure>
-    <figure style="margin: 0; display: flex; flex-direction: column; gap: 8px"><img src="assets/portfolio/craft-goldleaf.jpg" alt="Gold-leaf craft" style="width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 16px; background: #E3DCCB"><figcaption style="font-size: 12px; font-weight: 600; color: #8A8578">Gold leaf</figcaption></figure>
-    <figure style="margin: 0; display: flex; flex-direction: column; gap: 8px"><img src="assets/portfolio/craft-papercraft.jpg" alt="Paper craft" style="width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 16px; background: #E3DCCB"><figcaption style="font-size: 12px; font-weight: 600; color: #8A8578">Paper craft</figcaption></figure>
-    <figure style="margin: 0; display: flex; flex-direction: column; gap: 8px"><img src="assets/portfolio/craft-carving.jpg" alt="Carving" style="width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 16px; background: #E3DCCB"><figcaption style="font-size: 12px; font-weight: 600; color: #8A8578">Carving</figcaption></figure>
+    <figure style="margin: 0; display: flex; flex-direction: column; gap: 8px"><img src="assets/portfolio/craft-pottery.jpg" alt="Xinhui shaping a clay vessel" loading="lazy" style="width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 16px; background: #E3DCCB"><figcaption style="font-size: 12px; font-weight: 600; color: #8A8578">Pottery</figcaption></figure>
+    <figure style="margin: 0; display: flex; flex-direction: column; gap: 8px"><img src="assets/portfolio/craft-floristry.jpg" alt="Flower arrangement" loading="lazy" style="width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 16px; background: #E3DCCB"><figcaption style="font-size: 12px; font-weight: 600; color: #8A8578">Floristry</figcaption></figure>
+    <figure style="margin: 0; display: flex; flex-direction: column; gap: 8px"><img src="assets/portfolio/craft-painting.jpg" alt="Painting" loading="lazy" style="width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 16px; background: #E3DCCB"><figcaption style="font-size: 12px; font-weight: 600; color: #8A8578">Painting</figcaption></figure>
+    <figure style="margin: 0; display: flex; flex-direction: column; gap: 8px"><img src="assets/portfolio/craft-goldleaf.jpg" alt="Gold leaf craft" loading="lazy" style="width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 16px; background: #E3DCCB"><figcaption style="font-size: 12px; font-weight: 600; color: #8A8578">Gold leaf</figcaption></figure>
+    <figure style="margin: 0; display: flex; flex-direction: column; gap: 8px"><img src="assets/portfolio/craft-papercraft.jpg" alt="Paper craft" loading="lazy" style="width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 16px; background: #E3DCCB"><figcaption style="font-size: 12px; font-weight: 600; color: #8A8578">Paper craft</figcaption></figure>
+    <figure style="margin: 0; display: flex; flex-direction: column; gap: 8px"><img src="assets/portfolio/craft-carving.jpg" alt="Carving" loading="lazy" style="width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 16px; background: #E3DCCB"><figcaption style="font-size: 12px; font-weight: 600; color: #8A8578">Carving</figcaption></figure>
   </div>
 </section>
 
@@ -372,7 +525,7 @@
     <div style="display: flex; flex-direction: column; gap: 18px">
       <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(242, 237, 225, 0.6)">Don't wait for a vacancy to close</span>
       <h2 style="margin: 0; font-size: 52px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.02; text-wrap: balance">Let's make something people actually need.</h2>
-      <p style="margin: 0; max-width: 560px; font-size: 15px; line-height: 1.6; color: rgba(242, 237, 225, 0.75)">Based in Best, the Netherlands. Open to design research, UX research and product design roles — in the Netherlands, across the EU, or remote.</p>
+      <p style="margin: 0; max-width: 560px; font-size: 15px; line-height: 1.6; color: rgba(242, 237, 225, 0.75)">Based in Best, the Netherlands. Open to design research, UX research and product design roles in the Netherlands, across the EU, or remote.</p>
     </div>
     <div style="display: flex; gap: 12px; flex-wrap: wrap">
       <a class="p-btn-light" href="mailto:kristinyxh@gmail.com" style="padding: 14px 28px; font-size: 15px">kristinyxh@gmail.com →</a>
