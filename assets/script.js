@@ -270,48 +270,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  /* ---- Highlights category filter ----------------------------------- */
-  // The pills are real links (?filter=design …), so a filtered URL can be
-  // shared as a focused portfolio link and still works if this never runs.
-  // Clicks filter in place and keep the address bar in sync, so the link
-  // in the bar is always the shareable one.
-  const filterBar = document.querySelector("[data-filter-bar]");
-  if (filterBar) {
-    const pills = Array.from(filterBar.querySelectorAll("[data-filter]"));
-    const cards = Array.from(document.querySelectorAll(".hl-item[data-tags]"));
-    const ALIASES = { teach: "teaching" };
-
-    const applyFilter = (raw) => {
-      let key = (raw || "all").toLowerCase();
-      key = ALIASES[key] || key;
-      if (!pills.some((p) => p.dataset.filter === key)) key = "all";
-      pills.forEach((p) => {
-        const active = p.dataset.filter === key;
-        p.classList.toggle("is-active", active);
-        p.setAttribute("aria-pressed", active ? "true" : "false");
-      });
-      cards.forEach((card) => {
-        const show = key === "all" || card.dataset.tags.split(/\s+/).includes(key);
-        card.classList.toggle("is-hidden", !show);
-      });
-      return key;
-    };
-
-    applyFilter(new URLSearchParams(location.search).get("filter"));
-
-    pills.forEach((pill) => {
-      pill.addEventListener("click", (e) => {
-        e.preventDefault();
-        const key = applyFilter(pill.dataset.filter);
-        history.replaceState(
-          null,
-          "",
-          key === "all" ? location.pathname : location.pathname + "?filter=" + key
-        );
-      });
-    });
-  }
-
   /* ---- Craft gallery lightbox --------------------------------------- */
   // Click any thumbnail to open it full-size; handles images and videos.
   // Prev/next (buttons or arrow keys) step through every thumb in order.
