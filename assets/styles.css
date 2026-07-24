@@ -4346,7 +4346,7 @@ a.t-org:hover { color: var(--on-surface); }
 .secret-door:focus-visible {
   outline: none;
 }
-/* On touch screens there is no hover — keep the star a bit more visible. */
+/* Match the desktop look on touch screens: quiet, almost invisible. */
 @media (hover: none) {
-  .secret-door__star { opacity: 0.7; }
+  .secret-door__star { opacity: 0.45; }
 }
