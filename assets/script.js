@@ -982,7 +982,7 @@ document.addEventListener("DOMContentLoaded", () => {
     door.href = "portfolio.html";
     door.setAttribute("aria-label", "A shortcut for the curious — the quick portfolio");
     door.innerHTML =
-      '<span class="secret-door__star" aria-hidden="true">✳</span>' +
+      '<span class="secret-door__star" aria-hidden="true">✳︎</span>' +
       '<span class="secret-door__hint">pssst… the five-minute version of everything</span>';
     footerHome.appendChild(door);
   }
