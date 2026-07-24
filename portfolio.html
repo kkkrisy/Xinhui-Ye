@@ -54,7 +54,9 @@
 
   /* Drag wiper: the analytical framework on top, a mapped team underneath.
      Drag the handle (or click a label) to wipe between the two. */
-  .p-reveal { display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 720px; align-self: center; }
+  .p-reveal { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 40px; align-items: center; width: 100%; }
+  .p-reveal-left { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+  .p-reveal-copy { display: flex; flex-direction: column; gap: 18px; }
   .p-reveal-toggle { display: grid; grid-template-columns: 1fr auto 1fr; column-gap: 14px; align-items: baseline; font-size: 14px; color: rgba(20, 20, 20, 0.35); }
   .p-reveal-toggle button { border: none; background: transparent; cursor: pointer; padding: 0; font-family: inherit; font-size: 14px; font-weight: 500; color: #7B8471; transition: color .25s ease; }
   .p-reveal-toggle button[data-face="front"] { justify-self: end; }
@@ -92,6 +94,8 @@
     .p-case-banner { width: calc(100% - 48px) !important; margin: 0 24px !important; }
     .p-case-body-top { padding-top: 28px !important; }
     .p-cols-2 { grid-template-columns: 1fr !important; }
+    .p-reveal { grid-template-columns: 1fr !important; gap: 24px !important; }
+    .p-reveal-left { max-width: 440px; }
     .p-figs-3 { grid-template-columns: 1fr 1fr !important; }
     .p-screens-4 { grid-template-columns: 1fr 1fr !important; }
     .p-stats { grid-template-columns: 1fr 1fr !important; }
@@ -318,21 +322,33 @@
       </div>
     </div>
     <div class="p-reveal" style="--reveal: 65%">
-      <div class="p-reveal-toggle">
-        <button type="button" data-face="front" aria-selected="true">Framework</button>
-        <span aria-hidden="true">|</span>
-        <button type="button" data-face="back" aria-selected="false">One team mapped</button>
-      </div>
-      <div class="p-reveal-media">
-        <div class="p-reveal-frame">
-          <img class="p-reveal-img" src="assets/longitudinal-3.jpg" alt="The framework plotted for a single team over the whole project" draggable="false">
-          <img class="p-reveal-img p-reveal-img--front" src="assets/longitudinal-13.jpg" alt="The analytical framework of exploring together, with four dimensions" draggable="false">
+      <div class="p-reveal-left">
+        <div class="p-reveal-toggle">
+          <button type="button" data-face="front" aria-selected="true">Framework</button>
+          <span aria-hidden="true">|</span>
+          <button type="button" data-face="back" aria-selected="false">One team mapped</button>
         </div>
-        <button type="button" class="p-reveal-handle" aria-label="Drag to reveal the mapped team">
-          <span class="p-reveal-grip" aria-hidden="true">‹ ›</span>
-        </button>
+        <div class="p-reveal-media">
+          <div class="p-reveal-frame">
+            <img class="p-reveal-img" src="assets/longitudinal-3.jpg" alt="The framework plotted for a single team over the whole project" draggable="false">
+            <img class="p-reveal-img p-reveal-img--front" src="assets/longitudinal-13.jpg" alt="The analytical framework of exploring together, with four dimensions" draggable="false">
+          </div>
+          <button type="button" class="p-reveal-handle" aria-label="Drag to reveal the mapped team">
+            <span class="p-reveal-grip" aria-hidden="true">‹ ›</span>
+          </button>
+        </div>
+        <p class="p-reveal-caption">Drag the handle to wipe between the framework and a real team mapped onto it.</p>
       </div>
-      <p class="p-reveal-caption">The analytical framework: four dimensions, one line per activity. Drag the handle to see a real team mapped onto it.</p>
+      <div class="p-reveal-copy">
+        <div style="display: flex; flex-direction: column; gap: 8px">
+          <h4 style="margin: 0; font-size: 17px; font-weight: 700">How to read this map</h4>
+          <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #37402F">Every activity a team documented becomes one line across four dimensions. <strong>Information distribution</strong>: was knowledge shared before the activity? <strong>Diversity of insights</strong>: where did the ideas come from? <strong>Communication types</strong>: what kind of exchange took place? <strong>People distribution</strong>: was the team in one room, partly online, or fully online?</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px">
+          <h4 style="margin: 0; font-size: 17px; font-weight: 700">Mapping an activity</h4>
+          <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #37402F">Take a brainwriting session. Nothing was shared beforehand, the ideas came through a structured group technique, sketches were passed around and built on, and everyone sat at one table. Those four values draw one line on the map. Draw all 161 lines from all 16 teams, and five recurring patterns surface.</p>
+        </div>
+      </div>
     </div>
     <div style="display: flex; flex-direction: column; gap: 10px">
       <h4 style="margin: 0; font-size: 18px; font-weight: 700">Five patterns, defined and put to work</h4>
