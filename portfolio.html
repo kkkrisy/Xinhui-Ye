@@ -30,6 +30,15 @@
   /* Diagrams and boards are shown at their natural proportions, never cropped. */
   .p-fig-full img, .p-fig-full video { width: 100%; height: auto; display: block; border-radius: 14px; background: #FFFFFF; }
 
+  /* Folded figure: shows only the top of a tall diagram, fading out at the
+     bottom, until the button unfolds it. */
+  .p-fold-clip { position: relative; max-height: 320px; overflow: hidden; border-radius: 14px; transition: max-height .7s cubic-bezier(.2, .75, .2, 1); }
+  .p-fold-clip::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 160px; background: linear-gradient(to bottom, rgba(220, 228, 242, 0), #DCE4F2); pointer-events: none; opacity: 1; transition: opacity .5s ease; }
+  .p-fold.is-open .p-fold-clip { max-height: 1400px; }
+  .p-fold.is-open .p-fold-clip::after { opacity: 0; }
+  .p-fold-btn { align-self: center; border: none; cursor: pointer; font-family: inherit; padding: 11px 22px; background: #141414; color: #F2EDE1; border-radius: 999px; font-size: 13px; font-weight: 600; transition: background-color .18s ease; }
+  .p-fold-btn:hover, .p-fold-btn:focus-visible { background: #C7431D; color: #FFF; }
+
   /* Flippable card: the weekly diary schema on the front, one team's full
      process board on the back. Click or press Enter to flip. */
   .p-flip { perspective: 1600px; cursor: pointer; }
@@ -225,8 +234,11 @@
       <h4 style="margin: 0; font-size: 18px; font-weight: 700">From nine flows to one architecture</h4>
       <p style="margin: 0; max-width: 720px; font-size: 14px; line-height: 1.65; color: #333747">Every flow was wireframed before any visual polish: nine flows on one board, argued over and settled. Out of that came the information architecture, one root with six sections and 57 screens, sheets and states.</p>
     </div>
-    <figure class="p-fig-full" style="margin: 0; display: flex; flex-direction: column; gap: 8px">
-      <img src="assets/nisse-information-architecture.png" alt="The Nisse information architecture: one root, six sections and 57 screens, sheets and states" loading="lazy">
+    <figure class="p-fig-full p-fold" style="margin: 0; display: flex; flex-direction: column; gap: 12px">
+      <div class="p-fold-clip">
+        <img src="assets/nisse-information-architecture.png" alt="The Nisse information architecture: one root, six sections and 57 screens, sheets and states" loading="lazy">
+      </div>
+      <button type="button" class="p-fold-btn">Unfold the full map ↓</button>
       <figcaption style="font-size: 12px; font-weight: 500; color: #555B6E">The information architecture: Home, Calendar, Grocery, Add, Household and Settings, with cross links at the bottom.</figcaption>
     </figure>
     <div style="display: flex; flex-direction: column; gap: 14px">
@@ -578,6 +590,15 @@
 </div>
 
 <script>
+  // Folded figure: the button unfolds and refolds the tall diagram.
+  document.querySelectorAll('.p-fold').forEach(function (fold) {
+    var btn = fold.querySelector('.p-fold-btn');
+    btn.addEventListener('click', function () {
+      var open = fold.classList.toggle('is-open');
+      btn.textContent = open ? 'Fold it back ↑' : 'Unfold the full map ↓';
+    });
+  });
+
   // Flip card: click or Enter/Space toggles the two faces.
   document.querySelectorAll('.p-flip').forEach(function (card) {
     function flip() { card.classList.toggle('is-flipped'); }
