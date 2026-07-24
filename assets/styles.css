@@ -2677,57 +2677,9 @@ a.t-org:hover { color: var(--on-surface); }
 .hl-item .media-placeholder { aspect-ratio: 4 / 3; }
 .hl-item .headline-lg { font-size: clamp(22px, 2.6vw, 32px); margin-bottom: var(--space-xs); }
 
-/* ---- Highlights category filter --------------------------------------
-   Outline pills above the list; the active one fills navy like every other
-   primary control, hover flips to the mint accent. Cards are spaced by the
-   list's grid gap (not sibling margins) so filtered-out cards vanish
-   without leaving stray gaps. */
-.filter-bar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-xs);
-  margin-bottom: var(--space-xl);
-}
-.filter-pill {
-  display: inline-flex;
-  align-items: center;
-  height: 40px;
-  padding: 0 22px;
-  border-radius: var(--radius-full);
-  border: 1px solid var(--outline);
-  font-family: var(--font-grotesque);
-  font-weight: 600;
-  font-size: 12px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: var(--on-surface);
-  transition: background-color .15s ease, color .15s ease, border-color .15s ease;
-}
-@media (hover: hover) {
-  .filter-pill:hover {
-    background: var(--tertiary);
-    border-color: var(--tertiary);
-    color: var(--on-tertiary);
-  }
-}
-.filter-pill:focus-visible {
-  outline: none;
-  background: var(--tertiary);
-  border-color: var(--tertiary);
-  color: var(--on-tertiary);
-}
-.filter-pill.is-active {
-  background: var(--primary);
-  border-color: var(--primary);
-  color: var(--on-primary);
-}
 .hl-list { display: grid; row-gap: var(--space-2xl); }
 .hl-list .hl-item + .hl-item { margin-top: 0; }
-.hl-item.is-hidden { display: none; }
 @media (max-width: 760px) {
-  .filter-bar { margin-bottom: var(--space-lg); }
-  .filter-pill { height: 36px; padding: 0 18px; font-size: 11px; }
   .hl-list { row-gap: var(--space-xl); }
 }
 
