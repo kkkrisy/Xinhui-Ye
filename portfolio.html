@@ -97,6 +97,7 @@
     .p-reveal { grid-template-columns: 1fr !important; gap: 24px !important; }
     .p-reveal-left { max-width: 440px; }
     .p-figs-3 { grid-template-columns: 1fr 1fr !important; }
+    .p-kanban { grid-template-columns: 1fr 1fr !important; }
     .p-screens-4 { grid-template-columns: 1fr 1fr !important; }
     .p-stats { grid-template-columns: 1fr 1fr !important; }
     .p-about-grid { grid-template-columns: 1fr !important; }
@@ -110,7 +111,7 @@
     .p-nav-links { font-size: 13px !important; gap: 12px !important; }
     .p-nav-anchor { display: none !important; }
     .p-hero h1 { font-size: 38px !important; }
-    .p-figs-2, .p-figs-3 { grid-template-columns: 1fr !important; }
+    .p-figs-2, .p-figs-3, .p-kanban { grid-template-columns: 1fr !important; }
     .p-craft-grid { grid-template-columns: 1fr 1fr !important; }
     .p-stats { grid-template-columns: 1fr !important; }
     .p-meta-grid { grid-template-columns: 1fr !important; }
@@ -420,43 +421,63 @@
       <h4 style="margin: 0; font-size: 18px; font-weight: 700">The process, out on the table</h4>
       <p style="margin: 0; max-width: 720px; font-size: 14px; line-height: 1.65; color: #4A3A2E">Interviews, sticky notes, an affinity wall, mood cards, hand drawn screens, testing, and two days of public demo. This is what owning a project end to end looks like in photos.</p>
     </div>
-    <div class="p-figs-3" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px">
-      <figure style="margin: 0; display: flex; flex-direction: column; gap: 8px">
-        <img src="assets/interview-1-web.jpg" alt="Interviewing a domain expert in his office" loading="lazy" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 14px; background: #FFFFFF">
-        <figcaption style="font-size: 12px; font-weight: 500; color: #6B5646">Interviewing a domain expert.</figcaption>
-      </figure>
-      <figure style="margin: 0; display: flex; flex-direction: column; gap: 8px">
-        <img src="assets/ai%26u_WiP%202.JPG" alt="Mapping learners' emotions and moods on cards" loading="lazy" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 14px; background: #FFFFFF">
-        <figcaption style="font-size: 12px; font-weight: 500; color: #6B5646">Mapping learners' moods on cards.</figcaption>
-      </figure>
-      <figure style="margin: 0; display: flex; flex-direction: column; gap: 8px">
-        <img src="assets/ai%26u_WiP%203.JPG" alt="Clustering research findings on an affinity wall" loading="lazy" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 14px; background: #FFFFFF">
-        <figcaption style="font-size: 12px; font-weight: 500; color: #6B5646">Clustering findings on the affinity wall.</figcaption>
-      </figure>
-    </div>
-    <div class="p-figs-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px">
-      <figure style="margin: 0; display: flex; flex-direction: column; gap: 8px">
-        <img src="assets/ai%26u_WiP%201.jpg" alt="Early requirements sketched on sticky notes" loading="lazy" style="width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 14px; background: #FFFFFF">
-        <figcaption style="font-size: 12px; font-weight: 500; color: #6B5646">The first requirements, on sticky notes.</figcaption>
-      </figure>
-      <figure style="margin: 0; display: flex; flex-direction: column; gap: 8px">
-        <img src="assets/ai%26u_user%20test%201.jpg" alt="Walking a learner through the paper prototype" loading="lazy" style="width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 14px; background: #FFFFFF">
-        <figcaption style="font-size: 12px; font-weight: 500; color: #6B5646">Walking a learner through the paper prototype.</figcaption>
-      </figure>
-    </div>
-    <div class="p-figs-3" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px">
-      <figure style="margin: 0; display: flex; flex-direction: column; gap: 8px">
-        <img src="assets/ai%26u_user%20test%202.jpeg" alt="The full screen flow drawn by hand, printed and laid out" loading="lazy" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 14px; background: #FFFFFF">
-        <figcaption style="font-size: 12px; font-weight: 500; color: #6B5646">Every screen drawn by hand and laid out.</figcaption>
-      </figure>
-      <figure style="margin: 0; display: flex; flex-direction: column; gap: 8px">
-        <img src="assets/ai%26u_user%20test%203.jpeg" alt="Reading learners' reactions during a test" loading="lazy" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 14px; background: #FFFFFF">
-        <figcaption style="font-size: 12px; font-weight: 500; color: #6B5646">Reading reactions during a test.</figcaption>
-      </figure>
-      <figure style="margin: 0; display: flex; flex-direction: column; gap: 8px">
-        <img src="assets/portfolio/aiu-demo-day.jpg" alt="Xinhui explaining AI&amp;U at her stand during the public demo day" loading="lazy" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 14px; background: #FFFFFF">
-        <figcaption style="font-size: 12px; font-weight: 500; color: #6B5646">Demo day: two days of explaining the work to strangers.</figcaption>
-      </figure>
+    <div class="p-kanban" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; align-items: start">
+      <div style="display: flex; flex-direction: column; gap: 12px; background: rgba(255, 255, 255, 0.55); border-radius: 16px; padding: 16px">
+        <div style="display: flex; flex-direction: column; gap: 2px; padding-bottom: 8px; border-bottom: 1.5px solid rgba(20, 20, 20, 0.15)">
+          <span style="font-size: 11px; font-weight: 800; letter-spacing: 0.1em; color: #C7431D">01</span>
+          <span style="font-size: 15px; font-weight: 700">Learn</span>
+        </div>
+        <figure style="margin: 0; display: flex; flex-direction: column; gap: 5px">
+          <img src="assets/interview-1-web.jpg" alt="Interviewing a domain expert in his office" loading="lazy" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 10px; background: #FFFFFF">
+          <figcaption style="font-size: 11px; font-weight: 500; color: #6B5646">Expert interviews</figcaption>
+        </figure>
+        <figure style="margin: 0; display: flex; flex-direction: column; gap: 5px">
+          <img src="assets/interview-2-web.jpg" alt="A field interview at a table" loading="lazy" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 10px; background: #FFFFFF">
+          <figcaption style="font-size: 11px; font-weight: 500; color: #6B5646">A field interview</figcaption>
+        </figure>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px; background: rgba(255, 255, 255, 0.55); border-radius: 16px; padding: 16px">
+        <div style="display: flex; flex-direction: column; gap: 2px; padding-bottom: 8px; border-bottom: 1.5px solid rgba(20, 20, 20, 0.15)">
+          <span style="font-size: 11px; font-weight: 800; letter-spacing: 0.1em; color: #C7431D">02</span>
+          <span style="font-size: 15px; font-weight: 700">Synthesize</span>
+        </div>
+        <figure style="margin: 0; display: flex; flex-direction: column; gap: 5px">
+          <img src="assets/ai%26u_WiP%202.JPG" alt="Mapping learners' emotions and moods on cards" loading="lazy" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 10px; background: #FFFFFF">
+          <figcaption style="font-size: 11px; font-weight: 500; color: #6B5646">Mood cards</figcaption>
+        </figure>
+        <figure style="margin: 0; display: flex; flex-direction: column; gap: 5px">
+          <img src="assets/ai%26u_WiP%203.JPG" alt="Clustering research findings on an affinity wall" loading="lazy" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 10px; background: #FFFFFF">
+          <figcaption style="font-size: 11px; font-weight: 500; color: #6B5646">The affinity wall</figcaption>
+        </figure>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px; background: rgba(255, 255, 255, 0.55); border-radius: 16px; padding: 16px">
+        <div style="display: flex; flex-direction: column; gap: 2px; padding-bottom: 8px; border-bottom: 1.5px solid rgba(20, 20, 20, 0.15)">
+          <span style="font-size: 11px; font-weight: 800; letter-spacing: 0.1em; color: #C7431D">03</span>
+          <span style="font-size: 15px; font-weight: 700">Prototype</span>
+        </div>
+        <figure style="margin: 0; display: flex; flex-direction: column; gap: 5px">
+          <img src="assets/ai%26u_user%20test%202.jpeg" alt="The full screen flow drawn by hand, printed and laid out" loading="lazy" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 10px; background: #FFFFFF">
+          <figcaption style="font-size: 11px; font-weight: 500; color: #6B5646">Screens drawn by hand</figcaption>
+        </figure>
+        <figure style="margin: 0; display: flex; flex-direction: column; gap: 5px">
+          <video src="assets/knowledge-graph.mp4" poster="assets/knowledge-graph-poster.jpg" controls playsinline preload="none" style="width: 100%; aspect-ratio: 16 / 10; border-radius: 10px; background: #0F2A2C; display: block"></video>
+          <figcaption style="font-size: 11px; font-weight: 500; color: #6B5646">The learner's knowledge graph</figcaption>
+        </figure>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px; background: rgba(255, 255, 255, 0.55); border-radius: 16px; padding: 16px">
+        <div style="display: flex; flex-direction: column; gap: 2px; padding-bottom: 8px; border-bottom: 1.5px solid rgba(20, 20, 20, 0.15)">
+          <span style="font-size: 11px; font-weight: 800; letter-spacing: 0.1em; color: #C7431D">04</span>
+          <span style="font-size: 15px; font-weight: 700">Test &amp; show</span>
+        </div>
+        <figure style="margin: 0; display: flex; flex-direction: column; gap: 5px">
+          <img src="assets/ai%26u_user%20test%203.jpeg" alt="Reading learners' reactions during a test" loading="lazy" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 10px; background: #FFFFFF">
+          <figcaption style="font-size: 11px; font-weight: 500; color: #6B5646">Reading reactions</figcaption>
+        </figure>
+        <figure style="margin: 0; display: flex; flex-direction: column; gap: 5px">
+          <img src="assets/portfolio/aiu-demo-day.jpg" alt="Xinhui explaining AI&amp;U at her stand during the public demo day" loading="lazy" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 10px; background: #FFFFFF">
+          <figcaption style="font-size: 11px; font-weight: 500; color: #6B5646">Demo day</figcaption>
+        </figure>
+      </div>
     </div>
     <div style="display: flex; flex-direction: column; gap: 14px">
       <h4 style="margin: 0; font-size: 18px; font-weight: 700">The screens</h4>
@@ -556,14 +577,14 @@
 <section id="craft" class="p-pad" style="max-width: 1140px; margin: 0 auto; padding: 112px 48px 0; display: flex; flex-direction: column; gap: 32px">
   <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap">
     <h2 class="p-section-title" style="margin: 0; font-size: 44px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.05">Hands that<br>keep making.</h2>
-    <p style="margin: 0; max-width: 420px; font-size: 15px; line-height: 1.6; color: #4A473E">Pottery, floristry, painting, goldsmithing, paper craft, paper carving. Making by hand keeps my eye honest and my patience trained. <a href="craft.html">More on the craft page →</a></p>
+    <p style="margin: 0; max-width: 420px; font-size: 15px; line-height: 1.6; color: #4A473E">Pottery, painting, goldsmithing, paper craft, floristry, paper carving. Making by hand keeps my eye honest and my patience trained. <a href="craft.html">More on the craft page →</a></p>
   </div>
   <div class="p-craft-grid" style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px">
     <figure style="margin: 0; display: flex; flex-direction: column; gap: 8px"><img src="assets/portfolio/craft-pottery.jpg" alt="Xinhui shaping a clay vessel" loading="lazy" style="width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 16px; background: #E3DCCB"><figcaption style="font-size: 12px; font-weight: 600; color: #8A8578">Pottery</figcaption></figure>
-    <figure style="margin: 0; display: flex; flex-direction: column; gap: 8px"><img src="assets/portfolio/craft-floristry.jpg" alt="Flower arrangement" loading="lazy" style="width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 16px; background: #E3DCCB"><figcaption style="font-size: 12px; font-weight: 600; color: #8A8578">Floristry</figcaption></figure>
     <figure style="margin: 0; display: flex; flex-direction: column; gap: 8px"><img src="assets/portfolio/craft-painting.jpg" alt="Painting" loading="lazy" style="width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 16px; background: #E3DCCB"><figcaption style="font-size: 12px; font-weight: 600; color: #8A8578">Painting</figcaption></figure>
     <figure style="margin: 0; display: flex; flex-direction: column; gap: 8px"><img src="assets/portfolio/craft-goldleaf.jpg" alt="Goldsmith work" loading="lazy" style="width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 16px; background: #E3DCCB"><figcaption style="font-size: 12px; font-weight: 600; color: #8A8578">Goldsmith</figcaption></figure>
     <figure style="margin: 0; display: flex; flex-direction: column; gap: 8px"><img src="assets/portfolio/craft-papercraft.jpg" alt="Paper craft" loading="lazy" style="width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 16px; background: #E3DCCB"><figcaption style="font-size: 12px; font-weight: 600; color: #8A8578">Paper craft</figcaption></figure>
+    <figure style="margin: 0; display: flex; flex-direction: column; gap: 8px"><img src="assets/portfolio/craft-floristry.jpg" alt="Flower arrangement" loading="lazy" style="width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 16px; background: #E3DCCB"><figcaption style="font-size: 12px; font-weight: 600; color: #8A8578">Floristry</figcaption></figure>
     <figure style="margin: 0; display: flex; flex-direction: column; gap: 8px"><img src="assets/portfolio/craft-carving.jpg" alt="Paper carving" loading="lazy" style="width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 16px; background: #E3DCCB"><figcaption style="font-size: 12px; font-weight: 600; color: #8A8578">Paper carving</figcaption></figure>
   </div>
 </section>
