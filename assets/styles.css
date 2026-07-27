@@ -2945,7 +2945,10 @@ a.t-org:hover { color: var(--on-surface); }
   align-items: flex-start;
 }
 @media (max-width: 860px) { .cv-grid { flex-direction: column; gap: var(--space-lg); } }
-.cv-col { flex: 0 0 auto; min-width: 0; }
+/* flex-shrink stays on: when the frame is narrower than the columns' natural
+   widths (between the 860px stack point and full desktop), columns compress
+   and their text wraps instead of overflowing the frame. */
+.cv-col { flex: 0 1 auto; min-width: 0; }
 /* Explicit column widths → fixed flex boxes → space-between yields exactly
    equal gaps between columns. Widths are sized to each column's content. */
 .cv-grid > .cv-col:nth-child(1) { width: 290px; }       /* sets the bio measure */
